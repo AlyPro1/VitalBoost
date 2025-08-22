@@ -282,6 +282,241 @@
     <!-- Confetti Container -->
     <div class="confetti-container" id="confettiContainer"></div>
   </section>
+  
+  <!-- Quick Challenge Section -->
+  <section class="quick-challenge-section">
+    <div class="challenge-background">
+      <div class="animated-icon water-drop" style="top: 20%; left: 10%;">💧</div>
+      <div class="animated-icon heartbeat" style="top: 60%; right: 15%;">💓</div>
+      <div class="animated-icon dumbbell" style="bottom: 30%; left: 20%;">🏋️</div>
+      <div class="animated-icon energy" style="top: 40%; right: 25%;">⚡</div>
+    </div>
+    
+    <div class="challenge-container">
+      <div class="section-header">
+        <h2 class="section-title">Take Today's Quick Challenge</h2>
+        <p class="section-subtitle">Micro-challenges that make a macro difference</p>
+        
+        <!-- Progress Tracker -->
+        <div class="progress-tracker">
+          <div class="progress-header">
+            <span class="progress-text">Daily Progress</span>
+            <span class="progress-count"><span id="completedCount">0</span>/5 Completed</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="progress-glow"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Challenge Carousel -->
+      <div class="challenge-carousel-wrapper">
+        <button class="carousel-nav prev-btn" id="prevBtn">
+          <span>‹</span>
+        </button>
+        
+        <div class="challenge-carousel" id="challengeCarousel">
+          <!-- Challenge Card 1 -->
+          <div class="challenge-card" data-challenge="1">
+            <div class="card-header">
+              <div class="challenge-icon">🏃‍♀️</div>
+              <div class="challenge-status" id="status-1">
+                <div class="status-indicator"></div>
+              </div>
+            </div>
+            <h3 class="challenge-title">5-Minute Energy Boost</h3>
+            <p class="challenge-preview">Quick cardio burst to energize your day</p>
+            <div class="challenge-duration">⏱️ 5 minutes</div>
+            <button class="start-challenge-btn" data-challenge="1">Start Challenge</button>
+            
+            <!-- Expanded Content -->
+            <div class="challenge-expanded" id="expanded-1">
+              <div class="challenge-instructions">
+                <h4>Your 5-Minute Energy Boost</h4>
+                <ul class="instruction-list">
+                  <li>1 min: Jumping jacks</li>
+                  <li>1 min: High knees</li>
+                  <li>1 min: Burpees</li>
+                  <li>1 min: Mountain climbers</li>
+                  <li>1 min: Cool down stretches</li>
+                </ul>
+              </div>
+              
+              <div class="timer-section">
+                <div class="timer-display" id="timer-1">05:00</div>
+                <div class="timer-controls">
+                  <button class="timer-btn start-btn" data-challenge="1">▶️ Start</button>
+                  <button class="timer-btn pause-btn" data-challenge="1">⏸️ Pause</button>
+                  <button class="timer-btn reset-btn" data-challenge="1">🔄 Reset</button>
+                </div>
+                <div class="timer-progress">
+                  <div class="timer-bar" id="timerBar-1"></div>
+                </div>
+              </div>
+              
+              <button class="complete-challenge-btn" data-challenge="1">✅ Mark as Done</button>
+            </div>
+          </div>
+          
+          <!-- Challenge Card 2 -->
+          <div class="challenge-card" data-challenge="2">
+            <div class="card-header">
+              <div class="challenge-icon">💧</div>
+              <div class="challenge-status" id="status-2">
+                <div class="status-indicator"></div>
+              </div>
+            </div>
+            <h3 class="challenge-title">Hydration Challenge</h3>
+            <p class="challenge-preview">Drink 8 glasses of water today</p>
+            <div class="challenge-duration">⏱️ All day</div>
+            <button class="start-challenge-btn" data-challenge="2">Start Challenge</button>
+            
+            <!-- Expanded Content -->
+            <div class="challenge-expanded" id="expanded-2">
+              <div class="challenge-instructions">
+                <h4>Daily Hydration Goal</h4>
+                <p>Track your water intake throughout the day. Aim for 8 glasses (64oz) of water.</p>
+                <div class="water-tracker">
+                  <div class="water-glasses">
+                    <div class="water-glass" data-glass="1">💧</div>
+                    <div class="water-glass" data-glass="2">💧</div>
+                    <div class="water-glass" data-glass="3">💧</div>
+                    <div class="water-glass" data-glass="4">💧</div>
+                    <div class="water-glass" data-glass="5">💧</div>
+                    <div class="water-glass" data-glass="6">💧</div>
+                    <div class="water-glass" data-glass="7">💧</div>
+                    <div class="water-glass" data-glass="8">💧</div>
+                  </div>
+                  <p class="water-count"><span id="waterCount">0</span>/8 glasses</p>
+                </div>
+              </div>
+              
+              <button class="complete-challenge-btn" data-challenge="2">✅ Mark as Done</button>
+            </div>
+          </div>
+          
+          <!-- Challenge Card 3 -->
+          <div class="challenge-card" data-challenge="3">
+            <div class="card-header">
+              <div class="challenge-icon">🧘‍♂️</div>
+              <div class="challenge-status" id="status-3">
+                <div class="status-indicator"></div>
+              </div>
+            </div>
+            <h3 class="challenge-title">Mindful Breathing</h3>
+            <p class="challenge-preview">3-minute guided breathing session</p>
+            <div class="challenge-duration">⏱️ 3 minutes</div>
+            <button class="start-challenge-btn" data-challenge="3">Start Challenge</button>
+            
+            <!-- Expanded Content -->
+            <div class="challenge-expanded" id="expanded-3">
+              <div class="challenge-instructions">
+                <h4>4-7-8 Breathing Technique</h4>
+                <ul class="instruction-list">
+                  <li>Inhale through nose for 4 counts</li>
+                  <li>Hold breath for 7 counts</li>
+                  <li>Exhale through mouth for 8 counts</li>
+                  <li>Repeat cycle 4 times</li>
+                </ul>
+              </div>
+              
+              <div class="timer-section">
+                <div class="timer-display" id="timer-3">03:00</div>
+                <div class="breathing-guide">
+                  <div class="breath-circle" id="breathCircle-3">
+                    <span class="breath-text" id="breathText-3">Ready</span>
+                  </div>
+                </div>
+                <div class="timer-controls">
+                  <button class="timer-btn start-btn" data-challenge="3">▶️ Start</button>
+                  <button class="timer-btn pause-btn" data-challenge="3">⏸️ Pause</button>
+                  <button class="timer-btn reset-btn" data-challenge="3">🔄 Reset</button>
+                </div>
+              </div>
+              
+              <button class="complete-challenge-btn" data-challenge="3">✅ Mark as Done</button>
+            </div>
+          </div>
+          
+          <!-- Challenge Card 4 -->
+          <div class="challenge-card" data-challenge="4">
+            <div class="card-header">
+              <div class="challenge-icon">💪</div>
+              <div class="challenge-status" id="status-4">
+                <div class="status-indicator"></div>
+              </div>
+            </div>
+            <h3 class="challenge-title">Strength Burst</h3>
+            <p class="challenge-preview">Quick strength training session</p>
+            <div class="challenge-duration">⏱️ 4 minutes</div>
+            <button class="start-challenge-btn" data-challenge="4">Start Challenge</button>
+            
+            <!-- Expanded Content -->
+            <div class="challenge-expanded" id="expanded-4">
+              <div class="challenge-instructions">
+                <h4>4-Minute Strength Circuit</h4>
+                <ul class="instruction-list">
+                  <li>1 min: Push-ups</li>
+                  <li>1 min: Squats</li>
+                  <li>1 min: Plank hold</li>
+                  <li>1 min: Lunges</li>
+                </ul>
+              </div>
+              
+              <div class="timer-section">
+                <div class="timer-display" id="timer-4">04:00</div>
+                <div class="timer-controls">
+                  <button class="timer-btn start-btn" data-challenge="4">▶️ Start</button>
+                  <button class="timer-btn pause-btn" data-challenge="4">⏸️ Pause</button>
+                  <button class="timer-btn reset-btn" data-challenge="4">🔄 Reset</button>
+                </div>
+                <div class="timer-progress">
+                  <div class="timer-bar" id="timerBar-4"></div>
+                </div>
+              </div>
+              
+              <button class="complete-challenge-btn" data-challenge="4">✅ Mark as Done</button>
+            </div>
+          </div>
+          
+          <!-- Challenge Card 5 -->
+          <div class="challenge-card" data-challenge="5">
+            <div class="card-header">
+              <div class="challenge-icon">🍎</div>
+              <div class="challenge-status" id="status-5">
+                <div class="status-indicator"></div>
+              </div>
+            </div>
+            <h3 class="challenge-title">Healthy Snack</h3>
+            <p class="challenge-preview">Choose a nutritious snack today</p>
+            <div class="challenge-duration">⏱️ Anytime</div>
+            <button class="start-challenge-btn" data-challenge="5">Start Challenge</button>
+            
+            <!-- Expanded Content -->
+            <div class="challenge-expanded" id="expanded-5">
+              <div class="challenge-instructions">
+                <h4>Smart Snacking Challenge</h4>
+                <p>Choose one healthy snack option today:</p>
+                <div class="snack-options">
+                  <div class="snack-option" data-snack="1">🥜 Mixed nuts</div>
+                  <div class="snack-option" data-snack="2">🍎 Apple with almond butter</div>
+                  <div class="snack-option" data-snack="3">🥕 Carrots with hummus</div>
+                  <div class="snack-option" data-snack="4">🫐 Greek yogurt with berries</div>
+                </div>
+              </div>
+              
+              <button class="complete-challenge-btn" data-challenge="5">✅ Mark as Done</button>
+            </div>
+          </div>
+        </div>
+        
+        <button class="carousel-nav next-btn" id="nextBtn">
+          <span>›</span>
+        </button>
+      </div>
+    </div>
+  </section>
   <script src="script.js"></script>
 </body>
 </html>
