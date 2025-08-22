@@ -3,11 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VitalBoost</title>
+  <title>VitalBoost - Boost Your Vitality. One Tip a Day.</title>
+  <meta name="description" content="Daily health & fitness wisdom in 60 seconds. Join thousands of wellness seekers transforming their lives one tip at a time.">
+  <meta property="og:title" content="VitalBoost - Boost Your Vitality. One Tip a Day.">
+  <meta property="og:description" content="Daily health & fitness wisdom in 60 seconds. Join thousands of wellness seekers transforming their lives one tip at a time.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🚀 Welcome to VitalBoost!</h1>
-  <p>This is your first deployed website on Netlify.</p>
+  <div class="hero-container">
+    <!-- Background Image Carousel -->
+    <div class="image-carousel">
+      <div class="image-slide active" style="background-image: url('https://images.pexels.com/photos/416778/pexels-photo-416778.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
+      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
+      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
+      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
+      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
+    </div>
+
+    <!-- Gradient Overlay -->
+    <div class="gradient-overlay"></div>
+
+    <!-- Parallax Elements -->
+    <div class="parallax-element parallax-1"></div>
+    <div class="parallax-element parallax-2"></div>
+    <div class="parallax-element parallax-3"></div>
+
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <div class="content-wrapper">
+        <!-- Logo/Brand -->
+        <div class="brand">
+          <div class="logo-icon">💪</div>
+          <span class="brand-name">VitalBoost</span>
+        </div>
+
+        <!-- Main Headlines -->
+        <h1 class="main-headline">
+          <span class="headline-line">Boost Your Vitality.</span>
+          <span class="headline-line highlight">One Tip a Day.</span>
+        </h1>
+
+        <p class="subheadline">
+          Daily health & fitness wisdom in 60 seconds
+        </p>
+
+        <!-- CTA Button -->
+        <button class="cta-button" id="ctaButton">
+          <span class="button-text">Get Today's Pro Tip</span>
+          <div class="button-glow"></div>
+          <div class="button-shine"></div>
+        </button>
+
+        <!-- Social Proof Counter -->
+        <div class="social-proof">
+          <div class="counter-wrapper">
+            <div class="pulse-dot"></div>
+            <span class="counter-text">Join <span class="counter-number" id="counterNumber">15,324</span> wellness seekers today!</span>
+          </div>
+        </div>
+
+        <!-- Feature Pills -->
+        <div class="feature-pills">
+          <div class="pill">
+            <span class="pill-icon">⚡</span>
+            <span>60-Second Tips</span>
+          </div>
+          <div class="pill">
+            <span class="pill-icon">🎯</span>
+            <span>Science-Backed</span>
+          </div>
+          <div class="pill">
+            <span class="pill-icon">📱</span>
+            <span>Daily Delivery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Action Elements -->
+    <div class="floating-elements">
+      <div class="floating-element element-1">💊</div>
+      <div class="floating-element element-2">🏃‍♀️</div>
+      <div class="floating-element element-3">🥗</div>
+      <div class="floating-element element-4">💧</div>
+      <div class="floating-element element-5">🧘‍♂️</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
