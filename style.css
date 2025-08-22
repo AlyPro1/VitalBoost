@@ -399,6 +399,329 @@ body {
   }
 }
 
+/* Daily Tips Section */
+.daily-tips-section {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  padding: 5rem 0;
+  overflow: hidden;
+}
+
+/* Rotating Background Patterns */
+.tips-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.1;
+}
+
+.pattern-leaves {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10c20 0 30 20 30 40s-10 40-30 40c-20 0-30-20-30-40s10-40 30-40z" fill="%2310b981" opacity="0.3"/></svg>') repeat;
+  animation: rotatePattern 20s linear infinite;
+  top: 10%;
+  left: 10%;
+}
+
+.pattern-water {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="20" fill="%233b82f6" opacity="0.3"/><circle cx="30" cy="30" r="10" fill="%233b82f6" opacity="0.2"/><circle cx="70" cy="70" r="15" fill="%233b82f6" opacity="0.25"/></svg>') repeat;
+  animation: rotatePattern 15s linear infinite reverse;
+  top: 60%;
+  right: 15%;
+}
+
+.pattern-energy {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10 50 L90 50 M50 10 L50 90 M25 25 L75 75 M75 25 L25 75" stroke="%238b5cf6" stroke-width="2" opacity="0.2"/></svg>') repeat;
+  animation: rotatePattern 25s linear infinite;
+  bottom: 20%;
+  left: 20%;
+}
+
+@keyframes rotatePattern {
+  from { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  to { transform: rotate(360deg) scale(1); }
+}
+
+/* Tips Container */
+.tips-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: slideInUp 1s ease-out;
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #10b981, #3b82f6, #8b5cf6);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease-in-out infinite;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+}
+
+/* Tips Grid */
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  animation: slideInUp 1s ease-out 0.3s both;
+}
+
+/* Tip Cards */
+.tip-card {
+  perspective: 1000px;
+  height: 280px;
+  cursor: pointer;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.tip-card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-front {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.card-back {
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card-preview {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.flip-indicator {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  font-style: italic;
+  animation: pulse 2s infinite;
+}
+
+/* Card Back Content */
+.tip-content h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.tip-content p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  opacity: 0.95;
+}
+
+/* Tip Actions */
+.tip-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.save-btn,
+.share-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.7rem 1.2rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.save-btn:hover,
+.share-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.save-btn:active,
+.share-btn:active {
+  transform: translateY(0) scale(1.02);
+}
+
+.btn-icon {
+  font-size: 1rem;
+}
+
+/* Confetti Animation */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #10b981;
+  animation: confettiFall 3s ease-out forwards;
+}
+
+.confetti-piece:nth-child(2n) { background: #3b82f6; }
+.confetti-piece:nth-child(3n) { background: #8b5cf6; }
+.confetti-piece:nth-child(4n) { background: #f59e0b; }
+.confetti-piece:nth-child(5n) { background: #ef4444; }
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .daily-tips-section {
+    padding: 3rem 0;
+  }
+  
+  .tips-container {
+    padding: 0 1rem;
+  }
+  
+  .section-header {
+    margin-bottom: 3rem;
+  }
+  
+  .tips-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .tip-card {
+    height: 250px;
+  }
+  
+  .card-front,
+  .card-back {
+    padding: 1.5rem;
+  }
+  
+  .card-icon {
+    font-size: 2.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.3rem;
+  }
+  
+  .tip-actions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .save-btn,
+  .share-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tip-card {
+    height: 220px;
+  }
+  
+  .card-front,
+  .card-back {
+    padding: 1.2rem;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-content {

@@ -207,7 +207,177 @@ document.addEventListener('DOMContentLoaded', () => {
   new ImageCarousel();
   new MouseParallax();
   new PerformanceOptimizer();
+  new DailyTipsManager();
 });
+
+// Daily Tips Manager
+class DailyTipsManager {
+  constructor() {
+    this.savedTips = JSON.parse(localStorage.getItem('vitalboost-saved-tips') || '[]');
+    this.init();
+  }
+  
+  init() {
+    this.initTipCards();
+    this.initSaveButtons();
+    this.initShareButtons();
+  }
+  
+  initTipCards() {
+    const tipCards = document.querySelectorAll('.tip-card');
+    
+    tipCards.forEach((card, index) => {
+      // Add staggered animation delay
+      card.style.animationDelay = `${index * 0.1}s`;
+      
+      // Add hover sound effect (optional)
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-5px)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0)';
+      });
+    });
+  }
+  
+  initSaveButtons() {
+    const saveButtons = document.querySelectorAll('.save-btn');
+    
+    saveButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const tipId = button.getAttribute('data-tip');
+        this.saveTip(tipId, button);
+      });
+    });
+  }
+  
+  initShareButtons() {
+    const shareButtons = document.querySelectorAll('.share-btn');
+    
+    shareButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const tipId = button.getAttribute('data-tip');
+        this.shareTip(tipId);
+      });
+    });
+  }
+  
+  saveTip(tipId, button) {
+    // Get tip content
+    const tipCard = button.closest('.tip-card');
+    const tipTitle = tipCard.querySelector('.card-back h4').textContent;
+    const tipContent = tipCard.querySelector('.card-back p').textContent;
+    
+    const tip = {
+      id: tipId,
+      title: tipTitle,
+      content: tipContent,
+      savedAt: new Date().toISOString()
+    };
+    
+    // Check if already saved
+    if (!this.savedTips.find(t => t.id === tipId)) {
+      this.savedTips.push(tip);
+      localStorage.setItem('vitalboost-saved-tips', JSON.stringify(this.savedTips));
+      
+      // Update button state
+      button.innerHTML = '<span class="btn-icon">✅</span>Saved!';
+      button.style.background = 'rgba(16, 185, 129, 0.3)';
+      
+      // Trigger confetti
+      this.triggerConfetti(button);
+      
+      // Reset button after 2 seconds
+      setTimeout(() => {
+        button.innerHTML = '<span class="btn-icon">💾</span>Save Tip';
+        button.style.background = 'rgba(255, 255, 255, 0.2)';
+      }, 2000);
+    } else {
+      // Already saved
+      button.innerHTML = '<span class="btn-icon">✅</span>Already Saved';
+      setTimeout(() => {
+        button.innerHTML = '<span class="btn-icon">💾</span>Save Tip';
+      }, 1500);
+    }
+  }
+  
+  shareTip(tipId) {
+    const tipCard = document.querySelector(`[data-tip="${tipId}"]`).closest('.tip-card');
+    const tipTitle = tipCard.querySelector('.card-back h4').textContent;
+    const tipContent = tipCard.querySelector('.card-back p').textContent;
+    
+    const shareText = `💪 VitalBoost Tip: ${tipTitle}\n\n${tipContent}\n\n🚀 Get more daily health tips at VitalBoost!`;
+    
+    if (navigator.share) {
+      // Use native sharing if available
+      navigator.share({
+        title: `VitalBoost Tip: ${tipTitle}`,
+        text: shareText,
+        url: window.location.href
+      }).catch(console.error);
+    } else {
+      // Fallback to clipboard
+      navigator.clipboard.writeText(shareText).then(() => {
+        // Show success message
+        const shareBtn = document.querySelector(`[data-tip="${tipId}"].share-btn`);
+        const originalText = shareBtn.innerHTML;
+        shareBtn.innerHTML = '<span class="btn-icon">✅</span>Copied!';
+        shareBtn.style.background = 'rgba(59, 130, 246, 0.3)';
+        
+        setTimeout(() => {
+          shareBtn.innerHTML = originalText;
+          shareBtn.style.background = 'rgba(255, 255, 255, 0.2)';
+        }, 2000);
+      }).catch(() => {
+        // Fallback alert
+        alert(`Share this tip:\n\n${shareText}`);
+      });
+    }
+  }
+  
+  triggerConfetti(sourceElement) {
+    const container = document.getElementById('confettiContainer');
+    const rect = sourceElement.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    // Create 50 confetti pieces
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti-piece';
+      
+      // Random starting position around the button
+      const startX = centerX + (Math.random() - 0.5) * 100;
+      const startY = centerY + (Math.random() - 0.5) * 50;
+      
+      confetti.style.left = startX + 'px';
+      confetti.style.top = startY + 'px';
+      
+      // Random horizontal drift
+      const drift = (Math.random() - 0.5) * 200;
+      confetti.style.setProperty('--drift', drift + 'px');
+      
+      // Random animation duration
+      const duration = 2 + Math.random() * 2;
+      confetti.style.animationDuration = duration + 's';
+      
+      // Random delay
+      confetti.style.animationDelay = Math.random() * 0.5 + 's';
+      
+      container.appendChild(confetti);
+      
+      // Remove after animation
+      setTimeout(() => {
+        if (confetti.parentNode) {
+          confetti.parentNode.removeChild(confetti);
+        }
+      }, (duration + 0.5) * 1000);
+    }
+  }
+}
 
 // Add CSS animations dynamically
 const style = document.createElement('style');
@@ -230,6 +400,21 @@ style.textContent = `
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  
+  .confetti-piece {
+    animation-name: confettiFall;
+  }
+  
+  @keyframes confettiFall {
+    0% {
+      transform: translateY(0) translateX(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) translateX(var(--drift, 0px)) rotate(720deg);
+      opacity: 0;
+    }
   }
 `;
 document.head.appendChild(style);
