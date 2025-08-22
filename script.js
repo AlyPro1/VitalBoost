@@ -418,3 +418,379 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+
+// Quick Challenge Manager
+class QuickChallengeManager {
+  constructor() {
+    this.completedChallenges = JSON.parse(localStorage.getItem('vitalboost-completed-challenges') || '[]');
+    this.timers = {};
+    this.currentSlide = 0;
+    this.totalSlides = 5;
+    this.init();
+  }
+  
+  init() {
+    this.initCarousel();
+    this.initChallengeCards();
+    this.initProgressTracker();
+    this.updateProgress();
+  }
+  
+  initCarousel() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const carousel = document.getElementById('challengeCarousel');
+    
+    if (prevBtn && nextBtn && carousel) {
+      prevBtn.addEventListener('click', () => this.slideCarousel(-1));
+      nextBtn.addEventListener('click', () => this.slideCarousel(1));
+      
+      // Touch/swipe support
+      let startX = 0;
+      carousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+      });
+      
+      carousel.addEventListener('touchend', (e) => {
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            this.slideCarousel(1);
+          } else {
+            this.slideCarousel(-1);
+          }
+        }
+      });
+    }
+  }
+  
+  slideCarousel(direction) {
+    const carousel = document.getElementById('challengeCarousel');
+    const cardWidth = 320 + 32; // card width + gap
+    
+    this.currentSlide += direction;
+    
+    if (this.currentSlide < 0) {
+      this.currentSlide = this.totalSlides - 1;
+    } else if (this.currentSlide >= this.totalSlides) {
+      this.currentSlide = 0;
+    }
+    
+    carousel.scrollTo({
+      left: this.currentSlide * cardWidth,
+      behavior: 'smooth'
+    });
+  }
+  
+  initChallengeCards() {
+    const startButtons = document.querySelectorAll('.start-challenge-btn');
+    const completeButtons = document.querySelectorAll('.complete-challenge-btn');
+    const timerButtons = document.querySelectorAll('.timer-btn');
+    
+    startButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const challengeId = button.getAttribute('data-challenge');
+        this.startChallenge(challengeId);
+      });
+    });
+    
+    completeButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const challengeId = button.getAttribute('data-challenge');
+        this.completeChallenge(challengeId);
+      });
+    });
+    
+    timerButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const challengeId = button.getAttribute('data-challenge');
+        const action = button.classList.contains('start-btn') ? 'start' :
+                      button.classList.contains('pause-btn') ? 'pause' : 'reset';
+        this.handleTimer(challengeId, action);
+      });
+    });
+    
+    // Water tracker
+    const waterGlasses = document.querySelectorAll('.water-glass');
+    waterGlasses.forEach(glass => {
+      glass.addEventListener('click', () => {
+        const glassNumber = parseInt(glass.getAttribute('data-glass'));
+        this.updateWaterTracker(glassNumber);
+      });
+    });
+    
+    // Snack options
+    const snackOptions = document.querySelectorAll('.snack-option');
+    snackOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        snackOptions.forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+      });
+    });
+    
+    // Update UI based on completed challenges
+    this.updateChallengeStatus();
+  }
+  
+  startChallenge(challengeId) {
+    const card = document.querySelector(`[data-challenge="${challengeId}"]`);
+    const expanded = document.getElementById(`expanded-${challengeId}`);
+    
+    if (expanded) {
+      expanded.classList.add('active');
+      card.style.maxWidth = '400px';
+      card.style.minWidth = '400px';
+      
+      // Scroll to show expanded content
+      setTimeout(() => {
+        expanded.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 300);
+    }
+  }
+  
+  handleTimer(challengeId, action) {
+    const timerDisplay = document.getElementById(`timer-${challengeId}`);
+    const timerBar = document.getElementById(`timerBar-${challengeId}`);
+    const breathCircle = document.getElementById(`breathCircle-${challengeId}`);
+    const breathText = document.getElementById(`breathText-${challengeId}`);
+    
+    if (!this.timers[challengeId]) {
+      const durations = { '1': 300, '3': 180, '4': 240 }; // 5min, 3min, 4min in seconds
+      this.timers[challengeId] = {
+        duration: durations[challengeId] || 300,
+        remaining: durations[challengeId] || 300,
+        interval: null,
+        isRunning: false
+      };
+    }
+    
+    const timer = this.timers[challengeId];
+    
+    switch (action) {
+      case 'start':
+        if (!timer.isRunning) {
+          timer.isRunning = true;
+          timer.interval = setInterval(() => {
+            timer.remaining--;
+            
+            const minutes = Math.floor(timer.remaining / 60);
+            const seconds = timer.remaining % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timerBar) {
+              const progress = ((timer.duration - timer.remaining) / timer.duration) * 100;
+              timerBar.style.width = `${progress}%`;
+            }
+            
+            // Breathing guide for challenge 3
+            if (challengeId === '3' && breathCircle && breathText) {
+              const cycle = Math.floor((timer.duration - timer.remaining) / 19); // 4+7+8 = 19 seconds per cycle
+              const cycleTime = (timer.duration - timer.remaining) % 19;
+              
+              if (cycleTime < 4) {
+                breathCircle.className = 'breath-circle inhale';
+                breathText.textContent = 'Inhale';
+              } else if (cycleTime < 11) {
+                breathCircle.className = 'breath-circle hold';
+                breathText.textContent = 'Hold';
+              } else {
+                breathCircle.className = 'breath-circle exhale';
+                breathText.textContent = 'Exhale';
+              }
+            }
+            
+            if (timer.remaining <= 0) {
+              clearInterval(timer.interval);
+              timer.isRunning = false;
+              this.completeChallenge(challengeId);
+              this.showCompletionMessage(challengeId);
+            }
+          }, 1000);
+        }
+        break;
+        
+      case 'pause':
+        if (timer.isRunning) {
+          clearInterval(timer.interval);
+          timer.isRunning = false;
+        }
+        break;
+        
+      case 'reset':
+        clearInterval(timer.interval);
+        timer.isRunning = false;
+        timer.remaining = timer.duration;
+        const minutes = Math.floor(timer.remaining / 60);
+        const seconds = timer.remaining % 60;
+        timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        if (timerBar) timerBar.style.width = '0%';
+        if (breathCircle) {
+          breathCircle.className = 'breath-circle';
+          breathText.textContent = 'Ready';
+        }
+        break;
+    }
+  }
+  
+  updateWaterTracker(glassNumber) {
+    const waterGlasses = document.querySelectorAll('.water-glass');
+    const waterCount = document.getElementById('waterCount');
+    
+    // Fill glasses up to the clicked one
+    waterGlasses.forEach((glass, index) => {
+      if (index < glassNumber) {
+        glass.classList.add('filled');
+      } else {
+        glass.classList.remove('filled');
+      }
+    });
+    
+    waterCount.textContent = glassNumber;
+    
+    // Auto-complete if 8 glasses reached
+    if (glassNumber === 8) {
+      setTimeout(() => this.completeChallenge('2'), 500);
+    }
+  }
+  
+  completeChallenge(challengeId) {
+    if (!this.completedChallenges.includes(challengeId)) {
+      this.completedChallenges.push(challengeId);
+      localStorage.setItem('vitalboost-completed-challenges', JSON.stringify(this.completedChallenges));
+      
+      // Update UI
+      this.updateChallengeStatus();
+      this.updateProgress();
+      
+      // Trigger celebration
+      this.triggerCelebration(challengeId);
+    }
+  }
+  
+  updateChallengeStatus() {
+    this.completedChallenges.forEach(challengeId => {
+      const status = document.getElementById(`status-${challengeId}`);
+      const completeBtn = document.querySelector(`[data-challenge="${challengeId}"].complete-challenge-btn`);
+      
+      if (status) {
+        status.classList.add('completed');
+      }
+      
+      if (completeBtn) {
+        completeBtn.textContent = '✅ Completed!';
+        completeBtn.disabled = true;
+      }
+    });
+  }
+  
+  updateProgress() {
+    const progressBar = document.getElementById('progressBar');
+    const completedCount = document.getElementById('completedCount');
+    
+    const progress = (this.completedChallenges.length / 5) * 100;
+    
+    if (progressBar) {
+      progressBar.style.width = `${progress}%`;
+    }
+    
+    if (completedCount) {
+      completedCount.textContent = this.completedChallenges.length;
+    }
+  }
+  
+  initProgressTracker() {
+    // Animate progress bar on load
+    setTimeout(() => {
+      this.updateProgress();
+    }, 1000);
+  }
+  
+  triggerCelebration(challengeId) {
+    const card = document.querySelector(`[data-challenge="${challengeId}"]`);
+    
+    // Create celebration particles
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.style.cssText = `
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: ${['#10b981', '#3b82f6', '#8b5cf6', '#f59e0b'][i % 4]};
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1000;
+      `;
+      
+      const rect = card.getBoundingClientRect();
+      particle.style.left = (rect.left + rect.width / 2) + 'px';
+      particle.style.top = (rect.top + rect.height / 2) + 'px';
+      
+      document.body.appendChild(particle);
+      
+      // Animate particle
+      const angle = (i / 20) * Math.PI * 2;
+      const velocity = 100 + Math.random() * 100;
+      const vx = Math.cos(angle) * velocity;
+      const vy = Math.sin(angle) * velocity;
+      
+      particle.animate([
+        { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+        { transform: `translate(${vx}px, ${vy}px) scale(0)`, opacity: 0 }
+      ], {
+        duration: 1000,
+        easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+      }).onfinish = () => particle.remove();
+    }
+    
+    // Show success message
+    this.showCompletionMessage(challengeId);
+  }
+  
+  showCompletionMessage(challengeId) {
+    const messages = {
+      '1': '🎉 Amazing! You crushed that energy boost!',
+      '2': '💧 Fantastic! You\'re properly hydrated!',
+      '3': '🧘‍♂️ Perfect! You\'re centered and calm!',
+      '4': '💪 Incredible! You\'re getting stronger!',
+      '5': '🍎 Great choice! Healthy snacking wins!'
+    };
+    
+    const message = messages[challengeId] || '🎉 Challenge completed!';
+    
+    // Create toast notification
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #10b981, #3b82f6);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    `;
+    toast.textContent = message;
+    
+    document.body.appendChild(toast);
+    
+    // Animate in
+    setTimeout(() => {
+      toast.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Animate out and remove
+    setTimeout(() => {
+      toast.style.transform = 'translateX(100%)';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+}

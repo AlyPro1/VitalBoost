@@ -1,522 +1,1335 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VitalBoost - Boost Your Vitality. One Tip a Day.</title>
-  <meta name="description" content="Daily health & fitness wisdom in 60 seconds. Join thousands of wellness seekers transforming their lives one tip at a time.">
-  <meta property="og:title" content="VitalBoost - Boost Your Vitality. One Tip a Day.">
-  <meta property="og:description" content="Daily health & fitness wisdom in 60 seconds. Join thousands of wellness seekers transforming their lives one tip at a time.">
-  <meta property="og:type" content="website">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="hero-container">
-    <!-- Background Image Carousel -->
-    <div class="image-carousel">
-      <div class="image-slide active" style="background-image: url('https://images.pexels.com/photos/416778/pexels-photo-416778.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
-      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
-      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
-      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
-      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
-    </div>
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    <!-- Gradient Overlay -->
-    <div class="gradient-overlay"></div>
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  background: #000;
+}
 
-    <!-- Parallax Elements -->
-    <div class="parallax-element parallax-1"></div>
-    <div class="parallax-element parallax-2"></div>
-    <div class="parallax-element parallax-3"></div>
+/* Hero Container */
+.hero-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    <!-- Hero Content -->
-    <div class="hero-content">
-      <div class="content-wrapper">
-        <!-- Logo/Brand -->
-        <div class="brand">
-          <div class="logo-icon">💪</div>
-          <span class="brand-name">VitalBoost</span>
-        </div>
+/* Image Carousel with 3D Effects */
+.image-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
 
-        <!-- Main Headlines -->
-        <h1 class="main-headline">
-          <span class="headline-line">Boost Your Vitality.</span>
-          <span class="headline-line highlight">One Tip a Day.</span>
-        </h1>
+.image-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.1) rotateY(15deg);
+  transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.7) contrast(1.1);
+}
 
-        <p class="subheadline">
-          Daily health & fitness wisdom in 60 seconds
-        </p>
+.image-slide.active {
+  opacity: 1;
+  transform: scale(1) rotateY(0deg);
+}
 
-        <!-- CTA Button -->
-        <button class="cta-button" id="ctaButton">
-          <span class="button-text">Get Today's Pro Tip</span>
-          <div class="button-glow"></div>
-          <div class="button-shine"></div>
-        </button>
+.image-slide.next {
+  transform: scale(0.9) rotateY(-15deg);
+}
 
-        <!-- Social Proof Counter -->
-        <div class="social-proof">
-          <div class="counter-wrapper">
-            <div class="pulse-dot"></div>
-            <span class="counter-text">Join <span class="counter-number" id="counterNumber">15,324</span> wellness seekers today!</span>
-          </div>
-        </div>
+/* Gradient Overlay */
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(16, 185, 129, 0.1) 25%,
+    rgba(59, 130, 246, 0.1) 50%,
+    rgba(147, 51, 234, 0.1) 75%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  z-index: 2;
+}
 
-        <!-- Feature Pills -->
-        <div class="feature-pills">
-          <div class="pill">
-            <span class="pill-icon">⚡</span>
-            <span>60-Second Tips</span>
-          </div>
-          <div class="pill">
-            <span class="pill-icon">🎯</span>
-            <span>Science-Backed</span>
-          </div>
-          <div class="pill">
-            <span class="pill-icon">📱</span>
-            <span>Daily Delivery</span>
-          </div>
-        </div>
-      </div>
-    </div>
+/* Parallax Elements */
+.parallax-element {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(45deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+  backdrop-filter: blur(1px);
+  z-index: 2;
+  animation: float 6s ease-in-out infinite;
+}
 
-    <!-- Floating Action Elements -->
-    <div class="floating-elements">
-      <div class="floating-element element-1">💊</div>
-      <div class="floating-element element-2">🏃‍♀️</div>
-      <div class="floating-element element-3">🥗</div>
-      <div class="floating-element element-4">💧</div>
-      <div class="floating-element element-5">🧘‍♂️</div>
-    </div>
-  </div>
+.parallax-1 {
+  width: 200px;
+  height: 200px;
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+}
 
-  <!-- Daily Tips Section -->
-  <section class="daily-tips-section">
-    <div class="tips-background">
-      <div class="pattern-leaves"></div>
-      <div class="pattern-water"></div>
-      <div class="pattern-energy"></div>
-    </div>
-    
-    <div class="tips-container">
-      <div class="section-header">
-        <h2 class="section-title">Daily Wellness Tips</h2>
-        <p class="section-subtitle">Transform your health one tip at a time</p>
-      </div>
-      
-      <div class="tips-grid">
-        <!-- Tip Card 1 -->
-        <div class="tip-card" data-tip="1">
-          <div class="card-inner">
-            <div class="card-front">
-              <div class="card-icon">💧</div>
-              <h3 class="card-title">Hydration Boost</h3>
-              <p class="card-preview">Start your day right...</p>
-              <div class="flip-indicator">Hover to reveal tip</div>
-            </div>
-            <div class="card-back">
-              <div class="tip-content">
-                <h4>Morning Hydration</h4>
-                <p>Drink 16-20oz of water immediately upon waking. Add a pinch of sea salt and lemon for enhanced absorption and energy.</p>
-                <div class="tip-actions">
-                  <button class="save-btn" data-tip="1">
-                    <span class="btn-icon">💾</span>
-                    Save Tip
-                  </button>
-                  <button class="share-btn" data-tip="1">
-                    <span class="btn-icon">📤</span>
-                    Share
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Tip Card 2 -->
-        <div class="tip-card" data-tip="2">
-          <div class="card-inner">
-            <div class="card-front">
-              <div class="card-icon">🏃‍♀️</div>
-              <h3 class="card-title">Movement Magic</h3>
-              <p class="card-preview">Micro-workouts that work...</p>
-              <div class="flip-indicator">Hover to reveal tip</div>
-            </div>
-            <div class="card-back">
-              <div class="tip-content">
-                <h4>2-Minute Energy Boost</h4>
-                <p>Do 20 jumping jacks, 10 push-ups, and 30-second plank every 2 hours. Increases metabolism by 15% throughout the day.</p>
-                <div class="tip-actions">
-                  <button class="save-btn" data-tip="2">
-                    <span class="btn-icon">💾</span>
-                    Save Tip
-                  </button>
-                  <button class="share-btn" data-tip="2">
-                    <span class="btn-icon">📤</span>
-                    Share
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Tip Card 3 -->
-        <div class="tip-card" data-tip="3">
-          <div class="card-inner">
-            <div class="card-front">
-              <div class="card-icon">🧘‍♂️</div>
-              <h3 class="card-title">Mindful Moments</h3>
-              <p class="card-preview">Stress-busting secrets...</p>
-              <div class="flip-indicator">Hover to reveal tip</div>
-            </div>
-            <div class="card-back">
-              <div class="tip-content">
-                <h4>4-7-8 Breathing</h4>
-                <p>Inhale for 4 counts, hold for 7, exhale for 8. Repeat 4 times. Activates parasympathetic nervous system instantly.</p>
-                <div class="tip-actions">
-                  <button class="save-btn" data-tip="3">
-                    <span class="btn-icon">💾</span>
-                    Save Tip
-                  </button>
-                  <button class="share-btn" data-tip="3">
-                    <span class="btn-icon">📤</span>
-                    Share
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Tip Card 4 -->
-        <div class="tip-card" data-tip="4">
-          <div class="card-inner">
-            <div class="card-front">
-              <div class="card-icon">🥗</div>
-              <h3 class="card-title">Nutrition Hack</h3>
-              <p class="card-preview">Supercharge your meals...</p>
-              <div class="flip-indicator">Hover to reveal tip</div>
-            </div>
-            <div class="card-back">
-              <div class="tip-content">
-                <h4>Protein First Rule</h4>
-                <p>Eat protein within 30 minutes of waking. Aim for 25-30g to stabilize blood sugar and boost metabolism for 6+ hours.</p>
-                <div class="tip-actions">
-                  <button class="save-btn" data-tip="4">
-                    <span class="btn-icon">💾</span>
-                    Save Tip
-                  </button>
-                  <button class="share-btn" data-tip="4">
-                    <span class="btn-icon">📤</span>
-                    Share
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Tip Card 5 -->
-        <div class="tip-card" data-tip="5">
-          <div class="card-inner">
-            <div class="card-front">
-              <div class="card-icon">😴</div>
-              <h3 class="card-title">Sleep Optimization</h3>
-              <p class="card-preview">Recovery revolution...</p>
-              <div class="flip-indicator">Hover to reveal tip</div>
-            </div>
-            <div class="card-back">
-              <div class="tip-content">
-                <h4>Cool Down Protocol</h4>
-                <p>Keep bedroom at 65-68°F and use blue light blockers 2 hours before bed. Improves deep sleep by 23%.</p>
-                <div class="tip-actions">
-                  <button class="save-btn" data-tip="5">
-                    <span class="btn-icon">💾</span>
-                    Save Tip
-                  </button>
-                  <button class="share-btn" data-tip="5">
-                    <span class="btn-icon">📤</span>
-                    Share
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Tip Card 6 -->
-        <div class="tip-card" data-tip="6">
-          <div class="card-inner">
-            <div class="card-front">
-              <div class="card-icon">⚡</div>
-              <h3 class="card-title">Energy Amplifier</h3>
-              <p class="card-preview">Natural power boost...</p>
-              <div class="flip-indicator">Hover to reveal tip</div>
-            </div>
-            <div class="card-back">
-              <div class="tip-content">
-                <h4>Cold Exposure Therapy</h4>
-                <p>End showers with 30 seconds of cold water. Increases norepinephrine by 530% and boosts metabolism for hours.</p>
-                <div class="tip-actions">
-                  <button class="save-btn" data-tip="6">
-                    <span class="btn-icon">💾</span>
-                    Save Tip
-                  </button>
-                  <button class="share-btn" data-tip="6">
-                    <span class="btn-icon">📤</span>
-                    Share
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Confetti Container -->
-    <div class="confetti-container" id="confettiContainer"></div>
-  </section>
+.parallax-2 {
+  width: 150px;
+  height: 150px;
+  top: 60%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+.parallax-3 {
+  width: 100px;
+  height: 100px;
+  bottom: 20%;
+  left: 20%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* Hero Content */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: white;
+  max-width: 100%;
+  padding: 0 20px;
+}
+
+.content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  animation: slideInDown 1s ease-out;
+}
+
+.logo-icon {
+  font-size: 2.5rem;
+  margin-right: 0.5rem;
+  filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));
+}
+
+.brand-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Main Headlines */
+.main-headline {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  animation: slideInUp 1s ease-out 0.3s both;
+}
+
+.headline-line {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.highlight {
+  background: linear-gradient(135deg, #10b981, #3b82f6, #8b5cf6);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Subheadline */
+.subheadline {
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 400;
+  opacity: 0.9;
+  margin-bottom: 3rem;
+  animation: slideInUp 1s ease-out 0.6s both;
+}
+
+/* CTA Button */
+.cta-button {
+  position: relative;
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  border: none;
+  border-radius: 50px;
+  padding: 1.2rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+  animation: slideInUp 1s ease-out 0.9s both;
+  margin-bottom: 2.5rem;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
+}
+
+.cta-button:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+.button-glow {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  border-radius: 50px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cta-button:hover .button-glow {
+  opacity: 1;
+  animation: pulse 2s infinite;
+}
+
+.button-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.cta-button:hover .button-shine {
+  left: 100%;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+/* Social Proof */
+.social-proof {
+  margin-bottom: 2.5rem;
+  animation: slideInUp 1s ease-out 1.2s both;
+}
+
+.counter-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulseGreen 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.counter-text {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.counter-number {
+  font-weight: 600;
+  color: #10b981;
+}
+
+/* Feature Pills */
+.feature-pills {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: slideInUp 1s ease-out 1.5s both;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.pill:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.pill-icon {
+  font-size: 1.1rem;
+}
+
+/* Floating Elements */
+.floating-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.floating-element {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.6;
+  animation: floatRandom 8s ease-in-out infinite;
+}
+
+.element-1 {
+  top: 15%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.element-2 {
+  top: 25%;
+  right: 20%;
+  animation-delay: 1.5s;
+}
+
+.element-3 {
+  bottom: 30%;
+  left: 10%;
+  animation-delay: 3s;
+}
+
+.element-4 {
+  bottom: 20%;
+  right: 15%;
+  animation-delay: 4.5s;
+}
+
+.element-5 {
+  top: 50%;
+  left: 5%;
+  animation-delay: 6s;
+}
+
+@keyframes floatRandom {
+  0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+  25% { transform: translateY(-15px) translateX(10px) rotate(90deg); }
+  50% { transform: translateY(-10px) translateX(-5px) rotate(180deg); }
+  75% { transform: translateY(-20px) translateX(15px) rotate(270deg); }
+}
+
+/* Animations */
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Daily Tips Section */
+.daily-tips-section {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  padding: 5rem 0;
+  overflow: hidden;
+}
+
+/* Rotating Background Patterns */
+.tips-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.1;
+}
+
+.pattern-leaves {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10c20 0 30 20 30 40s-10 40-30 40c-20 0-30-20-30-40s10-40 30-40z" fill="%2310b981" opacity="0.3"/></svg>') repeat;
+  animation: rotatePattern 20s linear infinite;
+  top: 10%;
+  left: 10%;
+}
+
+.pattern-water {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="20" fill="%233b82f6" opacity="0.3"/><circle cx="30" cy="30" r="10" fill="%233b82f6" opacity="0.2"/><circle cx="70" cy="70" r="15" fill="%233b82f6" opacity="0.25"/></svg>') repeat;
+  animation: rotatePattern 15s linear infinite reverse;
+  top: 60%;
+  right: 15%;
+}
+
+.pattern-energy {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10 50 L90 50 M50 10 L50 90 M25 25 L75 75 M75 25 L25 75" stroke="%238b5cf6" stroke-width="2" opacity="0.2"/></svg>') repeat;
+  animation: rotatePattern 25s linear infinite;
+  bottom: 20%;
+  left: 20%;
+}
+
+@keyframes rotatePattern {
+  from { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  to { transform: rotate(360deg) scale(1); }
+}
+
+/* Tips Container */
+.tips-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: slideInUp 1s ease-out;
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #10b981, #3b82f6, #8b5cf6);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease-in-out infinite;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+}
+
+/* Tips Grid */
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  animation: slideInUp 1s ease-out 0.3s both;
+}
+
+/* Tip Cards */
+.tip-card {
+  perspective: 1000px;
+  height: 280px;
+  cursor: pointer;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.tip-card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-front {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.card-back {
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.card-preview {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.flip-indicator {
+  font-size: 0.9rem;
+  opacity: 0.6;
+  font-style: italic;
+  animation: pulse 2s infinite;
+}
+
+/* Card Back Content */
+.tip-content h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.tip-content p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  opacity: 0.95;
+}
+
+/* Tip Actions */
+.tip-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.save-btn,
+.share-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.7rem 1.2rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.save-btn:hover,
+.share-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.save-btn:active,
+.share-btn:active {
+  transform: translateY(0) scale(1.02);
+}
+
+.btn-icon {
+  font-size: 1rem;
+}
+
+/* Confetti Animation */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #10b981;
+  animation: confettiFall 3s ease-out forwards;
+}
+
+.confetti-piece:nth-child(2n) { background: #3b82f6; }
+.confetti-piece:nth-child(3n) { background: #8b5cf6; }
+.confetti-piece:nth-child(4n) { background: #f59e0b; }
+.confetti-piece:nth-child(5n) { background: #ef4444; }
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Quick Challenge Section */
+.quick-challenge-section {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  padding: 5rem 0;
+  overflow: hidden;
+}
+
+/* Challenge Background */
+.challenge-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.animated-icon {
+  position: absolute;
+  font-size: 3rem;
+  animation: floatIcon 6s ease-in-out infinite;
+}
+
+.animated-icon.water-drop {
+  animation-delay: 0s;
+}
+
+.animated-icon.heartbeat {
+  animation: heartbeat 2s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.animated-icon.dumbbell {
+  animation: bounce 3s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.animated-icon.energy {
+  animation: pulse 2s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Challenge Container */
+.challenge-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Progress Tracker */
+.progress-tracker {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.progress-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.progress-count {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.progress-bar-container {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #3b82f6);
+  border-radius: 6px;
+  width: 0%;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.progress-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: progressGlow 2s ease-in-out infinite;
+}
+
+@keyframes progressGlow {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Challenge Carousel */
+.challenge-carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.carousel-nav {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.carousel-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.carousel-nav:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.challenge-carousel {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+/* Challenge Cards */
+.challenge-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  color: white;
+  transition: all 0.3s ease;
+  display: none;
+}
+
+.challenge-card.active {
+  display: block;
+  animation: slideInUp 0.5s ease-out;
+}
+
+.challenge-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.challenge-icon {
+  font-size: 3rem;
+  filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));
+}
+
+.challenge-status {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.challenge-status.completed .status-indicator {
+  background: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.challenge-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.challenge-preview {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+}
+
+.challenge-duration {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+}
+
+.start-challenge-btn {
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem 2rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+}
+
+.start-challenge-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+}
+
+/* Challenge Expanded Content */
+.challenge-expanded {
+  display: none;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.challenge-expanded.active {
+  display: block;
+  animation: slideInUp 0.3s ease-out;
+}
+
+.challenge-instructions h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.instruction-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+.instruction-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1rem;
+}
+
+/* Timer Section */
+.timer-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.timer-display {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #10b981;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.timer-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.7rem 1.2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.timer-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.timer-progress {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.timer-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #3b82f6);
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* Breathing Guide */
+.breathing-guide {
+  margin: 2rem 0;
+}
+
+.breath-circle {
+  width: 150px;
+  height: 150px;
+  border: 3px solid #10b981;
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.breath-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #10b981;
+}
+
+.breath-circle.inhale {
+  transform: scale(1.3);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.breath-circle.hold {
+  transform: scale(1.3);
+  background: rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+}
+
+.breath-circle.exhale {
+  transform: scale(0.8);
+  background: rgba(139, 92, 246, 0.1);
+  border-color: #8b5cf6;
+}
+
+/* Water Tracker */
+.water-tracker {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.water-glasses {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.water-glass {
+  font-size: 2rem;
+  padding: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.water-glass:hover {
+  transform: scale(1.1);
+  border-color: #3b82f6;
+}
+
+.water-glass.filled {
+  opacity: 1;
+  background: rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+.water-count {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #3b82f6;
+}
+
+/* Snack Options */
+.snack-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.snack-option {
+  padding: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.snack-option:hover {
+  transform: translateY(-2px);
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.snack-option.selected {
+  border-color: #10b981;
+  background: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Complete Challenge Button */
+.complete-challenge-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: none;
+  border-radius: 25px;
+  padding: 1rem 2rem;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+  width: 100%;
+}
+
+.complete-challenge-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+}
+
+.complete-challenge-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .daily-tips-section {
+    padding: 3rem 0;
+  }
   
-  <!-- Quick Challenge Section -->
-  <section class="quick-challenge-section">
-    <div class="challenge-background">
-      <div class="animated-icon water-drop" style="top: 20%; left: 10%;">💧</div>
-      <div class="animated-icon heartbeat" style="top: 60%; right: 15%;">💓</div>
-      <div class="animated-icon dumbbell" style="bottom: 30%; left: 20%;">🏋️</div>
-      <div class="animated-icon energy" style="top: 40%; right: 25%;">⚡</div>
-    </div>
-    
-    <div class="challenge-container">
-      <div class="section-header">
-        <h2 class="section-title">Take Today's Quick Challenge</h2>
-        <p class="section-subtitle">Micro-challenges that make a macro difference</p>
-        
-        <!-- Progress Tracker -->
-        <div class="progress-tracker">
-          <div class="progress-header">
-            <span class="progress-text">Daily Progress</span>
-            <span class="progress-count"><span id="completedCount">0</span>/5 Completed</span>
-          </div>
-          <div class="progress-bar-container">
-            <div class="progress-bar" id="progressBar"></div>
-            <div class="progress-glow"></div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Challenge Carousel -->
-      <div class="challenge-carousel-wrapper">
-        <button class="carousel-nav prev-btn" id="prevBtn">
-          <span>‹</span>
-        </button>
-        
-        <div class="challenge-carousel" id="challengeCarousel">
-          <!-- Challenge Card 1 -->
-          <div class="challenge-card" data-challenge="1">
-            <div class="card-header">
-              <div class="challenge-icon">🏃‍♀️</div>
-              <div class="challenge-status" id="status-1">
-                <div class="status-indicator"></div>
-              </div>
-            </div>
-            <h3 class="challenge-title">5-Minute Energy Boost</h3>
-            <p class="challenge-preview">Quick cardio burst to energize your day</p>
-            <div class="challenge-duration">⏱️ 5 minutes</div>
-            <button class="start-challenge-btn" data-challenge="1">Start Challenge</button>
-            
-            <!-- Expanded Content -->
-            <div class="challenge-expanded" id="expanded-1">
-              <div class="challenge-instructions">
-                <h4>Your 5-Minute Energy Boost</h4>
-                <ul class="instruction-list">
-                  <li>1 min: Jumping jacks</li>
-                  <li>1 min: High knees</li>
-                  <li>1 min: Burpees</li>
-                  <li>1 min: Mountain climbers</li>
-                  <li>1 min: Cool down stretches</li>
-                </ul>
-              </div>
-              
-              <div class="timer-section">
-                <div class="timer-display" id="timer-1">05:00</div>
-                <div class="timer-controls">
-                  <button class="timer-btn start-btn" data-challenge="1">▶️ Start</button>
-                  <button class="timer-btn pause-btn" data-challenge="1">⏸️ Pause</button>
-                  <button class="timer-btn reset-btn" data-challenge="1">🔄 Reset</button>
-                </div>
-                <div class="timer-progress">
-                  <div class="timer-bar" id="timerBar-1"></div>
-                </div>
-              </div>
-              
-              <button class="complete-challenge-btn" data-challenge="1">✅ Mark as Done</button>
-            </div>
-          </div>
-          
-          <!-- Challenge Card 2 -->
-          <div class="challenge-card" data-challenge="2">
-            <div class="card-header">
-              <div class="challenge-icon">💧</div>
-              <div class="challenge-status" id="status-2">
-                <div class="status-indicator"></div>
-              </div>
-            </div>
-            <h3 class="challenge-title">Hydration Challenge</h3>
-            <p class="challenge-preview">Drink 8 glasses of water today</p>
-            <div class="challenge-duration">⏱️ All day</div>
-            <button class="start-challenge-btn" data-challenge="2">Start Challenge</button>
-            
-            <!-- Expanded Content -->
-            <div class="challenge-expanded" id="expanded-2">
-              <div class="challenge-instructions">
-                <h4>Daily Hydration Goal</h4>
-                <p>Track your water intake throughout the day. Aim for 8 glasses (64oz) of water.</p>
-                <div class="water-tracker">
-                  <div class="water-glasses">
-                    <div class="water-glass" data-glass="1">💧</div>
-                    <div class="water-glass" data-glass="2">💧</div>
-                    <div class="water-glass" data-glass="3">💧</div>
-                    <div class="water-glass" data-glass="4">💧</div>
-                    <div class="water-glass" data-glass="5">💧</div>
-                    <div class="water-glass" data-glass="6">💧</div>
-                    <div class="water-glass" data-glass="7">💧</div>
-                    <div class="water-glass" data-glass="8">💧</div>
-                  </div>
-                  <p class="water-count"><span id="waterCount">0</span>/8 glasses</p>
-                </div>
-              </div>
-              
-              <button class="complete-challenge-btn" data-challenge="2">✅ Mark as Done</button>
-            </div>
-          </div>
-          
-          <!-- Challenge Card 3 -->
-          <div class="challenge-card" data-challenge="3">
-            <div class="card-header">
-              <div class="challenge-icon">🧘‍♂️</div>
-              <div class="challenge-status" id="status-3">
-                <div class="status-indicator"></div>
-              </div>
-            </div>
-            <h3 class="challenge-title">Mindful Breathing</h3>
-            <p class="challenge-preview">3-minute guided breathing session</p>
-            <div class="challenge-duration">⏱️ 3 minutes</div>
-            <button class="start-challenge-btn" data-challenge="3">Start Challenge</button>
-            
-            <!-- Expanded Content -->
-            <div class="challenge-expanded" id="expanded-3">
-              <div class="challenge-instructions">
-                <h4>4-7-8 Breathing Technique</h4>
-                <ul class="instruction-list">
-                  <li>Inhale through nose for 4 counts</li>
-                  <li>Hold breath for 7 counts</li>
-                  <li>Exhale through mouth for 8 counts</li>
-                  <li>Repeat cycle 4 times</li>
-                </ul>
-              </div>
-              
-              <div class="timer-section">
-                <div class="timer-display" id="timer-3">03:00</div>
-                <div class="breathing-guide">
-                  <div class="breath-circle" id="breathCircle-3">
-                    <span class="breath-text" id="breathText-3">Ready</span>
-                  </div>
-                </div>
-                <div class="timer-controls">
-                  <button class="timer-btn start-btn" data-challenge="3">▶️ Start</button>
-                  <button class="timer-btn pause-btn" data-challenge="3">⏸️ Pause</button>
-                  <button class="timer-btn reset-btn" data-challenge="3">🔄 Reset</button>
-                </div>
-              </div>
-              
-              <button class="complete-challenge-btn" data-challenge="3">✅ Mark as Done</button>
-            </div>
-          </div>
-          
-          <!-- Challenge Card 4 -->
-          <div class="challenge-card" data-challenge="4">
-            <div class="card-header">
-              <div class="challenge-icon">💪</div>
-              <div class="challenge-status" id="status-4">
-                <div class="status-indicator"></div>
-              </div>
-            </div>
-            <h3 class="challenge-title">Strength Burst</h3>
-            <p class="challenge-preview">Quick strength training session</p>
-            <div class="challenge-duration">⏱️ 4 minutes</div>
-            <button class="start-challenge-btn" data-challenge="4">Start Challenge</button>
-            
-            <!-- Expanded Content -->
-            <div class="challenge-expanded" id="expanded-4">
-              <div class="challenge-instructions">
-                <h4>4-Minute Strength Circuit</h4>
-                <ul class="instruction-list">
-                  <li>1 min: Push-ups</li>
-                  <li>1 min: Squats</li>
-                  <li>1 min: Plank hold</li>
-                  <li>1 min: Lunges</li>
-                </ul>
-              </div>
-              
-              <div class="timer-section">
-                <div class="timer-display" id="timer-4">04:00</div>
-                <div class="timer-controls">
-                  <button class="timer-btn start-btn" data-challenge="4">▶️ Start</button>
-                  <button class="timer-btn pause-btn" data-challenge="4">⏸️ Pause</button>
-                  <button class="timer-btn reset-btn" data-challenge="4">🔄 Reset</button>
-                </div>
-                <div class="timer-progress">
-                  <div class="timer-bar" id="timerBar-4"></div>
-                </div>
-              </div>
-              
-              <button class="complete-challenge-btn" data-challenge="4">✅ Mark as Done</button>
-            </div>
-          </div>
-          
-          <!-- Challenge Card 5 -->
-          <div class="challenge-card" data-challenge="5">
-            <div class="card-header">
-              <div class="challenge-icon">🍎</div>
-              <div class="challenge-status" id="status-5">
-                <div class="status-indicator"></div>
-              </div>
-            </div>
-            <h3 class="challenge-title">Healthy Snack</h3>
-            <p class="challenge-preview">Choose a nutritious snack today</p>
-            <div class="challenge-duration">⏱️ Anytime</div>
-            <button class="start-challenge-btn" data-challenge="5">Start Challenge</button>
-            
-            <!-- Expanded Content -->
-            <div class="challenge-expanded" id="expanded-5">
-              <div class="challenge-instructions">
-                <h4>Smart Snacking Challenge</h4>
-                <p>Choose one healthy snack option today:</p>
-                <div class="snack-options">
-                  <div class="snack-option" data-snack="1">🥜 Mixed nuts</div>
-                  <div class="snack-option" data-snack="2">🍎 Apple with almond butter</div>
-                  <div class="snack-option" data-snack="3">🥕 Carrots with hummus</div>
-                  <div class="snack-option" data-snack="4">🫐 Greek yogurt with berries</div>
-                </div>
-              </div>
-              
-              <button class="complete-challenge-btn" data-challenge="5">✅ Mark as Done</button>
-            </div>
-          </div>
-        </div>
-        
-        <button class="carousel-nav next-btn" id="nextBtn">
-          <span>›</span>
-        </button>
-      </div>
-    </div>
-  </section>
-  <script src="script.js"></script>
-</body>
-</html>
+  .tips-container {
+    padding: 0 1rem;
+  }
+  
+  .section-header {
+    margin-bottom: 3rem;
+  }
+  
+  .tips-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .tip-card {
+    height: 250px;
+  }
+  
+  .card-front,
+  .card-back {
+    padding: 1.5rem;
+  }
+  
+  .card-icon {
+    font-size: 2.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.3rem;
+  }
+  
+  .tip-actions {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .save-btn,
+  .share-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .quick-challenge-section {
+    padding: 3rem 0;
+  }
+  
+  .challenge-container {
+    padding: 0 1rem;
+  }
+  
+  .challenge-carousel-wrapper {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .carousel-nav {
+    display: none;
+  }
+  
+  .challenge-card {
+    padding: 1.5rem;
+  }
+  
+  .timer-display {
+    font-size: 2.5rem;
+  }
+  
+  .timer-controls {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .water-glasses {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .snack-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .tips-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tip-card {
+    height: 220px;
+  }
+  
+  .card-front,
+  .card-back {
+    padding: 1.2rem;
+  }
+
+  .feature-pills {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pill {
+    width: fit-content;
+  }
+  
+  .counter-wrapper {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  
+  .challenge-card {
+    padding: 1rem;
+  }
+  
+  .timer-display {
+    font-size: 2rem;
+  }
+  
+  .breath-circle {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 0 15px;
+  }
+  
+  .brand {
+    margin-bottom: 1.5rem;
+  }
+  
+  .logo-icon {
+    font-size: 2rem;
+  }
+  
+  .brand-name {
+    font-size: 1.5rem;
+  }
+  
+  .main-headline {
+    margin-bottom: 1rem;
+  }
+  
+  .subheadline {
+    margin-bottom: 2rem;
+  }
+  
+  .cta-button {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .feature-pills {
+    gap: 0.7rem;
+  }
+  
+  .pill {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .parallax-element {
+    display: none;
+  }
+  
+  .floating-element {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-pills {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pill {
+    width: fit-content;
+  }
+  
+  .counter-wrapper {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}
