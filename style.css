@@ -1441,3 +1441,24 @@ body {
   animation: fadeUp 0.8s ease forwards;
 }
 
+/* ===== Scroll Animation Effects ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.card.show {
+  animation: fadeUp 0.8s ease forwards;
+}
+
