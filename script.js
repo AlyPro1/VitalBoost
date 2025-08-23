@@ -219,99 +219,107 @@ class CheckUpManager {
   
   init() {
     const boostButton = document.getElementById('boostButton');
-    const popupOverlay = document.getElementById('popupOverlay');
-    const closeBtn = document.getElementById('closeBtn');
-    const confettiContainer = document.getElementById('confettiContainer');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalClose = document.getElementById('modalClose');
     
-    if (boostButton && popupOverlay && closeBtn) {
-      boostButton.addEventListener('click', () => this.openPopup());
-      closeBtn.addEventListener('click', () => this.closePopup());
-      popupOverlay.addEventListener('click', (e) => {
-        if (e.target === popupOverlay) {
-          this.closePopup();
+    if (boostButton && modalOverlay && modalClose) {
+      boostButton.addEventListener('click', () => this.openModal());
+      modalClose.addEventListener('click', () => this.closeModal());
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+          this.closeModal();
         }
       });
       
       // Close on Escape key
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && popupOverlay.classList.contains('active')) {
-          this.closePopup();
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+          this.closeModal();
         }
       });
     }
   }
   
-  openPopup() {
-    const popupOverlay = document.getElementById('popupOverlay');
-    popupOverlay.classList.add('active');
+  openModal() {
+    const modalOverlay = document.getElementById('modalOverlay');
+    modalOverlay.classList.add('active');
     
     // Trigger confetti
     this.triggerConfetti();
     
-    // Animate stats after a short delay
+    // Animate cards and stats after modal opens
     setTimeout(() => {
+      this.animateCards();
       this.animateStats();
-    }, 500);
+    }, 300);
     
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
   }
   
-  closePopup() {
-    const popupOverlay = document.getElementById('popupOverlay');
-    popupOverlay.classList.remove('active');
+  closeModal() {
+    const modalOverlay = document.getElementById('modalOverlay');
+    modalOverlay.classList.remove('active');
     
     // Reset stats
     this.resetStats();
+    this.resetCards();
     
     // Restore body scroll
     document.body.style.overflow = '';
   }
   
+  animateCards() {
+    const statCards = document.querySelectorAll('.stat-card');
+    statCards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('animate');
+      }, index * 100);
+    });
+  }
+  
   animateStats() {
     const stats = [
-      { element: 'energy', value: this.getRandomValue(75, 95), color: '#ff6b6b' },
-      { element: 'hydration', value: this.getRandomValue(60, 85), color: '#48dbfb' },
-      { element: 'mood', value: this.getRandomValue(70, 90), color: '#feca57' },
-      { element: 'vitality', value: this.getRandomValue(80, 98), color: '#ff9ff3' }
+      { element: 'heart', value: this.getRandomValue(60, 100), color: '#ff6b6b' },
+      { element: 'stress', value: this.getRandomValue(50, 85), color: '#feca57' },
+      { element: 'energy', value: this.getRandomValue(70, 95), color: '#48dbfb' },
+      { element: 'sleep', value: this.getRandomValue(65, 90), color: '#ff9ff3' }
     ];
     
     stats.forEach((stat, index) => {
       setTimeout(() => {
-        this.animateStat(stat.element, stat.value, stat.color);
+        this.animateCircularProgress(stat.element, stat.value);
       }, index * 200);
     });
   }
   
-  animateStat(statType, targetValue, color) {
-    const progressElement = document.querySelector(`[data-stat="${statType}"]`);
-    const progressFill = progressElement.querySelector('.progress-fill');
-    const progressValue = progressElement.querySelector('.progress-value');
-    const statCard = progressElement.closest('.stat-card');
+  animateCircularProgress(statType, targetValue) {
+    const statCard = document.querySelector(`[data-stat="${statType}"]`);
+    const progressRing = statCard.querySelector('.progress-ring-circle');
+    const progressValue = statCard.querySelector('.progress-value');
     
+    // Calculate stroke-dashoffset for the target value
+    const circumference = 2 * Math.PI * 35; // radius = 35
+    const offset = circumference - (targetValue / 100) * circumference;
+    
+    // Animate the circular progress
+    setTimeout(() => {
+      progressRing.style.strokeDashoffset = offset;
+    }, 100);
+    
+    // Animate the number count-up
     let currentValue = 0;
-    const duration = 2000;
-    const increment = targetValue / (duration / 16);
-    
-    // Add bounce animation to the card
-    statCard.style.animation = 'none';
-    statCard.offsetHeight; // Trigger reflow
-    statCard.style.animation = 'cardPop 0.6s ease-out';
+    const duration = 2000; // 2 seconds
+    const increment = targetValue / (duration / 16); // 60fps
     
     const updateProgress = () => {
       currentValue += increment;
       
       if (currentValue < targetValue) {
-        const percentage = Math.floor(currentValue);
-        progressValue.textContent = `${percentage}%`;
-        progressFill.style.background = `conic-gradient(from 0deg, ${color} ${percentage * 3.6}deg, transparent ${percentage * 3.6}deg)`;
+        progressValue.textContent = Math.floor(currentValue);
         requestAnimationFrame(updateProgress);
       } else {
-        progressValue.textContent = `${targetValue}%`;
-        progressFill.style.background = `conic-gradient(from 0deg, ${color} ${targetValue * 3.6}deg, transparent ${targetValue * 3.6}deg)`;
-        
-        // Add completion sparkle
-        this.addSparkle(statCard);
+        progressValue.textContent = targetValue;
       }
     };
     
@@ -319,13 +327,28 @@ class CheckUpManager {
   }
   
   resetStats() {
-    const progressElements = document.querySelectorAll('.circular-progress');
-    progressElements.forEach(element => {
-      const progressFill = element.querySelector('.progress-fill');
-      const progressValue = element.querySelector('.progress-value');
+    const progressRings = document.querySelectorAll('.progress-ring-circle');
+    const progressValues = document.querySelectorAll('.progress-value');
+    
+    progressRings.forEach(ring => {
+      ring.style.strokeDashoffset = '220'; // Reset to full circle
+    });
+    
+    progressValues.forEach(value => {
+      value.textContent = '0';
+    });
+  }
+  
+  resetCards() {
+    const statCards = document.querySelectorAll('.stat-card');
+    statCards.forEach(card => {
+      card.classList.remove('animate');
       
-      progressFill.style.background = 'conic-gradient(from 0deg, transparent 0%, transparent 100%)';
-      progressValue.textContent = '0%';
+      // Reset transform and opacity
+      setTimeout(() => {
+        card.style.transform = 'translateY(50px) scale(0.8)';
+        card.style.opacity = '0';
+      }, 100);
     });
   }
   
@@ -335,33 +358,33 @@ class CheckUpManager {
   
   triggerConfetti() {
     const container = document.getElementById('confettiContainer');
-    const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff'];
+    const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd'];
     
-    // Create 100 confetti pieces
-    for (let i = 0; i < 100; i++) {
+    // Create 150 confetti pieces for more impact
+    for (let i = 0; i < 150; i++) {
       const confetti = document.createElement('div');
       confetti.className = 'confetti-piece';
-      confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+      
+      // Random color
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.background = color;
+      confetti.style.boxShadow = `0 0 6px ${color}`;
       
       // Random starting position
       confetti.style.left = Math.random() * 100 + '%';
-      confetti.style.top = '-10px';
+      confetti.style.top = '-20px';
       
       // Random size
-      const size = Math.random() * 8 + 6;
+      const size = Math.random() * 10 + 8;
       confetti.style.width = size + 'px';
       confetti.style.height = size + 'px';
       
       // Random animation duration
-      const duration = Math.random() * 2 + 2;
+      const duration = Math.random() * 1.5 + 2.5;
       confetti.style.animationDuration = duration + 's';
       
       // Random delay
-      confetti.style.animationDelay = Math.random() * 0.5 + 's';
-      
-      // Random horizontal drift
-      const drift = (Math.random() - 0.5) * 200;
-      confetti.style.setProperty('--drift', drift + 'px');
+      confetti.style.animationDelay = Math.random() * 0.3 + 's';
       
       container.appendChild(confetti);
       
@@ -370,34 +393,13 @@ class CheckUpManager {
         if (confetti.parentNode) {
           confetti.parentNode.removeChild(confetti);
         }
-      }, (duration + 0.5) * 1000);
+      }, (duration + 0.3) * 1000);
     }
-  }
-  
-  addSparkle(element) {
-    const sparkle = document.createElement('div');
-    sparkle.style.cssText = `
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, #fff 0%, transparent 70%);
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      animation: sparkleAnimation 0.6s ease-out;
-      pointer-events: none;
-      z-index: 10;
-    `;
     
-    element.style.position = 'relative';
-    element.appendChild(sparkle);
-    
+    // Auto-clear confetti container after 3 seconds
     setTimeout(() => {
-      if (sparkle.parentNode) {
-        sparkle.parentNode.removeChild(sparkle);
-      }
-    }, 600);
+      container.innerHTML = '';
+    }, 3000);
   }
 }
 

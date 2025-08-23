@@ -65,62 +65,59 @@
   </div>
 </section>
 
-<!-- Health Stats Pop-up -->
-<div class="popup-overlay" id="popupOverlay">
-  <div class="popup-container" id="popupContainer">
-    <div class="popup-header">
-      <h3>Your Health Boost Report 🚀</h3>
-      <button class="close-btn" id="closeBtn">×</button>
+<!-- Glassmorphism Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-container" id="modalContainer">
+    <button class="modal-close" id="modalClose">❌</button>
+    
+    <div class="modal-header">
+      <h3>Your Health Stats 🚀</h3>
     </div>
     
     <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-icon">💓</div>
-        <div class="stat-label">Energy Boost</div>
-        <div class="circular-progress" data-stat="energy">
-          <div class="progress-circle">
-            <div class="progress-fill"></div>
-            <div class="progress-value">0%</div>
-          </div>
+      <div class="stat-card" data-stat="heart">
+        <div class="stat-icon">❤️</div>
+        <div class="stat-label">Heart Rate</div>
+        <div class="circular-progress">
+          <svg class="progress-ring" width="80" height="80">
+            <circle class="progress-ring-circle" cx="40" cy="40" r="35" stroke="#ff6b6b" stroke-width="6" fill="transparent"/>
+          </svg>
+          <div class="progress-value">0</div>
         </div>
       </div>
       
-      <div class="stat-card">
-        <div class="stat-icon">💧</div>
-        <div class="stat-label">Hydration Level</div>
-        <div class="circular-progress" data-stat="hydration">
-          <div class="progress-circle">
-            <div class="progress-fill"></div>
-            <div class="progress-value">0%</div>
-          </div>
+      <div class="stat-card" data-stat="stress">
+        <div class="stat-icon">😰</div>
+        <div class="stat-label">Stress</div>
+        <div class="circular-progress">
+          <svg class="progress-ring" width="80" height="80">
+            <circle class="progress-ring-circle" cx="40" cy="40" r="35" stroke="#feca57" stroke-width="6" fill="transparent"/>
+          </svg>
+          <div class="progress-value">0</div>
         </div>
       </div>
       
-      <div class="stat-card">
-        <div class="stat-icon">🌞</div>
-        <div class="stat-label">Mood Index</div>
-        <div class="circular-progress" data-stat="mood">
-          <div class="progress-circle">
-            <div class="progress-fill"></div>
-            <div class="progress-value">0%</div>
-          </div>
+      <div class="stat-card" data-stat="energy">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-label">Energy</div>
+        <div class="circular-progress">
+          <svg class="progress-ring" width="80" height="80">
+            <circle class="progress-ring-circle" cx="40" cy="40" r="35" stroke="#48dbfb" stroke-width="6" fill="transparent"/>
+          </svg>
+          <div class="progress-value">0</div>
         </div>
       </div>
       
-      <div class="stat-card">
-        <div class="stat-icon">🏋️</div>
-        <div class="stat-label">Daily Vitality</div>
-        <div class="circular-progress" data-stat="vitality">
-          <div class="progress-circle">
-            <div class="progress-fill"></div>
-            <div class="progress-value">0%</div>
-          </div>
+      <div class="stat-card" data-stat="sleep">
+        <div class="stat-icon">😴</div>
+        <div class="stat-label">Sleep</div>
+        <div class="circular-progress">
+          <svg class="progress-ring" width="80" height="80">
+            <circle class="progress-ring-circle" cx="40" cy="40" r="35" stroke="#ff9ff3" stroke-width="6" fill="transparent"/>
+          </svg>
+          <div class="progress-value">0</div>
         </div>
       </div>
-    </div>
-    
-    <div class="popup-footer">
-      <p>Keep up the great work! 💪</p>
     </div>
   </div>
 </div>
