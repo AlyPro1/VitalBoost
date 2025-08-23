@@ -1049,3 +1049,22 @@ function runStats() {
   document.getElementById("energy").innerText = Math.floor(Math.random() * 25) + 70;
   document.getElementById("sleep").innerText = Math.floor(Math.random() * 25) + 65;
 }
+
+// Modal Logic
+const checkupBtn = document.getElementById("checkupBtn");
+const checkupModal = document.getElementById("checkupModal");
+const closeBtn = document.querySelector(".closeBtn");
+
+checkupBtn.addEventListener("click", () => {
+  checkupModal.style.display = "block";
+});
+
+closeBtn.addEventListener("click", () => {
+  checkupModal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target == checkupModal) {
+    checkupModal.style.display = "none";
+  }
+});
