@@ -987,3 +987,39 @@ class QuickChallengeManager {
     }, 3000);
   }
 }
+// ========== CheckUp 1 Click Feature ==========
+const checkupBtn = document.getElementById("checkupBtn");
+const checkupModal = document.getElementById("checkupModal");
+const closeBtn = document.querySelector(".close-btn");
+
+function randomBetween(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function openCheckup() {
+  checkupModal.style.display = "flex";
+
+  // Animate stats
+  document.getElementById("heartRate").textContent = randomBetween(60, 100);
+  document.getElementById("stressLevel").textContent = randomBetween(50, 85);
+  document.getElementById("energyLevel").textContent = randomBetween(70, 95);
+  document.getElementById("sleepLevel").textContent = randomBetween(65, 90);
+
+  // Confetti (simple)
+  for (let i = 0; i < 100; i++) {
+    let confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3000);
+  }
+}
+
+function closeCheckup() {
+  checkupModal.style.display = "none";
+}
+
+checkupBtn.addEventListener("click", openCheckup);
+closeBtn.addEventListener("click", closeCheckup);
+window.addEventListener("click", (e) => {
+  if (e.target === checkupModal) closeCheckup();
+});
