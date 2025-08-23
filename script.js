@@ -211,6 +211,196 @@ document.addEventListener('DOMContentLoaded', () => {
   new DailyTipsManager();
 });
 
+// CheckUP at One Click Manager
+class CheckUpManager {
+  constructor() {
+    this.init();
+  }
+  
+  init() {
+    const boostButton = document.getElementById('boostButton');
+    const popupOverlay = document.getElementById('popupOverlay');
+    const closeBtn = document.getElementById('closeBtn');
+    const confettiContainer = document.getElementById('confettiContainer');
+    
+    if (boostButton && popupOverlay && closeBtn) {
+      boostButton.addEventListener('click', () => this.openPopup());
+      closeBtn.addEventListener('click', () => this.closePopup());
+      popupOverlay.addEventListener('click', (e) => {
+        if (e.target === popupOverlay) {
+          this.closePopup();
+        }
+      });
+      
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && popupOverlay.classList.contains('active')) {
+          this.closePopup();
+        }
+      });
+    }
+  }
+  
+  openPopup() {
+    const popupOverlay = document.getElementById('popupOverlay');
+    popupOverlay.classList.add('active');
+    
+    // Trigger confetti
+    this.triggerConfetti();
+    
+    // Animate stats after a short delay
+    setTimeout(() => {
+      this.animateStats();
+    }, 500);
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+  }
+  
+  closePopup() {
+    const popupOverlay = document.getElementById('popupOverlay');
+    popupOverlay.classList.remove('active');
+    
+    // Reset stats
+    this.resetStats();
+    
+    // Restore body scroll
+    document.body.style.overflow = '';
+  }
+  
+  animateStats() {
+    const stats = [
+      { element: 'energy', value: this.getRandomValue(75, 95), color: '#ff6b6b' },
+      { element: 'hydration', value: this.getRandomValue(60, 85), color: '#48dbfb' },
+      { element: 'mood', value: this.getRandomValue(70, 90), color: '#feca57' },
+      { element: 'vitality', value: this.getRandomValue(80, 98), color: '#ff9ff3' }
+    ];
+    
+    stats.forEach((stat, index) => {
+      setTimeout(() => {
+        this.animateStat(stat.element, stat.value, stat.color);
+      }, index * 200);
+    });
+  }
+  
+  animateStat(statType, targetValue, color) {
+    const progressElement = document.querySelector(`[data-stat="${statType}"]`);
+    const progressFill = progressElement.querySelector('.progress-fill');
+    const progressValue = progressElement.querySelector('.progress-value');
+    const statCard = progressElement.closest('.stat-card');
+    
+    let currentValue = 0;
+    const duration = 2000;
+    const increment = targetValue / (duration / 16);
+    
+    // Add bounce animation to the card
+    statCard.style.animation = 'none';
+    statCard.offsetHeight; // Trigger reflow
+    statCard.style.animation = 'cardPop 0.6s ease-out';
+    
+    const updateProgress = () => {
+      currentValue += increment;
+      
+      if (currentValue < targetValue) {
+        const percentage = Math.floor(currentValue);
+        progressValue.textContent = `${percentage}%`;
+        progressFill.style.background = `conic-gradient(from 0deg, ${color} ${percentage * 3.6}deg, transparent ${percentage * 3.6}deg)`;
+        requestAnimationFrame(updateProgress);
+      } else {
+        progressValue.textContent = `${targetValue}%`;
+        progressFill.style.background = `conic-gradient(from 0deg, ${color} ${targetValue * 3.6}deg, transparent ${targetValue * 3.6}deg)`;
+        
+        // Add completion sparkle
+        this.addSparkle(statCard);
+      }
+    };
+    
+    updateProgress();
+  }
+  
+  resetStats() {
+    const progressElements = document.querySelectorAll('.circular-progress');
+    progressElements.forEach(element => {
+      const progressFill = element.querySelector('.progress-fill');
+      const progressValue = element.querySelector('.progress-value');
+      
+      progressFill.style.background = 'conic-gradient(from 0deg, transparent 0%, transparent 100%)';
+      progressValue.textContent = '0%';
+    });
+  }
+  
+  getRandomValue(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
+  triggerConfetti() {
+    const container = document.getElementById('confettiContainer');
+    const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff'];
+    
+    // Create 100 confetti pieces
+    for (let i = 0; i < 100; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti-piece';
+      confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+      
+      // Random starting position
+      confetti.style.left = Math.random() * 100 + '%';
+      confetti.style.top = '-10px';
+      
+      // Random size
+      const size = Math.random() * 8 + 6;
+      confetti.style.width = size + 'px';
+      confetti.style.height = size + 'px';
+      
+      // Random animation duration
+      const duration = Math.random() * 2 + 2;
+      confetti.style.animationDuration = duration + 's';
+      
+      // Random delay
+      confetti.style.animationDelay = Math.random() * 0.5 + 's';
+      
+      // Random horizontal drift
+      const drift = (Math.random() - 0.5) * 200;
+      confetti.style.setProperty('--drift', drift + 'px');
+      
+      container.appendChild(confetti);
+      
+      // Remove after animation
+      setTimeout(() => {
+        if (confetti.parentNode) {
+          confetti.parentNode.removeChild(confetti);
+        }
+      }, (duration + 0.5) * 1000);
+    }
+  }
+  
+  addSparkle(element) {
+    const sparkle = document.createElement('div');
+    sparkle.style.cssText = `
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, #fff 0%, transparent 70%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      animation: sparkleAnimation 0.6s ease-out;
+      pointer-events: none;
+      z-index: 10;
+    `;
+    
+    element.style.position = 'relative';
+    element.appendChild(sparkle);
+    
+    setTimeout(() => {
+      if (sparkle.parentNode) {
+        sparkle.parentNode.removeChild(sparkle);
+      }
+    }, 600);
+  }
+}
+
 // Daily Tips Manager
 class DailyTipsManager {
   constructor() {
