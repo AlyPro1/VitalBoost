@@ -15,6 +15,41 @@
       <div class="image-slide" style="background-image: url('https://source.unsplash.com/1600x900/?gym,workout');"></div>
       <div class="image-slide" style="background-image: url('https://source.unsplash.com/1600x900/?running,training');"></div>
     </div>
+<!-- CheckUp 1 Click Feature -->
+<section class="checkup-section">
+  <button id="checkupBtn" class="checkup-btn">CheckUp 1 Click ✅</button>
+
+  <!-- Modal -->
+  <div id="checkupModal" class="modal hidden">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h2>Your Instant CheckUp</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <svg class="progress-circle"><circle></circle></svg>
+          <p>❤️ Heart Rate</p>
+          <span class="stat-value" id="heartRate">0</span>
+        </div>
+        <div class="stat-card">
+          <svg class="progress-circle"><circle></circle></svg>
+          <p>😰 Stress</p>
+          <span class="stat-value" id="stress">0</span>
+        </div>
+        <div class="stat-card">
+          <svg class="progress-circle"><circle></circle></svg>
+          <p>⚡ Energy</p>
+          <span class="stat-value" id="energy">0</span>
+        </div>
+        <div class="stat-card">
+          <svg class="progress-circle"><circle></circle></svg>
+          <p>😴 Sleep</p>
+          <span class="stat-value" id="sleep">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <!-- Gradient Overlay -->
     <div class="gradient-overlay"></div>
