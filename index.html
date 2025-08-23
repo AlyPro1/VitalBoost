@@ -46,6 +46,88 @@
   </div>
 
   <script src="script.js"></script>
+
+<!-- CheckUP at One Click Section -->
+<section class="checkup-section">
+  <div class="checkup-container">
+    <div class="checkup-header">
+      <h2 class="checkup-title">CheckUP at One Click ✅</h2>
+      <p class="checkup-subtitle">Discover your daily health boost instantly!</p>
+    </div>
+    
+    <div class="checkup-cta">
+      <button class="boost-button" id="boostButton">
+        <span class="button-glow"></span>
+        <span class="button-text">Boost Me Now</span>
+        <div class="pulse-ring"></div>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Health Stats Pop-up -->
+<div class="popup-overlay" id="popupOverlay">
+  <div class="popup-container" id="popupContainer">
+    <div class="popup-header">
+      <h3>Your Health Boost Report 🚀</h3>
+      <button class="close-btn" id="closeBtn">×</button>
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">💓</div>
+        <div class="stat-label">Energy Boost</div>
+        <div class="circular-progress" data-stat="energy">
+          <div class="progress-circle">
+            <div class="progress-fill"></div>
+            <div class="progress-value">0%</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">💧</div>
+        <div class="stat-label">Hydration Level</div>
+        <div class="circular-progress" data-stat="hydration">
+          <div class="progress-circle">
+            <div class="progress-fill"></div>
+            <div class="progress-value">0%</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">🌞</div>
+        <div class="stat-label">Mood Index</div>
+        <div class="circular-progress" data-stat="mood">
+          <div class="progress-circle">
+            <div class="progress-fill"></div>
+            <div class="progress-value">0%</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon">🏋️</div>
+        <div class="stat-label">Daily Vitality</div>
+        <div class="circular-progress" data-stat="vitality">
+          <div class="progress-circle">
+            <div class="progress-fill"></div>
+            <div class="progress-value">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="popup-footer">
+      <p>Keep up the great work! 💪</p>
+    </div>
+  </div>
+</div>
+
+<!-- Confetti Container -->
+<div class="confetti-container" id="confettiContainer"></div>
+
 <!-- ===== Feature Section Start ===== -->
 <section class="features">
   <h2 class="section-title">Why VitalBoost?</h2>

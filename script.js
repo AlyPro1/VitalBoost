@@ -207,6 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new ImageCarousel();
   new MouseParallax();
   new PerformanceOptimizer();
+  new CheckUpManager();
   new DailyTipsManager();
 });
 
