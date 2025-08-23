@@ -1023,3 +1023,29 @@ closeBtn.addEventListener("click", closeCheckup);
 window.addEventListener("click", (e) => {
   if (e.target === checkupModal) closeCheckup();
 });
+
+// --- CheckUp Modal Logic ---
+const modal = document.getElementById("checkupModal");
+const btn = document.getElementById("checkupBtn");
+const closeBtn = document.getElementById("closeModal");
+
+btn.addEventListener("click", () => {
+  modal.classList.remove("hidden");
+  runStats();
+});
+
+closeBtn.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) modal.classList.add("hidden");
+});
+
+// Generate random stats
+function runStats() {
+  document.getElementById("heartRate").innerText = Math.floor(Math.random() * 40) + 60;
+  document.getElementById("stress").innerText = Math.floor(Math.random() * 35) + 50;
+  document.getElementById("energy").innerText = Math.floor(Math.random() * 25) + 70;
+  document.getElementById("sleep").innerText = Math.floor(Math.random() * 25) + 65;
+}
