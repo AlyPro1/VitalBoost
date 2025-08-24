@@ -1027,7 +1027,7 @@ window.addEventListener("click", (e) => {
 // --- CheckUp Modal Logic ---
 const modal = document.getElementById("checkupModal");
 const btn = document.getElementById("checkupBtn");
-const closeBtn = document.getElementById("closeModal");
+const checkupCloseBtn = document.getElementById("closeModal");
 
 btn.addEventListener("click", () => {
   modal.classList.remove("hidden");
