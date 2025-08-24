@@ -218,18 +218,25 @@ class CheckUpManager {
   }
   
   init() {
-    const boostButton = document.getElementById('boostButton');
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modalClose = document.getElementById('modalClose');
-    
-    if (boostButton && modalOverlay && modalClose) {
-      boostButton.addEventListener('click', () => this.openModal());
-      modalClose.addEventListener('click', () => this.closeModal());
-      modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) {
-          this.closeModal();
-        }
-      });
+   const checkupBtn = document.getElementById('checkupBtn');
+const checkupModal = document.getElementById('checkupModal');
+const modalClose = document.getElementById('modalClose');
+
+if (checkupBtn && checkupModal && modalClose) {
+  checkupBtn.addEventListener('click', () => this.openModal());
+  modalClose.addEventListener('click', () => this.closeModal());
+  checkupModal.addEventListener('click', (e) => {
+    if (e.target === checkupModal) {
+      this.closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !checkupModal.classList.contains('hidden')) {
+      this.closeModal();
+    }
+  });
+}
       
       // Close on Escape key
       document.addEventListener('keydown', (e) => {
