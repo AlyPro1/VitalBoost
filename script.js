@@ -248,8 +248,10 @@ if (checkupBtn && checkupModal && modalClose) {
   }
   
   openModal() {
-    const modalOverlay = document.getElementById('modalOverlay');
-    modalOverlay.classList.add('active');
+  const checkupModal = document.getElementById('checkupModal');
+  checkupModal.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
     
     // Trigger confetti
     this.triggerConfetti();
@@ -265,8 +267,10 @@ if (checkupBtn && checkupModal && modalClose) {
   }
   
   closeModal() {
-    const modalOverlay = document.getElementById('modalOverlay');
-    modalOverlay.classList.remove('active');
+  const checkupModal = document.getElementById('checkupModal');
+  checkupModal.classList.add('hidden');
+  document.body.style.overflow = '';
+}
     
     // Reset stats
     this.resetStats();
