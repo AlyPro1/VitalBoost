@@ -1034,7 +1034,7 @@ btn.addEventListener("click", () => {
   runStats();
 });
 
-closeBtn.addEventListener("click", () => {
+checkupCloseBtn.addEventListener("click", () => {
   modal.classList.add("hidden");
 });
 
