@@ -76,79 +76,18 @@
           <span class="button-shine"></span>
           Get Started
         </button>
+        <!-- Social Proof -->
+        <div class="social-proof">
+          <div class="counter-wrapper">
+            <span class="pulse-dot"></span>
+            <span class="counter-text">Join over <span class="counter-number" id="counterNumber">0</span> happy users!</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 
   <script src="script.js"></script>
-
-<!-- Confetti Container -->
-<div class="confetti-container" id="confettiContainer"></div>
-
-<!-- ===== Feature Section Start ===== -->
-<section class="features">
-  <h2 class="section-title">Why VitalBoost?</h2>
-  <div class="cards">
-    <div class="card">
-      <div class="icon">💪</div>
-      <h3>Boost Your Health</h3>
-      <p>Personalized challenges designed to keep you fit, strong, and energized every day.</p>
-    </div>
-    <div class="card">
-      <div class="icon">🔥</div>
-      <h3>Stay Motivated</h3>
-      <p>Daily streaks, timers, and rewards keep you on track without losing momentum.</p>
-    </div>
-    <div class="card">
-      <div class="icon">⚡</div>
-      <h3>Quick & Easy</h3>
-      <p>Simple 5-minute routines you can do anytime, anywhere — no excuses!</p>
-    </div>
-  </div>
-</section>
-<!-- ===== Feature Section End ===== -->
-
-<script>
-  // Fade-up animation on scroll
-  const cards = document.querySelectorAll('.card');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-      }
-    });
-  }, { threshold: 0.2 });
-
-  cards.forEach(card => {
-    observer.observe(card);
-  });
-</script>
-
-<script>
-  // Reveal cards with staggered animation
-  
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.card');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          cards.forEach((card, index) => {
-            setTimeout(() => {
-              card.classList.add('show');
-            }, index * 200); // 200ms delay per card
-          });
-          observer.disconnect(); // Stop observing once triggered
-        }
-      });
-    }, { threshold: 0.2 });
-
-    cards.forEach(card => {
-      observer.observe(card);
-    });
-  });
-</script>
-
 </body>
 </html>
