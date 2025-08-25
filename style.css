@@ -1189,4 +1189,4 @@ body {
     font-size: 0.8rem;
   }
 }
-top: clamp(48px, 40vh, 120px);
+top: clamp(48px, 50vh, 120px);
