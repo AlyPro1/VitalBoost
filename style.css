@@ -1098,3 +1098,37 @@ body {
   background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
   z-index: 2;
 }
+/* Avatars Popup Section */
+.avatars-popup {
+  position: absolute;
+  top: 120px; /* adjust so it sits just above hero section */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 30px;
+  z-index: 10; /* stays above background but doesn’t overlap nav */
+}
+
+.avatar-item {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.avatar-item:hover {
+  transform: scale(1.1);
+}
+
+.avatar-image {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.avatar-text {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
