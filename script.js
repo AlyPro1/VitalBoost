@@ -35,3 +35,21 @@ if (checkupBtn) {
     alert("Redirecting you to free health checkup!");
   });
 }
+// =============================
+// Hero Background Carousel Patch
+// =============================
+const slides = document.querySelectorAll('.image-slide');
+let currentIndex = 0;
+
+// Randomize slides on page load for dynamic effect
+const shuffledSlides = Array.from(slides).sort(() => Math.random() - 0.5);
+
+function rotateSlides() {
+  shuffledSlides.forEach(slide => slide.classList.remove('active'));
+  shuffledSlides[currentIndex].classList.add('active');
+  currentIndex = (currentIndex + 1) % shuffledSlides.length;
+}
+
+// Rotate every 5 seconds
+setInterval(rotateSlides, 5000);
+rotateSlides(); // Initial display
