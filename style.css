@@ -1190,3 +1190,38 @@ body {
   }
 }
 top: clamp(48px, 60vh, 120px);
+
+/* Avatars Section */
+.avatars-section {
+  position: absolute; /* fix relative to hero section */
+  top: 50%; /* middle of hero */
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between; /* one left, one right */
+  padding: 0 40px; /* push them inward from edges */
+  z-index: 5;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: white;
+  padding: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
