@@ -1064,6 +1064,33 @@ body {
   height: 100vh;
   overflow: hidden;
 }
+/* Position Avatars inside Hero Section */
+.doctor-avatar-wrapper,
+.runner-avatar-wrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 11; /* above overlay & carousel */
+}
+
+/* Doctor on left */
+.doctor-avatar-wrapper {
+  left: 5%;
+  text-align: center;
+}
+
+/* Runner on right */
+.runner-avatar-wrapper {
+  right: 5%;
+  text-align: center;
+}
+
+.doctor-avatar-wrapper img,
+.runner-avatar-wrapper img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
 
 /* Background Carousel */
 .image-carousel {
