@@ -1330,3 +1330,78 @@ top: clamp(48px, 60vh, 120px);
   height: 180px;
   object-fit: contain;
 }
+/* ===== FORCE avatars fixed middle-left / middle-right =====
+   Paste this EXACTLY at the BOTTOM of style.css (after all other rules)
+   This uses position: fixed so avatars stay locked on screen center-left/right.
+   It targets both wrapper class names and the avatars-popup structure.
+*/
+.doctor-avatar-wrapper,
+.runner-avatar-wrapper,
+.avatars-popup .avatar-item:first-child,
+.avatars-popup .avatar-item:last-child {
+  position: fixed !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 9999 !important;        /* on top of everything */
+  pointer-events: auto !important;  /* ensure they are clickable */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Left / Right placement */
+.doctor-avatar-wrapper,
+.avatars-popup .avatar-item:first-child {
+  left: 4vw !important;            /* distance from left edge — adjust */
+  right: auto !important;
+}
+
+.runner-avatar-wrapper,
+.avatars-popup .avatar-item:last-child {
+  right: 4vw !important;           /* distance from right edge — adjust */
+  left: auto !important;
+}
+
+/* Make the avatars compact and uniform */
+.doctor-avatar-wrapper img,
+.runner-avatar-wrapper img,
+.avatars-popup .avatar-item img {
+  width: clamp(64px, 8vw, 96px) !important;
+  height: clamp(64px, 8vw, 96px) !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: block !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45), 0 0 18px rgba(0, 200, 255, 0.28) !important;
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.35) 60%, rgba(255,255,255,0.05) 100%) !important;
+  transition: transform 200ms ease, filter 200ms ease !important;
+}
+
+/* Hover / touch feedback */
+.doctor-avatar-wrapper:hover img,
+.runner-avatar-wrapper:hover img,
+.avatars-popup .avatar-item:hover img {
+  transform: scale(1.08) !important;
+  filter: drop-shadow(0 0 14px rgba(0,200,255,0.45)) !important;
+}
+
+/* Make sure container doesn't block clicks (only items are clickable) */
+.avatars-popup { pointer-events: none !important; }
+.avatars-popup .avatar-item { pointer-events: auto !important; }
+
+/* Mobile adjustments (shrink avatars & move them inward) */
+@media (max-width: 720px) {
+  .doctor-avatar-wrapper,
+  .avatars-popup .avatar-item:first-child {
+    left: 3vw !important;
+  }
+  .runner-avatar-wrapper,
+  .avatars-popup .avatar-item:last-child {
+    right: 3vw !important;
+  }
+  .doctor-avatar-wrapper img,
+  .runner-avatar-wrapper img,
+  .avatars-popup .avatar-item img {
+    width: 56px !important;
+    height: 56px !important;
+  }
+}
