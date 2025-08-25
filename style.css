@@ -1060,10 +1060,14 @@ body {
    Hero Background Carousel Patch
 ============================= */
 .hero-container {
-  position: relative;
+  position: relative; /* <-- Add this line */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   overflow: hidden;
 }
+
 /* Position Avatars inside Hero Section */
 .doctor-avatar-wrapper,
 .runner-avatar-wrapper {
