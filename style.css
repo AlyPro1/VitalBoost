@@ -1303,3 +1303,30 @@ top: clamp(48px, 60vh, 120px);
   height: 180px;
   object-fit: contain;
 }
+/* Fix Avatars to Middle Left/Right */
+.doctor-avatar-wrapper,
+.runner-avatar-wrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 11;
+}
+
+/* Left side avatar */
+.doctor-avatar-wrapper {
+  left: 5%;
+  text-align: center;
+}
+
+/* Right side avatar */
+.runner-avatar-wrapper {
+  right: 5%;
+  text-align: center;
+}
+
+.doctor-avatar-wrapper img,
+.runner-avatar-wrapper img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
