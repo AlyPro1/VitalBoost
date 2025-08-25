@@ -5,51 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VitalBoost</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Avatar Section Above Hero -->
+  <section class="avatar-section">
+    <div class="avatar-container">
+      <!-- Left Section - Doctor -->
+      <div class="avatar-left">
+        <div class="doctor-avatar" id="doctorAvatar">
+          <img src="/doctor_avatar_bounce.gif" alt="Doctor Avatar" class="avatar-image">
+          <div class="avatar-glow doctor-glow"></div>
+        </div>
+        <button class="checkup-button" id="checkupButton">
+          <span class="button-icon">🩺</span>
+          CheckUp 1 Click
+        </button>
+        
+        <!-- Mini Stat Cards (Hidden by default) -->
+        <div class="mini-stats-container" id="miniStatsContainer">
+          <div class="mini-stat-card" data-stat="heart" style="--delay: 0.1s">
+            <span class="mini-icon">❤️</span>
+            <span class="mini-label">Heart Rate</span>
+          </div>
+          <div class="mini-stat-card" data-stat="stress" style="--delay: 0.2s">
+            <span class="mini-icon">😰</span>
+            <span class="mini-label">Stress</span>
+          </div>
+          <div class="mini-stat-card" data-stat="energy" style="--delay: 0.3s">
+            <span class="mini-icon">⚡</span>
+            <span class="mini-label">Energy</span>
+          </div>
+          <div class="mini-stat-card" data-stat="sleep" style="--delay: 0.4s">
+            <span class="mini-icon">😴</span>
+            <span class="mini-label">Sleep</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Section - Runner -->
+      <div class="avatar-right">
+        <div class="runner-avatar" id="runnerAvatar">
+          <img src="/runner_avatar_flip.gif" alt="Runner Avatar" class="avatar-image">
+          <div class="avatar-glow runner-glow"></div>
+        </div>
+        
+        <!-- Counter Content (Hidden by default) -->
+        <div class="runner-content" id="runnerContent">
+          <div class="counter-display" id="counterDisplay">0</div>
+          <div class="tagline" id="tagline">Health is Wealth 🚀</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Hero Section -->
   <div class="hero-container">
     <!-- Background Carousel -->
     <div class="image-carousel">
-      <div class="image-slide active" style="background-image: url('https://source.unsplash.com/1600x900/?fitness,health');"></div>
-      <div class="image-slide" style="background-image: url('https://source.unsplash.com/1600x900/?gym,workout');"></div>
-      <div class="image-slide" style="background-image: url('https://source.unsplash.com/1600x900/?running,training');"></div>
+      <div class="image-slide active" style="background-image: url('https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1431282/pexels-photo-1431282.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
     </div>
-<!-- CheckUp 1 Click Feature -->
-<section class="checkup-section">
-  <button id="checkupBtn" class="checkup-btn">CheckUp 1 Click ✅</button>
-
-  <!-- Modal -->
-  <div id="checkupModal" class="modal hidden">
-    <div class="modal-content">
-      <span id="modalClose" class="close">&times;</span>
-      <h2>Your Instant CheckUp</h2>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <svg class="progress-circle"><circle></circle></svg>
-          <p>❤️ Heart Rate</p>
-          <span class="stat-value" id="heartRate">0</span>
-        </div>
-        <div class="stat-card">
-          <svg class="progress-circle"><circle></circle></svg>
-          <p>😰 Stress</p>
-          <span class="stat-value" id="stress">0</span>
-        </div>
-        <div class="stat-card">
-          <svg class="progress-circle"><circle></circle></svg>
-          <p>⚡ Energy</p>
-          <span class="stat-value" id="energy">0</span>
-        </div>
-        <div class="stat-card">
-          <svg class="progress-circle"><circle></circle></svg>
-          <p>😴 Sleep</p>
-          <span class="stat-value" id="sleep">0</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 
     <!-- Gradient Overlay -->
     <div class="gradient-overlay"></div>
@@ -76,6 +93,7 @@
           <span class="button-shine"></span>
           Get Started
         </button>
+        
         <!-- Social Proof -->
         <div class="social-proof">
           <div class="counter-wrapper">
@@ -83,10 +101,73 @@
             <span class="counter-text">Join over <span class="counter-number" id="counterNumber">0</span> happy users!</span>
           </div>
         </div>
+      </div>
+    </div>
 
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+      <div class="floating-element element-1">💊</div>
+      <div class="floating-element element-2">🏃‍♂️</div>
+      <div class="floating-element element-3">🥗</div>
+      <div class="floating-element element-4">💪</div>
+      <div class="floating-element element-5">🧘‍♀️</div>
+    </div>
+  </div>
+
+  <!-- Doctor Modal -->
+  <div class="modal-overlay" id="doctorModal">
+    <div class="modal-container">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-header">
+        <h3>Your Health CheckUp</h3>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card" data-stat="heart">
+          <span class="stat-icon">❤️</span>
+          <div class="stat-label">Heart Rate</div>
+          <div class="circular-progress">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="progress-ring-circle" stroke="#ff6b6b" stroke-width="4" fill="transparent" r="36" cx="40" cy="40"/>
+            </svg>
+            <div class="progress-value">0</div>
+          </div>
+        </div>
+        <div class="stat-card" data-stat="stress">
+          <span class="stat-icon">😰</span>
+          <div class="stat-label">Stress Level</div>
+          <div class="circular-progress">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="progress-ring-circle" stroke="#feca57" stroke-width="4" fill="transparent" r="36" cx="40" cy="40"/>
+            </svg>
+            <div class="progress-value">0</div>
+          </div>
+        </div>
+        <div class="stat-card" data-stat="energy">
+          <span class="stat-icon">⚡</span>
+          <div class="stat-label">Energy Boost</div>
+          <div class="circular-progress">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="progress-ring-circle" stroke="#10b981" stroke-width="4" fill="transparent" r="36" cx="40" cy="40"/>
+            </svg>
+            <div class="progress-value">0</div>
+          </div>
+        </div>
+        <div class="stat-card" data-stat="sleep">
+          <span class="stat-icon">😴</span>
+          <div class="stat-label">Sleep Tracker</div>
+          <div class="circular-progress">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="progress-ring-circle" stroke="#3b82f6" stroke-width="4" fill="transparent" r="36" cx="40" cy="40"/>
+            </svg>
+            <div class="progress-value">0</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Confetti Container -->
+  <div class="confetti-container" id="confettiContainer"></div>
 
   <script src="script.js"></script>
 </body>
