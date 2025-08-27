@@ -62,8 +62,12 @@
     --------------------------*/
     const doctorModal = document.getElementById('doctorModal');
     const runnerModal = document.getElementById('runnerModal');
+    const aiDoctorChatModal = document.getElementById('aiDoctorChatModal');
     const doctorAvatar = document.getElementById('doctorAvatar');
     const runnerAvatar = document.getElementById('runnerAvatar');
+
+    // AI Doctor Chat button
+    const chatWithAIDoctorBtn = document.getElementById('chatWithAIDoctorBtn');
 
     function openModal(modal) {
       if (!modal) return;
@@ -95,6 +99,17 @@
       });
     }
 
+    // Chat with AI Doctor button functionality
+    if (chatWithAIDoctorBtn && aiDoctorChatModal) {
+      chatWithAIDoctorBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Close the doctor modal first
+        if (doctorModal) closeModal(doctorModal);
+        // Then open the AI chat modal
+        openModal(aiDoctorChatModal);
+      });
+    }
+
     // Find close buttons inside each modal (works even if ids differ)
     if (doctorModal) {
       const close = doctorModal.querySelector('.modal-close');
@@ -103,6 +118,10 @@
     if (runnerModal) {
       const close = runnerModal.querySelector('.modal-close');
       if (close) close.addEventListener('click', () => closeModal(runnerModal));
+    }
+    if (aiDoctorChatModal) {
+      const close = aiDoctorChatModal.querySelector('.modal-close');
+      if (close) close.addEventListener('click', () => closeModal(aiDoctorChatModal));
     }
 
     // Click outside to close (the overlay is the modal element with class modal-overlay)
@@ -118,6 +137,7 @@
       if (ev.key === 'Escape') {
         if (doctorModal && doctorModal.classList.contains('active')) closeModal(doctorModal);
         if (runnerModal && runnerModal.classList.contains('active')) closeModal(runnerModal);
+        if (aiDoctorChatModal && aiDoctorChatModal.classList.contains('active')) closeModal(aiDoctorChatModal);
       }
     });
 

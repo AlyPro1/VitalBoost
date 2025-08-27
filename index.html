@@ -96,7 +96,7 @@
         <h3>Your Health CheckUp</h3>
       </div>
       <div class="modal-button-group">
-        <button class="modal-action-button doctor-chat">
+        <button class="modal-action-button doctor-chat" id="chatWithAIDoctorBtn">
           <span class="button-icon">🩺</span>
           Chat with AI Doctor
         </button>
@@ -130,6 +130,26 @@
         <button class="modal-action-button fitness-goals">
           <span class="button-icon">🎯</span>
           Daily Fitness Goals
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Doctor Chat Modal -->
+  <div class="modal-overlay" id="aiDoctorChatModal">
+    <div class="modal-container ai-chat-container">
+      <button class="modal-close" id="closeAIDoctor">&times;</button>
+      <div class="ai-doctor-header">
+        <div class="ai-doctor-avatar">
+          <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=300" alt="AI Doctor" class="doctor-avatar-img">
+        </div>
+        <h3 class="ai-doctor-greeting">How can I Help you with your Health?</h3>
+      </div>
+      <div class="ai-chat-input-section">
+        <input type="text" id="healthQuery" class="health-input" placeholder="Describe your symptoms or health concerns...">
+        <button class="send-query-btn" id="sendQueryBtn">
+          <span class="button-icon">💬</span>
+          Ask Doctor
         </button>
       </div>
     </div>
