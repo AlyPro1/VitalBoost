@@ -1760,3 +1760,53 @@ top: clamp(48px, 60vh, 120px);
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-20px); }
 }
+/* Floating Animation (Doctor) */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+/* Sway Animation (Runner) */
+@keyframes sway {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(12px); }
+  100% { transform: translateX(0); }
+}
+
+/* Glow Pulse Animation */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 12px rgba(0, 255, 128, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(0, 255, 128, 1); }
+  100% { box-shadow: 0 0 12px rgba(0, 255, 128, 0.5); }
+}
+
+/* Avatar Images - Base Style */
+.avatar-image {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Doctor Avatar: Floating + Glow */
+#doctorAvatar .avatar-image {
+  animation: float 4s ease-in-out infinite, pulseGlow 3s infinite alternate;
+}
+
+/* Runner Avatar: Sway + Glow */
+#runnerAvatar .avatar-image {
+  animation: sway 3s ease-in-out infinite, pulseGlow 2.5s infinite alternate;
+}
+
+/* Hover Effect - Extra Glow & Scale */
+.avatar-item:hover .avatar-image {
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(0, 255, 128, 1);
+}
+
+/* Active (Click) Effect - Ripple Tap */
+.avatar-item:active .avatar-image {
+  transform: scale(0.92);
+}
