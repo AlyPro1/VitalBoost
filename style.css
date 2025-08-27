@@ -1892,3 +1892,56 @@ top: clamp(48px, 60vh, 120px);
   opacity: 1;
   transform: translateY(0);
 }
+/* ===== MODALS ===== */
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(3px);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  animation: fadeIn 0.4s ease;
+}
+
+.modal h2 {
+  margin-bottom: 10px;
+  color: #2c3e50;
+  font-size: 22px;
+  text-align: center;
+}
+
+.modal p {
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+}
+
+.close {
+  color: #333;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #e74c3c;
+}
+
+@keyframes fadeIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
