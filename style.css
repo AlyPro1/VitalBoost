@@ -1485,3 +1485,48 @@ top: clamp(48px, 60vh, 120px);
   transform: scale(1.1);
   filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.7));
 }
+.hero {
+  position: relative; /* anchors the avatars inside hero section */
+  overflow: hidden;   /* keeps them inside */
+}
+
+/* Doctor Avatar - Left Side Floating */
+.doctor-avatar {
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+  width: 120px;
+  z-index: 5;
+
+  animation: floatUpDown 4s ease-in-out infinite;
+}
+
+/* Runner Avatar - Right Side Floating */
+.runner-avatar {
+  position: absolute;
+  bottom: 20%;
+  right: 10%;
+  width: 120px;
+  z-index: 5;
+
+  animation: floatSideways 5s ease-in-out infinite;
+}
+
+/* Keyframes for Floating Animations */
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px); /* bounce upward */
+  }
+}
+
+@keyframes floatSideways {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(20px); /* slide sideways */
+  }
+}
