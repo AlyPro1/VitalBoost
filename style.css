@@ -1557,3 +1557,59 @@ top: clamp(48px, 60vh, 120px);
     transform: translateY(-20px);
   }
 }
+/* === Doctor & Runner Avatars Fixed on Left + Right with Floating Animations === */
+.avatars-popup {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  pointer-events: none; /* container ignores clicks */
+  z-index: 9999;
+}
+
+.avatars-popup .avatar-item {
+  position: absolute;
+  transform: translateY(-50%);
+  pointer-events: auto; /* avatars clickable */
+  text-align: center;
+}
+
+.avatars-popup .avatar-item:first-child {
+  left: 20px;   /* Doctor on left side */
+  animation: floatDoctor 4s ease-in-out infinite;
+}
+
+.avatars-popup .avatar-item:last-child {
+  right: 20px;  /* Runner on right side */
+  animation: floatRunner 5s ease-in-out infinite;
+}
+
+.avatar-image {
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(0 0 12px rgba(0, 200, 255, 0.4));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.avatar-image:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.7));
+}
+
+.avatar-text {
+  color: #fff;
+  font-size: 14px;
+  margin-top: 8px;
+  text-shadow: 0 0 6px rgba(0,0,0,0.5);
+}
+
+/* Floating Animations */
+@keyframes floatDoctor {
+  0%, 100% { transform: translateY(-50%) translateY(0px); }
+  50% { transform: translateY(-50%) translateY(-20px); }
+}
+
+@keyframes floatRunner {
+  0%, 100% { transform: translateY(-50%) translateY(0px); }
+  50% { transform: translateY(-50%) translateY(20px); }
+}
