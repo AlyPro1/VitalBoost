@@ -1679,3 +1679,40 @@ top: clamp(48px, 60vh, 120px);
     width: 56px !important; height: 56px !important;
   }
 }
+/* ✨ Avatar Animations - Smooth & Professional */
+
+/* Floating + gentle wave */
+.doctor-avatar {
+  animation: floatDoctor 6s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.runner-avatar {
+  animation: floatRunner 5s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Glow + Scale */
+.doctor-avatar:hover,
+.runner-avatar:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(0, 255, 150, 0.5);
+}
+
+/* Doctor: slower, deeper float */
+@keyframes floatDoctor {
+  0% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-12px) rotate(-2deg); }
+  50% { transform: translateY(0px) rotate(0deg); }
+  75% { transform: translateY(10px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* Runner: slightly faster, livelier float */
+@keyframes floatRunner {
+  0% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(2deg); }
+  50% { transform: translateY(0px) rotate(0deg); }
+  75% { transform: translateY(6px) rotate(-2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
