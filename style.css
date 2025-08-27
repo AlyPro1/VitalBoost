@@ -1840,3 +1840,15 @@ top: clamp(48px, 60vh, 120px);
     filter: drop-shadow(0 0 15px rgba(255, 200, 0, 0.8));
   }
 }
+/* Avatar hover boost effect */
+.avatar-item:hover .avatar-image {
+  transform: scale(1.15); /* slightly bigger */
+  filter: drop-shadow(0 0 15px rgba(0, 200, 255, 0.9));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.avatar-item:hover .avatar-text {
+  color: #00c8ff; /* text changes color */
+  transform: scale(1.1);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
