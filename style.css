@@ -1530,3 +1530,30 @@ top: clamp(48px, 60vh, 120px);
     transform: translateX(20px); /* slide sideways */
   }
 }
+/* Doctor and Runner Avatars Floating Animation */
+.doctor-avatar {
+  position: absolute;
+  bottom: 50px; /* keep near bottom of hero */
+  left: 30px;   /* left side */
+  width: 180px;
+  animation: floatUpDown 4s ease-in-out infinite;
+  z-index: 5;
+}
+
+.runner-avatar {
+  position: absolute;
+  bottom: 50px; /* keep near bottom of hero */
+  right: 30px;  /* right side */
+  width: 180px;
+  animation: floatUpDown 4s ease-in-out infinite;
+  z-index: 5;
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
