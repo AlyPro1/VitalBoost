@@ -53,3 +53,33 @@ function rotateSlides() {
 // Rotate every 5 seconds
 setInterval(rotateSlides, 5000);
 rotateSlides(); // Initial display
+
+// Doctor Modal
+const doctorModal = document.getElementById("doctorModal");
+const doctorAvatar = document.getElementById("doctorAvatar");
+const closeDoctor = document.getElementById("closeDoctor");
+
+doctorAvatar.addEventListener("click", () => {
+  doctorModal.style.display = "block";
+});
+closeDoctor.addEventListener("click", () => {
+  doctorModal.style.display = "none";
+});
+
+// Runner Modal
+const runnerModal = document.getElementById("runnerModal");
+const runnerAvatar = document.getElementById("runnerAvatar");
+const closeRunner = document.getElementById("closeRunner");
+
+runnerAvatar.addEventListener("click", () => {
+  runnerModal.style.display = "block";
+});
+closeRunner.addEventListener("click", () => {
+  runnerModal.style.display = "none";
+});
+
+// Close modal if clicked outside
+window.addEventListener("click", (e) => {
+  if (e.target === doctorModal) doctorModal.style.display = "none";
+  if (e.target === runnerModal) runnerModal.style.display = "none";
+});
