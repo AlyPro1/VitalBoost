@@ -1810,3 +1810,33 @@ top: clamp(48px, 60vh, 120px);
 .avatar-item:active .avatar-image {
   transform: scale(0.92);
 }
+/* 🌟 Floating Animations for Avatars */
+.doctor-avatar .avatar-image {
+  animation: floatDoctor 4s ease-in-out infinite;
+}
+
+.runner-avatar .avatar-image {
+  animation: floatRunner 5s ease-in-out infinite;
+}
+
+@keyframes floatDoctor {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+  }
+  50% {
+    transform: translateY(-15px);
+    filter: drop-shadow(0 0 15px rgba(0, 255, 200, 0.8));
+  }
+}
+
+@keyframes floatRunner {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+    filter: drop-shadow(0 0 15px rgba(255, 200, 0, 0.8));
+  }
+}
