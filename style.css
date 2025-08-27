@@ -1716,3 +1716,47 @@ top: clamp(48px, 60vh, 120px);
   75% { transform: translateY(6px) rotate(-2deg); }
   100% { transform: translateY(0px) rotate(0deg); }
 }
+/* Avatar wrapper */
+.avatars-popup {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Shared avatar style */
+.avatar-item {
+  position: absolute;
+  text-align: center;
+  pointer-events: auto;
+}
+
+.avatar-image {
+  width: 150px;
+  max-width: 100%;
+}
+
+/* Doctor on left */
+.doctor-avatar {
+  left: 5%;
+  animation: floatDoctor 4s ease-in-out infinite;
+}
+
+/* Runner on right */
+.runner-avatar {
+  right: 5%;
+  animation: floatRunner 4s ease-in-out infinite;
+}
+
+/* Floating animations */
+@keyframes floatDoctor {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes floatRunner {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
