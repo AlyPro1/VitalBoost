@@ -1453,3 +1453,35 @@ top: clamp(48px, 60vh, 120px);
   color: #fff;
   text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
 }
+/* === Fix Doctor and Runner avatars to middle left & right === */
+.doctor-avatar,
+.runner-avatar {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.doctor-avatar {
+  left: 20px; /* adjust spacing from left */
+}
+
+.runner-avatar {
+  right: 20px; /* adjust spacing from right */
+}
+
+/* Avatar image styling */
+.doctor-avatar img,
+.runner-avatar img {
+  width: 120px; /* control size */
+  max-width: 20vw; /* responsive scaling */
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 10px rgba(0, 200, 255, 0.3));
+}
+
+.doctor-avatar img:hover,
+.runner-avatar img:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.7));
+}
