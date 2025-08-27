@@ -1405,3 +1405,51 @@ top: clamp(48px, 60vh, 120px);
     height: 56px !important;
   }
 }
+/* === Fix Avatars in Hero Section === */
+.avatars-popup {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 0;
+  pointer-events: none; /* so it doesn’t block hero text */
+  z-index: 20;
+}
+
+.avatars-popup .avatar-item {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: auto; /* clickable */
+  text-align: center;
+}
+
+.avatars-popup .avatar-item:first-child {
+  left: 40px; /* Doctor avatar on the left */
+}
+
+.avatars-popup .avatar-item:last-child {
+  right: 40px; /* Runner avatar on the right */
+}
+
+.avatar-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.28);
+}
+
+.avatar-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 35px rgba(0, 200, 255, 0.6);
+}
+
+.avatar-text {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
