@@ -403,4 +403,44 @@ symptomUpload.addEventListener("change", () => {
     uploadedFiles.appendChild(fileList);
   }
 });
+// === Health Tips Feature ===
+const healthTipsBtn = document.getElementById("healthTipsBtn");
+const healthTipsContainer = document.getElementById("healthTipsContainer");
+
+// Top-class, engaging health tips
+const healthTips = [
+  "💧 Drink at least 8 glasses of water daily to stay energized and focused.",
+  "🥗 Include a rainbow of vegetables in every meal for maximum nutrients.",
+  "🏃‍♂️ 30 minutes of daily exercise boosts mood, metabolism, and immunity.",
+  "😴 Prioritize 7-8 hours of sleep to help your body recover and function better.",
+  "🧘 Practice mindfulness or meditation for 10 minutes to reduce stress.",
+  "💪 Strength training twice a week helps build muscle and burn fat effectively.",
+  "🍳 Include protein-rich foods like eggs, chicken, or legumes to feel full longer.",
+  "🥤 Avoid sugary drinks; opt for herbal teas or infused water.",
+  "🚶 Take short walking breaks every hour to improve circulation and focus.",
+  "📵 Limit screen time before bed to improve sleep quality."
+];
+
+// Show random tip with animation
+healthTipsBtn.addEventListener("click", () => {
+  const randomTip = healthTips[Math.floor(Math.random() * healthTips.length)];
+  
+  // Create tip element
+  const tipElement = document.createElement("div");
+  tipElement.className = "tip-item";
+  tipElement.textContent = randomTip;
+
+  // Clear previous tip or keep history if you want
+  healthTipsContainer.innerHTML = "";
+  healthTipsContainer.appendChild(tipElement);
+
+  // Animation effect
+  tipElement.style.opacity = 0;
+  tipElement.style.transform = "translateY(-20px)";
+  setTimeout(() => {
+    tipElement.style.transition = "all 0.5s ease";
+    tipElement.style.opacity = 1;
+    tipElement.style.transform = "translateY(0)";
+  }, 50);
+});
 
