@@ -94,26 +94,27 @@
       <div class="modal-header">
         <h3>Your Health CheckUp</h3>
       </div>
-      <div class="modal-button-group">
-        <button class="modal-action-button doctor-chat" id="chatWithAIDoctorBtn">
-          <span class="button-icon">🩺</span>
-          Chat with AI Doctor
-        </button>
-        <button class="modal-action-button upload-symptoms">
-          <span class="button-icon">📤</span>
-          Upload Symptoms
-        <button class="modal-action-button upload-symptoms" id="uploadTrigger">
-  <span class="button-icon">📤</span>
-  Upload Symptoms
-</button>
-<input type="file" id="symptomUpload" multiple style="display:none;">
-<div id="uploadedFiles"></div>
+      <!-- Doctor Modal Features -->
+<div class="modal-button-group">
+  <button class="modal-action-button doctor-chat" id="chatWithAIDoctorBtn">
+    <span class="button-icon">🩺</span>
+    Chat with AI Doctor
+  </button>
 
-          Health Tips
-        </button>
-      </div>
-    </div>
-  </div>
+  <!-- ✅ Only one Upload Symptoms button -->
+  <button class="modal-action-button upload-symptoms" id="uploadTrigger">
+    <span class="button-icon">📤</span>
+    Upload Symptoms
+  </button>
+  <input type="file" id="symptomUpload" multiple style="display:none;">
+  <div id="uploadedFiles"></div>
+
+  <button class="modal-action-button health-tips">
+    <span class="button-icon">💡</span>
+    Health Tips
+  </button>
+</div>
+
   <!-- Runner Modal -->
   <div class="modal-overlay" id="runnerModal">
     <div class="modal-container">
