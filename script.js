@@ -281,3 +281,65 @@ Let me suggest some general health advice: stay hydrated, rest well, and if symp
     });
   }
 });
+// ===============================
+// AI Doctor Chat Enhancements
+// ===============================
+
+// Auto-scroll function
+function scrollToBottom() {
+  const chatMessages = document.getElementById("chatMessages");
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Function to simulate AI typing + delayed response
+function simulateAIResponse(userMessage) {
+  const chatMessages = document.getElementById("chatMessages");
+
+  // Add typing animation
+  const typingDiv = document.createElement("div");
+  typingDiv.classList.add("message", "ai-message", "typing");
+  typingDiv.textContent = "Doctor is typing...";
+  chatMessages.appendChild(typingDiv);
+  scrollToBottom();
+
+  // After 1.5 sec, replace with AI reply
+  setTimeout(() => {
+    typingDiv.remove();
+
+    const aiResponse = document.createElement("div");
+    aiResponse.classList.add("message", "ai-message");
+    aiResponse.textContent =
+      "Thank you for sharing. Based on your symptoms, I recommend consulting a healthcare provider for personalized advice.";
+    chatMessages.appendChild(aiResponse);
+
+    scrollToBottom();
+  }, 1500);
+}
+
+// Handle send button click
+document.getElementById("sendQueryBtn")?.addEventListener("click", () => {
+  const input = document.getElementById("healthQuery");
+  const message = input.value.trim();
+  if (message) {
+    // Show user message
+    const chatMessages = document.getElementById("chatMessages");
+    const userMessage = document.createElement("div");
+    userMessage.classList.add("message", "user-message");
+    userMessage.textContent = message;
+    chatMessages.appendChild(userMessage);
+    scrollToBottom();
+
+    // Clear input
+    input.value = "";
+
+    // Simulate AI response
+    simulateAIResponse(message);
+  }
+});
+
+// Handle Enter key for input
+document.getElementById("healthQuery")?.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    document.getElementById("sendQueryBtn").click();
+  }
+});
