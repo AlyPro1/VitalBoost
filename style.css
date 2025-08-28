@@ -2459,4 +2459,32 @@ top: clamp(48px, 60vh, 120px);
   color: #666 !important;       /* gray placeholder */
   opacity: 1 !important;
 }
+/* Health Tips Container */
+.health-tips-container {
+  margin-top: 15px;
+  padding: 12px 15px;
+  min-height: 60px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #a1ffce, #faffd1);
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* Tip Item Animation */
+.tip-item {
+  animation: popIn 0.5s ease forwards;
+  padding: 5px 10px;
+}
+
+/* Pop-in animation */
+@keyframes popIn {
+  0% { transform: scale(0.8) translateY(-20px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
 
