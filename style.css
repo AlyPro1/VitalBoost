@@ -2240,3 +2240,23 @@ top: clamp(48px, 60vh, 120px);
   display: flex;
   flex-direction: column;
 }
+/* --- Fix chatbox resizing and disappearing issue --- */
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  height: 400px; /* fixed height for the chat window */
+  max-height: 400px;
+  overflow-y: auto; /* scroll instead of pushing down */
+  background: #fff; /* keep background solid */
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.chat-input {
+  position: relative;
+  bottom: 0;
+  margin-top: auto; /* stays at bottom */
+  background: #f9f9f9;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
