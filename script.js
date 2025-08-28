@@ -165,3 +165,59 @@
 
   }); // DOMContentLoaded
 })(); 
+// =====================
+// AI Doctor Chat Logic
+// =====================
+const aiDoctorChatModal = document.getElementById("aiDoctorChatModal");
+const chatWithAIDoctorBtn = document.getElementById("chatWithAIDoctorBtn");
+const closeAIDoctor = document.getElementById("closeAIDoctor");
+const sendQueryBtn = document.getElementById("sendQueryBtn");
+const healthQueryInput = document.getElementById("healthQuery");
+const chatMessages = document.getElementById("chatMessages");
+
+// Open AI Doctor Chat
+chatWithAIDoctorBtn.addEventListener("click", () => {
+  aiDoctorChatModal.style.display = "block";
+});
+
+// Close AI Doctor Chat
+closeAIDoctor.addEventListener("click", () => {
+  aiDoctorChatModal.style.display = "none";
+});
+
+// Fake replies
+const fakeReplies = [
+  "It sounds like you need to rest and stay hydrated. 💧",
+  "I recommend booking a real checkup if symptoms continue. 🏥",
+  "Try light exercise and balanced meals. 🍎",
+  "That could be stress-related. Deep breaths may help. 🌿",
+  "Monitor your symptoms and let me know if they change. 👩‍⚕️"
+];
+
+// Send message
+sendQueryBtn.addEventListener("click", () => {
+  const userMessage = healthQueryInput.value.trim();
+  if (userMessage === "") return;
+
+  // Display user message
+  const userMsgDiv = document.createElement("div");
+  userMsgDiv.className = "chat-message user";
+  userMsgDiv.textContent = userMessage;
+  chatMessages.appendChild(userMsgDiv);
+
+  healthQueryInput.value = "";
+
+  // Auto-scroll to latest
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  // AI reply after 1.5s
+  setTimeout(() => {
+    const aiReply = fakeReplies[Math.floor(Math.random() * fakeReplies.length)];
+    const aiMsgDiv = document.createElement("div");
+    aiMsgDiv.className = "chat-message ai";
+    aiMsgDiv.textContent = aiReply;
+    chatMessages.appendChild(aiMsgDiv);
+
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }, 1500);
+});
