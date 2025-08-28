@@ -377,4 +377,30 @@ Let me suggest some general health advice: stay hydrated, rest well, and if symp
     observer.observe(chatModal, { attributes: true, attributeFilter: ["style", "class"] });
   }
 })();
+// === Upload Symptoms ===
+const uploadTrigger = document.getElementById("uploadTrigger");
+const symptomUpload = document.getElementById("symptomUpload");
+const uploadedFiles = document.getElementById("uploadedFiles");
+
+// Open file dialog when button is clicked
+uploadTrigger.addEventListener("click", () => {
+  symptomUpload.click();
+});
+
+// Display selected files
+symptomUpload.addEventListener("change", () => {
+  uploadedFiles.innerHTML = ""; // Clear previous list
+
+  if (symptomUpload.files.length === 0) {
+    uploadedFiles.innerHTML = "<p>No files uploaded.</p>";
+  } else {
+    const fileList = document.createElement("ul");
+    for (let file of symptomUpload.files) {
+      const li = document.createElement("li");
+      li.textContent = `📄 ${file.name}`;
+      fileList.appendChild(li);
+    }
+    uploadedFiles.appendChild(fileList);
+  }
+});
 
