@@ -221,3 +221,63 @@ sendQueryBtn.addEventListener("click", () => {
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }, 1500);
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const chatMessages = document.getElementById("chatMessages");
+  const healthQuery = document.getElementById("healthQuery");
+  const sendQueryBtn = document.getElementById("sendQueryBtn");
+
+  // Function to add messages to chat
+  function addMessage(sender, text, isTyping = false) {
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("chat-message", sender);
+
+    if (isTyping) {
+      messageDiv.innerHTML = `<span class="typing-dots"><span>.</span><span>.</span><span>.</span></span>`;
+    } else {
+      messageDiv.textContent = text;
+    }
+
+    chatMessages.appendChild(messageDiv);
+
+    // Auto-scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    return messageDiv;
+  }
+
+  // Handle sending query
+  function sendMessage() {
+    const query = healthQuery.value.trim();
+    if (!query) return;
+
+    // User message
+    addMessage("user", query);
+    healthQuery.value = "";
+
+    // Typing indicator for AI
+    const typingMessage = addMessage("doctor", "", true);
+
+    // After 1.5 sec, replace typing with AI response
+    setTimeout(() => {
+      typingMessage.remove();
+      addMessage("doctor", getAIResponse(query));
+    }, 1500);
+  }
+
+  // Fake AI response generator (replace with backend/AI API later)
+  function getAIResponse(userInput) {
+    return `I understand your concern about "${userInput}". 💡 
+Let me suggest some general health advice: stay hydrated, rest well, and if symptoms persist, consult a real doctor. 👨‍⚕️`;
+  }
+
+  // Event listeners
+  if (sendQueryBtn) {
+    sendQueryBtn.addEventListener("click", sendMessage);
+  }
+
+  if (healthQuery) {
+    healthQuery.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+  }
+});
