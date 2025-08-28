@@ -343,3 +343,52 @@ document.getElementById("healthQuery")?.addEventListener("keypress", (e) => {
     document.getElementById("sendQueryBtn").click();
   }
 });
+// ---------------- AI Doctor Chat Feature ----------------
+
+// Get chat elements
+const chatMessages = document.getElementById("chatMessages");
+const healthQuery = document.getElementById("healthQuery");
+const sendQueryBtn = document.getElementById("sendQueryBtn");
+
+// Helper: auto-scroll
+function scrollToBottom() {
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Helper: typing animation for AI doctor
+function showTypingIndicator() {
+  const typingDiv = document.createElement("div");
+  typingDiv.className = "ai-message typing";
+  typingDiv.innerHTML = `<span class="dot"></span><span class="dot"></span><span class="dot"></span>`;
+  chatMessages.appendChild(typingDiv);
+  scrollToBottom();
+  return typingDiv;
+}
+
+// Add message to chat
+function addMessage(sender, text) {
+  const msgDiv = document.createElement("div");
+  msgDiv.className = sender === "user" ? "user-message" : "ai-message";
+  msgDiv.textContent = text;
+  chatMessages.appendChild(msgDiv);
+  scrollToBottom();
+}
+
+// Handle send button
+sendQueryBtn.addEventListener("click", () => {
+  const query = healthQuery.value.trim();
+  if (!query) return;
+
+  // Add user message
+  addMessage("user", query);
+  healthQuery.value = "";
+
+  // Show typing animation
+  const typingDiv = showTypingIndicator();
+
+  // Simulate AI reply after 1.5s
+  setTimeout(() => {
+    typingDiv.remove();
+    addMessage("ai", "I'm your AI Doctor 👨‍⚕️ — Based on what you said, it’s best to stay hydrated and rest. Do you want me to suggest remedies?");
+  }, 1500);
+});
