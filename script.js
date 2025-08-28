@@ -281,3 +281,99 @@ Let me suggest some general health advice: stay hydrated, rest well, and if symp
     });
   }
 });
+/* ===== VitalBoost — AI Doctor Chat (scoped, safe-to-append) ===== */
+(function () {
+  const chatMessages = document.getElementById("chatMessages");
+  const input = document.getElementById("healthQuery");
+  const sendBtn = document.getElementById("sendQueryBtn");
+
+  // Guard so we don't error if the modal isn't on the page yet
+  if (!chatMessages || !input || !sendBtn) return;
+
+  // A few friendly placeholder replies
+  const AI_REPLIES = [
+    "Based on what you described, mild hydration, rest, and monitoring can help. If symptoms last >48h, consider a clinician visit.",
+    "Got it. Any fever, chest pain, or shortness of breath? If yes, seek in-person care. Otherwise, track symptoms and hydrate.",
+    "That can be common. Try regular sleep, simple meals, and light activity. If it worsens, consult a doctor.",
+    "Please avoid self-medication. If pain is severe or persists, consider a professional evaluation.",
+    "Try noting when symptoms start, what triggers them, and any relief measures. This helps with accurate assessment.",
+    "Gentle breathing exercises and short walks often help. If you feel dizzy or faint, sit/lie down immediately."
+  ];
+
+  // Helpers
+  const esc = (s) =>
+    s.replace(/[&<>"'`]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;", "`": "&#96;" }[c]));
+
+  function scrollToBottom() {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function appendBubble(text, who = "user") {
+    const row = document.createElement("div");
+    row.className = `vb-msg vb-${who}`;
+    const bubble = document.createElement("div");
+    bubble.className = "vb-bubble";
+    bubble.innerHTML = esc(text);
+    row.appendChild(bubble);
+    chatMessages.appendChild(row);
+    scrollToBottom();
+    return row;
+  }
+
+  function showTyping() {
+    const row = document.createElement("div");
+    row.className = "vb-msg vb-ai typing";
+    const bubble = document.createElement("div");
+    bubble.className = "vb-bubble";
+    bubble.innerHTML = `<span class="dots"><span></span><span></span><span></span></span>`;
+    row.appendChild(bubble);
+    chatMessages.appendChild(row);
+    scrollToBottom();
+    return row;
+  }
+
+  function aiReply() {
+    const reply = AI_REPLIES[Math.floor(Math.random() * AI_REPLIES.length)];
+    appendBubble(reply, "ai");
+  }
+
+  function handleSend() {
+    const text = input.value.trim();
+    if (!text) return;
+
+    appendBubble(text, "user");
+    input.value = "";
+    input.focus();
+
+    // Simulate typing 0.9–1.8s
+    const typingEl = showTyping();
+    const delay = 900 + Math.random() * 900;
+
+    setTimeout(() => {
+      typingEl.remove();
+      aiReply();
+    }, delay);
+  }
+
+  // Send on click
+  sendBtn.addEventListener("click", handleSend);
+
+  // Send on Enter (but allow Shift+Enter for newline)
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  });
+
+  // Keep chat scrolled to bottom whenever the modal opens
+  // (runs when it becomes visible again)
+  const chatModal = document.getElementById("aiDoctorChatModal");
+  if (chatModal) {
+    const observer = new MutationObserver(() => {
+      const isOpen = window.getComputedStyle(chatModal).display !== "none";
+      if (isOpen) setTimeout(scrollToBottom, 50);
+    });
+    observer.observe(chatModal, { attributes: true, attributeFilter: ["style", "class"] });
+  }
+})();
