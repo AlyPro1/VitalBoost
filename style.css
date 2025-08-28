@@ -2447,3 +2447,15 @@ top: clamp(48px, 60vh, 120px);
 #send-button:hover {
   background: #218838;
 }
+/* --- FORCE-VISIBLE TEXT IN HEALTH QUERY INPUT --- */
+#healthQuery {
+  color: #000 !important;         /* ensure black typing text */
+  background-color: #fff !important;
+  caret-color: #000 !important;   /* black blinking cursor */
+}
+
+/* Make sure placeholder text is visible */
+#healthQuery::placeholder {
+  color: #666 !important;       /* gray placeholder */
+  opacity: 1 !important;
+}
