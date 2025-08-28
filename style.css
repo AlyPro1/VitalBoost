@@ -2188,34 +2188,3 @@ top: clamp(48px, 60vh, 120px);
   from { transform: translateY(-20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-/* Chat Messages */
-#chatMessages {
-  max-height: 300px;
-  overflow-y: auto;
-  padding: 10px;
-}
-
-.message {
-  padding: 8px 12px;
-  margin: 5px 0;
-  border-radius: 10px;
-  max-width: 80%;
-  word-wrap: break-word;
-}
-
-.message.user {
-  background-color: #d1f7d6;
-  align-self: flex-end;
-  text-align: right;
-}
-
-.message.doctor {
-  background-color: #e6f0ff;
-  align-self: flex-start;
-  text-align: left;
-}
-
-.message.typing {
-  font-style: italic;
-  opacity: 0.7;
-}
