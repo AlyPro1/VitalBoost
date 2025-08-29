@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -21,28 +21,28 @@
     <!-- Gradient Overlay -->
     <div class="gradient-overlay"></div>
 
-    <!-- Avatars -->
+    <!-- ✅ Avatars (INSIDE the hero, right after the gradient) -->
     <div class="avatars-popup"> 
-      <!-- Doctor Avatar -->
-      <div class="avatar-item doctor-avatar" id="doctorAvatar">
-        <img
-          src="https://raw.githubusercontent.com/AlyPro1/VitalBoost/bc8a938f40e41dff57088dc24f991fd49a368d65/doctor_avatar_bounce.gif"
-          alt="Doctor Avatar"
-          class="avatar-image"
-        />
-        <p class="avatar-text">Talk to Doctor</p>
-      </div>
+  <!-- Doctor Avatar -->
+<div class="avatar-item doctor-avatar" id="doctorAvatar">
+  <img
+    src="https://raw.githubusercontent.com/AlyPro1/VitalBoost/bc8a938f40e41dff57088dc24f991fd49a368d65/doctor_avatar_bounce.gif"
+    alt="Doctor Avatar"
+    class="avatar-image"
+  />
+  <p class="avatar-text">Talk to Doctor</p>
+</div>
 
-      <!-- Runner Avatar -->
-      <div class="avatar-item runner-avatar" id="runnerAvatar">
-        <img
-          src="https://raw.githubusercontent.com/AlyPro1/VitalBoost/bc8a938f40e41dff57088dc24f991fd49a368d65/runner_avatar_flip.gif"
-          alt="Runner Avatar"
-          class="avatar-image"
-        />
-        <p class="avatar-text">Track Fitness</p>
-      </div>
-    </div> <!-- ✅ Closing avatars-popup -->
+<!-- Runner Avatar -->
+<div class="avatar-item runner-avatar" id="runnerAvatar">
+  <img
+    src="https://raw.githubusercontent.com/AlyPro1/VitalBoost/bc8a938f40e41dff57088dc24f991fd49a368d65/runner_avatar_flip.gif"
+    alt="Runner Avatar"
+    class="avatar-image"
+  />
+  <p class="avatar-text">Track Fitness</p>
+</div>
+    <!-- ✅ End Avatars -->
 
     <!-- Floating Parallax Elements -->
     <div class="parallax-element parallax-1"></div>
@@ -85,7 +85,7 @@
       <div class="floating-element element-4">💪</div>
       <div class="floating-element element-5">🧘‍♀️</div>
     </div>
-  </div> <!-- ✅ End Hero -->
+  </div>
 
   <!-- Doctor Modal -->
   <div class="modal-overlay" id="doctorModal">
@@ -95,31 +95,27 @@
         <h3>Your Health CheckUp</h3>
       </div>
       
-      <!-- Doctor Modal Features -->
-      <div class="modal-button-group">
-        <button class="modal-action-button doctor-chat" id="chatWithAIDoctorBtn">
-          <span class="button-icon">🩺</span>
-          Chat with AI Doctor
-        </button>
+<!-- Doctor Modal Features -->
+<div class="modal-button-group">
+  <button class="modal-action-button doctor-chat" id="chatWithAIDoctorBtn">
+    <span class="button-icon">🩺</span>
+    Chat with AI Doctor
+  </button>
 
-        <button class="modal-action-button upload-symptoms" id="uploadTrigger">
-          <span class="button-icon">📤</span>
-          Upload Symptoms
-        </button>
-        <input type="file" id="symptomUpload" multiple style="display:none;">
-        <div id="uploadedFiles"></div>
+  <!-- ✅ Keep only ONE Upload Symptoms button -->
+  <button class="modal-action-button upload-symptoms" id="uploadTrigger">
+    <span class="button-icon">📤</span>
+    Upload Symptoms
+  </button>
+  <input type="file" id="symptomUpload" multiple style="display:none;">
+  <div id="uploadedFiles"></div>
 
-       <!-- Health Tips -->
-      <button class="modal-action-button health-tips" id="healthTipsBtn">
-        <span class="button-icon">💡</span>
-        Health Tips
-      </button>
-
-      <!-- Container for Health Tips -->
-      <div id="healthTipsContainer" class="health-tips-container"></div>
-    </div>
-  </div> 
-  </div> <!-- ✅ Close doctorModal -->
+  <!-- ✅ Health Tips should remain as the third option -->
+  <button class="modal-action-button health-tips">
+    <span class="button-icon">💡</span>
+    Health Tips
+  </button>
+</div>
 
   <!-- Runner Modal -->
   <div class="modal-overlay" id="runnerModal">
@@ -146,6 +142,34 @@
   </div>
 
   <!-- AI Doctor Chat Modal -->
+<div class="modal-overlay" id="aiDoctorChatModal">
+  <div class="modal-container ai-chat-container">
+    <button class="modal-close" id="closeAIDoctor">&times;</button>
+    <div class="ai-doctor-header">
+      <div class="ai-doctor-avatar">
+        <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=300" alt="AI Doctor" class="doctor-avatar-img">
+      </div>
+      <h3 class="ai-doctor-greeting">How can I Help you with your Health?</h3>
+    </div>
+
+    <!-- ✅ Chat messages container -->
+    <div class="chat-messages" id="chatMessages"></div>
+
+    <div class="ai-chat-input-section">
+      <input type="text" id="healthQuery" class="health-input" placeholder="Describe your symptoms or health concerns...">
+      <button class="send-query-btn" id="sendQueryBtn">
+        <span class="button-icon">💬</span>
+        Ask Doctor
+      </button>
+    </div>
+  </div>
+</div>
+
+  <!-- Confetti Container -->
+  <div class="confetti-container" id="confettiContainer"></div>
+
+  <script src="script.js"></script>
+<!-- AI Doctor Chat Modal -->
   <div class="modal-overlay" id="aiDoctorChatModal">
     <div class="modal-container ai-chat-container">
       <button class="modal-close" id="closeAIDoctor">&times;</button>
@@ -156,7 +180,7 @@
         <h3 class="ai-doctor-greeting">How can I Help you with your Health?</h3>
       </div>
 
-      <!-- Chat messages container -->
+      <!-- ✅ Chat messages container -->
       <div class="chat-messages" id="chatMessages"></div>
 
       <div class="ai-chat-input-section">
@@ -168,11 +192,7 @@
       </div>
     </div>
   </div>
-
-  <!-- Confetti Container -->
-  <div class="confetti-container" id="confettiContainer"></div>
-
-  <!-- ✅ Script must be last -->
-  <script src="script.js"></script>
+      
 </body>
 </html>
+      
