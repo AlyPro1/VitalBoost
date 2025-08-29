@@ -742,6 +742,118 @@ body {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Modal Button Group */
+.modal-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Modal Action Buttons */
+.modal-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 1.2rem 1.8rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-action-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.modal-action-button:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+.modal-action-button .button-icon {
+  font-size: 1.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Specific button hover effects */
+.doctor-chat:hover {
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+.upload-symptoms:hover {
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+.health-tips:hover {
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(251, 191, 36, 0.4);
+}
+
+.track-steps:hover {
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+.calories-burned:hover {
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(245, 101, 101, 0.4);
+}
+
+.fitness-goals:hover {
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+/* Button shine effect */
+.modal-action-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.modal-action-button:hover::before {
+  left: 100%;
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -879,6 +991,167 @@ body {
   }
 }
 
+/* ===== AI Doctor Chat Modal ===== */
+.ai-chat-container {
+  max-width: 500px;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.ai-doctor-header {
+  margin-bottom: 2rem;
+}
+
+.ai-doctor-avatar {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.doctor-avatar-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    0 0 25px rgba(16, 185, 129, 0.4);
+  animation: doctorPulse 3s ease-in-out infinite;
+}
+
+@keyframes doctorPulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 
+      0 15px 35px rgba(0, 0, 0, 0.3),
+      0 0 25px rgba(16, 185, 129, 0.4);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 0 35px rgba(16, 185, 129, 0.6);
+  }
+}
+
+.ai-doctor-greeting {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ai-chat-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.health-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  color: white;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 8px 25px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.health-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.health-input:focus {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 0 20px rgba(16, 185, 129, 0.3);
+  transform: translateY(-2px);
+}
+
+.send-query-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.send-query-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
+}
+
+.send-query-btn:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+.send-query-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.send-query-btn:hover::before {
+  left: 100%;
+}
+
+/* Mobile responsiveness for AI chat */
+@media (max-width: 480px) {
+  .ai-chat-container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .doctor-avatar-img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .ai-doctor-greeting {
+    font-size: 1.3rem;
+  }
+  
+  .health-input {
+    padding: 0.9rem 1.2rem;
+    font-size: 0.95rem;
+  }
+  
+  .send-query-btn {
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
 /* ===== Responsive Design ===== */
 @media (max-width: 768px) {
   .avatar-section {
@@ -956,34 +1229,21 @@ body {
     max-width: 95%;
   }
   
-  .stats-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .modal-button-group {
+    gap: 1.2rem;
+  }
+  
+  .modal-action-button {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
   }
   
   .modal-header h3 {
     font-size: 1.6rem;
   }
   
-  .stat-card {
-    padding: 1.5rem;
-  }
-  
-  .stat-icon {
-    font-size: 2.5rem;
-  }
-  
-  .mini-stat-card {
-    min-width: 70px;
-    padding: 0.8rem;
-  }
-  
-  .mini-icon {
-    font-size: 1.2rem;
-  }
-  
-  .mini-label {
-    font-size: 0.7rem;
+  .modal-action-button .button-icon {
+    font-size: 1.3rem;
   }
 }
 
@@ -1029,30 +1289,1284 @@ body {
     right: 20px;
   }
   
-  .circular-progress {
-    width: 70px;
-    height: 70px;
+  .modal-action-button {
+    padding: 0.9rem 1.2rem;
+    font-size: 0.95rem;
+    gap: 0.8rem;
   }
   
-  .progress-ring {
-    width: 70px;
-    height: 70px;
-  }
-  
-  .progress-value {
+  .modal-action-button .button-icon {
     font-size: 1.2rem;
   }
-  
-  .mini-stat-card {
-    min-width: 60px;
-    padding: 0.6rem;
+}
+/* =============================
+   Hero Background Carousel Patch
+============================= */
+.hero-container {
+  position: relative; /* <-- Add this line */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Position Avatars inside Hero Section */
+.doctor-avatar-wrapper,
+.runner-avatar-wrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 11; /* above overlay & carousel */
+}
+
+/* Doctor on left */
+.doctor-avatar-wrapper {
+  left: 5%;
+  text-align: center;
+}
+
+/* Runner on right */
+.runner-avatar-wrapper {
+  right: 5%;
+  text-align: center;
+}
+
+.doctor-avatar-wrapper img,
+.runner-avatar-wrapper img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
+
+/* Background Carousel */
+.image-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.image-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 2s ease-in-out; /* Smooth cinematic fade */
+  z-index: 1;
+}
+
+.image-slide.active {
+  opacity: 1;
+}
+
+/* Gradient Overlay */
+.gradient-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+  z-index: 2;
+}
+/* Avatars Popup Section */
+.avatars-popup {
+  position: absolute;
+  top: 120px; /* adjust so it sits just above hero section */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 30px;
+  z-index: 10; /* stays above background but doesn’t overlap nav */
+}
+
+.avatar-item {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.avatar-item:hover {
+  transform: scale(1.1);
+}
+
+.avatar-image {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.avatar-text {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+/* ===== Avatars in Hero ===== */
+.hero-container { position: relative; } /* ensure absolute children anchor to hero */
+
+.avatars-popup {
+  position: absolute;
+  top: clamp(48px, 12vh, 120px); /* adjust if needed */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 36px);
+  z-index: 3; /* below high-floating elements, above background */
+  pointer-events: none; /* prevent container from blocking clicks */
+}
+
+.avatar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: auto; /* clickable */
+}
+
+.avatar-image {
+  width: clamp(60px, 8vw, 88px);
+  height: clamp(60px, 8vw, 88px);
+  object-fit: contain;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255,255,255,0.9), rgba(255,255,255,0.55) 60%, rgba(255,255,255,0.2) 100%);
+  box-shadow:
+    0 6px 24px rgba(0,0,0,0.2),
+    0 0 18px rgba(0, 240, 255, 0.45);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.avatar-item:hover .avatar-image {
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 12px rgba(0,255,255,0.9));
+}
+
+.avatar-text {
+  margin-top: 6px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+  user-select: none;
+}
+
+@media (max-width: 640px) {
+  .avatars-popup {
+    top: 64px; /* bring a bit lower on small screens */
+    gap: 18px;
   }
-  
-  .mini-icon {
-    font-size: 1rem;
+  .avatar-text {
+    font-size: 0.8rem;
   }
-  
-  .mini-label {
-    font-size: 0.6rem;
+}
+top: clamp(48px, 60vh, 120px);
+
+/* Avatars Section */
+.avatars-section {
+  position: absolute; /* fix relative to hero section */
+  top: 50%; /* middle of hero */
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between; /* one left, one right */
+  padding: 0 40px; /* push them inward from edges */
+  z-index: 5;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: white;
+  padding: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Avatar Fix */
+.avatar-left, .avatar-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80px;   /* adjust size if needed */
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  z-index: 1000;
+}
+
+.avatar-left {
+  left: 20px; /* distance from left edge */
+}
+
+.avatar-right {
+  right: 20px; /* distance from right edge */
+}
+/* Position Avatars inside Hero Section */
+.doctor-avatar-wrapper,
+.runner-avatar-wrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 11; /* above overlay & carousel */
+}
+
+/* Doctor on left */
+.doctor-avatar-wrapper {
+  left: 5%;
+  text-align: center;
+}
+
+/* Runner on right */
+.runner-avatar-wrapper {
+  right: 5%;
+  text-align: center;
+}
+
+.doctor-avatar-wrapper img,
+.runner-avatar-wrapper img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
+/* Fix Avatars to Middle Left/Right */
+.doctor-avatar-wrapper,
+.runner-avatar-wrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 11;
+}
+
+/* Left side avatar */
+.doctor-avatar-wrapper {
+  left: 5%;
+  text-align: center;
+}
+
+/* Right side avatar */
+.runner-avatar-wrapper {
+  right: 5%;
+  text-align: center;
+}
+
+.doctor-avatar-wrapper img,
+.runner-avatar-wrapper img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
+/* ===== FORCE avatars fixed middle-left / middle-right =====
+   Paste this EXACTLY at the BOTTOM of style.css (after all other rules)
+   This uses position: fixed so avatars stay locked on screen center-left/right.
+   It targets both wrapper class names and the avatars-popup structure.
+*/
+.doctor-avatar-wrapper,
+.runner-avatar-wrapper,
+.avatars-popup .avatar-item:first-child,
+.avatars-popup .avatar-item:last-child {
+  position: fixed !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 9999 !important;        /* on top of everything */
+  pointer-events: auto !important;  /* ensure they are clickable */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Left / Right placement */
+.doctor-avatar-wrapper,
+.avatars-popup .avatar-item:first-child {
+  left: 4vw !important;            /* distance from left edge — adjust */
+  right: auto !important;
+}
+
+.runner-avatar-wrapper,
+.avatars-popup .avatar-item:last-child {
+  right: 4vw !important;           /* distance from right edge — adjust */
+  left: auto !important;
+}
+
+/* Make the avatars compact and uniform */
+.doctor-avatar-wrapper img,
+.runner-avatar-wrapper img,
+.avatars-popup .avatar-item img {
+  width: clamp(64px, 8vw, 96px) !important;
+  height: clamp(64px, 8vw, 96px) !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: block !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45), 0 0 18px rgba(0, 200, 255, 0.28) !important;
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.35) 60%, rgba(255,255,255,0.05) 100%) !important;
+  transition: transform 200ms ease, filter 200ms ease !important;
+}
+
+/* Hover / touch feedback */
+.doctor-avatar-wrapper:hover img,
+.runner-avatar-wrapper:hover img,
+.avatars-popup .avatar-item:hover img {
+  transform: scale(1.08) !important;
+  filter: drop-shadow(0 0 14px rgba(0,200,255,0.45)) !important;
+}
+
+/* Make sure container doesn't block clicks (only items are clickable) */
+.avatars-popup { pointer-events: none !important; }
+.avatars-popup .avatar-item { pointer-events: auto !important; }
+
+/* Mobile adjustments (shrink avatars & move them inward) */
+@media (max-width: 720px) {
+  .doctor-avatar-wrapper,
+  .avatars-popup .avatar-item:first-child {
+    left: 3vw !important;
   }
+  .runner-avatar-wrapper,
+  .avatars-popup .avatar-item:last-child {
+    right: 3vw !important;
+  }
+  .doctor-avatar-wrapper img,
+  .runner-avatar-wrapper img,
+  .avatars-popup .avatar-item img {
+    width: 56px !important;
+    height: 56px !important;
+  }
+}
+/* === Fix Avatars in Hero Section === */
+.avatars-popup {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 0;
+  pointer-events: none; /* so it doesn’t block hero text */
+  z-index: 20;
+}
+
+.avatars-popup .avatar-item {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: auto; /* clickable */
+  text-align: center;
+}
+
+.avatars-popup .avatar-item:first-child {
+  left: 40px; /* Doctor avatar on the left */
+}
+
+.avatars-popup .avatar-item:last-child {
+  right: 40px; /* Runner avatar on the right */
+}
+
+.avatar-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 200, 255, 0.28);
+}
+
+.avatar-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 35px rgba(0, 200, 255, 0.6);
+}
+
+.avatar-text {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+/* === Fix Doctor and Runner avatars to middle left & right === */
+.doctor-avatar,
+.runner-avatar {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.doctor-avatar {
+  left: 20px; /* adjust spacing from left */
+}
+
+.runner-avatar {
+  right: 20px; /* adjust spacing from right */
+}
+
+/* Avatar image styling */
+.doctor-avatar img,
+.runner-avatar img {
+  width: 120px; /* control size */
+  max-width: 20vw; /* responsive scaling */
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 10px rgba(0, 200, 255, 0.3));
+}
+
+.doctor-avatar img:hover,
+.runner-avatar img:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.7));
+}
+.hero {
+  position: relative; /* anchors the avatars inside hero section */
+  overflow: hidden;   /* keeps them inside */
+}
+
+/* Doctor Avatar - Left Side Floating */
+.doctor-avatar {
+  position: absolute;
+  bottom: 20%;
+  left: 10%;
+  width: 120px;
+  z-index: 5;
+
+  animation: floatUpDown 4s ease-in-out infinite;
+}
+
+/* Runner Avatar - Right Side Floating */
+.runner-avatar {
+  position: absolute;
+  bottom: 20%;
+  right: 10%;
+  width: 120px;
+  z-index: 5;
+
+  animation: floatSideways 5s ease-in-out infinite;
+}
+
+/* Keyframes for Floating Animations */
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px); /* bounce upward */
+  }
+}
+
+@keyframes floatSideways {
+  0%, 100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(20px); /* slide sideways */
+  }
+}
+/* Doctor and Runner Avatars Floating Animation */
+.doctor-avatar {
+  position: absolute;
+  bottom: 50px; /* keep near bottom of hero */
+  left: 30px;   /* left side */
+  width: 180px;
+  animation: floatUpDown 4s ease-in-out infinite;
+  z-index: 5;
+}
+
+.runner-avatar {
+  position: absolute;
+  bottom: 50px; /* keep near bottom of hero */
+  right: 30px;  /* right side */
+  width: 180px;
+  animation: floatUpDown 4s ease-in-out infinite;
+  z-index: 5;
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+/* === Doctor & Runner Avatars Fixed on Left + Right with Floating Animations === */
+.avatars-popup {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  pointer-events: none; /* container ignores clicks */
+  z-index: 9999;
+}
+
+.avatars-popup .avatar-item {
+  position: absolute;
+  transform: translateY(-50%);
+  pointer-events: auto; /* avatars clickable */
+  text-align: center;
+}
+
+.avatars-popup .avatar-item:first-child {
+  left: 20px;   /* Doctor on left side */
+  animation: floatDoctor 4s ease-in-out infinite;
+}
+
+.avatars-popup .avatar-item:last-child {
+  right: 20px;  /* Runner on right side */
+  animation: floatRunner 5s ease-in-out infinite;
+}
+
+.avatar-image {
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(0 0 12px rgba(0, 200, 255, 0.4));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.avatar-image:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px rgba(0, 200, 255, 0.7));
+}
+
+.avatar-text {
+  color: #fff;
+  font-size: 14px;
+  margin-top: 8px;
+  text-shadow: 0 0 6px rgba(0,0,0,0.5);
+}
+
+/* Floating Animations */
+@keyframes floatDoctor {
+  0%, 100% { transform: translateY(-50%) translateY(0px); }
+  50% { transform: translateY(-50%) translateY(-20px); }
+}
+
+@keyframes floatRunner {
+  0%, 100% { transform: translateY(-50%) translateY(0px); }
+  50% { transform: translateY(-50%) translateY(20px); }
+}
+/* ===== HARD OVERRIDE: place & animate hero avatars (wins against everything) ===== */
+
+/* neutralize any previous .avatars-popup positioning so it never blocks content */
+.avatars-popup{
+  position: static !important;
+  top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+  width: auto !important; height: auto !important;
+  transform: none !important; z-index: auto !important;
+  display: block !important;
+  pointer-events: none !important; /* children will re-enable clicks */
+}
+
+/* lock each avatar independently to middle-left / middle-right */
+#doctorAvatar, #runnerAvatar{
+  position: fixed !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 900 !important;        /* below your modal overlay (1000), above hero */
+  pointer-events: auto !important; /* clickable */
+  margin: 0 !important;
+}
+
+/* left = Doctor, right = Runner */
+#doctorAvatar{ left: clamp(12px, 3vw, 40px) !important; right: auto !important; }
+#runnerAvatar{ right: clamp(12px, 3vw, 40px) !important; left:  auto !important; }
+
+/* visuals + floating animation on the image itself (not the container) */
+#doctorAvatar .avatar-image,
+#runnerAvatar .avatar-image{
+  width: clamp(68px, 8vw, 110px) !important;
+  height: clamp(68px, 8vw, 110px) !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35), 0 0 18px rgba(0,200,255,.28) !important;
+  transition: transform .2s ease, filter .2s ease !important;
+}
+
+#doctorAvatar .avatar-text,
+#runnerAvatar .avatar-text{
+  margin-top: 6px !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(0,0,0,.45) !important;
+}
+
+/* gentle float (Doctor up, Runner down) */
+#doctorAvatar .avatar-image{ animation: vbFloatUp 4.6s ease-in-out infinite; }
+#runnerAvatar .avatar-image{ animation: vbFloatDown 5.1s ease-in-out infinite; }
+
+@keyframes vbFloatUp{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-14px) } }
+@keyframes vbFloatDown{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(14px) } }
+
+/* hover feedback */
+#doctorAvatar .avatar-image:hover,
+#runnerAvatar .avatar-image:hover{
+  transform: translateY(0) scale(1.08) !important;
+  filter: drop-shadow(0 0 14px rgba(0,200,255,.45)) !important;
+}
+
+/* mobile tweaks */
+@media (max-width: 720px){
+  #doctorAvatar, #runnerAvatar{ top: 46% !important; }
+  #doctorAvatar .avatar-image, #runnerAvatar .avatar-image{
+    width: 56px !important; height: 56px !important;
+  }
+}
+/* ✨ Avatar Animations - Smooth & Professional */
+
+/* Floating + gentle wave */
+.doctor-avatar {
+  animation: floatDoctor 6s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.runner-avatar {
+  animation: floatRunner 5s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Glow + Scale */
+.doctor-avatar:hover,
+.runner-avatar:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(0, 255, 150, 0.5);
+}
+
+/* Doctor: slower, deeper float */
+@keyframes floatDoctor {
+  0% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-12px) rotate(-2deg); }
+  50% { transform: translateY(0px) rotate(0deg); }
+  75% { transform: translateY(10px) rotate(2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* Runner: slightly faster, livelier float */
+@keyframes floatRunner {
+  0% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(2deg); }
+  50% { transform: translateY(0px) rotate(0deg); }
+  75% { transform: translateY(6px) rotate(-2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+/* Avatar wrapper */
+.avatars-popup {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Shared avatar style */
+.avatar-item {
+  position: absolute;
+  text-align: center;
+  pointer-events: auto;
+}
+
+.avatar-image {
+  width: 150px;
+  max-width: 100%;
+}
+
+/* Doctor on left */
+.doctor-avatar {
+  left: 5%;
+  animation: floatDoctor 4s ease-in-out infinite;
+}
+
+/* Runner on right */
+.runner-avatar {
+  right: 5%;
+  animation: floatRunner 4s ease-in-out infinite;
+}
+
+/* Floating animations */
+@keyframes floatDoctor {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes floatRunner {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+/* Floating Animation (Doctor) */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+/* Sway Animation (Runner) */
+@keyframes sway {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(12px); }
+  100% { transform: translateX(0); }
+}
+
+/* Glow Pulse Animation */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 12px rgba(0, 255, 128, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(0, 255, 128, 1); }
+  100% { box-shadow: 0 0 12px rgba(0, 255, 128, 0.5); }
+}
+
+/* Avatar Images - Base Style */
+.avatar-image {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Doctor Avatar: Floating + Glow */
+#doctorAvatar .avatar-image {
+  animation: float 4s ease-in-out infinite, pulseGlow 3s infinite alternate;
+}
+
+/* Runner Avatar: Sway + Glow */
+#runnerAvatar .avatar-image {
+  animation: sway 3s ease-in-out infinite, pulseGlow 2.5s infinite alternate;
+}
+
+/* Hover Effect - Extra Glow & Scale */
+.avatar-item:hover .avatar-image {
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(0, 255, 128, 1);
+}
+
+/* Active (Click) Effect - Ripple Tap */
+.avatar-item:active .avatar-image {
+  transform: scale(0.92);
+}
+/* 🌟 Floating Animations for Avatars */
+.doctor-avatar .avatar-image {
+  animation: floatDoctor 4s ease-in-out infinite;
+}
+
+.runner-avatar .avatar-image {
+  animation: floatRunner 5s ease-in-out infinite;
+}
+
+@keyframes floatDoctor {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+  }
+  50% {
+    transform: translateY(-15px);
+    filter: drop-shadow(0 0 15px rgba(0, 255, 200, 0.8));
+  }
+}
+
+@keyframes floatRunner {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+    filter: drop-shadow(0 0 15px rgba(255, 200, 0, 0.8));
+  }
+}
+/* Avatar hover boost effect */
+.avatar-item:hover .avatar-image {
+  transform: scale(1.15); /* slightly bigger */
+  filter: drop-shadow(0 0 15px rgba(0, 200, 255, 0.9));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.avatar-item:hover .avatar-text {
+  color: #00c8ff; /* text changes color */
+  transform: scale(1.1);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+/* === Avatar Premium Effects === */
+
+/* Ripple pulse on click */
+.avatar-item {
+  position: relative;
+  overflow: hidden;
+}
+.avatar-item:active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: ripple 0.6s ease-out;
+}
+@keyframes ripple {
+  to {
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+  }
+}
+
+/* Fancy text reveal on hover */
+.avatar-text {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.3s ease;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(0,0,0,0.4);
+}
+.avatar-item:hover .avatar-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* ===== MODALS ===== */
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(3px);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  animation: fadeIn 0.4s ease;
+}
+
+.modal h2 {
+  margin-bottom: 10px;
+  color: #2c3e50;
+  font-size: 22px;
+  text-align: center;
+}
+
+.modal p {
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+}
+
+.close {
+  color: #333;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #e74c3c;
+}
+
+@keyframes fadeIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.chat-message {
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 75%;
+}
+
+.chat-message.user {
+  background: #d1e7ff;
+  align-self: flex-end;
+}
+
+.chat-message.doctor {
+  background: #e8f5e9;
+  align-self: flex-start;
+}
+
+/* Typing dots */
+.typing-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.typing-dots span {
+  width: 6px;
+  height: 6px;
+  background: #555;
+  border-radius: 50%;
+  animation: blink 1s infinite alternate;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  from { opacity: 0.2; }
+  to { opacity: 1; }
+}
+
+/* Make chat scrollable */
+.chat-messages {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+/* --- Fix chatbox resizing and disappearing issue --- */
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  height: 400px; /* fixed height for the chat window */
+  max-height: 400px;
+  overflow-y: auto; /* scroll instead of pushing down */
+  background: #fff; /* keep background solid */
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.chat-input {
+  position: relative;
+  bottom: 0;
+  margin-top: auto; /* stays at bottom */
+  background: #f9f9f9;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+/* ===== VitalBoost — AI Doctor Chat (scoped) ===== */
+.ai-chat-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 720px;
+  max-height: 72vh;            /* keep modal from growing forever */
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;            /* messages scroll inside */
+}
+
+/* Header stays at the top */
+.ai-doctor-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  background: #fff;
+}
+
+/* Chat messages area: fills available space and scrolls */
+#chatMessages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 12px 18px;
+  background:
+    radial-gradient(1200px 300px at 50% 0%, rgba(59,130,246,0.06), transparent 60%),
+    #ffffff;
+}
+
+/* Input bar: pinned at bottom */
+.ai-chat-input-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  background: #fafafa;
+}
+
+.ai-chat-input-section .health-input {
+  flex: 1;
+  height: 44px;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 12px;
+  padding: 0 12px;
+  outline: none;
+}
+
+.ai-chat-input-section .send-query-btn {
+  height: 44px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #3b82f6, #10b981);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(59,130,246,0.25);
+  transition: transform .12s ease, filter .12s ease;
+}
+.ai-chat-input-section .send-query-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+/* Message bubbles */
+.vb-msg {
+  display: flex;
+  margin: 8px 0;
+}
+.vb-msg.vb-user { justify-content: flex-end; }
+.vb-msg.vb-ai   { justify-content: flex-start; }
+
+.vb-bubble {
+  max-width: min(80%, 520px);
+  padding: 10px 12px;
+  border-radius: 14px;
+  line-height: 1.35;
+  font-size: 0.95rem;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+.vb-user .vb-bubble {
+  background: #3b82f6;
+  color: #fff;
+  border-bottom-right-radius: 6px;
+}
+.vb-ai .vb-bubble {
+  background: #f3f4f6;
+  color: #111827;
+  border-bottom-left-radius: 6px;
+}
+
+/* Typing indicator (three dots) */
+.vb-ai.typing .vb-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.vb-ai.typing .dots {
+  display: inline-flex;
+  gap: 4px;
+}
+.vb-ai.typing .dots span {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #9ca3af;
+  animation: vb-blink 1s infinite ease-in-out;
+}
+.vb-ai.typing .dots span:nth-child(2) { animation-delay: .15s; }
+.vb-ai.typing .dots span:nth-child(3) { animation-delay: .3s; }
+
+@keyframes vb-blink {
+  0%, 80%, 100% { opacity: .25; transform: translateY(0); }
+  40%          { opacity: 1;    transform: translateY(-2px); }
+}
+/* --- FINAL CHAT FIX --- */
+.chat-box, 
+.chat-messages, 
+.message, 
+.message.user, 
+.message.bot, 
+#user-input {
+  color: initial !important;
+  background: initial !important;
+}
+
+/* Chat container */
+.chat-box {
+  background-color: #f5f5f5 !important;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  overflow-y: auto;
+}
+
+/* Messages */
+.message {
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin: 6px 0;
+  max-width: 75%;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.message.user {
+  background-color: #007bff !important; /* Blue */
+  color: #fff !important;              /* White text */
+  align-self: flex-end;
+}
+
+.message.bot {
+  background-color: #e9ecef !important; /* Light gray */
+  color: #000 !important;               /* Black text */
+  align-self: flex-start;
+}
+
+/* Input box */
+#user-input {
+  background: #fff !important;
+  color: #000 !important;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#send-button {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+#send-button:hover {
+  background: #218838;
+}
+/* --- FORCE-VISIBLE TEXT IN HEALTH QUERY INPUT --- */
+#healthQuery {
+  color: #000 !important;         /* ensure black typing text */
+  background-color: #fff !important;
+  caret-color: #000 !important;   /* black blinking cursor */
+}
+
+/* Make sure placeholder text is visible */
+#healthQuery::placeholder {
+  color: #666 !important;       /* gray placeholder */
+  opacity: 1 !important;
+}
+/* Health Tips Container */
+.health-tips-container {
+  margin-top: 15px;
+  padding: 12px 15px;
+  min-height: 60px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #a1ffce, #faffd1);
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* Tip Item Animation */
+.tip-item {
+  animation: popIn 0.5s ease forwards;
+  padding: 5px 10px;
+}
+
+/* Pop-in animation */
+@keyframes popIn {
+  0% { transform: scale(0.8) translateY(-20px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+/* Popup Modal for Health Tips */
+#healthTipsPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Popup Content */
+.health-tips-popup-content {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 700px;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  position: relative;
+}
+
+/* Close Button */
+.health-tips-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Flipping Cards */
+.health-tip-card {
+  perspective: 1000px;
+}
+
+.health-tip-inner {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.health-tip-card:hover .health-tip-inner {
+  transform: rotateY(180deg);
+}
+
+.health-tip-front,
+.health-tip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.health-tip-front {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.health-tip-back {
+  background: #f9f9f9;
+  color: #333;
+  transform: rotateY(180deg);
+  font-size: 16px;
 }
