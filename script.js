@@ -443,3 +443,51 @@ healthTipsBtn.addEventListener("click", () => {
     tipElement.style.transform = "translateY(0)";
   }, 50);
 });
+// Health Tips Popup
+const healthTipsBtn = document.getElementById("healthTipsBtn");
+const body = document.querySelector("body");
+
+// Create Popup Container dynamically
+const healthTipsPopup = document.createElement("div");
+healthTipsPopup.id = "healthTipsPopup";
+healthTipsPopup.innerHTML = `
+  <div class="health-tips-popup-content">
+    <span class="health-tips-close">&times;</span>
+    <div class="health-tip-card">
+      <div class="health-tip-inner">
+        <div class="health-tip-front">💧 Stay Hydrated</div>
+        <div class="health-tip-back">Drink at least 8 glasses of water daily to keep your body active and refreshed.</div>
+      </div>
+    </div>
+    <div class="health-tip-card">
+      <div class="health-tip-inner">
+        <div class="health-tip-front">🥦 Eat Greens</div>
+        <div class="health-tip-back">Include vegetables in every meal for better digestion and immunity.</div>
+      </div>
+    </div>
+    <div class="health-tip-card">
+      <div class="health-tip-inner">
+        <div class="health-tip-front">💤 Sleep Well</div>
+        <div class="health-tip-back">7-8 hours of sleep restores energy and boosts productivity.</div>
+      </div>
+    </div>
+  </div>
+`;
+body.appendChild(healthTipsPopup);
+
+// Open popup on button click
+healthTipsBtn.addEventListener("click", () => {
+  healthTipsPopup.style.display = "flex";
+});
+
+// Close popup on X button
+document.querySelector(".health-tips-close").addEventListener("click", () => {
+  healthTipsPopup.style.display = "none";
+});
+
+// Close popup if user clicks outside the content
+window.addEventListener("click", (e) => {
+  if (e.target === healthTipsPopup) {
+    healthTipsPopup.style.display = "none";
+  }
+});
