@@ -1439,18 +1439,25 @@ body {
 /* Avatars Popup Section */
 .avatars-popup {
   position: absolute;
-  top: 120px; /* adjust so it sits just above hero section */
-  left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 100%;
   display: flex;
-  gap: 30px;
-  z-index: 10; /* stays above background but doesn't overlap nav */
+  justify-content: space-between;
+  padding: 0 5%;
+  z-index: 10;
+  pointer-events: auto;
 }
 
 .avatar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease;
+  pointer-events: auto;
 }
 
 .avatar-item:hover {
@@ -1458,42 +1465,20 @@ body {
 }
 
 .avatar-image {
-  width: 100px;
-  height: auto;
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
   border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
 }
 
 .avatar-text {
-  margin-top: 8px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 /* ===== Avatars in Hero ===== */
-.hero-container { position: relative; } /* ensure absolute children anchor to hero */
-
-.avatars-popup {
-  position: absolute;
-  top: clamp(48px, 12vh, 120px); /* adjust if needed */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: clamp(16px, 3vw, 36px);
-  z-index: 3; /* below high-floating elements, above background */
-  pointer-events: none; /* prevent container from blocking clicks */
-}
-
-.avatar-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  pointer-events: auto; /* clickable */
-}
-
-.avatar-image {
-  width: clamp(60px, 8vw, 88px);
-  height: clamp(60px, 8vw, 88px);
-}
   

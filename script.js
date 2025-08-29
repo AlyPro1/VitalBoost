@@ -66,68 +66,94 @@ const runnerAvatar = document.getElementById("runnerAvatar");
 // Select modals
 const doctorModal = document.getElementById("doctorModal");
 const runnerModal = document.getElementById("runnerModal");
+const aiDoctorChatModal = document.getElementById("aiDoctorChatModal");
 
 // Select close buttons
 const closeDoctor = document.getElementById("closeDoctor");
 const closeRunner = document.getElementById("closeRunner");
 const closeAIDoctor = document.getElementById("closeAIDoctor");
 
-// Select AI Doctor chat elements
+// Select AI Doctor chat button
 const chatWithAIDoctorBtn = document.getElementById("chatWithAIDoctorBtn");
-const aiDoctorChatModal = document.getElementById("aiDoctorChatModal");
 
 // Open doctor modal
 if (doctorAvatar) {
   doctorAvatar.addEventListener("click", () => {
-    doctorModal.style.display = "flex";
+    if (doctorModal) {
+      doctorModal.style.display = "flex";
+      doctorModal.classList.add("active");
+    }
   });
 }
 
 // Open runner modal
 if (runnerAvatar) {
   runnerAvatar.addEventListener("click", () => {
-    runnerModal.style.display = "flex";
+    if (runnerModal) {
+      runnerModal.style.display = "flex";
+      runnerModal.classList.add("active");
+    }
   });
 }
 
 // Close doctor modal
 if (closeDoctor) {
   closeDoctor.addEventListener("click", () => {
-    doctorModal.style.display = "none";
+    if (doctorModal) {
+      doctorModal.style.display = "none";
+      doctorModal.classList.remove("active");
+    }
   });
 }
 
 // Close runner modal
 if (closeRunner) {
   closeRunner.addEventListener("click", () => {
-    runnerModal.style.display = "none";
+    if (runnerModal) {
+      runnerModal.style.display = "none";
+      runnerModal.classList.remove("active");
+    }
   });
 }
 
 // Close AI doctor modal
 if (closeAIDoctor) {
   closeAIDoctor.addEventListener("click", () => {
-    aiDoctorChatModal.style.display = "none";
+    if (aiDoctorChatModal) {
+      aiDoctorChatModal.style.display = "none";
+      aiDoctorChatModal.classList.remove("active");
+    }
   });
 }
 
 // Open AI Doctor chat modal
 if (chatWithAIDoctorBtn) {
   chatWithAIDoctorBtn.addEventListener("click", () => {
-    doctorModal.style.display = "none";
-    aiDoctorChatModal.style.display = "flex";
+    // Close doctor modal first
+    if (doctorModal) {
+      doctorModal.style.display = "none";
+      doctorModal.classList.remove("active");
+    }
+    // Open AI doctor chat modal
+    if (aiDoctorChatModal) {
+      aiDoctorChatModal.style.display = "flex";
+      aiDoctorChatModal.classList.add("active");
+    }
   });
 }
 
 // Close modal when clicking outside container
 window.addEventListener("click", (event) => {
-  if (event.target === doctorModal) {
+  if (event.target === doctorModal && doctorModal) {
     doctorModal.style.display = "none";
+    doctorModal.classList.remove("active");
   }
-  if (event.target === runnerModal) {
+  if (event.target === runnerModal && runnerModal) {
     runnerModal.style.display = "none";
+    runnerModal.classList.remove("active");
   }
-  if (event.target === aiDoctorChatModal) {
+  if (event.target === aiDoctorChatModal && aiDoctorChatModal) {
     aiDoctorChatModal.style.display = "none";
+    aiDoctorChatModal.classList.remove("active");
   }
 });
