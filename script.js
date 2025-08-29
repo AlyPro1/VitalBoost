@@ -443,4 +443,59 @@ healthTipsBtn.addEventListener("click", () => {
     tipElement.style.transform = "translateY(0)";
   }, 50);
 });
+// Health Tips Modal
+const healthTipsBtn = document.querySelector('.health-tips');
+const healthTipsModal = document.getElementById('healthTipsModal');
+const closeHealthTips = document.getElementById('closeHealthTips');
+const tipCard = document.querySelector('.tip-card');
+const nextTipBtn = document.getElementById('nextTipBtn');
+
+const tips = [
+  {
+    img: "https://source.unsplash.com/400x250/?water,health",
+    tip: "Drink at least 8 glasses of water daily 💧",
+    detail: "💡 Staying hydrated improves brain function, skin glow, and muscle performance."
+  },
+  {
+    img: "https://source.unsplash.com/400x250/?fruit,healthy",
+    tip: "Eat fresh fruits every day 🍎",
+    detail: "💡 Fruits provide essential vitamins and boost immunity naturally."
+  },
+  {
+    img: "https://source.unsplash.com/400x250/?exercise,fitness",
+    tip: "Exercise at least 30 minutes daily 🏋️",
+    detail: "💡 Regular activity improves heart health, muscles, and mental well-being."
+  }
+];
+
+let currentTip = 0;
+
+healthTipsBtn.addEventListener('click', () => {
+  healthTipsModal.style.display = 'flex';
+  showTip(currentTip);
+});
+
+closeHealthTips.addEventListener('click', () => {
+  healthTipsModal.style.display = 'none';
+});
+
+nextTipBtn.addEventListener('click', () => {
+  tipCard.classList.toggle('flipped');
+  setTimeout(() => {
+    currentTip = (currentTip + 1) % tips.length;
+    showTip(currentTip);
+    tipCard.classList.toggle('flipped');
+  }, 1000);
+});
+
+function showTip(index) {
+  const front = tipCard.querySelector('.tip-front');
+  const back = tipCard.querySelector('.tip-back');
+
+  front.innerHTML = `
+    <img src="${tips[index].img}" alt="Health Tip">
+    <p>${tips[index].tip}</p>
+  `;
+  back.innerHTML = `<p>${tips[index].detail}</p>`;
+}
 
