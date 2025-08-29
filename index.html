@@ -115,10 +115,56 @@
         Health Tips
       </button>
 
-      <!-- Container for Health Tips -->
-      <div id="healthTipsContainer" class="health-tips-container"></div>
+     <!-- Health Tips Popup Modal -->
+<div class="modal-overlay" id="healthTipsModal">
+  <div class="modal-container large">
+    <button class="modal-close" id="closeHealthTips">&times;</button>
+    <div class="modal-header">
+      <h3>Daily Health Tips 💡</h3>
     </div>
-  </div> 
+    <div class="tips-card-container">
+      <!-- Example tip card 1 -->
+      <div class="tip-card">
+        <div class="tip-card-inner">
+          <div class="tip-card-front">
+            <img src="https://source.unsplash.com/300x200/?fruits,healthy" alt="Fruits" />
+            <h4>Eat More Fruits</h4>
+          </div>
+          <div class="tip-card-back">
+            <p>Fresh fruits give you essential vitamins, fiber, and hydration for better health.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example tip card 2 -->
+      <div class="tip-card">
+        <div class="tip-card-inner">
+          <div class="tip-card-front">
+            <img src="https://source.unsplash.com/300x200/?water,health" alt="Water" />
+            <h4>Stay Hydrated</h4>
+          </div>
+          <div class="tip-card-back">
+            <p>Drinking at least 8 glasses of water daily improves focus, energy, and skin glow.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example tip card 3 -->
+      <div class="tip-card">
+        <div class="tip-card-inner">
+          <div class="tip-card-front">
+            <img src="https://source.unsplash.com/300x200/?exercise,fitness" alt="Exercise" />
+            <h4>Move Daily</h4>
+          </div>
+          <div class="tip-card-back">
+            <p>Just 30 minutes of exercise boosts mood, strength, and overall heart health.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
   </div> <!-- ✅ Close doctorModal -->
 
   <!-- Runner Modal -->
