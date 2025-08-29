@@ -108,22 +108,3 @@ window.addEventListener("click", (event) => {
     runnerModal.style.display = "none";
   }
 });
-document.addEventListener("DOMContentLoaded", () => {
-  const doctorAvatar = document.getElementById("doctorAvatar");
-  const runnerAvatar = document.getElementById("runnerAvatar");
-
-  if (!doctorAvatar || !runnerAvatar) {
-    console.error("❌ Avatars not found in DOM");
-    return;
-  }
-
-  doctorAvatar.addEventListener("click", () => {
-    console.log("🩺 Doctor Avatar CLICKED");
-    alert("Doctor Avatar works!");
-  });
-
-  runnerAvatar.addEventListener("click", () => {
-    console.log("🏃 Runner Avatar CLICKED");
-    alert("Runner Avatar works!");
-  });
-});
