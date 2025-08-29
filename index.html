@@ -1,98 +1,137 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VitalBoost App</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VitalBoost</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
-  <!-- Header -->
-  <header>
-    <h1>VitalBoost App</h1>
-  </header>
+<body> 
+  <!-- Avatars Popup Section -->
+<div class="avatars-popup">
+  <div class="avatar-item">
+    <img src="https://raw.githubusercontent.com/AlyPro1/VitalBoost/bc8a938f40e41dff57088dc24f991fd49a368d65/doctor_avatar_bounce.gif" 
+         alt="Doctor Avatar" class="avatar-image">
+    <p class="avatar-text">Talk to Doctor</p>
+  </div>
+  <div class="avatar-item">
+    <img src="https://raw.githubusercontent.com/AlyPro1/VitalBoost/bc8a938f40e41dff57088dc24f991fd49a368d65/runner_avatar_flip.gif" 
+         alt="Runner Avatar" class="avatar-image">
+    <p class="avatar-text">Track Fitness</p>
+  </div>
+</div>
 
-  <!-- Features Section -->
-  <section id="features">
-    <div class="feature">
-      <button id="openDoctorModal">Chat with AI Doctor 🤖</button>
+  <!-- Hero Section -->
+  <div class="hero-container">
+    <!-- Background Carousel -->
+    <div class="image-carousel">
+      <div class="image-slide active" style="background-image: url('https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1431282/pexels-photo-1431282.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
     </div>
-    <div class="feature">
-      <button id="openRunnerModal">Upload Symptoms 📤</button>
+
+    <!-- Gradient Overlay -->
+    <div class="gradient-overlay"></div>
+    
+    <!-- Floating Parallax Elements -->
+    <div class="parallax-element parallax-1"></div>
+    <div class="parallax-element parallax-2"></div>
+    <div class="parallax-element parallax-3"></div>
+
+    <!-- Main Content -->
+    <div class="hero-content">
+      <div class="content-wrapper">
+        <div class="brand">
+          <span class="logo-icon">💪</span>
+          <span class="brand-name">VitalBoost</span>
+        </div>
+        <h1 class="main-headline">
+          <span class="headline-line">Boost Your</span>
+          <span class="headline-line highlight">Health & Fitness</span>
+        </h1>
+        <p class="subheadline">Your journey to strength, energy, and vitality starts here.</p>
+        <button class="cta-button" id="ctaButton">
+          <span class="button-glow"></span>
+          <span class="button-shine"></span>
+          Get Started
+        </button>
+        
+        <!-- Social Proof -->
+        <div class="social-proof">
+          <div class="counter-wrapper">
+            <span class="pulse-dot"></span>
+            <span class="counter-text">Join over <span class="counter-number" id="counterNumber">0</span> happy users!</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="feature">
-      <button id="healthTipsBtn">Health Tips 💡</button>
+
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+      <div class="floating-element element-1">💊</div>
+      <div class="floating-element element-2">🏃♂️</div>
+      <div class="floating-element element-3">🥗</div>
+      <div class="floating-element element-4">💪</div>
+      <div class="floating-element element-5">🧘♀️</div>
     </div>
-  </section>
+  </div>
 
   <!-- Doctor Modal -->
   <div class="modal-overlay" id="doctorModal">
     <div class="modal-container">
-      <button class="modal-close" id="closeDoctor">&times;</button>
+      <button class="modal-close" id="modalClose">&times;</button>
       <div class="modal-header">
-        <h3>Chat with AI Doctor</h3>
+        <h3>Your Health CheckUp</h3>
       </div>
-      <div class="modal-content">
-        <textarea placeholder="Describe your symptoms..."></textarea>
-        <button>Start Chat</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Runner Modal -->
-  <div class="modal-overlay" id="runnerModal">
-    <div class="modal-container">
-      <button class="modal-close" id="closeRunner">&times;</button>
-      <div class="modal-header">
-        <h3>Upload Symptoms</h3>
-      </div>
-      <div class="modal-content">
-        <input type="file" />
-        <button>Upload</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- AI Doctor Chat Modal -->
-  <div class="modal-overlay" id="aiDoctorChatModal">
-    <div class="modal-container">
-      <button class="modal-close" id="closeAIDoctorChat">&times;</button>
-      <div class="modal-header">
-        <h3>AI Doctor Chat</h3>
-      </div>
-      <div class="modal-content">
-        <div id="chatWindow"></div>
-        <input type="text" id="chatInput" placeholder="Type your message..."/>
-        <button id="sendChat">Send</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Health Tips Modal (moved outside Doctor Modal ✅) -->
-  <div class="modal-overlay" id="healthTipsModal">
-    <div class="modal-container large">
-      <button class="modal-close" id="closeHealthTips">&times;</button>
-      <div class="modal-header">
-        <h3>Daily Health Tips 💡</h3>
-      </div>
-      <div class="tips-card-container">
-        <div class="tip-card">
-          <div class="tip-card-front">💧 Stay Hydrated</div>
-          <div class="tip-card-back">Drink at least 8 glasses of water daily.</div>
+      <div class="stats-grid">
+        <div class="stat-card" data-stat="heart">
+          <span class="stat-icon">❤️</span>
+          <div class="stat-label">Heart Rate</div>
+          <div class="circular-progress">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="progress-ring-circle" stroke="#ff6b6b" stroke-width="4" fill="transparent" r="36" cx="40" cy="40"/>
+            </svg>
+            <div class="progress-value">0</div>
+          </div>
         </div>
-        <div class="tip-card">
-          <div class="tip-card-front">🥗 Eat Greens</div>
-          <div class="tip-card-back">Include leafy vegetables in your meals.</div>
+        <div class="stat-card" data-stat="stress">
+          <span class="stat-icon">😰</span>
+          <div class="stat-label">Stress Level</div>
+          <div class="circular-progress">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="progress-ring-circle" stroke="#feca57" stroke-width="4" fill="transparent" r="36" cx="40" cy="40"/>
+            </svg>
+            <div class="progress-value">0</div>
+          </div>
         </div>
-        <div class="tip-card">
-          <div class="tip-card-front">🏃 Stay Active</div>
-          <div class="tip-card-back">Do at least 30 mins of exercise daily.</div>
+        <div class="stat-card" data-stat="energy">
+          <span class="stat-icon">⚡</span>
+          <div class="stat-label">Energy Boost</div>
+          <div class="circular-progress">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="progress-ring-circle" stroke="#10b981" stroke-width="4" fill="transparent" r="36" cx="40" cy="40"/>
+            </svg>
+            <div class="progress-value">0</div>
+          </div>
+        </div>
+        <div class="stat-card" data-stat="sleep">
+          <span class="stat-icon">😴</span>
+          <div class="stat-label">Sleep Tracker</div>
+          <div class="circular-progress">
+            <svg class="progress-ring" width="80" height="80">
+              <circle class="progress-ring-circle" stroke="#3b82f6" stroke-width="4" fill="transparent" r="36" cx="40" cy="40"/>
+            </svg>
+            <div class="progress-value">0</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- Confetti Container -->
+  <div class="confetti-container" id="confettiContainer"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
