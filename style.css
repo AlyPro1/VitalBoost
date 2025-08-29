@@ -1495,4 +1495,5 @@ body {
 .avatar-image {
   width: clamp(60px, 8vw, 88px);
   height: clamp(60px, 8vw, 88px);
+}
   
