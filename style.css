@@ -2487,3 +2487,86 @@ top: clamp(48px, 60vh, 120px);
   0% { transform: scale(0.8) translateY(-20px); opacity: 0; }
   100% { transform: scale(1) translateY(0); opacity: 1; }
 }
+/* Popup Modal for Health Tips */
+#healthTipsPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Popup Content */
+.health-tips-popup-content {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 700px;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  position: relative;
+}
+
+/* Close Button */
+.health-tips-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Flipping Cards */
+.health-tip-card {
+  perspective: 1000px;
+}
+
+.health-tip-inner {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.health-tip-card:hover .health-tip-inner {
+  transform: rotateY(180deg);
+}
+
+.health-tip-front,
+.health-tip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.health-tip-front {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.health-tip-back {
+  background: #f9f9f9;
+  color: #333;
+  transform: rotateY(180deg);
+  font-size: 16px;
+}
