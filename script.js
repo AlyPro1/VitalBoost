@@ -444,7 +444,7 @@ healthTipsBtn.addEventListener("click", () => {
   }, 50);
 });
 // Health Tips Popup
-const healthTipsBtn = document.getElementById("healthTipsBtn");
+
 const body = document.querySelector("body");
 
 // Create Popup Container dynamically
