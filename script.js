@@ -83,3 +83,52 @@ window.addEventListener("click", (e) => {
   if (e.target === doctorModal) doctorModal.style.display = "none";
   if (e.target === runnerModal) runnerModal.style.display = "none";
 });
+// Select avatars
+const doctorAvatar = document.getElementById("doctorAvatar");
+const runnerAvatar = document.getElementById("runnerAvatar");
+
+// Select modals
+const doctorModal = document.getElementById("doctorModal");
+const runnerModal = document.getElementById("runnerModal");
+
+// Select close buttons
+const closeDoctor = document.getElementById("closeDoctor");
+const closeRunner = document.getElementById("closeRunner");
+
+// Open doctor modal
+if (doctorAvatar) {
+  doctorAvatar.addEventListener("click", () => {
+    doctorModal.style.display = "flex";
+  });
+}
+
+// Open runner modal
+if (runnerAvatar) {
+  runnerAvatar.addEventListener("click", () => {
+    runnerModal.style.display = "flex";
+  });
+}
+
+// Close doctor modal
+if (closeDoctor) {
+  closeDoctor.addEventListener("click", () => {
+    doctorModal.style.display = "none";
+  });
+}
+
+// Close runner modal
+if (closeRunner) {
+  closeRunner.addEventListener("click", () => {
+    runnerModal.style.display = "none";
+  });
+}
+
+// Close modal when clicking outside container
+window.addEventListener("click", (event) => {
+  if (event.target === doctorModal) {
+    doctorModal.style.display = "none";
+  }
+  if (event.target === runnerModal) {
+    runnerModal.style.display = "none";
+  }
+});
