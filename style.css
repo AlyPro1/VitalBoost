@@ -2570,3 +2570,6 @@ top: clamp(48px, 60vh, 120px);
   transform: rotateY(180deg);
   font-size: 16px;
 }
+.gradient-overlay {
+  pointer-events: none;  /* allow clicks to pass through */
+}
