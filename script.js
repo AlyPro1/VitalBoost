@@ -443,33 +443,3 @@ healthTipsBtn.addEventListener("click", () => {
     tipElement.style.transform = "translateY(0)";
   }, 50);
 });
-// Modal Handling
-const modal = document.getElementById("doctorModal");
-const openModalBtn = document.getElementById("openDoctorModal");
-const closeModal = document.querySelector(".close");
-
-openModalBtn.onclick = () => { modal.style.display = "block"; };
-closeModal.onclick = () => { modal.style.display = "none"; };
-window.onclick = (event) => {
-  if (event.target === modal) modal.style.display = "none";
-};
-
-// Health Tips Popup
-const healthTipsPopup = document.getElementById("healthTipsPopup");
-const healthTipsBtn = document.querySelector(".health-tips");
-const closeHealthTips = document.getElementById("closeHealthTips");
-
-healthTipsBtn.onclick = () => {
-  healthTipsPopup.style.display = "block";
-  modal.style.display = "none"; // hide main modal
-};
-
-closeHealthTips.onclick = () => {
-  healthTipsPopup.style.display = "none";
-};
-
-window.addEventListener("click", (event) => {
-  if (event.target === healthTipsPopup) {
-    healthTipsPopup.style.display = "none";
-  }
-});
