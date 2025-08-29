@@ -2578,3 +2578,45 @@ top: clamp(48px, 60vh, 120px);
   position: relative;
   z-index: 5;  /* above overlay */
 }
+/* === FIX AVATARS CLICKABILITY === */
+.avatars-popup {
+  position: fixed !important;  /* keep fixed in viewport */
+  top: 50% !important;
+  left: 0 !important;
+  width: 100% !important;
+  transform: none !important;
+  pointer-events: none !important; /* container ignores clicks */
+  z-index: 9999 !important;
+}
+
+.avatars-popup .avatar-item {
+  pointer-events: auto !important; /* each avatar clickable */
+  position: fixed !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 10000 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.avatars-popup .avatar-item:first-child {
+  left: 20px !important; /* Doctor avatar left */
+}
+
+.avatars-popup .avatar-item:last-child {
+  right: 20px !important; /* Runner avatar right */
+}
+
+/* Avatar images */
+.avatars-popup .avatar-item .avatar-image {
+  width: clamp(68px, 8vw, 110px) !important;
+  height: clamp(68px, 8vw, 110px) !important;
+  cursor: pointer !important;
+}
+
+/* Hover feedback */
+.avatars-popup .avatar-item:hover .avatar-image {
+  transform: scale(1.08) !important;
+  filter: drop-shadow(0 0 14px rgba(0,200,255,0.45)) !important;
+}
