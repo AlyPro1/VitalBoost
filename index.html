@@ -1,1 +1,68 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>VitalBoost</title> <link rel="stylesheet" href="style.css" /> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"> </head> <body> <!-- Hero Section --> <div class="hero-container"> <!-- Background Carousel --> <div class="image-carousel"> <div class="image-slide active" style="background-image: url('https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div> <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div> <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1431282/pexels-photo-1431282.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div> </div> <!-- Gradient Overlay --> <div class="gradient-overlay"></div> <!-- Avatars --> <div class="avatars-popup"> <!-- Doctor Avatar --> <div class="avatar-item doctor-avatar" id="doctorAvatar"> <img src="https://raw.githubusercontent.com/AlyPro1/VitalBoost/bc8a938f40e41dff57088dc24f991fd49a368d65/doctor_avatar_bounce.gif" alt="Doctor Avatar" class="avatar-image" /> <p class="avatar-text">Talk to Doctor</p> </div> <!-- Runner Avatar --> <div class="avatar-item runner-avatar" id="runnerAvatar"> <img src="https://raw.githubusercontent.com/AlyPro1/VitalBoost/bc8a938f40e41dff57088dc24f991fd49a368d65/runner_avatar_flip.gif" alt="Runner Avatar" class="avatar-image" /> <p class="avatar-text">Track Fitness</p> </div> </div> <!-- ✅ Closing avatars-popup --> <!-- Floating Parallax Elements --> <div class="parallax-element parallax-1"></div> <div class="parallax-element parallax-2"></div> <div class="parallax-element parallax-3"></div> <!-- Main Content --> <div class="hero-content"> <div class="content-wrapper"> <div class="brand"> <span class="logo-icon">💪</span> <span class="brand-name">VitalBoost</span> </div> <h1 class="main-headline"> <span class="headline-line">Boost Your</span> <span class="headline-line highlight">Health & Fitness</span> </h1> <p class="subheadline">Your journey to strength, energy, and vitality starts here.</p> <button class="cta-button" id="ctaButton"> <span class="button-glow"></span> <span class="button-shine"></span> Get Started </button> <!-- Social Proof --> <div class="social-proof"> <div class="counter-wrapper"> <span class="pulse-dot"></span> <span class="counter-text">Join over <span class="counter-number" id="counterNumber">0</span> happy users!</span> </div> </div> </div> </div> <!-- Floating Elements --> <div class="floating-elements"> <div class="floating-element element-1">💊</div> <div class="floating-element element-2">🏃‍♂️</div> <div class="floating-element element-3">🥗</div> <div class="floating-element element-4">💪</div> <div class="floating-element element-5">🧘‍♀️</div> </div> </div> <!-- ✅ End Hero --> <!-- Doctor Modal --> <div class="modal-overlay" id="doctorModal"> <div class="modal-container"> <button class="modal-close" id="closeDoctor">&times;</button> <div class="modal-header"> <h3>Your Health CheckUp</h3> </div> <!-- Doctor Modal Features --> <div class="modal-button-group"> <button class="modal-action-button doctor-chat" id="chatWithAIDoctorBtn"> <span class="button-icon">🩺</span> Chat with AI Doctor </button> <button class="modal-action-button upload-symptoms" id="uploadTrigger"> <span class="button-icon">📤</span> Upload Symptoms </button> <input type="file" id="symptomUpload" multiple style="display:none;"> <div id="uploadedFiles"></div> <!-- Health Tips --> <button class="modal-action-button health-tips" id="healthTipsBtn"> <span class="button-icon">💡</span> Health Tips </button> <!-- Container for Health Tips --> <div id="healthTipsContainer" class="health-tips-container"></div> </div> </div> </div> <!-- ✅ Close doctorModal --> <!-- Runner Modal --> <div class="modal-overlay" id="runnerModal"> <div class="modal-container"> <button class="modal-close" id="closeRunner">&times;</button> <div class="modal-header"> <h3>Your Fitness Tracker</h3> </div> <div class="modal-button-group"> <button class="modal-action-button track-steps"> <span class="button-icon">👟</span> Track Steps </button> <button class="modal-action-button calories-burned"> <span class="button-icon">🔥</span> Calories Burned </button> <button class="modal-action-button fitness-goals"> <span class="button-icon">🎯</span> Daily Fitness Goals </button> </div> </div> </div> <!-- AI Doctor Chat Modal --> <div class="modal-overlay" id="aiDoctorChatModal"> <div class="modal-container ai-chat-container"> <button class="modal-close" id="closeAIDoctor">&times;</button> <div class="ai-doctor-header"> <div class="ai-doctor-avatar"> <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=300" alt="AI Doctor" class="doctor-avatar-img"> </div> <h3 class="ai-doctor-greeting">How can I Help you with your Health?</h3> </div> <!-- Chat messages container --> <div class="chat-messages" id="chatMessages"></div> <div class="ai-chat-input-section"> <input type="text" id="healthQuery" class="health-input" placeholder="Describe your symptoms or health concerns..."> <button class="send-query-btn" id="sendQueryBtn"> <span class="button-icon">💬</span> Ask Doctor </button> </div> </div> </div> <!-- Confetti Container --> <div class="confetti-container" id="confettiContainer"></div> <!-- ✅ Script must be last --> <script src="script.js"></script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vital Boost App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Main Section -->
+  <div class="container">
+    <h1>Vital Boost App</h1>
+    <button id="openDoctorModal" class="main-button">👨‍⚕️ Chat with AI Doctor</button>
+  </div>
+
+  <!-- Doctor Modal -->
+  <div id="doctorModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>AI Doctor Assistance</h2>
+      <p>Select a feature below:</p>
+
+      <!-- Action Buttons -->
+      <div class="modal-actions">
+        <button class="modal-action-button chat-ai">
+          <span class="button-icon">💬</span>
+          Chat with AI Doctor
+        </button>
+
+        <button class="modal-action-button upload-symptoms">
+          <span class="button-icon">📤</span>
+          Upload Symptoms
+        </button>
+
+        <button class="modal-action-button health-tips">
+          <span class="button-icon">💡</span>
+          Health Tips
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Health Tips Popup -->
+  <div id="healthTipsPopup" class="health-tips-popup">
+    <div class="health-tips-content">
+      <span class="close-btn" id="closeHealthTips">&times;</span>
+      <h2>💡 Daily Health Tips</h2>
+
+      <div class="tips-card">
+        <img src="https://source.unsplash.com/400x200/?fitness,health" alt="Health Image">
+        <p>Stay hydrated! Drink at least 8 glasses of water daily to keep your energy up.</p>
+      </div>
+
+      <div class="tips-card">
+        <img src="https://source.unsplash.com/400x200/?healthy-food,fruits" alt="Healthy Food">
+        <p>Eat colorful fruits and veggies. They’re packed with vitamins and antioxidants.</p>
+      </div>
+
+      <div class="tips-card">
+        <img src="https://source.unsplash.com/400x200/?running,exercise" alt="Exercise">
+        <p>Do at least 30 minutes of exercise daily to boost your heart health.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
