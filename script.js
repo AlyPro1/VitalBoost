@@ -70,6 +70,11 @@ const runnerModal = document.getElementById("runnerModal");
 // Select close buttons
 const closeDoctor = document.getElementById("closeDoctor");
 const closeRunner = document.getElementById("closeRunner");
+const closeAIDoctor = document.getElementById("closeAIDoctor");
+
+// Select AI Doctor chat elements
+const chatWithAIDoctorBtn = document.getElementById("chatWithAIDoctorBtn");
+const aiDoctorChatModal = document.getElementById("aiDoctorChatModal");
 
 // Open doctor modal
 if (doctorAvatar) {
@@ -99,6 +104,21 @@ if (closeRunner) {
   });
 }
 
+// Close AI doctor modal
+if (closeAIDoctor) {
+  closeAIDoctor.addEventListener("click", () => {
+    aiDoctorChatModal.style.display = "none";
+  });
+}
+
+// Open AI Doctor chat modal
+if (chatWithAIDoctorBtn) {
+  chatWithAIDoctorBtn.addEventListener("click", () => {
+    doctorModal.style.display = "none";
+    aiDoctorChatModal.style.display = "flex";
+  });
+}
+
 // Close modal when clicking outside container
 window.addEventListener("click", (event) => {
   if (event.target === doctorModal) {
@@ -106,5 +126,8 @@ window.addEventListener("click", (event) => {
   }
   if (event.target === runnerModal) {
     runnerModal.style.display = "none";
+  }
+  if (event.target === aiDoctorChatModal) {
+    aiDoctorChatModal.style.display = "none";
   }
 });
