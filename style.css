@@ -2487,4 +2487,80 @@ top: clamp(48px, 60vh, 120px);
   0% { transform: scale(0.8) translateY(-20px); opacity: 0; }
   100% { transform: scale(1) translateY(0); opacity: 1; }
 }
+/* Health Tips Modal */
+#healthTipsModal {
+  display: none; 
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#healthTipsModal .modal-content.large {
+  background: #fff;
+  padding: 20px;
+  width: 500px;
+  max-width: 90%;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+#healthTipsModal .close {
+  position: absolute;
+  top: 15px; right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.tips-container {
+  perspective: 1000px;
+  margin: 20px 0;
+}
+
+.tip-card {
+  width: 100%;
+  height: 300px;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  position: relative;
+  cursor: pointer;
+}
+
+.tip-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.tip-front, .tip-back {
+  position: absolute;
+  width: 100%; height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+.tip-front img {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+}
+
+.tip-front p, .tip-back p {
+  padding: 15px;
+  font-size: 18px;
+}
+
+.tip-back {
+  background: #f7f9fc;
+  color: #333;
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
