@@ -2570,11 +2570,3 @@ top: clamp(48px, 60vh, 120px);
   transform: rotateY(180deg);
   font-size: 16px;
 }
-/* Force avatars to be clickable */
-#doctorAvatar, 
-#runnerAvatar {
-  cursor: pointer !important;
-  z-index: 1000 !important;
-  pointer-events: auto !important;
-  position: relative !important;
-}
