@@ -491,3 +491,64 @@ window.addEventListener("click", (e) => {
     healthTipsPopup.style.display = "none";
   }
 });
+// Chat with AI Doctor
+const chatForm = document.getElementById("chatForm");
+const chatInput = document.getElementById("chatInput");
+const chatMessages = document.getElementById("chatMessages");
+
+chatForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const message = chatInput.value.trim();
+  if (message) {
+    const userMessage = document.createElement("div");
+    userMessage.className = "message user-message";
+    userMessage.innerText = message;
+    chatMessages.appendChild(userMessage);
+
+    // Fake AI reply
+    setTimeout(() => {
+      const aiMessage = document.createElement("div");
+      aiMessage.className = "message ai-message";
+      aiMessage.innerText = "AI Doctor: " + generateFakeReply(message);
+      chatMessages.appendChild(aiMessage);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1000);
+
+    chatInput.value = "";
+  }
+});
+
+function generateFakeReply(input) {
+  return "This is a helpful suggestion based on: " + input;
+}
+
+// Upload Symptoms
+const symptomsForm = document.getElementById("symptomsForm");
+const symptomsInput = document.getElementById("symptomsInput");
+const symptomsResult = document.getElementById("symptomsResult");
+
+symptomsForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const symptoms = symptomsInput.value.trim();
+  if (symptoms) {
+    symptomsResult.innerText =
+      "We’ve recorded your symptoms: " +
+      symptoms +
+      ". Our AI will analyze and provide insights soon.";
+    symptomsInput.value = "";
+  }
+});
+
+// Health Tips Popup
+const healthTipsBtn = document.getElementById("healthTipsBtn");
+const healthTipsContainer = document.getElementById("healthTipsContainer");
+
+healthTipsBtn.addEventListener("click", () => {
+  healthTipsContainer.style.display = "flex"; // Show popup
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === healthTipsContainer) {
+    healthTipsContainer.style.display = "none"; // Hide popup
+  }
+});
