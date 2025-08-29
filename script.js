@@ -1,63 +1,37 @@
-// ------------------------- Doctor Chat -------------------------
-const doctorAvatar = document.getElementById("doctorAvatar");
-const doctorModal = document.getElementById("doctorModal");
-const closeDoctorModal = document.getElementById("closeDoctorModal");
+// Floating images animation
+document.addEventListener("DOMContentLoaded", () => {
+  const floatingElements = document.querySelectorAll(".floating-image");
 
-doctorAvatar.addEventListener("click", () => {
-  doctorModal.style.display = "flex";
+  floatingElements.forEach((el, index) => {
+    let speed = 2 + Math.random() * 2;
+    let direction = index % 2 === 0 ? 1 : -1;
+    let position = 0;
+
+    function float() {
+      position += direction * 0.3;
+      if (Math.abs(position) > 15) {
+        direction *= -1;
+      }
+      el.style.transform = `translateY(${position}px)`;
+      requestAnimationFrame(float);
+    }
+    float();
+  });
 });
 
-closeDoctorModal.addEventListener("click", () => {
-  doctorModal.style.display = "none";
-});
+// Visitor Counter (demo only)
+let visitorCount = localStorage.getItem("visitorCount") || 0;
+visitorCount++;
+localStorage.setItem("visitorCount", visitorCount);
+const visitorDisplay = document.getElementById("visitorCount");
+if (visitorDisplay) {
+  visitorDisplay.textContent = visitorCount;
+}
 
-window.addEventListener("click", (event) => {
-  if (event.target === doctorModal) {
-    doctorModal.style.display = "none";
-  }
-});
-
-// ------------------------- Upload Symptoms -------------------------
-const uploadSymptomsBtn = document.getElementById("uploadSymptomsBtn");
-const symptomsModal = document.getElementById("symptomsModal");
-const closeSymptomsModal = document.getElementById("closeSymptomsModal");
-
-uploadSymptomsBtn.addEventListener("click", () => {
-  symptomsModal.style.display = "flex";
-});
-
-closeSymptomsModal.addEventListener("click", () => {
-  symptomsModal.style.display = "none";
-});
-
-window.addEventListener("click", (event) => {
-  if (event.target === symptomsModal) {
-    symptomsModal.style.display = "none";
-  }
-});
-
-// ------------------------- Health Tips -------------------------
-const healthTipsBtn = document.getElementById("healthTipsBtn");
-const healthTipsModal = document.getElementById("healthTipsModal");
-const closeHealthTipsModal = document.getElementById("closeHealthTipsModal");
-
-healthTipsBtn.addEventListener("click", () => {
-  healthTipsModal.style.display = "flex";
-});
-
-closeHealthTipsModal.addEventListener("click", () => {
-  healthTipsModal.style.display = "none";
-});
-
-window.addEventListener("click", (event) => {
-  if (event.target === healthTipsModal) {
-    healthTipsModal.style.display = "none";
-  }
-});
-
-// ------------------------- Runner Avatar -------------------------
-const runnerAvatar = document.getElementById("runnerAvatar");
-
-runnerAvatar.addEventListener("click", () => {
-  alert("Runner avatar clicked! Future functionality can go here.");
-});
+// Simple Button Alert (Demo)
+const checkupBtn = document.getElementById("checkupBtn");
+if (checkupBtn) {
+  checkupBtn.addEventListener("click", () => {
+    alert("Redirecting you to free health checkup!");
+  });
+}
