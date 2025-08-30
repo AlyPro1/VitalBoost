@@ -157,3 +157,82 @@ window.addEventListener("click", (event) => {
     aiDoctorChatModal.classList.remove("active");
   }
 });
+// =============================
+// AI CHAT INTERACTIVITY LOGIC
+// =============================
+
+// Select the chat elements from your HTML
+const chatMessages = document.getElementById('chatMessages');
+const healthQueryInput = document.getElementById('healthQuery');
+const sendQueryBtn = document.getElementById('sendQueryBtn');
+
+// Make sure the chat elements actually exist before adding listeners
+if (chatMessages && healthQueryInput && sendQueryBtn) {
+
+    // Send message when the "Ask Doctor" button is clicked
+    sendQueryBtn.addEventListener('click', sendMessage);
+
+    // Also send message when the "Enter" key is pressed
+    healthQueryInput.addEventListener('keydown', (event) => {
+        // Check if the key pressed was "Enter"
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevents a new line from being added
+            sendMessage();
+        }
+    });
+
+    // This is the main function that runs when you send a message
+    function sendMessage() {
+        const userText = healthQueryInput.value.trim(); // Get text from input
+
+        if (userText === "") {
+            return; // Don't do anything if the input is empty
+        }
+
+        // 1. Display the user's message in the chat window
+        displayMessage(userText, 'user');
+        
+        // 2. Clear the input field for the next message
+        healthQueryInput.value = "";
+
+        // 3. Get the AI's response (using the simulated function for now)
+        getAIResponse(userText);
+    }
+
+    // This function creates and adds a new message bubble to the chat
+    function displayMessage(message, sender) {
+        const messageDiv = document.createElement('div');
+        
+        // Use the CSS classes we added to your style.css file
+        messageDiv.className = `chat-message-bubble ${sender}-message`;
+        messageDiv.innerText = message;
+        
+        chatMessages.appendChild(messageDiv);
+
+        // Automatically scroll down to the newest message
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // This function simulates getting a response from the AI
+    function getAIResponse(userMessage) {
+        // Display a "thinking..." message immediately for better user experience
+        displayMessage("Thinking...", 'ai');
+
+        // Simulate a network delay (like the AI is actually thinking)
+        setTimeout(() => {
+            // First, find and remove the "Thinking..." message
+            const thinkingBubble = Array.from(chatMessages.children).find(child => child.innerText === "Thinking...");
+            if (thinkingBubble) {
+                chatMessages.removeChild(thinkingBubble);
+            }
+
+            // --- IMPORTANT ---
+            // ** TODO: Replace this simulated response with your actual API call to Bolt AI. **
+            const simulatedResponse = `Regarding your query about "${userMessage}", please remember I am an AI assistant. For any real medical advice, consult a qualified doctor. General guidance often suggests a balanced diet and regular exercise.`;
+            
+            // Display the final simulated response
+            displayMessage(simulatedResponse, 'ai');
+
+        }, 1500); // 1.5-second delay
+    }
+}
