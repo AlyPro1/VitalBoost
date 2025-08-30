@@ -1080,6 +1080,9 @@ body {
 .ai-chat-container {
   max-width: 500px;
   width: 90%;
+  display: flex;
+    flex-direction: column;
+    height: 80vh; /* Give the container a defined height */
 }
 
 .ai-doctor-header {
