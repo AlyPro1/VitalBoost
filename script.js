@@ -236,3 +236,42 @@ if (chatMessages && healthQueryInput && sendQueryBtn) {
         }, 1500); // 1.5-second delay
     }
 }
+// =============================
+// UPLOAD SYMPTOMS FEATURE
+// =============================
+
+// Select the elements from your HTML
+const uploadTriggerBtn = document.getElementById('uploadTrigger');
+const symptomUploadInput = document.getElementById('symptomUpload');
+const uploadedFilesContainer = document.getElementById('uploadedFiles');
+
+// Make sure the elements exist before adding listeners
+if (uploadTriggerBtn && symptomUploadInput && uploadedFilesContainer) {
+
+    // 1. When the visible "Upload Symptoms" button is clicked...
+    uploadTriggerBtn.addEventListener('click', () => {
+        // ...trigger a click on the hidden file input.
+        symptomUploadInput.click();
+    });
+
+    // 2. When a file is selected in the file input...
+    symptomUploadInput.addEventListener('change', () => {
+        // Clear any previously listed files
+        uploadedFilesContainer.innerHTML = ''; 
+
+        // Check if any files were selected
+        if (symptomUploadInput.files.length > 0) {
+            
+            // Loop through all the selected files
+            for (const file of symptomUploadInput.files) {
+                // Create a new element to display the file name
+                const filePill = document.createElement('div');
+                filePill.className = 'file-pill'; // Add a class for styling
+                filePill.textContent = `📄 ${file.name}`; // Show an icon and the file name
+                
+                // Add the new element to the display container
+                uploadedFilesContainer.appendChild(filePill);
+            }
+        }
+    });
+}
