@@ -274,4 +274,33 @@ if (uploadTriggerBtn && symptomUploadInput && uploadedFilesContainer) {
             }
         }
     });
+} 
+// =============================
+// HEALTH TIPS MODAL
+// =============================
+
+// Select the new elements
+const healthTipsBtn = document.getElementById('healthTipsBtn');
+const healthTipsModal = document.getElementById('healthTipsModal');
+const closeHealthTips = document.getElementById('closeHealthTips');
+
+if(healthTipsBtn && healthTipsModal && closeHealthTips) {
+  
+  // Open the Health Tips modal
+  healthTipsBtn.addEventListener('click', () => {
+    doctorModal.style.display = 'none'; // Hide the doctor modal
+    healthTipsModal.style.display = 'flex'; // Show the tips modal
+  });
+
+  // Close the Health Tips modal
+  closeHealthTips.addEventListener('click', () => {
+    healthTipsModal.style.display = 'none';
+  });
+
+  // Also close it by clicking the background
+  window.addEventListener('click', (event) => {
+    if (event.target === healthTipsModal) {
+      healthTipsModal.style.display = 'none';
+    }
+  });
 }
