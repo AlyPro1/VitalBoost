@@ -1542,4 +1542,89 @@ body {
   color: white;
   text-align: center;
   word-break: break-all;
+} 
+/* ===== Health Tips Modal & Cards ===== */
+.tips-modal-container {
+  max-width: 900px; /* Make this modal wider for the cards */
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+  perspective: 1000px; /* Enables 3D space for children */
+}
+
+.tip-card {
+  background-color: transparent;
+  width: 100%;
+  height: 320px;
+  border: none;
+  cursor: pointer;
+}
+
+.tip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d; /* This is key for the 3D flip */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border-radius: 20px;
+}
+
+/* This triggers the flip */
+.tip-card:hover .tip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back faces */
+.tip-card-front, .tip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden; /* Hides the back of the card face */
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Style the front of the card (with the image) */
+.tip-card-front {
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: white;
+}
+.tip-card-front h4 {
+  background: rgba(0,0,0,0.6);
+  width: 100%;
+  padding: 1rem;
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+/* Style the back of the card (with the text) */
+.tip-card-back {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  transform: rotateY(180deg); /* Start with the back face flipped */
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.tip-card-back h5 {
+  font-size: 1.2rem;
+  margin: 0 0 1rem 0;
+  border-bottom: 2px solid rgba(255,255,255,0.5);
+  padding-bottom: 0.5rem;
+}
+.tip-card-back p {
+  font-size: 0.95rem;
+  margin: 0;
 }
