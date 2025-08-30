@@ -159,5 +159,3 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-}); // <-- This closes the main DOMContentLoaded listener
