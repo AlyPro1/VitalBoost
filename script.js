@@ -1,3 +1,5 @@
+// --- REPLACE YOUR ENTIRE script.js FILE WITH THIS FINAL CODE ---
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // =============================
@@ -159,3 +161,5 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+}); // <-- This closes the main DOMContentLoaded listener
