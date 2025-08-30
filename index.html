@@ -109,10 +109,15 @@
         <input type="file" id="symptomUpload" multiple style="display:none;">
         <div id="uploadedFiles"></div>
 
-        <button class="modal-action-button health-tips green-glow">
-          <span class="button-icon">💡</span>
-          Health Tips
-        </button>
+       <button class="modal-action-button health-tips green-glow">
+    <span class="button-icon">💡</span>
+    Health Tips
+</button>
+
+<button class="modal-action-button health-tips green-glow" id="healthTipsBtn">
+    <span class="button-icon">💡</span>
+    Health Tips
+</button> 
       </div>
     </div>
   </div> <!-- ✅ Close doctorModal -->
@@ -170,5 +175,53 @@
 
   <!-- ✅ Script must be last -->
   <script src="script.js"></script>
+<div class="modal-overlay" id="healthTipsModal">
+  <div class="modal-container tips-modal-container">
+    <button class="modal-close" id="closeHealthTips">&times;</button>
+    <div class="modal-header">
+      <h3>Trending Health Tips</h3>
+    </div>
+    
+    <div class="tips-grid">
+
+      <div class="tip-card">
+        <div class="tip-card-inner">
+          <div class="tip-card-front" style="background-image: url('https://images.pexels.com/photos/1128678/pexels-photo-1128678.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <h4>Stay Hydrated</h4>
+          </div>
+          <div class="tip-card-back">
+            <h5>Drink Water Regularly</h5>
+            <p>Aim for 8 glasses (about 2 liters) a day to boost energy, improve skin health, and support overall bodily functions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-card-inner">
+          <div class="tip-card-front" style="background-image: url('https://images.pexels.com/photos/3768894/pexels-photo-3768894.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <h4>Balanced Diet</h4>
+          </div>
+          <div class="tip-card-back">
+            <h5>Eat the Rainbow</h5>
+            <p>Incorporate a variety of colorful fruits and vegetables into your meals to ensure you get a wide range of essential nutrients and antioxidants.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-card-inner">
+          <div class="tip-card-front" style="background-image: url('https://images.pexels.com/photos/40751/running-runner-long-distance-fitness-40751.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <h4>Move Daily</h4>
+          </div>
+          <div class="tip-card-back">
+            <h5>Consistent Exercise</h5>
+            <p>Engage in at least 30 minutes of moderate activity, like a brisk walk, most days of the week to improve cardiovascular health.</p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
 </body>
 </html>
