@@ -1,58 +1,24 @@
-// --- REPLACE YOUR ENTIRE script.js FILE WITH THIS FINAL CODE ---
+// --- REPLACE YOUR ENTIRE script.js FILE WITH THIS FINAL, CORRECTED CODE ---
 
 document.addEventListener('DOMContentLoaded', () => {
 
     // =============================
-    // ORIGINAL: Floating Elements & Counter
-    // =============================
-    const floatingElements = document.querySelectorAll(".floating-element");
-    if (floatingElements.length > 0) {
-        floatingElements.forEach((el) => {
-            let direction = Math.random() < 0.5 ? -1 : 1;
-            let speed = 1 + Math.random() * 1;
-            let currentY = 0;
-            function float() {
-                if (Math.abs(currentY) > 20) direction *= -1;
-                currentY += direction * 0.1 * speed;
-                el.style.transform = `translateY(${currentY}px)`;
-                requestAnimationFrame(float);
-            }
-            float();
-        });
-    }
-
-    const counterNumber = document.getElementById("counterNumber");
-    if (counterNumber) {
-        let count = 0;
-        const targetCount = 100; // Let's set a target
-        const interval = setInterval(() => {
-            count += Math.ceil(Math.random() * 5);
-            if (count > targetCount) {
-                count = targetCount;
-                clearInterval(interval);
-            }
-            counterNumber.textContent = count;
-        }, 80);
-    }
-    
-    // =============================
-    // ORIGINAL: Hero Background Carousel
+    // HERO BACKGROUND CAROUSEL
     // =============================
     const slides = document.querySelectorAll('.image-slide');
     if (slides.length > 0) {
         let currentIndex = 0;
-        const shuffledSlides = Array.from(slides).sort(() => Math.random() - 0.5);
         function rotateSlides() {
-            shuffledSlides.forEach(slide => slide.classList.remove('active'));
-            shuffledSlides[currentIndex].classList.add('active');
-            currentIndex = (currentIndex + 1) % shuffledSlides.length;
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentIndex].classList.add('active');
+            currentIndex = (currentIndex + 1) % slides.length;
         }
         setInterval(rotateSlides, 5000);
         rotateSlides();
     }
 
     // =============================
-    // ALL MODAL CONTROLS
+    // ALL MODAL ELEMENT SELECTIONS
     // =============================
     const doctorAvatar = document.getElementById("doctorAvatar");
     const runnerAvatar = document.getElementById("runnerAvatar");
@@ -70,23 +36,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatWithAIDoctorBtn = document.getElementById("chatWithAIDoctorBtn");
     const healthTipsBtn = document.getElementById('healthTipsBtn');
 
-    if(doctorAvatar) doctorAvatar.addEventListener("click", () => doctorModal.style.display = "flex");
-    if(runnerAvatar) runnerAvatar.addEventListener("click", () => runnerModal.style.display = "flex");
+    // =============================
+    // MODAL EVENT LISTENERS
+    // =============================
+    if (doctorAvatar) {
+        doctorAvatar.addEventListener("click", () => {
+            if (doctorModal) doctorModal.style.display = "flex";
+        });
+    }
 
-    if(closeDoctor) closeDoctor.addEventListener("click", () => doctorModal.style.display = "none");
-    if(closeRunner) closeRunner.addEventListener("click", () => runnerModal.style.display = "none");
-    if(closeAIDoctor) closeAIDoctor.addEventListener("click", () => aiDoctorChatModal.style.display = "none");
-    if(closeHealthTips) closeHealthTips.addEventListener("click", () => healthTipsModal.style.display = "none");
+    if (runnerAvatar) {
+        runnerAvatar.addEventListener("click", () => {
+            if (runnerModal) runnerModal.style.display = "flex";
+        });
+    }
+
+    if (closeDoctor) closeDoctor.addEventListener("click", () => doctorModal.style.display = "none");
+    if (closeRunner) closeRunner.addEventListener("click", () => runnerModal.style.display = "none");
+    if (closeAIDoctor) closeAIDoctor.addEventListener("click", () => aiDoctorChatModal.style.display = "none");
+    if (closeHealthTips) closeHealthTips.addEventListener("click", () => healthTipsModal.style.display = "none");
     
-    if(chatWithAIDoctorBtn) chatWithAIDoctorBtn.addEventListener("click", () => {
-        if(doctorModal) doctorModal.style.display = "none";
-        if(aiDoctorChatModal) aiDoctorChatModal.style.display = "flex";
-    });
+    if (chatWithAIDoctorBtn) {
+        chatWithAIDoctorBtn.addEventListener("click", () => {
+            if (doctorModal) doctorModal.style.display = "none";
+            if (aiDoctorChatModal) aiDoctorChatModal.style.display = "flex";
+        });
+    }
     
-    if(healthTipsBtn) healthTipsBtn.addEventListener("click", () => {
-        if(doctorModal) doctorModal.style.display = "none";
-        if(healthTipsModal) healthTipsModal.style.display = "flex";
-    });
+    if (healthTipsBtn) {
+        healthTipsBtn.addEventListener("click", () => {
+            if (doctorModal) doctorModal.style.display = "none";
+            if (healthTipsModal) healthTipsModal.style.display = "flex";
+        });
+    }
 
     window.addEventListener("click", (event) => {
         if (event.target === doctorModal) doctorModal.style.display = "none";
@@ -96,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // =============================
-    // AI CHAT INTERACTIVITY LOGIC
+    // AI CHAT INTERACTIVITY
     // =============================
     const chatMessages = document.getElementById('chatMessages');
     const healthQueryInput = document.getElementById('healthQuery');
@@ -131,8 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
             displayMessage("Thinking...", 'ai');
             setTimeout(() => {
                 const thinkingBubble = Array.from(chatMessages.children).find(child => child.innerText === "Thinking...");
-                if (thinkingBubble) chatMessages.removeChild(thinkingBubble);
-                const simulatedResponse = `Regarding your query about "${userMessage}", please remember I am an AI assistant. For any real medical advice, consult a qualified doctor.`;
+                if (thinkingBubble) thinkingBubble.remove();
+                const simulatedResponse = `Regarding "${userMessage}", please remember I am an AI assistant. For real medical advice, consult a qualified doctor.`;
                 displayMessage(simulatedResponse, 'ai');
             }, 1500);
         }
@@ -162,4 +144,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-}); // <-- This closes the main DOMContentLoaded listener
+});
