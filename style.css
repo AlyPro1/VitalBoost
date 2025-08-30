@@ -1520,3 +1520,26 @@ body {
     color: #fff;
     align-self: flex-end; /* Aligns to the right */
 }
+
+#uploadedFiles {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.file-pill {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 10px 15px;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  word-break: break-all;
+}
