@@ -1,5 +1,3 @@
-// --- REPLACE YOUR ENTIRE script.js FILE WITH THIS FINAL, CORRECTED CODE ---
-
 document.addEventListener('DOMContentLoaded', () => {
 
     // =============================
