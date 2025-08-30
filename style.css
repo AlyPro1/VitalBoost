@@ -1496,6 +1496,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 12px; /* Space between messages */
+  flex-grow: 1;
 }
 
 /* Base style for all message bubbles */
