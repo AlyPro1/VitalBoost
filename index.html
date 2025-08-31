@@ -1,88 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">	
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VitalBoost App</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VitalBoost</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
-  <!-- ===== Header Section ===== -->
-  <header>
-    <h1>VitalBoost</h1>
-    <p>Your AI-powered fitness & health companion</p>
-  </header>
+<body> 
 
-  <!-- ===== Avatars Section ===== -->
-  <section class="avatars">
-    <div class="avatar" id="doctorAvatar">
-      <img src="https://via.placeholder.com/100x100?text=Doctor" alt="AI Doctor">
-      <p>AI Doctor</p>
+  <!-- Hero Section -->
+  <div class="hero-container">
+    <!-- Background Carousel -->
+    <div class="image-carousel">
+      <div class="image-slide active" style="background-image: url('https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1431282/pexels-photo-1431282.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
     </div>
-    <div class="avatar" id="runnerAvatar">
-      <img src="https://via.placeholder.com/100x100?text=Runner" alt="Runner">
-      <p>Runner</p>
-    </div>
-  </section>
 
-  <!-- ===== Features Section ===== -->
-  <section class="features">
-    <button id="chatDoctorBtn">💬 Chat with AI Doctor</button>
-    <button id="uploadSymptomsBtn">📤 Upload Symptoms</button>
-    <button id="healthTipsBtn">💡 Health Tips</button>
-  </section>
+    <!-- Gradient Overlay -->
+    <div class="gradient-overlay"></div>
 
-  <!-- ===== Doctor Modal ===== -->
-  <div id="doctorModal" class="modal-overlay">
-    <div class="modal-container">
-      <span class="close-modal" data-close="doctorModal">&times;</span>
-      <h2>AI Doctor Features</h2>
-      <ul>
-        <li>💬 Chat with AI Doctor</li>
-        <li>📤 Upload Symptoms</li>
-        <li>💡 Health Tips</li>
-      </ul>
-    </div>
-  </div>
+    <!-- Avatars -->
+    <div class="avatars-popup"> 
+      <!-- Doctor Avatar -->
+      <div class="avatar-item doctor-avatar" id="doctorAvatar">
+        <img
+          src="https://raw.githubusercontent.com/AlyPro1/VitalBoost/bc8a938f40e41dff57088dc24f991fd49a368d65/doctor_avatar_bounce.gif"
+          alt="Doctor Avatar"
+          class="avatar-image"
+        />
+        <p class="avatar-text">Talk to Doctor</p>
+      </div>
 
-  <!-- ===== Runner Modal ===== -->
-  <div id="runnerModal" class="modal-overlay">
-    <div class="modal-container">
-      <span class="close-modal" data-close="runnerModal">&times;</span>
-      <h2>Runner Stats</h2>
-      <div class="mini-stats-container">
-        <p>🏃 Distance: 5.2 km</p>
-        <p>🔥 Calories Burned: 320</p>
-        <p>⏱ Time: 32 mins</p>
+      <!-- Runner Avatar -->
+      <div class="avatar-item runner-avatar" id="runnerAvatar">
+        <img
+          src="https://raw.githubusercontent.com/AlyPro1/VitalBoost/bc8a938f40e41dff57088dc24f991fd49a368d65/runner_avatar_flip.gif"
+          alt="Runner Avatar"
+          class="avatar-image"
+        />
+        <p class="avatar-text">Track Fitness</p>
+      </div>
+    </div> <!-- ✅ Closing avatars-popup -->
+
+    <!-- Floating Parallax Elements -->
+    <div class="parallax-element parallax-1"></div>
+    <div class="parallax-element parallax-2"></div>
+    <div class="parallax-element parallax-3"></div>
+
+    <!-- Main Content -->
+    <div class="hero-content">
+      <div class="content-wrapper">
+        <div class="brand">
+          <span class="logo-icon">💪</span>
+          <span class="brand-name">VitalBoost</span>
+        </div>
+        <h1 class="main-headline">
+          <span class="headline-line">Boost Your</span>
+          <span class="headline-line highlight">Health & Fitness</span>
+        </h1>
+        <p class="subheadline">Your journey to strength, energy, and vitality starts here.</p>
+        <button class="cta-button" id="ctaButton">
+          <span class="button-glow"></span>
+          <span class="button-shine"></span>
+          Get Started
+        </button>
+        
+        <!-- Social Proof -->
+        <div class="social-proof">
+          <div class="counter-wrapper">
+            <span class="pulse-dot"></span>
+            <span class="counter-text">Join over <span class="counter-number" id="counterNumber">0</span> happy users!</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- ===== Health Tips Modal ===== -->
-  <div id="healthTipsModal" class="modal-overlay">
-    <div class="modal-container">
-      <span class="close-modal" data-close="healthTipsModal">&times;</span>
-      <h2>Daily Health Tips</h2>
-      <ul>
-        <li>🥗 Eat a balanced diet</li>
-        <li>💧 Stay hydrated</li>
-        <li>🛌 Get 7–8 hours sleep</li>
-        <li>🏋️ Exercise regularly</li>
-      </ul>
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+      <div class="floating-element element-1">💊</div>
+      <div class="floating-element element-2">🏃♂️</div>
+      <div class="floating-element element-3">🥗</div>
+      <div class="floating-element element-4">💪</div>
+      <div class="floating-element element-5">🧘♀️</div>
     </div>
-  </div>
+  </div> <!-- ✅ End Hero -->
 
-  <!-- ===== Chat Modal ===== -->
-  <div id="chatModal" class="modal-overlay">
+  <!-- Doctor Modal -->
+  <div class="modal-overlay" id="doctorModal">
     <div class="modal-container">
-      <span class="close-modal" data-close="chatModal">&times;</span>
-      <h2>Chat with AI Doctor</h2>
-      <div id="chatWindow"></div>
-      <input type="text" id="chatInput" placeholder="Type your message...">
-      <button id="sendBtn">Send</button>
-    </div>
-  </div>
+      <button class="modal-close" id="closeDoctor">&times;</button>
+      <div class="modal-header">
+        <h3>Your Health CheckUp</h3>
+      </div>
+      
+      <!-- Doctor Modal Features -->
+      <div class="modal-button-group">
+    <button class="modal-action-button doctor-chat blue-glow" id="chatWithAIDoctorBtn">
+        <span class="button-icon">🩺</span>
+        Chat with AI Doctor
+    </button>
 
-  <script src="script.js"></script>
+    <button class="modal-action-button upload-symptoms red-glow" id="uploadTrigger">
+        <span class="button-icon">📤</span>
+        Upload Symptoms
+    </button>
+    <input type="file" id="symptomUpload" multiple style="display:none;">
+    <div id="uploadedFiles"></div>
+
+    <button class="modal-action-button health-tips green-glow" id="healthTipsBtn">
+        <span class="button-icon">💡</span>
+        Health Tips
+    </button>
+</div> 
+  </div> <!-- ✅ Close doctorModal -->
+
+  <!-- Runner Modal -->
+<div class="modal-overlay" id="runnerModal">
+  <div class="modal-content">
+    <span class="close-button" data-modal="runnerModal">&times;</span>
+    <h2>Upload Symptoms</h2>
+    <form>
+      <label for="symptomFile">Upload a file with your symptoms:</label>
+      <input type="file" id="symptomFile" name="symptomFile">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- AI Doctor Chat Modal -->
+<div class="modal-overlay" id="aiDoctorChatModal">
+  <div class="modal-content">
+    <span class="close-button" data-modal="aiDoctorChatModal">&times;</span>
+    <h2>Chat with AI Doctor</h2>
+    <div id="chatBox">
+      <p><strong>AI Doctor:</strong> Hello! How can I assist you today?</p>
+    </div>
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <button id="sendMessage">Send</button>
+  </div>
+</div>
+
+<!-- ✅ Health Tips Modal moved ABOVE script -->
+<div class="modal-overlay" id="healthTipsModal">
+  <div class="modal-content">
+    <span class="close-button" data-modal="healthTipsModal">&times;</span>
+    <h2>Health Tips</h2>
+    <ul>
+      <li>Stay hydrated and drink plenty of water.</li>
+      <li>Exercise regularly to maintain a healthy body.</li>
+      <li>Get at least 7-8 hours of sleep each night.</li>
+      <li>Eat a balanced diet rich in fruits and vegetables.</li>
+      <li>Take breaks and manage stress effectively.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ✅ Script must always be LAST -->
+<script src="script.js"></script>
 </body>
 </html>
