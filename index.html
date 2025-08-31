@@ -117,105 +117,47 @@
   </div> <!-- ✅ Close doctorModal -->
 
   <!-- Runner Modal -->
-  <div class="modal-overlay" id="runnerModal">
-    <div class="modal-container">
-      <button class="modal-close" id="closeRunner">&times;</button>
-      <div class="modal-header">
-        <h3>Your Fitness Tracker</h3>
-      </div>
-      <div class="modal-button-group">
-        <button class="modal-action-button track-steps sky-blue-glow">
-          <span class="button-icon">👟</span>
-          Track Steps
-        </button>
-        <button class="modal-action-button calories-burned orange-glow">
-          <span class="button-icon">🔥</span>
-          Calories Burned
-        </button>
-        <button class="modal-action-button fitness-goals vanilla-glow">
-          <span class="button-icon">🎯</span>
-          Daily Fitness Goals
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- AI Doctor Chat Modal -->
-  <div class="modal-overlay" id="aiDoctorChatModal">
-    <div class="modal-container ai-chat-container">
-      <button class="modal-close" id="closeAIDoctor">&times;</button>
-      <div class="ai-doctor-header">
-        <div class="ai-doctor-avatar">
-          <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=300" alt="AI Doctor" class="doctor-avatar-img">
-        </div>
-        <h3 class="ai-doctor-greeting">How can I Help you with your Health?</h3>
-      </div>
-
-      <!-- Chat messages container -->
-      <div class="chat-messages" id="chatMessages"></div>
-
-      <div class="ai-chat-input-section">
-        <input type="text" id="healthQuery" class="health-input" placeholder="Describe your symptoms or health concerns...">
-        <button class="send-query-btn" id="sendQueryBtn">
-          <span class="button-icon">💬</span>
-          Ask Doctor
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Confetti Container -->
-  <div class="confetti-container" id="confettiContainer"></div>
-
-  <!-- ✅ Script must be last -->
-  <script src="script.js"></script>
-<div class="modal-overlay" id="healthTipsModal">
-  <div class="modal-container tips-modal-container">
-    <button class="modal-close" id="closehealthTips">&times;</button>
-    <div class="modal-header">
-      <h3>Trending Health Tips</h3>
-    </div>
-    
-    <div class="tips-grid">
-
-      <div class="tip-card">
-        <div class="tip-card-inner">
-          <div class="tip-card-front" style="background-image: url('https://images.pexels.com/photos/1128678/pexels-photo-1128678.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
-            <h4>Stay Hydrated</h4>
-          </div>
-          <div class="tip-card-back">
-            <h5>Drink Water Regularly</h5>
-            <p>Aim for 8 glasses (about 2 liters) a day to boost energy, improve skin health, and support overall bodily functions.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="tip-card">
-        <div class="tip-card-inner">
-          <div class="tip-card-front" style="background-image: url('https://images.pexels.com/photos/3768894/pexels-photo-3768894.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
-            <h4>Balanced Diet</h4>
-          </div>
-          <div class="tip-card-back">
-            <h5>Eat the Rainbow</h5>
-            <p>Incorporate a variety of colorful fruits and vegetables into your meals to ensure you get a wide range of essential nutrients and antioxidants.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="tip-card">
-        <div class="tip-card-inner">
-          <div class="tip-card-front" style="background-image: url('https://images.pexels.com/photos/40751/running-runner-long-distance-fitness-40751.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
-            <h4>Move Daily</h4>
-          </div>
-          <div class="tip-card-back">
-            <h5>Consistent Exercise</h5>
-            <p>Engage in at least 30 minutes of moderate activity, like a brisk walk, most days of the week to improve cardiovascular health.</p>
-          </div>
-        </div>
-      </div>
-      
-    </div>
+<div class="modal-overlay" id="runnerModal">
+  <div class="modal-content">
+    <span class="close-button" data-modal="runnerModal">&times;</span>
+    <h2>Upload Symptoms</h2>
+    <form>
+      <label for="symptomFile">Upload a file with your symptoms:</label>
+      <input type="file" id="symptomFile" name="symptomFile">
+      <button type="submit">Submit</button>
+    </form>
   </div>
 </div>
+
+<!-- AI Doctor Chat Modal -->
+<div class="modal-overlay" id="aiDoctorChatModal">
+  <div class="modal-content">
+    <span class="close-button" data-modal="aiDoctorChatModal">&times;</span>
+    <h2>Chat with AI Doctor</h2>
+    <div id="chatBox">
+      <p><strong>AI Doctor:</strong> Hello! How can I assist you today?</p>
+    </div>
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <button id="sendMessage">Send</button>
+  </div>
+</div>
+
+<!-- ✅ Health Tips Modal moved ABOVE script -->
+<div class="modal-overlay" id="healthTipsModal">
+  <div class="modal-content">
+    <span class="close-button" data-modal="healthTipsModal">&times;</span>
+    <h2>Health Tips</h2>
+    <ul>
+      <li>Stay hydrated and drink plenty of water.</li>
+      <li>Exercise regularly to maintain a healthy body.</li>
+      <li>Get at least 7-8 hours of sleep each night.</li>
+      <li>Eat a balanced diet rich in fruits and vegetables.</li>
+      <li>Take breaks and manage stress effectively.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ✅ Script must always be LAST -->
+<script src="script.js"></script>
 </body>
 </html>
