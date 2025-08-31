@@ -1627,3 +1627,81 @@ body {
   font-size: 0.95rem;
   margin: 0;
 }
+/* Health Tips Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.health-tips-modal {
+  background: #111;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 450px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 25px #00ff99, 0 0 50px #00ffcc;
+  animation: glowPulse 2s infinite alternate;
+}
+
+@keyframes glowPulse {
+  from { box-shadow: 0 0 15px #00ff99; }
+  to { box-shadow: 0 0 35px #00ffcc; }
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.tips-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.tip-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: rotateY(90deg);
+  transition: all 1s ease;
+}
+
+.tip-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.tip-card p {
+  font-size: 18px;
+  font-weight: 500;
+  color: #00ffcc;
+}
+
+.tip-card.active {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
