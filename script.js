@@ -330,48 +330,46 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-// Health Tips Feature
+// ✅ Select button once
 const healthTipsBtn = document.getElementById("healthTipsBtn");
 const healthTipsModal = document.getElementById("healthTipsModal");
-const closeHealthTips = document.getElementById("closeHealthTips");
-const tipCards = document.querySelectorAll(".tip-card");
-let currentTip = 0;
+const healthTipsClose = document.getElementById("healthTipsClose");
+const healthTipText = document.getElementById("healthTipText");
+
+const healthTips = [
+  "💧 Stay hydrated — drink at least 8 glasses of water daily!",
+  "🥗 Eat a rainbow of fruits and vegetables every day.",
+  "🏃 Move at least 30 minutes daily — walking counts!",
+  "😴 Sleep 7–9 hours each night for recovery.",
+  "🧘 Manage stress with deep breathing or meditation.",
+  "🚶 Take short breaks to stretch if sitting for long hours."
+];
+
+let currentTipIndex = 0;
 let tipInterval;
 
-// Open Modal
+// Open modal and start auto cycle
 healthTipsBtn.addEventListener("click", () => {
   healthTipsModal.style.display = "flex";
-  showTip(currentTip);
-
-  // Start auto-cycle every 4s
-  tipInterval = setInterval(() => {
-    currentTip = (currentTip + 1) % tipCards.length;
-    showTip(currentTip);
-  }, 4000);
+  showTip(currentTipIndex);
+  tipInterval = setInterval(nextTip, 4000); // every 4s flip
 });
 
-// Close Modal
-closeHealthTips.addEventListener("click", () => {
+// Close modal and stop auto cycle
+healthTipsClose.addEventListener("click", () => {
   healthTipsModal.style.display = "none";
   clearInterval(tipInterval);
 });
 
-// Function to show tips
+// Functions
 function showTip(index) {
-  tipCards.forEach((card, i) => {
-    card.classList.remove("active");
-    if (i === index) {
-      card.classList.add("active");
-    }
-  });
+  healthTipText.textContent = healthTips[index];
+  healthTipText.classList.remove("show");
+  void healthTipText.offsetWidth; // reset animation
+  healthTipText.classList.add("show");
 }
 
-// Close if clicked outside content
-window.addEventListener("click", (e) => {
-  if (e.target === healthTipsModal) {
-    healthTipsModal.style.display = "none";
-    clearInterval(tipInterval);
-  }
-});
-
-
+function nextTip() {
+  currentTipIndex = (currentTipIndex + 1) % healthTips.length;
+  showTip(currentTipIndex);
+}
