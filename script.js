@@ -304,5 +304,31 @@ if(healthTipsBtn && healthTipsModal && closeHealthTips) {
     }
   });
 }
+// ✅ Health Tips Button Logic
+document.addEventListener("DOMContentLoaded", () => {
+  const healthTipsBtn = document.getElementById("healthTipsBtn");
+
+  if (healthTipsBtn) {
+    healthTipsBtn.addEventListener("click", () => {
+      // Example list of health tips
+      const tips = [
+        "💧 Stay hydrated — drink at least 8 glasses of water daily.",
+        "🥗 Eat more whole foods like fruits, vegetables, and lean proteins.",
+        "🏃 Exercise at least 30 minutes a day, 5 times a week.",
+        "😴 Aim for 7–8 hours of quality sleep every night.",
+        "🧘 Reduce stress with meditation, deep breathing, or yoga.",
+        "🚶 Take short breaks to stretch if you sit for long periods.",
+        "❌ Avoid smoking and limit alcohol for long-term health.",
+        "💡 Regular check-ups can catch issues early."
+      ];
+
+      // Pick a random tip
+      const randomTip = tips[Math.floor(Math.random() * tips.length)];
+
+      // Show it in an alert (you can replace with a modal, toast, etc.)
+      alert("Health Tip: " + randomTip);
+    });
+  }
+});
 
 
