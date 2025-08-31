@@ -304,3 +304,7 @@ if(healthTipsBtn && healthTipsModal && closeHealthTips) {
     }
   });
 }
+// Health Tips button click
+document.getElementById("healthTipsBtn").addEventListener("click", function () {
+    alert("💡 Daily Health Tips will appear here!");
+});
