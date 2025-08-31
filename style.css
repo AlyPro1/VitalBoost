@@ -1520,8 +1520,7 @@ body {
     color: #fff;
     align-self: flex-end; /* Aligns to the right */
 }
-
-#uploadedFiles {
+#uploadedFiles:not(:empty) {
   margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
