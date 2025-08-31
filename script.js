@@ -330,5 +330,48 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+// Health Tips Feature
+const healthTipsBtn = document.getElementById("healthTipsBtn");
+const healthTipsModal = document.getElementById("healthTipsModal");
+const closeHealthTips = document.getElementById("closeHealthTips");
+const tipCards = document.querySelectorAll(".tip-card");
+let currentTip = 0;
+let tipInterval;
+
+// Open Modal
+healthTipsBtn.addEventListener("click", () => {
+  healthTipsModal.style.display = "flex";
+  showTip(currentTip);
+
+  // Start auto-cycle every 4s
+  tipInterval = setInterval(() => {
+    currentTip = (currentTip + 1) % tipCards.length;
+    showTip(currentTip);
+  }, 4000);
+});
+
+// Close Modal
+closeHealthTips.addEventListener("click", () => {
+  healthTipsModal.style.display = "none";
+  clearInterval(tipInterval);
+});
+
+// Function to show tips
+function showTip(index) {
+  tipCards.forEach((card, i) => {
+    card.classList.remove("active");
+    if (i === index) {
+      card.classList.add("active");
+    }
+  });
+}
+
+// Close if clicked outside content
+window.addEventListener("click", (e) => {
+  if (e.target === healthTipsModal) {
+    healthTipsModal.style.display = "none";
+    clearInterval(tipInterval);
+  }
+});
 
 
