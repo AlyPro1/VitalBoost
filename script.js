@@ -306,7 +306,6 @@ if(healthTipsBtn && healthTipsModal && closeHealthTips) {
 }
 // ✅ Health Tips Button Logic
 document.addEventListener("DOMContentLoaded", () => {
-const healthTipsBtn = document.getElementById('healthTipsBtn');
   
   if (healthTipsBtn) {
     healthTipsBtn.addEventListener("click", () => {
