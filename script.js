@@ -329,3 +329,47 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+// =======================
+// Health Tips Feature
+// =======================
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Select the new elements (declare ONCE inside DOMContentLoaded)
+  const healthTipsBtn = document.getElementById("healthTipsBtn");
+  const healthTipsModal = document.getElementById("healthTipsModal");
+  const closeHealthTips = document.getElementById("closeHealthTips");
+  const tipsContent = document.getElementById("tipsContent");
+
+  // Health tips data
+  const healthTips = [
+    "💧 Drink at least 8 glasses of water daily to stay hydrated.",
+    "🏃‍♂️ Exercise 30 minutes a day to improve cardiovascular health.",
+    "🍎 Eat more fruits and vegetables for essential vitamins.",
+    "😴 Get 7-8 hours of quality sleep every night.",
+    "🧘 Manage stress with meditation or breathing exercises.",
+  ];
+
+  let currentTipIndex = 0;
+  let tipInterval;
+
+  // Function to start rotating tips
+  function startHealthTipsCarousel() {
+    tipsContent.textContent = healthTips[currentTipIndex];
+
+    tipInterval = setInterval(() => {
+      currentTipIndex = (currentTipIndex + 1) % healthTips.length;
+      tipsContent.textContent = healthTips[currentTipIndex];
+    }, 3000); // change every 3 seconds
+  }
+
+  // ✅ Button + Modal Logic
+  healthTipsBtn.addEventListener("click", () => {
+    healthTipsModal.style.display = "flex";
+    startHealthTipsCarousel();
+  });
+
+  closeHealthTips.addEventListener("click", () => {
+    healthTipsModal.style.display = "none";
+    clearInterval(tipInterval);
+  });
+});
