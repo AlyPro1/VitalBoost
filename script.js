@@ -460,21 +460,24 @@ if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carou
     }
   });
 }
-// ✅ Only add event listeners (no duplicate consts)
+const healthTipsBtn = document.getElementById("healthTipsBtn");
+const healthTipsModal = document.getElementById("healthTipsModal");
+const closeHealthTips = document.getElementById("closeHealthTips"); // <-- FIXED
+const overlay = document.getElementById("overlay");
 
-// Open modal on button click
+// Open modal when Health Tips is clicked
 healthTipsBtn.addEventListener("click", () => {
     healthTipsModal.style.display = "block";
     overlay.style.display = "block";
 });
 
-// Close modal when clicking X
-closeModal.addEventListener("click", () => {
+// Close modal when clicking the X
+closeHealthTips.addEventListener("click", () => {
     healthTipsModal.style.display = "none";
     overlay.style.display = "none";
 });
 
-// Close modal when clicking overlay
+// Close modal when clicking the overlay
 overlay.addEventListener("click", () => {
     healthTipsModal.style.display = "none";
     overlay.style.display = "none";
