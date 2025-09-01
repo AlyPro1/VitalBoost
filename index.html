@@ -194,6 +194,31 @@
     </div>
   </div>
 
+  <!-- Steps Tracker Modal -->
+<div id="stepsModal" class="modal-overlay">
+  <div class="modal-container steps-modal-container">
+    <button class="modal-close" id="closeSteps">&times;</button>
+    <div class="modal-header">
+      <h3>👟 Step Counter</h3>
+    </div>
+
+    <div class="steps-circle" id="stepsCircle">
+      <span class="shoe-icon">👟</span>
+    </div>
+
+    <p class="step-count-text">Steps Today: <span id="stepCount">0</span></p>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="steps-controls">
+      <button id="addSteps">+100 Steps</button>
+      <button id="resetSteps">Reset</button>
+    </div>
+  </div>
+</div>
+
   <!-- ✅ Script must be last (moved AFTER the Health Tips modal) -->
   <script src="script.js"></script>
 </body>
