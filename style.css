@@ -2012,3 +2012,78 @@ body {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* Steps Modal Custom Styling */
+.steps-modal-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.steps-circle {
+  width: 120px;
+  height: 120px;
+  margin: 20px auto;
+  border-radius: 50%;
+  background: radial-gradient(circle, #3af 30%, #0a1a2f 90%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 25px #3af;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.shoe-icon {
+  font-size: 3rem;
+  animation: shoeIdle 1.5s infinite ease-in-out;
+}
+
+@keyframes shoeIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.jump {
+  animation: shoeJump 0.4s ease;
+}
+
+@keyframes shoeJump {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+
+.step-count-text {
+  font-size: 1.2rem;
+  margin: 15px 0;
+}
+
+.progress-bar {
+  width: 80%;
+  height: 15px;
+  background: #222;
+  border-radius: 10px;
+  margin: 15px auto;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: limegreen;
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.steps-controls button {
+  margin: 10px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #3af;
+  color: white;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.steps-controls button:hover {
+  background: #1f78ff;
+}
