@@ -462,7 +462,7 @@ if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carou
 }
 // Track Steps Logic
 document.addEventListener("DOMContentLoaded", () => {
-  const openStepsBtn = document.getElementById("openStepsTracker");
+  const openStepsBtn = document.getElementById("openSteps");
   const stepsTracker = document.getElementById("stepsTracker");
   const stepCount = document.getElementById("stepCount");
   const addStepsBtn = document.getElementById("addSteps");
