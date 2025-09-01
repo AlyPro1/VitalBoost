@@ -470,20 +470,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let steps = 0;
 
-  // Show / hide tracker when button clicked
-  openStepsBtn.addEventListener("click", () => {
-    stepsTracker.style.display = stepsTracker.style.display === "none" ? "block" : "none";
-  });
+  // Only run if elements exist
+  if (openStepsBtn && stepsTracker && stepCount && addStepsBtn && resetStepsBtn) {
+    // Show / hide tracker
+    openStepsBtn.addEventListener("click", () => {
+      stepsTracker.style.display =
+        stepsTracker.style.display === "none" ? "block" : "none";
+    });
 
-  // Add steps
-  addStepsBtn.addEventListener("click", () => {
-    steps += 100;
-    stepCount.textContent = steps;
-  });
+    // Add steps
+    addStepsBtn.addEventListener("click", () => {
+      steps += 100;
+      stepCount.textContent = steps;
+    });
 
-  // Reset steps
-  resetStepsBtn.addEventListener("click", () => {
-    steps = 0;
-    stepCount.textContent = steps;
-  });
+    // Reset steps
+    resetStepsBtn.addEventListener("click", () => {
+      steps = 0;
+      stepCount.textContent = steps;
+    });
+  }
 });
