@@ -460,9 +460,8 @@ if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carou
     }
   });
 }
-const healthTipsBtn = document.getElementById("healthTipsBtn");
-const healthTipsModal = document.getElementById("healthTipsModal");
-const closeHealthTips = document.getElementById("closeHealthTips"); // <-- FIXED
+// ✅ Fix for closing Health Tips modal
+const closeHealthTips = document.getElementById("closeHealthTips"); // matches your HTML
 const overlay = document.getElementById("overlay");
 
 // Open modal when Health Tips is clicked
