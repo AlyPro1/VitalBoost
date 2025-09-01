@@ -460,3 +460,30 @@ if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carou
     }
   });
 }
+// Track Steps Logic
+document.addEventListener("DOMContentLoaded", () => {
+  const openStepsBtn = document.getElementById("openStepsTracker");
+  const stepsTracker = document.getElementById("stepsTracker");
+  const stepCount = document.getElementById("stepCount");
+  const addStepsBtn = document.getElementById("addSteps");
+  const resetStepsBtn = document.getElementById("resetSteps");
+
+  let steps = 0;
+
+  // Show / hide tracker when button clicked
+  openStepsBtn.addEventListener("click", () => {
+    stepsTracker.style.display = stepsTracker.style.display === "none" ? "block" : "none";
+  });
+
+  // Add steps
+  addStepsBtn.addEventListener("click", () => {
+    steps += 100;
+    stepCount.textContent = steps;
+  });
+
+  // Reset steps
+  resetStepsBtn.addEventListener("click", () => {
+    steps = 0;
+    stepCount.textContent = steps;
+  });
+});
