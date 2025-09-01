@@ -460,20 +460,3 @@ if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carou
     }
   });
 }
-// Open modal when Health Tips is clicked
-healthTipsBtn.addEventListener("click", () => {
-    healthTipsModal.style.display = "block";
-    overlay.style.display = "block";
-});
-
-// Close modal when clicking the X
-closeHealthTips.addEventListener("click", () => {
-    healthTipsModal.style.display = "none";
-    overlay.style.display = "none";
-});
-
-// Close modal when clicking the overlay
-overlay.addEventListener("click", () => {
-    healthTipsModal.style.display = "none";
-    overlay.style.display = "none";
-});
