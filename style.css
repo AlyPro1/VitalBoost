@@ -1627,81 +1627,258 @@ body {
   font-size: 0.95rem;
   margin: 0;
 }
-/* Health Tips Modal */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+/* Health Tips Modal Specific Styles */
+.health-tips-modal-container {
+  max-width: 800px;
+  width: 95%;
+  max-height: 90vh;
+  padding: 2rem;
 }
 
-.health-tips-modal {
-  background: #111;
-  padding: 20px;
-  border-radius: 15px;
-  max-width: 450px;
-  text-align: center;
-  color: #fff;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 25px #00ff99, 0 0 50px #00ffcc;
-  animation: glowPulse 2s infinite alternate;
-}
-
-@keyframes glowPulse {
-  from { box-shadow: 0 0 15px #00ff99; }
-  to { box-shadow: 0 0 35px #00ffcc; }
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
-  color: #fff;
-}
-
-.tips-container {
+.tips-carousel-container {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 450px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tips-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
 }
 
 .tip-card {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #222;
-  border-radius: 12px;
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   opacity: 0;
-  transform: rotateY(90deg);
-  transition: all 1s ease;
-}
-
-.tip-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.tip-card p {
-  font-size: 18px;
-  font-weight: 500;
-  color: #00ffcc;
+  transform: translateX(100%) scale(0.8);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 
 .tip-card.active {
   opacity: 1;
-  transform: rotateY(0deg);
+  transform: translateX(0) scale(1);
+  z-index: 10;
+}
+
+.tip-card.prev {
+  opacity: 0;
+  transform: translateX(-100%) scale(0.8);
+}
+
+.tip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(16, 185, 129, 0.2);
+  animation: cardGlow 3s ease-in-out infinite alternate;
+}
+
+.tip-card:hover .tip-card-inner {
+  transform: rotateY(180deg);
+}
+
+@keyframes cardGlow {
+  0% {
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.3),
+      0 0 20px rgba(16, 185, 129, 0.2);
+  }
+  100% {
+    box-shadow: 
+      0 25px 50px rgba(0, 0, 0, 0.4),
+      0 0 40px rgba(59, 130, 246, 0.3);
+  }
+}
+
+.tip-card-front,
+.tip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.tip-card-front {
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+}
+
+.tip-card-front::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+.tip-card-front h4 {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  padding: 1.5rem;
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  border-top: 2px solid rgba(16, 185, 129, 0.5);
+}
+
+.tip-card-back {
+  background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+  transform: rotateY(180deg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.tip-card-back h5 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 1.5rem 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 1rem;
+  width: 100%;
+}
+
+.tip-card-back p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.tip-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.1); }
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 20;
+}
+
+.indicator-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.indicator-dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
+}
+
+.indicator-dot.active {
+  background: #10b981;
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+  transform: scale(1.3);
+}
+
+/* Responsive Design for Health Tips Modal */
+@media (max-width: 768px) {
+  .health-tips-modal-container {
+    max-width: 95%;
+    padding: 1.5rem;
+  }
+  
+  .tips-carousel-container {
+    height: 400px;
+  }
+  
+  .tip-card-front h4 {
+    font-size: 1.2rem;
+    padding: 1.2rem;
+  }
+  
+  .tip-card-back {
+    padding: 1.5rem;
+  }
+  
+  .tip-card-back h5 {
+    font-size: 1.1rem;
+  }
+  
+  .tip-card-back p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tips-carousel-container {
+    height: 350px;
+  }
+  
+  .tip-card-front h4 {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+  
+  .tip-card-back {
+    padding: 1.2rem;
+  }
+  
+  .tip-card-back h5 {
+    font-size: 1rem;
+  }
+  
+  .tip-card-back p {
+    font-size: 0.9rem;
+  }
+  
+  .tip-icon {
+    font-size: 2rem;
+  }
 }

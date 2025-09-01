@@ -172,24 +172,17 @@
   <script src="script.js"></script>
   <!-- Health Tips Modal -->
 <div id="healthTipsModal" class="modal-overlay">
-  <div class="modal-content health-tips-modal">
-    <span class="close-btn" id="closeHealthTips">&times;</span>
-    <div class="tips-container">
-      <div class="tip-card active">
-        <img src="https://source.unsplash.com/400x250/?fruits,healthy" alt="Fruits">
-        <p>Eat fresh fruits daily to boost immunity 🍎</p>
+  <div class="modal-container health-tips-modal-container">
+    <button class="modal-close" id="closeHealthTips">&times;</button>
+    <div class="modal-header">
+      <h3>💡 Daily Health Tips</h3>
+    </div>
+    <div class="tips-carousel-container">
+      <div class="tips-carousel" id="tipsCarousel">
+        <!-- Cards will be dynamically inserted here -->
       </div>
-      <div class="tip-card">
-        <img src="https://source.unsplash.com/400x250/?water,glass" alt="Water">
-        <p>Drink at least 8 glasses of water every day 💧</p>
-      </div>
-      <div class="tip-card">
-        <img src="https://source.unsplash.com/400x250/?exercise,fitness" alt="Exercise">
-        <p>Exercise for 30 minutes to stay fit 💪</p>
-      </div>
-      <div class="tip-card">
-        <img src="https://source.unsplash.com/400x250/?sleep,rest" alt="Sleep">
-        <p>Get 7-8 hours of quality sleep 💤</p>
+      <div class="carousel-indicators" id="carouselIndicators">
+        <!-- Indicator dots will be dynamically inserted here -->
       </div>
     </div>
   </div>

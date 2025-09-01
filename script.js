@@ -275,101 +275,188 @@ if (uploadTriggerBtn && symptomUploadInput && uploadedFilesContainer) {
         }
     });
 } 
+
 // =============================
-// HEALTH TIPS MODAL
+// HEALTH TIPS MODAL WITH CAROUSEL
 // =============================
 
-// Select the new elements
+// Health Tips Modal Elements
 const healthTipsBtn = document.getElementById('healthTipsBtn');
 const healthTipsModal = document.getElementById('healthTipsModal');
 const closeHealthTips = document.getElementById('closeHealthTips');
+const tipsCarousel = document.getElementById('tipsCarousel');
+const carouselIndicators = document.getElementById('carouselIndicators');
 
-if(healthTipsBtn && healthTipsModal && closeHealthTips) {
+// Health Tips Data
+const healthTipsData = [
+  {
+    title: "Stay Hydrated Daily",
+    frontImage: "https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg?auto=compress&cs=tinysrgb&w=800",
+    backTitle: "💧 Hydration Benefits",
+    description: "Drinking 8-10 glasses of water daily improves brain function, boosts energy levels, aids digestion, and helps maintain healthy skin. Proper hydration is essential for optimal body performance."
+  },
+  {
+    title: "Exercise Regularly",
+    frontImage: "https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=800",
+    backTitle: "🏃‍♂️ Fitness Power",
+    description: "30 minutes of daily exercise strengthens your heart, builds muscle, improves mental health, and increases longevity. Even light activities like walking can make a significant difference."
+  },
+  {
+    title: "Eat Nutritious Foods",
+    frontImage: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
+    backTitle: "🥗 Nutrition Facts",
+    description: "A balanced diet rich in fruits, vegetables, lean proteins, and whole grains provides essential nutrients, boosts immunity, and reduces the risk of chronic diseases."
+  },
+  {
+    title: "Get Quality Sleep",
+    frontImage: "https://images.pexels.com/photos/935777/pexels-photo-935777.jpeg?auto=compress&cs=tinysrgb&w=800",
+    backTitle: "😴 Sleep Science",
+    description: "7-9 hours of quality sleep enhances memory consolidation, supports immune function, regulates hormones, and improves overall cognitive performance and emotional well-being."
+  },
+  {
+    title: "Manage Stress Levels",
+    frontImage: "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=800",
+    backTitle: "🧘‍♀️ Stress Relief",
+    description: "Regular meditation, deep breathing exercises, and mindfulness practices reduce cortisol levels, lower blood pressure, and improve mental clarity and emotional resilience."
+  },
+  {
+    title: "Regular Health Checkups",
+    frontImage: "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=800",
+    backTitle: "🩺 Prevention Care",
+    description: "Annual health screenings and regular checkups help detect potential health issues early, enabling timely treatment and better health outcomes through preventive care."
+  }
+];
+
+let currentTipIndex = 0;
+let tipCyclingInterval;
+
+// Create individual tip card element
+function createTipCardElement(tip, index) {
+  const cardDiv = document.createElement('div');
+  cardDiv.className = 'tip-card';
+  cardDiv.innerHTML = `
+    <div class="tip-card-inner">
+      <div class="tip-card-front" style="background-image: url('${tip.frontImage}')">
+        <h4>${tip.title}</h4>
+      </div>
+      <div class="tip-card-back">
+        <div class="tip-icon">${tip.backTitle.split(' ')[0]}</div>
+        <h5>${tip.backTitle}</h5>
+        <p>${tip.description}</p>
+      </div>
+    </div>
+  `;
+  return cardDiv;
+}
+
+// Create indicator dot element
+function createIndicatorDot(index) {
+  const dot = document.createElement('div');
+  dot.className = 'indicator-dot';
+  dot.addEventListener('click', () => showTip(index));
+  return dot;
+}
+
+// Populate the carousel with tip cards and indicators
+function populateTipsCarousel() {
+  // Clear existing content
+  tipsCarousel.innerHTML = '';
+  carouselIndicators.innerHTML = '';
   
-  // Open the Health Tips modal
-  healthTipsBtn.addEventListener('click', () => {
-    doctorModal.style.display = 'none'; // Hide the doctor modal
-    healthTipsModal.style.display = 'flex'; // Show the tips modal
+  // Create and append tip cards
+  healthTipsData.forEach((tip, index) => {
+    const cardElement = createTipCardElement(tip, index);
+    tipsCarousel.appendChild(cardElement);
+    
+    const indicatorDot = createIndicatorDot(index);
+    carouselIndicators.appendChild(indicatorDot);
   });
+  
+  // Show the first tip
+  showTip(0);
+}
 
-  // Close the Health Tips modal
+// Show specific tip by index
+function showTip(index) {
+  const allCards = tipsCarousel.querySelectorAll('.tip-card');
+  const allDots = carouselIndicators.querySelectorAll('.indicator-dot');
+  
+  // Remove active and prev classes from all cards
+  allCards.forEach(card => {
+    card.classList.remove('active', 'prev');
+  });
+  
+  // Remove active class from all indicators
+  allDots.forEach(dot => {
+    dot.classList.remove('active');
+  });
+  
+  // Add prev class to current card before switching
+  if (allCards[currentTipIndex]) {
+    allCards[currentTipIndex].classList.add('prev');
+  }
+  
+  // Update current index
+  currentTipIndex = index;
+  
+  // Show new active card and indicator
+  if (allCards[currentTipIndex]) {
+    allCards[currentTipIndex].classList.add('active');
+  }
+  if (allDots[currentTipIndex]) {
+    allDots[currentTipIndex].classList.add('active');
+  }
+}
+
+// Start auto-cycling through tips
+function startTipCycling() {
+  tipCyclingInterval = setInterval(() => {
+    const nextIndex = (currentTipIndex + 1) % healthTipsData.length;
+    showTip(nextIndex);
+  }, 4500); // Change every 4.5 seconds
+}
+
+// Stop auto-cycling
+function stopTipCycling() {
+  if (tipCyclingInterval) {
+    clearInterval(tipCyclingInterval);
+    tipCyclingInterval = null;
+  }
+}
+
+// Health Tips Modal Event Listeners
+if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carouselIndicators) {
+  
+  // Open Health Tips modal
+  healthTipsBtn.addEventListener('click', () => {
+    // Close doctor modal first
+    if (doctorModal) {
+      doctorModal.style.display = 'none';
+      doctorModal.classList.remove('active');
+    }
+    
+    // Show health tips modal
+    healthTipsModal.style.display = 'flex';
+    healthTipsModal.classList.add('active');
+    
+    // Populate carousel and start cycling
+    populateTipsCarousel();
+    startTipCycling();
+  });
+  
+  // Close Health Tips modal
   closeHealthTips.addEventListener('click', () => {
     healthTipsModal.style.display = 'none';
+    healthTipsModal.classList.remove('active');
+    stopTipCycling();
   });
-
-  // Also close it by clicking the background
+  
+  // Close modal when clicking outside
   window.addEventListener('click', (event) => {
     if (event.target === healthTipsModal) {
       healthTipsModal.style.display = 'none';
+      healthTipsModal.classList.remove('active');
+      stopTipCycling();
     }
   });
 }
-// ✅ Health Tips Button Logic
-document.addEventListener("DOMContentLoaded", () => {
-  
-  if (healthTipsBtn) {
-    healthTipsBtn.addEventListener("click", () => {
-      // Example list of health tips
-      const tips = [
-        "💧 Stay hydrated — drink at least 8 glasses of water daily.",
-        "🥗 Eat more whole foods like fruits, vegetables, and lean proteins.",
-        "🏃 Exercise at least 30 minutes a day, 5 times a week.",
-        "😴 Aim for 7–8 hours of quality sleep every night.",
-        "🧘 Reduce stress with meditation, deep breathing, or yoga.",
-        "🚶 Take short breaks to stretch if you sit for long periods.",
-        "❌ Avoid smoking and limit alcohol for long-term health.",
-        "💡 Regular check-ups can catch issues early."
-      ];
-
-      // Pick a random tip
-      const randomTip = tips[Math.floor(Math.random() * tips.length)];
-
-      // Show it in an alert (you can replace with a modal, toast, etc.)
-      alert("Health Tip: " + randomTip);
-    });
-  }
-});
-// =======================
-// Health Tips Feature
-// =======================
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Select the new elements (declare ONCE inside DOMContentLoaded)
-  const healthTipsBtn = document.getElementById("healthTipsBtn");
-  const healthTipsModal = document.getElementById("healthTipsModal");
-  const closeHealthTips = document.getElementById("closeHealthTips");
-  const tipsContent = document.getElementById("tipsContent");
-
-  // Health tips data
-  const healthTips = [
-    "💧 Drink at least 8 glasses of water daily to stay hydrated.",
-    "🏃‍♂️ Exercise 30 minutes a day to improve cardiovascular health.",
-    "🍎 Eat more fruits and vegetables for essential vitamins.",
-    "😴 Get 7-8 hours of quality sleep every night.",
-    "🧘 Manage stress with meditation or breathing exercises.",
-  ];
-
-  let currentTipIndex = 0;
-  let tipInterval;
-
-  // Function to start rotating tips
-  function startHealthTipsCarousel() {
-    tipsContent.textContent = healthTips[currentTipIndex];
-
-    tipInterval = setInterval(() => {
-      currentTipIndex = (currentTipIndex + 1) % healthTips.length;
-      tipsContent.textContent = healthTips[currentTipIndex];
-    }, 3000); // change every 3 seconds
-  }
-
-  // ✅ Button + Modal Logic
-  healthTipsBtn.addEventListener("click", () => {
-    healthTipsModal.style.display = "flex";
-    startHealthTipsCarousel();
-  });
-
-  closeHealthTips.addEventListener("click", () => {
-    healthTipsModal.style.display = "none";
-    clearInterval(tipInterval);
-  });
-});
