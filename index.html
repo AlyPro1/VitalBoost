@@ -110,12 +110,12 @@
         <div id="uploadedFiles"></div>
 
        <button class="modal-action-button health-tips green-glow" id="healthTipsBtn">
-    <span class="button-icon">💡</span>
-    Health Tips
-  </button>
-</div>
-</div>
-</div> <!-- ✅ Close doctorModal -->
+         <span class="button-icon">💡</span>
+         Health Tips
+       </button>
+      </div>
+    </div>
+  </div> <!-- ✅ Close doctorModal -->
 
   <!-- Runner Modal -->
   <div class="modal-overlay" id="runnerModal">
@@ -168,25 +168,25 @@
   <!-- Confetti Container -->
   <div class="confetti-container" id="confettiContainer"></div>
 
-  <!-- ✅ Script must be last -->
-  <script src="script.js"></script>
   <!-- Health Tips Modal -->
-<div id="healthTipsModal" class="modal-overlay">
-  <div class="modal-container health-tips-modal-container">
-    <button class="modal-close" id="closeHealthTips">&times;</button>
-    <div class="modal-header">
-      <h3>💡 Daily Health Tips</h3>
-    </div>
-    <div class="tips-carousel-container">
-      <div class="tips-carousel" id="tipsCarousel">
-        <!-- Cards will be dynamically inserted here -->
+  <div id="healthTipsModal" class="modal-overlay">
+    <div class="modal-container health-tips-modal-container">
+      <button class="modal-close" id="closeHealthTips">&times;</button>
+      <div class="modal-header">
+        <h3>💡 Daily Health Tips</h3>
       </div>
-      <div class="carousel-indicators" id="carouselIndicators">
-        <!-- Indicator dots will be dynamically inserted here -->
+      <div class="tips-carousel-container">
+        <div class="tips-carousel" id="tipsCarousel">
+          <!-- Cards will be dynamically inserted here -->
+        </div>
+        <div class="carousel-indicators" id="carouselIndicators">
+          <!-- Indicator dots will be dynamically inserted here -->
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+  <!-- ✅ Script must be last (moved AFTER the Health Tips modal) -->
+  <script src="script.js"></script>
 </body>
 </html>
