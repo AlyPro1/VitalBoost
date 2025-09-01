@@ -491,3 +491,65 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+// Step Tracker Modal
+const openStepsBtn = document.querySelector(".track-steps");
+const stepsModal = document.getElementById("stepsModal");
+const closeSteps = document.getElementById("closeSteps");
+
+const stepCount = document.getElementById("stepCount");
+const addSteps = document.getElementById("addSteps");
+const resetSteps = document.getElementById("resetSteps");
+const progressFill = document.getElementById("progressFill");
+const stepsCircle = document.getElementById("stepsCircle");
+
+let steps = 0;
+const goal = 5000; // daily step goal
+
+// Open modal
+openStepsBtn.addEventListener("click", () => {
+  stepsModal.style.display = "flex";
+});
+
+// Close modal
+closeSteps.addEventListener("click", () => {
+  stepsModal.style.display = "none";
+});
+
+// Update UI
+function updateSteps() {
+  stepCount.textContent = steps;
+
+  let progress = Math.min((steps / goal) * 100, 100);
+  progressFill.style.width = progress + "%";
+
+  // Glow color based on progress
+  if (progress < 50) {
+    stepsCircle.style.boxShadow = "0 0 25px limegreen";
+    progressFill.style.background = "limegreen";
+  } else if (progress < 80) {
+    stepsCircle.style.boxShadow = "0 0 25px yellow";
+    progressFill.style.background = "yellow";
+  } else {
+    stepsCircle.style.boxShadow = "0 0 25px red";
+    progressFill.style.background = "red";
+  }
+}
+
+// Add steps
+addSteps.addEventListener("click", () => {
+  steps += 100;
+  updateSteps();
+
+  // Shoe jump animation
+  stepsCircle.classList.add("jump");
+  setTimeout(() => stepsCircle.classList.remove("jump"), 400);
+});
+
+// Reset steps
+resetSteps.addEventListener("click", () => {
+  steps = 0;
+  updateSteps();
+});
+
+// Initialize
+updateSteps();
