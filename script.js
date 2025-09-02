@@ -505,3 +505,48 @@ resetStepsBtn.addEventListener("click", () => {
   steps = 0;
   updateSteps();
 });
+// ===== Steps Tracker =====
+const openStepsBtn = document.getElementById("openStepsTracker");
+const stepsModal = document.getElementById("stepsModal");
+const closeStepsBtn = document.getElementById("closeSteps");
+const stepCount = document.getElementById("stepCount");
+const progressFill = document.getElementById("progressFill");
+const addStepsBtn = document.getElementById("addSteps");
+const resetStepsBtn = document.getElementById("resetSteps");
+const runnerAvatar = document.getElementById("runnerAvatar");
+
+let steps = 0;
+const dailyGoal = 5000;
+
+// Open / Close Modal
+openStepsBtn.addEventListener("click", () => {
+  stepsModal.style.display = "flex";
+});
+closeStepsBtn.addEventListener("click", () => {
+  stepsModal.style.display = "none";
+});
+
+// Update Step Count
+function updateSteps() {
+  stepCount.textContent = steps;
+  let progress = Math.min((steps / dailyGoal) * 100, 100);
+  progressFill.style.width = progress + "%";
+}
+
+// Add Steps
+addStepsBtn.addEventListener("click", () => {
+  steps += 100;
+  updateSteps();
+
+  // Trigger running animation
+  runnerAvatar.classList.add("run-animation");
+  setTimeout(() => {
+    runnerAvatar.classList.remove("run-animation");
+  }, 1000);
+});
+
+// Reset Steps
+resetStepsBtn.addEventListener("click", () => {
+  steps = 0;
+  updateSteps();
+});
