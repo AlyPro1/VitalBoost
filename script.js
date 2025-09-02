@@ -460,93 +460,72 @@ if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carou
     }
   });
 }
-// ===== Steps Tracker =====
-const openStepsBtn = document.getElementById("openStepsTracker");
-const stepsModal = document.getElementById("stepsModal");
-const closeStepsBtn = document.getElementById("closeSteps");
+// Track Steps Logic
+document.addEventListener("DOMContentLoaded", () => {
+  const openStepsBtn = document.getElementById("openSteps");
+  const stepsTracker = document.getElementById("stepsTracker");
+  const stepCount = document.getElementById("stepCount");
+  const addStepsBtn = document.getElementById("addSteps");
+  const resetStepsBtn = document.getElementById("resetSteps");
+
+  let steps = 0;
+
+  // Only run if elements exist
+  if (openStepsBtn && stepsTracker && stepCount && addStepsBtn && resetStepsBtn) {
+    // Show / hide tracker
+    openStepsBtn.addEventListener("click", () => {
+      stepsTracker.style.display =
+        stepsTracker.style.display === "none" ? "block" : "none";
+    });
+
+    // Add steps
+    addStepsBtn.addEventListener("click", () => {
+      steps += 100;
+      stepCount.textContent = steps;
+    });
+
+    // Reset steps
+    resetStepsBtn.addEventListener("click", () => {
+      steps = 0;
+      stepCount.textContent = steps;
+    });
+  }
+});
+// Step Tracker
+const openStepsBtn = document.getElementById("openStepsTracker"); 
+const stepsTracker = document.getElementById("stepsTracker");
+
 const stepCount = document.getElementById("stepCount");
+const addSteps = document.getElementById("addSteps");
+const resetSteps = document.getElementById("resetSteps");
+
 const progressFill = document.getElementById("progressFill");
-const addStepsBtn = document.getElementById("addSteps");
-const resetStepsBtn = document.getElementById("resetSteps");
-const runnerAvatar = document.getElementById("runnerAvatar");
+const stepsCircle = document.getElementById("stepsCircle");
 
 let steps = 0;
-const dailyGoal = 5000;
+const goal = 5000; // daily step goal
 
-// Open / Close Modal
+// Open tracker
 openStepsBtn.addEventListener("click", () => {
-  stepsModal.style.display = "flex";
-});
-closeStepsBtn.addEventListener("click", () => {
-  stepsModal.style.display = "none";
+  stepsTracker.style.display = "block";
 });
 
-// Update Step Count
+// Update UI
 function updateSteps() {
   stepCount.textContent = steps;
-  let progress = Math.min((steps / dailyGoal) * 100, 100);
-  progressFill.style.width = progress + "%";
 }
 
-// Add Steps
-addStepsBtn.addEventListener("click", () => {
+// Add steps
+addSteps.addEventListener("click", () => {
   steps += 100;
   updateSteps();
-
-  // Trigger running animation
-  runnerAvatar.classList.add("run-animation");
-  setTimeout(() => {
-    runnerAvatar.classList.remove("run-animation");
-  }, 1000);
 });
 
-// Reset Steps
-resetStepsBtn.addEventListener("click", () => {
+// Reset steps
+resetSteps.addEventListener("click", () => {
   steps = 0;
   updateSteps();
 });
-// ===== Steps Tracker =====
-const openStepsBtn = document.getElementById("openStepsTracker");
-const stepsModal = document.getElementById("stepsModal");
-const closeStepsBtn = document.getElementById("closeSteps");
-const stepCount = document.getElementById("stepCount");
-const progressFill = document.getElementById("progressFill");
-const addStepsBtn = document.getElementById("addSteps");
-const resetStepsBtn = document.getElementById("resetSteps");
-const runnerAvatar = document.getElementById("runnerAvatar");
 
-let steps = 0;
-const dailyGoal = 5000;
-
-// Open / Close Modal
-openStepsBtn.addEventListener("click", () => {
-  stepsModal.style.display = "flex";
-});
-closeStepsBtn.addEventListener("click", () => {
-  stepsModal.style.display = "none";
-});
-
-// Update Step Count
-function updateSteps() {
-  stepCount.textContent = steps;
-  let progress = Math.min((steps / dailyGoal) * 100, 100);
-  progressFill.style.width = progress + "%";
-}
-
-// Add Steps
-addStepsBtn.addEventListener("click", () => {
-  steps += 100;
-  updateSteps();
-
-  // Trigger running animation
-  runnerAvatar.classList.add("run-animation");
-  setTimeout(() => {
-    runnerAvatar.classList.remove("run-animation");
-  }, 1000);
-});
-
-// Reset Steps
-resetStepsBtn.addEventListener("click", () => {
-  steps = 0;
-  updateSteps();
-});
+// Initialize
+updateSteps();
