@@ -343,6 +343,12 @@ function updateStepDisplay() {
 function startTracking() {
   if (isTracking) return;
   
+  // Add null checks to prevent TypeError
+  if (!stepsCircle || !shoeIcon || !stopTrackingBtn || !addSteps || !resetSteps) {
+    console.error('Required DOM elements not found for step tracking');
+    return;
+  }
+  
   isTracking = true;
   stepCountText.textContent = 'Steps Today:';
   
