@@ -199,19 +199,37 @@
         <span class="shoe-icon">👟</span>
       </div>
 
-    <p class="step-count-text">Steps Today: <span id="stepCount">0</span></p>
+    <p class="step-count-text" id="stepCountText">Start Walking</p>
+    <p class="step-number" id="stepCount">0</p>
 
     <div class="progress-bar">
       <div class="progress-fill" id="progressFill"></div>
     </div>
 
     <div class="steps-controls">
+      <button id="stopTrackingBtn" style="display: none;">Stop Tracking</button>
       <button id="addSteps">+100 Steps</button>
       <button id="resetSteps">Reset</button>
     </div>
   </div>
 </div>
 
+  <!-- Reward Modal -->
+  <div id="rewardModal" class="modal-overlay">
+    <div class="modal-container reward-modal-container">
+      <button class="modal-close" id="closeReward">&times;</button>
+      <div class="reward-content">
+        <div class="reward-icon">🎉</div>
+        <h3 class="reward-title">Congratulations!</h3>
+        <p class="reward-message">You've hit your step goal!</p>
+        <p class="crypto-reward">You've won a crypto reward! 🪙</p>
+        <button class="claim-reward-btn" id="claimRewardBtn">
+          <span class="button-icon">🎁</span>
+          Claim Reward
+        </button>
+      </div>
+    </div>
+  </div>
   <!-- ✅ Script must be last (moved AFTER the Health Tips modal) -->
   <script src="script.js"></script>
 </body>
