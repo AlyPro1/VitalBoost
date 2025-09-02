@@ -460,62 +460,50 @@ if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carou
     }
   });
 }
-// Track Steps Logic
-document.addEventListener("DOMContentLoaded", () => {
-  const openStepsBtn = document.getElementById("openSteps");
-  const stepsTracker = document.getElementById("stepsTracker");
-  const stepCount = document.getElementById("stepCount");
-  const addStepsBtn = document.getElementById("addSteps");
-  const resetStepsBtn = document.getElementById("resetSteps");
+// ==========================
+// ✅ Step Tracker Modal
+// ==========================
+const openStepsBtn = document.getElementById("openStepsTracker"); 
+const stepsModal = document.getElementById("stepsModal"); 
+const closeSteps = document.getElementById("closeSteps");
 
-  let steps = 0;
+// Open modal
+openStepsBtn.addEventListener("click", () => {
+  stepsModal.style.display = "flex";
+});
 
-  // Only run if elements exist
-  if (openStepsBtn && stepsTracker && stepCount && addStepsBtn && resetStepsBtn) {
-    // Show / hide tracker
-    openStepsBtn.addEventListener("click", () => {
-      stepsTracker.style.display =
-        stepsTracker.style.display === "none" ? "block" : "none";
-    });
+// Close modal with × button
+closeSteps.addEventListener("click", () => {
+  stepsModal.style.display = "none";
+});
 
-    // Add steps
-    addStepsBtn.addEventListener("click", () => {
-      steps += 100;
-      stepCount.textContent = steps;
-    });
-
-    // Reset steps
-    resetStepsBtn.addEventListener("click", () => {
-      steps = 0;
-      stepCount.textContent = steps;
-    });
+// Close modal by clicking outside
+window.addEventListener("click", (event) => {
+  if (event.target === stepsModal) {
+    stepsModal.style.display = "none";
   }
 });
-// Step Tracker
-const openStepsBtn = document.getElementById("openStepsTracker"); 
-const stepsTracker = document.getElementById("stepsTracker");
 
+// ==========================
+// ✅ Track Steps Logic
+// ==========================
+let steps = 0;
 const stepCount = document.getElementById("stepCount");
+const progressFill = document.getElementById("progressFill");
 const addSteps = document.getElementById("addSteps");
 const resetSteps = document.getElementById("resetSteps");
 
-const progressFill = document.getElementById("progressFill");
-const stepsCircle = document.getElementById("stepsCircle");
+// 🎯 Set a daily goal (change if needed)
+const dailyGoal = 10000;
 
-let steps = 0;
-const goal = 5000; // daily step goal
-
-// Open tracker
-openStepsBtn.addEventListener("click", () => {
-  stepsTracker.style.display = "block";
-});
-
-// Update UI
+// Function to update UI
 function updateSteps() {
   stepCount.textContent = steps;
+  let progress = Math.min((steps / dailyGoal) * 100, 100); 
+  progressFill.style.width = progress + "%";
 }
 
-// Add steps
+// Add +100 steps
 addSteps.addEventListener("click", () => {
   steps += 100;
   updateSteps();
@@ -527,5 +515,5 @@ resetSteps.addEventListener("click", () => {
   updateSteps();
 });
 
-// Initialize
+// Initialize display
 updateSteps();
