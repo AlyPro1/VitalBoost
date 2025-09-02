@@ -553,3 +553,42 @@ resetSteps.addEventListener("click", () => {
 
 // Initialize
 updateSteps();
+// Step Tracker
+const openStepsBtn = document.getElementById("openStepsTracker"); 
+const stepsTracker = document.getElementById("stepsTracker");
+
+const stepCount = document.getElementById("stepCount");
+const addSteps = document.getElementById("addSteps");
+const resetSteps = document.getElementById("resetSteps");
+
+// If you don’t have these in your HTML, remove them
+// const progressFill = document.getElementById("progressFill");
+// const stepsCircle = document.getElementById("stepsCircle");
+
+let steps = 0;
+const goal = 5000; // daily step goal
+
+// Open tracker
+openStepsBtn.addEventListener("click", () => {
+  stepsTracker.style.display = "block";
+});
+
+// Update UI
+function updateSteps() {
+  stepCount.textContent = steps;
+}
+
+// Add steps
+addSteps.addEventListener("click", () => {
+  steps += 100;
+  updateSteps();
+});
+
+// Reset steps
+resetSteps.addEventListener("click", () => {
+  steps = 0;
+  updateSteps();
+});
+
+// Initialize
+updateSteps();
