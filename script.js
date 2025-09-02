@@ -498,6 +498,7 @@ const stepsTracker = document.getElementById("stepsTracker");
 const stepCount = document.getElementById("stepCount");
 const addSteps = document.getElementById("addSteps");
 const resetSteps = document.getElementById("resetSteps");
+
 let steps = 0;
 const goal = 5000; // daily step goal
 
