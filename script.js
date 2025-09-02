@@ -505,37 +505,3 @@ resetStepsBtn.addEventListener("click", () => {
   steps = 0;
   updateSteps();
 });
-
-// ==========================
-// ✅ Track Steps Logic
-// ==========================
-let steps = 0;
-const stepCount = document.getElementById("stepCount");
-const progressFill = document.getElementById("progressFill");
-const addSteps = document.getElementById("addSteps");
-const resetSteps = document.getElementById("resetSteps");
-
-// 🎯 Set a daily goal (change if needed)
-const dailyGoal = 10000;
-
-// Function to update UI
-function updateSteps() {
-  stepCount.textContent = steps;
-  let progress = Math.min((steps / dailyGoal) * 100, 100); 
-  progressFill.style.width = progress + "%";
-}
-
-// Add +100 steps
-addSteps.addEventListener("click", () => {
-  steps += 100;
-  updateSteps();
-});
-
-// Reset steps
-resetSteps.addEventListener("click", () => {
-  steps = 0;
-  updateSteps();
-});
-
-// Initialize display
-updateSteps();
