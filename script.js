@@ -492,7 +492,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 // Step Tracker Modal
-const openStepsBtn = document.querySelector(".track-steps");
+const openStepsBtn = document.getElementById("openStepsTracker"); 
 const stepsModal = document.getElementById("stepsModal");
 const closeSteps = document.getElementById("closeSteps");
 
