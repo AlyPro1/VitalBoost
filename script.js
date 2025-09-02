@@ -287,6 +287,240 @@ const closeHealthTips = document.getElementById('closeHealthTips');
 const tipsCarousel = document.getElementById('tipsCarousel');
 const carouselIndicators = document.getElementById('carouselIndicators');
 
+// =============================
+// TRACK STEPS FEATURE
+// =============================
+
+// Steps Modal Elements
+const openStepsTracker = document.getElementById('openStepsTracker');
+const stepsModal = document.getElementById('stepsModal');
+const closeSteps = document.getElementById('closeSteps');
+const stepsCircle = document.getElementById('stepsCircle');
+const shoeIcon = document.getElementById('shoeIcon');
+const stepCountText = document.getElementById('stepCountText');
+const stepCount = document.getElementById('stepCount');
+const progressFill = document.getElementById('progressFill');
+const addSteps = document.getElementById('addSteps');
+const resetSteps = document.getElementById('resetSteps');
+const stopTrackingBtn = document.getElementById('stopTrackingBtn');
+
+// Reward Modal Elements
+const rewardModal = document.getElementById('rewardModal');
+const closeReward = document.getElementById('closeReward');
+const claimRewardBtn = document.getElementById('claimRewardBtn');
+
+// Steps Tracking State
+let currentSteps = 0;
+let stepGoal = 1000;
+let isTracking = false;
+let stepInterval = null;
+
+// Update step display and progress
+function updateStepDisplay() {
+  stepCount.textContent = currentSteps;
+  
+  const progressPercentage = Math.min((currentSteps / stepGoal) * 100, 100);
+  progressFill.style.width = `${progressPercentage}%`;
+  
+  // Dynamic progress bar colors
+  if (progressPercentage < 25) {
+    progressFill.style.background = 'linear-gradient(90deg, #10b981, #059669)';
+  } else if (progressPercentage < 50) {
+    progressFill.style.background = 'linear-gradient(90deg, #f59e0b, #d97706)';
+  } else if (progressPercentage < 75) {
+    progressFill.style.background = 'linear-gradient(90deg, #3b82f6, #2563eb)';
+  } else {
+    progressFill.style.background = 'linear-gradient(90deg, #8b5cf6, #7c3aed)';
+  }
+  
+  // Check if goal reached
+  if (currentSteps >= stepGoal && isTracking) {
+    triggerReward();
+  }
+}
+
+// Start step tracking
+function startTracking() {
+  if (isTracking) return;
+  
+  isTracking = true;
+  stepCountText.textContent = 'Steps Today:';
+  
+  // Update UI
+  stepsCircle.classList.add('tracking');
+  shoeIcon.classList.add('shoe-jump');
+  
+  // Show/hide buttons
+  stopTrackingBtn.style.display = 'inline-block';
+  addSteps.style.display = 'none';
+  resetSteps.style.display = 'none';
+  
+  // Start counting steps (faster for demo - every 100ms)
+  stepInterval = setInterval(() => {
+    currentSteps += Math.floor(Math.random() * 3) + 1; // Random 1-3 steps
+    updateStepDisplay();
+  }, 100);
+}
+
+// Stop step tracking
+function stopTracking() {
+  if (!isTracking) return;
+  
+  isTracking = false;
+  
+  // Clear interval
+  if (stepInterval) {
+    clearInterval(stepInterval);
+    stepInterval = null;
+  }
+  
+  // Update UI
+  stepsCircle.classList.remove('tracking');
+  shoeIcon.classList.remove('shoe-jump');
+  
+  // Show/hide buttons
+  stopTrackingBtn.style.display = 'none';
+  addSteps.style.display = 'inline-block';
+  resetSteps.style.display = 'inline-block';
+}
+
+// Trigger reward popup
+function triggerReward() {
+  stopTracking();
+  
+  // Show reward modal
+  rewardModal.style.display = 'flex';
+  rewardModal.classList.add('active');
+  
+  // Generate confetti
+  generateConfetti();
+  
+  // Reset steps after reward
+  setTimeout(() => {
+    currentSteps = 0;
+    updateStepDisplay();
+    stepCountText.textContent = 'Start Walking';
+  }, 3000);
+}
+
+// Generate confetti animation
+function generateConfetti() {
+  const confettiContainer = document.getElementById('confettiContainer');
+  if (!confettiContainer) return;
+  
+  const colors = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'];
+  
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti-piece';
+    confetti.style.left = Math.random() * 100 + '%';
+    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.animationDelay = Math.random() * 2 + 's';
+    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+    
+    confettiContainer.appendChild(confetti);
+    
+    // Remove confetti after animation
+    setTimeout(() => {
+      if (confetti.parentNode) {
+        confetti.parentNode.removeChild(confetti);
+      }
+    }, 4000);
+  }
+}
+
+// Steps Modal Event Listeners
+if (openStepsTracker && stepsModal && closeSteps && stepsCircle) {
+  
+  // Open steps modal
+  openStepsTracker.addEventListener('click', () => {
+    // Close runner modal first
+    if (runnerModal) {
+      runnerModal.style.display = 'none';
+      runnerModal.classList.remove('active');
+    }
+    
+    // Show steps modal
+    stepsModal.style.display = 'flex';
+    stepsModal.classList.add('active');
+    
+    // Initialize display
+    updateStepDisplay();
+  });
+  
+  // Close steps modal
+  closeSteps.addEventListener('click', () => {
+    stepsModal.style.display = 'none';
+    stepsModal.classList.remove('active');
+    stopTracking();
+  });
+  
+  // Shoe icon click to start/stop tracking
+  stepsCircle.addEventListener('click', () => {
+    if (!isTracking) {
+      startTracking();
+    }
+  });
+  
+  // Stop tracking button
+  if (stopTrackingBtn) {
+    stopTrackingBtn.addEventListener('click', stopTracking);
+  }
+  
+  // Manual step controls (for testing)
+  if (addSteps) {
+    addSteps.addEventListener('click', () => {
+      if (!isTracking) {
+        currentSteps += 100;
+        updateStepDisplay();
+      }
+    });
+  }
+  
+  if (resetSteps) {
+    resetSteps.addEventListener('click', () => {
+      if (!isTracking) {
+        currentSteps = 0;
+        stepCountText.textContent = 'Start Walking';
+        updateStepDisplay();
+      }
+    });
+  }
+  
+  // Close modal when clicking outside
+  window.addEventListener('click', (event) => {
+    if (event.target === stepsModal) {
+      stepsModal.style.display = 'none';
+      stepsModal.classList.remove('active');
+      stopTracking();
+    }
+  });
+}
+
+// Reward Modal Event Listeners
+if (rewardModal && closeReward && claimRewardBtn) {
+  
+  // Close reward modal
+  closeReward.addEventListener('click', () => {
+    rewardModal.style.display = 'none';
+    rewardModal.classList.remove('active');
+  });
+  
+  // Claim reward button
+  claimRewardBtn.addEventListener('click', () => {
+    alert('🎉 Crypto reward claimed! Keep up the great work!');
+    rewardModal.style.display = 'none';
+    rewardModal.classList.remove('active');
+  });
+  
+  // Close modal when clicking outside
+  window.addEventListener('click', (event) => {
+    if (event.target === rewardModal) {
+      rewardModal.style.display = 'none';
+      rewardModal.classList.remove('active');
+    }
+  });
+}
 // Health Tips Data
 const healthTipsData = [
   {
