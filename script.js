@@ -700,30 +700,119 @@ if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carou
     }
   });
 }
-// Calories Burned Modal Logic
-document.addEventListener("DOMContentLoaded", () => {
-  const openCaloriesBurnedBtn = document.getElementById("openCaloriesBurned");
-  const caloriesBurnedModal = document.getElementById("caloriesBurnedModal");
-  const closeCaloriesBurnedBtn = document.getElementById("closeCaloriesBurned");
+// ==== CALORIES BURNED – DROP-IN WIRING (safe-scoped) ====
+(() => {
+  // Open/close
+  const openBtn  = document.getElementById('openCaloriesBurned');   // <button id="openCaloriesBurned">…</button>
+  const modal    = document.getElementById('caloriesBurnedModal');  // <div id="caloriesBurnedModal" …>
+  const closeBtn = document.getElementById('closeCaloriesBurned');  // <button id="closeCaloriesBurned">×</button>
 
-  if (openCaloriesBurnedBtn && caloriesBurnedModal && closeCaloriesBurnedBtn) {
-    // Open modal
-    openCaloriesBurnedBtn.addEventListener("click", () => {
-      caloriesBurnedModal.style.display = "flex";
+  if (!openBtn || !modal || !closeBtn) {
+    console.warn('Calories Burned: required elements missing', {
+      openBtn: !!openBtn, modal: !!modal, closeBtn: !!closeBtn
     });
-
-    // Close modal
-    closeCaloriesBurnedBtn.addEventListener("click", () => {
-      caloriesBurnedModal.style.display = "none";
-    });
-
-    // Close on outside click
-    caloriesBurnedModal.addEventListener("click", (e) => {
-      if (e.target === caloriesBurnedModal) {
-        caloriesBurnedModal.style.display = "none";
-      }
-    });
-  } else {
-    console.warn("Calories Burned elements not found in DOM");
+    return; // quietly bail if the HTML isn’t in place yet
   }
-});
+
+  const openModal = () => {
+    modal.style.display = 'flex';
+    modal.classList.add('active');
+  };
+  const closeModal = () => {
+    modal.style.display = 'none';
+    modal.classList.remove('active');
+  };
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  // --- Inner feature logic (activities, calculate, progress) ---
+  const cyclingBtn   = document.getElementById('cyclingBtn');
+  const gymBtn       = document.getElementById('gymBtn');
+  const yogaBtn      = document.getElementById('yogaBtn');
+  const minutesInput = document.getElementById('minutesInput');
+  const calcBtn      = document.getElementById('calculateCaloriesBtn');
+
+  const caloriesDisplay   = document.getElementById('caloriesDisplay');
+  const progressFill      = document.getElementById('caloriesProgressFill');
+  const milestoneMessage  = document.getElementById('milestoneMessage');
+  const rewardMessage     = document.getElementById('caloriesRewardMessage');
+  const statusText        = document.getElementById('caloriesStatusText');
+  const flameIcon         = document.getElementById('flameIcon');
+
+  // Guard for inner nodes (keep modal open/close working even if some are missing)
+  if (!cyclingBtn || !gymBtn || !yogaBtn || !minutesInput || !calcBtn ||
+      !caloriesDisplay || !progressFill || !milestoneMessage || !rewardMessage ||
+      !statusText || !flameIcon) {
+    console.warn('Calories Burned: some inner nodes missing – modal open/close still works');
+    return;
+  }
+
+  // Simple MET table (approximate)
+  const METS = {
+    cycling: 8,   // moderate
+    gym:     6,   // general weight/circuit
+    yoga:    3,   // hatha-ish
+  };
+  let active = 'cycling';
+  let activeMET = METS[active];
+  const dailyGoalKcal = 500; // change if you want
+
+  function setActive(name) {
+    active = name;
+    activeMET = METS[name];
+    [cyclingBtn, gymBtn, yogaBtn].forEach(b => b.classList.remove('active'));
+    ({ cycling: cyclingBtn, gym: gymBtn, yoga: yogaBtn }[name]).classList.add('active');
+    statusText.textContent = `Selected: ${name[0].toUpperCase()}${name.slice(1)} – enter minutes`;
+  }
+
+  // Activity buttons
+  cyclingBtn.addEventListener('click', () => setActive('cycling'));
+  gymBtn.addEventListener('click',     () => setActive('gym'));
+  yogaBtn.addEventListener('click',    () => setActive('yoga'));
+
+  setActive('cycling'); // default
+
+  // Calc handler
+  calcBtn.addEventListener('click', () => {
+    const minutes = parseFloat(minutesInput.value);
+    if (!minutes || minutes <= 0) {
+      statusText.textContent = 'Enter minutes greater than 0';
+      return;
+    }
+
+    // Default weight assumption (no weight field provided)
+    const weightKg = 70;
+    // kcal ≈ MET * 3.5 * kg / 200 * minutes
+    const kcal = Math.round(activeMET * 3.5 * weightKg / 200 * minutes);
+
+    caloriesDisplay.textContent = `Total: ${kcal} kcal`;
+
+    // Progress bar
+    const pct = Math.min((kcal / dailyGoalKcal) * 100, 100);
+    progressFill.style.width = pct + '%';
+
+    // Color ramp
+    let color = 'limegreen';
+    if (pct >= 75) color = 'red';
+    else if (pct >= 50) color = 'orange';
+    progressFill.style.background = color;
+
+    // Flame animation (pulse), milestone/reward
+    flameIcon.classList.remove('pulse', 'burst');
+    // force reflow to restart animation
+    void flameIcon.offsetWidth;
+    flameIcon.classList.add('pulse');
+
+    if (pct >= 100) {
+      milestoneMessage.textContent = 'Milestone reached! 🔥';
+      rewardMessage.textContent = '🎁 Bonus unlocked!';
+      flameIcon.classList.add('burst');
+    } else {
+      milestoneMessage.textContent = '';
+      rewardMessage.textContent = '';
+    }
+  });
+})();
