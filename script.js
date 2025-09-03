@@ -816,3 +816,20 @@ if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carou
     }
   });
 })();
+// Progress Bar Color Shifts
+function updateCaloriesProgress(progress) {
+  const progressFill = document.getElementById("caloriesProgressFill");
+
+  // Clamp progress between 0–100
+  const percent = Math.min(progress, 100);
+
+  progressFill.style.width = percent + "%";
+
+  if (percent <= 30) {
+    progressFill.style.backgroundColor = "blue";
+  } else if (percent <= 70) {
+    progressFill.style.backgroundColor = "green";
+  } else {
+    progressFill.style.backgroundColor = "orangered";
+  }
+}
