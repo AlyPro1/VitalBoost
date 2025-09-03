@@ -2418,3 +2418,46 @@ body {
   background: limegreen; /* JS will update */
   transition: width .4s ease, background .2s ease;
 }
+/* --- Calories Burned Visual Enhancements --- */
+
+/* Modal entrance animation */
+.calories-burned-modal-container {
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.modal-overlay.active .calories-burned-modal-container {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Flame Icon Animation */
+#flameIcon {
+  font-size: 60px;
+  text-align: center;
+  animation: flamePulse 1.5s infinite alternate;
+  color: orange;
+}
+@keyframes flamePulse {
+  0% { transform: translateY(0) scale(1); color: orange; }
+  50% { transform: translateY(-4px) scale(1.1); color: red; }
+  100% { transform: translateY(0) scale(1); color: gold; }
+}
+
+/* Activity Buttons */
+.activity-button {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.activity-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255, 140, 0, 0.7);
+}
+.activity-button:active {
+  transform: scale(0.95);
+  background-color: rgba(255, 140, 0, 0.2);
+}
+
+/* Progress Bar Animation */
+#caloriesProgressFill {
+  transition: width 0.8s ease, background-color 0.6s ease;
+}
