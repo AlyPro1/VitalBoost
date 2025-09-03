@@ -700,94 +700,92 @@ if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carou
     }
   });
 }
-/* ===============================
-   Calories Burned Feature
-   =============================== */
+// ===================
+// Calories Burned Logic
+// ===================
 
-// Elements
-const openCaloriesBurnedBtn = document.getElementById("openCaloriesBurned");
+// Get elements
+const openCaloriesBurnedBtn = document.getElementById("openCaloriesBurned"); 
 const caloriesBurnedModal = document.getElementById("caloriesBurnedModal");
 const closeCaloriesBurnedBtn = document.getElementById("closeCaloriesBurned");
-const calculateCaloriesBtn = document.getElementById("calculateCaloriesBtn");
+
+const cyclingBtn = document.getElementById("cyclingBtn");
+const gymBtn = document.getElementById("gymBtn");
+const yogaBtn = document.getElementById("yogaBtn");
+
 const minutesInput = document.getElementById("minutesInput");
+const calculateCaloriesBtn = document.getElementById("calculateCaloriesBtn");
+
 const caloriesDisplay = document.getElementById("caloriesDisplay");
 const caloriesProgressFill = document.getElementById("caloriesProgressFill");
 const milestoneMessage = document.getElementById("milestoneMessage");
 const caloriesRewardMessage = document.getElementById("caloriesRewardMessage");
 
-// Activity buttons
-const cyclingBtn = document.getElementById("cyclingBtn");
-const gymBtn = document.getElementById("gymBtn");
-const yogaBtn = document.getElementById("yogaBtn");
-
 let selectedActivity = null;
-
-// Activity selection
-[cyclingBtn, gymBtn, yogaBtn].forEach(btn => {
-  btn.addEventListener("click", () => {
-    selectedActivity = btn.id;
-    [cyclingBtn, gymBtn, yogaBtn].forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-  });
-});
+let caloriesBurned = 0;
+const calorieGoal = 500; // Example daily goal
 
 // Open modal
-openCaloriesBurnedBtn.addEventListener("click", () => {
-  caloriesBurnedModal.style.display = "flex";
-});
+if (openCaloriesBurnedBtn) {
+  openCaloriesBurnedBtn.addEventListener("click", () => {
+    caloriesBurnedModal.style.display = "flex";
+  });
+}
 
 // Close modal
-closeCaloriesBurnedBtn.addEventListener("click", () => {
-  caloriesBurnedModal.style.display = "none";
-});
+if (closeCaloriesBurnedBtn) {
+  closeCaloriesBurnedBtn.addEventListener("click", () => {
+    caloriesBurnedModal.style.display = "none";
+  });
+}
 
-// Close when clicking outside modal
+// Close modal on overlay click
 window.addEventListener("click", (e) => {
   if (e.target === caloriesBurnedModal) {
     caloriesBurnedModal.style.display = "none";
   }
 });
 
-// Calories burned calculation
-calculateCaloriesBtn.addEventListener("click", () => {
-  const minutes = parseInt(minutesInput.value);
+// Activity selection
+if (cyclingBtn && gymBtn && yogaBtn) {
+  [cyclingBtn, gymBtn, yogaBtn].forEach((btn) => {
+    btn.addEventListener("click", () => {
+      selectedActivity = btn.id; // Save which button clicked
+      milestoneMessage.textContent = `Selected: ${btn.textContent}`;
+    });
+  });
+}
 
-  if (!selectedActivity) {
-    alert("Please select an activity first!");
-    return;
-  }
-  if (!minutes || minutes < 1) {
-    alert("Please enter minutes greater than 0!");
-    return;
-  }
+// Calculate calories
+if (calculateCaloriesBtn) {
+  calculateCaloriesBtn.addEventListener("click", () => {
+    const minutes = parseInt(minutesInput.value) || 0;
+    if (!selectedActivity || minutes <= 0) {
+      milestoneMessage.textContent = "⚠️ Please select an activity and enter minutes.";
+      return;
+    }
 
-  // Calories burned per minute (approx)
-  const activityRates = {
-    cyclingBtn: 8,
-    gymBtn: 10,
-    yogaBtn: 5,
-  };
+    // Simple calorie burn estimates
+    const calorieRates = {
+      cyclingBtn: 8,
+      gymBtn: 10,
+      yogaBtn: 5,
+    };
 
-  const rate = activityRates[selectedActivity];
-  const totalCalories = minutes * rate;
+    caloriesBurned = minutes * (calorieRates[selectedActivity] || 6);
+    caloriesDisplay.textContent = `Total: ${caloriesBurned} kcal`;
 
-  // Update display
-  caloriesDisplay.textContent = `Total: ${totalCalories} kcal`;
+    // Progress bar update
+    const progress = Math.min((caloriesBurned / calorieGoal) * 100, 100);
+    caloriesProgressFill.style.width = `${progress}%`;
 
-  // Update progress bar (goal = 500 kcal)
-  const goal = 500;
-  const progress = Math.min((totalCalories / goal) * 100, 100);
-  caloriesProgressFill.style.width = `${progress}%`;
-
-  // Milestone messages
-  if (totalCalories >= goal) {
-    milestoneMessage.textContent = "🔥 Amazing! You’ve hit your daily goal!";
-    caloriesRewardMessage.textContent = "🎁 You unlocked a fitness reward!";
-  } else if (totalCalories >= goal / 2) {
-    milestoneMessage.textContent = "💪 Halfway there, keep it up!";
-    caloriesRewardMessage.textContent = "";
-  } else {
-    milestoneMessage.textContent = "✨ Great start, push for more!";
-    caloriesRewardMessage.textContent = "";
-  }
-});
+    // Messages
+    if (caloriesBurned >= calorieGoal) {
+      milestoneMessage.textContent = "🎉 Goal Reached!";
+      caloriesRewardMessage.textContent = "🏆 You earned a Crypto reward!";
+    } else {
+      milestoneMessage.textContent = `🔥 Keep going! ${calorieGoal - caloriesBurned} kcal left to goal.`;
+      caloriesRewardMessage.textContent = "";
+    }
+  });
+}
