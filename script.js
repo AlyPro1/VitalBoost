@@ -700,92 +700,30 @@ if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carou
     }
   });
 }
-// ===================
-// Calories Burned Logic
-// ===================
+// Calories Burned Modal Logic
+document.addEventListener("DOMContentLoaded", () => {
+  const openCaloriesBurnedBtn = document.getElementById("openCaloriesBurned");
+  const caloriesBurnedModal = document.getElementById("caloriesBurnedModal");
+  const closeCaloriesBurnedBtn = document.getElementById("closeCaloriesBurned");
 
-// Get elements
-const openCaloriesBurnedBtn = document.getElementById("openCaloriesBurned"); 
-const caloriesBurnedModal = document.getElementById("caloriesBurnedModal");
-const closeCaloriesBurnedBtn = document.getElementById("closeCaloriesBurned");
+  if (openCaloriesBurnedBtn && caloriesBurnedModal && closeCaloriesBurnedBtn) {
+    // Open modal
+    openCaloriesBurnedBtn.addEventListener("click", () => {
+      caloriesBurnedModal.style.display = "flex";
+    });
 
-const cyclingBtn = document.getElementById("cyclingBtn");
-const gymBtn = document.getElementById("gymBtn");
-const yogaBtn = document.getElementById("yogaBtn");
+    // Close modal
+    closeCaloriesBurnedBtn.addEventListener("click", () => {
+      caloriesBurnedModal.style.display = "none";
+    });
 
-const minutesInput = document.getElementById("minutesInput");
-const calculateCaloriesBtn = document.getElementById("calculateCaloriesBtn");
-
-const caloriesDisplay = document.getElementById("caloriesDisplay");
-const caloriesProgressFill = document.getElementById("caloriesProgressFill");
-const milestoneMessage = document.getElementById("milestoneMessage");
-const caloriesRewardMessage = document.getElementById("caloriesRewardMessage");
-
-let selectedActivity = null;
-let caloriesBurned = 0;
-const calorieGoal = 500; // Example daily goal
-
-// Open modal
-if (openCaloriesBurnedBtn) {
-  openCaloriesBurnedBtn.addEventListener("click", () => {
-    caloriesBurnedModal.style.display = "flex";
-  });
-}
-
-// Close modal
-if (closeCaloriesBurnedBtn) {
-  closeCaloriesBurnedBtn.addEventListener("click", () => {
-    caloriesBurnedModal.style.display = "none";
-  });
-}
-
-// Close modal on overlay click
-window.addEventListener("click", (e) => {
-  if (e.target === caloriesBurnedModal) {
-    caloriesBurnedModal.style.display = "none";
+    // Close on outside click
+    caloriesBurnedModal.addEventListener("click", (e) => {
+      if (e.target === caloriesBurnedModal) {
+        caloriesBurnedModal.style.display = "none";
+      }
+    });
+  } else {
+    console.warn("Calories Burned elements not found in DOM");
   }
 });
-
-// Activity selection
-if (cyclingBtn && gymBtn && yogaBtn) {
-  [cyclingBtn, gymBtn, yogaBtn].forEach((btn) => {
-    btn.addEventListener("click", () => {
-      selectedActivity = btn.id; // Save which button clicked
-      milestoneMessage.textContent = `Selected: ${btn.textContent}`;
-    });
-  });
-}
-
-// Calculate calories
-if (calculateCaloriesBtn) {
-  calculateCaloriesBtn.addEventListener("click", () => {
-    const minutes = parseInt(minutesInput.value) || 0;
-    if (!selectedActivity || minutes <= 0) {
-      milestoneMessage.textContent = "⚠️ Please select an activity and enter minutes.";
-      return;
-    }
-
-    // Simple calorie burn estimates
-    const calorieRates = {
-      cyclingBtn: 8,
-      gymBtn: 10,
-      yogaBtn: 5,
-    };
-
-    caloriesBurned = minutes * (calorieRates[selectedActivity] || 6);
-    caloriesDisplay.textContent = `Total: ${caloriesBurned} kcal`;
-
-    // Progress bar update
-    const progress = Math.min((caloriesBurned / calorieGoal) * 100, 100);
-    caloriesProgressFill.style.width = `${progress}%`;
-
-    // Messages
-    if (caloriesBurned >= calorieGoal) {
-      milestoneMessage.textContent = "🎉 Goal Reached!";
-      caloriesRewardMessage.textContent = "🏆 You earned a Crypto reward!";
-    } else {
-      milestoneMessage.textContent = `🔥 Keep going! ${calorieGoal - caloriesBurned} kcal left to goal.`;
-      caloriesRewardMessage.textContent = "";
-    }
-  });
-}
