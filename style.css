@@ -2760,3 +2760,56 @@ body {
   50%  { filter: drop-shadow(0 0 25px gold); transform: scale(1.25); }
   100% { filter: drop-shadow(0 0 10px gold); transform: scale(1.2); }
 }
+/* =========================
+   Hero Section Layout
+   ========================= */
+.hero-avatars {
+  display: flex;
+  justify-content: space-between; /* Doctor left, Runner right */
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; /* Centers container */
+  padding: 0 20px;
+  position: relative;
+  z-index: 2; /* Ensure above background */
+}
+
+/* Avatar Base */
+.hero-avatars .avatar {
+  max-width: 180px;  /* Adjusted size for desktop */
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+/* Hover Effect */
+.hero-avatars .avatar:hover {
+  transform: scale(1.05);
+}
+
+/* Doctor Avatar Left */
+.hero-avatars .avatar.doctor {
+  margin-right: auto;
+}
+
+/* Runner Avatar Right */
+.hero-avatars .avatar.runner {
+  margin-left: auto;
+}
+
+/* =========================
+   Mobile Responsive Layout
+   ========================= */
+@media (max-width: 768px) {
+  .hero-avatars {
+    flex-direction: column;   /* Stack vertically */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .hero-avatars .avatar {
+    max-width: 140px; /* Smaller size for mobile */
+  }
+}
