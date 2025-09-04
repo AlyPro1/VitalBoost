@@ -2761,29 +2761,29 @@ body {
   100% { filter: drop-shadow(0 0 10px gold); transform: scale(1.2); }
 }
 /* ============================
-   Avatars Position + Resizing
+   Refined Avatars Positioning
    ============================ */
 
 /* Avatars container inside hero */
 .avatars-popup {
   position: absolute;
-  top: 50%;  /* Center vertically relative to hero */
+  top: 50%;  
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px; /* wider spread */
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* push left & right */
   align-items: center;
-  z-index: 10; /* Make sure above background */
-  padding: 0 20px;
+  z-index: 10;
+  padding: 0 40px; /* more padding */
   box-sizing: border-box;
 }
 
 /* Each avatar item */
 .avatar-item {
-  width: 150px;   /* smaller size */
-  height: 150px;
+  width: 130px;   
+  height: 130px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -2794,19 +2794,19 @@ body {
 }
 
 .avatar-item:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 /* Avatar images */
 .avatar-image {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   object-fit: contain;
 }
 
 /* Avatar text */
 .avatar-text {
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 1rem;
   color: #fff;
   text-shadow: 0 2px 5px rgba(0,0,0,0.6);
@@ -2815,7 +2815,8 @@ body {
 /* Desktop-specific */
 @media (min-width: 769px) {
   .avatars-popup {
-    top: 45%; /* adjust vertical placement */
+    top: 48%; /* fine-tune vertical */
+    max-width: 1200px; /* spread further apart */
   }
 }
 
@@ -2826,24 +2827,24 @@ body {
     align-items: center;
     justify-content: flex-end;
     top: auto;
-    bottom: 20px;
+    bottom: 30px; /* push down further */
     left: 50%;
     transform: translateX(-50%);
     padding: 0;
   }
 
   .avatar-item {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 12px;
+    width: 90px;
+    height: 90px;
+    margin-bottom: 16px; /* more spacing between avatars */
   }
 
   .avatar-image {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
   }
 
   .avatar-text {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 }
