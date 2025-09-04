@@ -113,6 +113,10 @@
          <span class="button-icon">💡</span>
          Health Tips
        </button>
+        <button class="modal-action-button fitness-goals vanilla-glow" id="openDailyGoalsTracker">
+          <span class="button-icon">🎯</span>
+          Daily Fitness Goals
+        </button>
       </div>
     </div>
   </div> <!-- ✅ Close doctorModal -->
@@ -267,6 +271,52 @@
     </div>
   </div>
   
+  <!-- Daily Fitness Goals Modal -->
+  <div class="modal-overlay" id="dailyGoalsModal">
+    <div class="modal-container daily-goals-modal-container">
+      <button class="modal-close" id="closeDailyGoals">&times;</button>
+      <div class="modal-header">
+        <h3>🎯 Daily Fitness Goals</h3>
+      </div>
+      
+      <div class="daily-goals-content">
+        <!-- Daily Streak Counter -->
+        <div class="streak-section">
+          <div class="streak-icon">🔥</div>
+          <div class="streak-text">
+            <span class="streak-label">Daily Streak</span>
+            <span class="streak-count" id="dailyStreakCounter">0</span>
+          </div>
+        </div>
+
+        <!-- Challenge Cards Container -->
+        <div class="challenge-cards-container" id="challengeCardsContainer">
+          <!-- Cards will be dynamically generated -->
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+          <div class="progress-label">
+            <span>Goals Completed: </span>
+            <span id="goalsCompletedCount">0/3</span>
+          </div>
+          <div class="daily-goals-progress-bar">
+            <div class="daily-goals-progress-fill" id="dailyGoalsProgressFill"></div>
+          </div>
+        </div>
+
+        <!-- Motivational Text -->
+        <p class="motivational-text" id="motivationalText">Complete your daily goals! 💪</p>
+
+        <!-- Reward Section -->
+        <div class="reward-section">
+          <div class="reward-chest" id="rewardChest">🎁</div>
+          <p class="daily-goals-reward-message" id="dailyGoalsRewardMessage"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
