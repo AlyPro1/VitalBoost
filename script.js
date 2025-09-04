@@ -1136,3 +1136,118 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+// ---------------- Daily Fitness Goals Feature ----------------
+document.addEventListener("DOMContentLoaded", () => {
+  const openDailyGoalsBtn = document.getElementById("openDailyGoals");
+  const dailyGoalsModal = document.getElementById("dailyGoalsModal");
+  const closeDailyGoalsBtn = document.getElementById("closeDailyGoals");
+
+  const challengeCardsContainer = document.getElementById("challengeCardsContainer");
+  const goalsCompletedCount = document.getElementById("goalsCompletedCount");
+  const progressFill = document.getElementById("dailyGoalsProgressFill");
+  const motivationalText = document.getElementById("motivationalText");
+  const rewardChest = document.getElementById("rewardChest");
+  const rewardMessage = document.getElementById("dailyGoalsRewardMessage");
+
+  // Daily challenges
+  const challenges = [
+    { id: 1, text: "Drink 8 glasses of water 🚰" },
+    { id: 2, text: "Stretch 10 minutes 🧘" },
+    { id: 3, text: "Eat 2 fruits 🍎" }
+  ];
+
+  // Motivational texts
+  const motivationalQuotes = [
+    "Keep pushing 💪",
+    "Discipline = Freedom 🔑",
+    "One step at a time 👟",
+    "Stronger every day 🏋️",
+    "You got this 🚀"
+  ];
+
+  let completedGoals = 0;
+
+  // Open Modal
+  openDailyGoalsBtn.addEventListener("click", () => {
+    dailyGoalsModal.classList.add("active");
+  });
+
+  // Close Modal
+  closeDailyGoalsBtn.addEventListener("click", () => {
+    dailyGoalsModal.classList.remove("active");
+  });
+
+  // Generate Challenge Cards
+  function renderChallenges() {
+    challengeCardsContainer.innerHTML = "";
+    challenges.forEach((challenge) => {
+      const card = document.createElement("div");
+      card.classList.add("challenge-card");
+      card.setAttribute("data-id", challenge.id);
+
+      card.innerHTML = `
+        <p>${challenge.text}</p>
+        <button class="mark-done-btn">Mark as Done ✅</button>
+      `;
+
+      const button = card.querySelector(".mark-done-btn");
+      button.addEventListener("click", () => completeChallenge(card, button));
+
+      challengeCardsContainer.appendChild(card);
+    });
+  }
+
+  // Complete Challenge
+  function completeChallenge(card, button) {
+    if (card.classList.contains("completed")) return; // prevent double clicks
+
+    card.classList.add("completed");
+    button.disabled = true;
+
+    // Update counter
+    completedGoals++;
+    goalsCompletedCount.textContent = `${completedGoals}/3`;
+
+    // Update progress bar
+    const progressPercent = (completedGoals / challenges.length) * 100;
+    progressFill.style.width = `${progressPercent}%`;
+
+    // Show motivational text
+    const randomQuote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
+    motivationalText.textContent = randomQuote;
+
+    // Animate card
+    card.classList.add("animate-card");
+
+    // If all done -> celebrate 🎉
+    if (completedGoals === challenges.length) {
+      launchConfetti();
+      rewardChest.classList.add("active");
+      rewardMessage.textContent = "🎉 You earned Boost Points!";
+    }
+  }
+
+  // Confetti Animation
+  function launchConfetti() {
+    const duration = 2000;
+    const end = Date.now() + duration;
+
+    (function frame() {
+      const confetti = document.createElement("div");
+      confetti.className = "confetti";
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.animationDuration = 2 + Math.random() * 3 + "s";
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      document.body.appendChild(confetti);
+
+      setTimeout(() => confetti.remove(), 4000);
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  }
+
+  // Initialize
+  renderChallenges();
+});
