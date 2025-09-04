@@ -2760,3 +2760,90 @@ body {
   50%  { filter: drop-shadow(0 0 25px gold); transform: scale(1.25); }
   100% { filter: drop-shadow(0 0 10px gold); transform: scale(1.2); }
 }
+/* ============================
+   Avatars Position + Resizing
+   ============================ */
+
+/* Avatars container inside hero */
+.avatars-popup {
+  position: absolute;
+  top: 50%;  /* Center vertically relative to hero */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10; /* Make sure above background */
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Each avatar item */
+.avatar-item {
+  width: 150px;   /* smaller size */
+  height: 150px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar-item:hover {
+  transform: scale(1.05);
+}
+
+/* Avatar images */
+.avatar-image {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+/* Avatar text */
+.avatar-text {
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #fff;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+}
+
+/* Desktop-specific */
+@media (min-width: 769px) {
+  .avatars-popup {
+    top: 45%; /* adjust vertical placement */
+  }
+}
+
+/* Mobile-specific */
+@media (max-width: 768px) {
+  .avatars-popup {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    top: auto;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0;
+  }
+
+  .avatar-item {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 12px;
+  }
+
+  .avatar-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .avatar-text {
+    font-size: 0.9rem;
+  }
+}
