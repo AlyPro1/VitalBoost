@@ -1136,118 +1136,126 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-// ---------------- Daily Fitness Goals Feature ----------------
-document.addEventListener("DOMContentLoaded", () => {
-  const openDailyGoalsBtn = document.getElementById("openDailyGoals");
-  const dailyGoalsModal = document.getElementById("dailyGoalsModal");
-  const closeDailyGoalsBtn = document.getElementById("closeDailyGoals");
+// ---------------- Daily Fitness Goals Feature ---------------- //
+const openDailyGoalsBtn = document.getElementById("openDailyGoals");
+const dailyGoalsModal = document.getElementById("dailyGoalsModal");
+const closeDailyGoalsBtn = document.getElementById("closeDailyGoals");
 
-  const challengeCardsContainer = document.getElementById("challengeCardsContainer");
-  const goalsCompletedCount = document.getElementById("goalsCompletedCount");
-  const progressFill = document.getElementById("dailyGoalsProgressFill");
-  const motivationalText = document.getElementById("motivationalText");
-  const rewardChest = document.getElementById("rewardChest");
-  const rewardMessage = document.getElementById("dailyGoalsRewardMessage");
+const challengeCardsContainer = document.getElementById("challengeCardsContainer");
+const dailyGoalsProgressFill = document.getElementById("dailyGoalsProgressFill");
+const goalsCompletedCount = document.getElementById("goalsCompletedCount");
+const motivationalText = document.getElementById("motivationalText");
+const rewardChest = document.getElementById("rewardChest");
+const rewardMessage = document.getElementById("dailyGoalsRewardMessage");
+const dailyStreakCounter = document.getElementById("dailyStreakCounter");
 
-  // Daily challenges
-  const challenges = [
-    { id: 1, text: "Drink 8 glasses of water 🚰" },
-    { id: 2, text: "Stretch 10 minutes 🧘" },
-    { id: 3, text: "Eat 2 fruits 🍎" }
-  ];
+let goalsCompleted = 0;
+let dailyStreak = 0;
 
-  // Motivational texts
-  const motivationalQuotes = [
-    "Keep pushing 💪",
-    "Discipline = Freedom 🔑",
-    "One step at a time 👟",
-    "Stronger every day 🏋️",
-    "You got this 🚀"
-  ];
+// Motivational messages
+const motivationalMessages = [
+  "Keep pushing 💪",
+  "Discipline = Freedom 🔑",
+  "Small steps, big results 🚀",
+  "Stay consistent, stay strong 🔥",
+];
 
-  let completedGoals = 0;
+// Challenges
+const challenges = [
+  { text: "Drink 8 glasses of water 🚰" },
+  { text: "Stretch 10 minutes 🧘" },
+  { text: "Eat 2 fruits 🍎" },
+];
 
-  // Open Modal
-  openDailyGoalsBtn.addEventListener("click", () => {
-    dailyGoalsModal.classList.add("active");
+// Generate challenge cards
+function loadChallenges() {
+  challengeCardsContainer.innerHTML = "";
+  challenges.forEach((challenge, index) => {
+    const card = document.createElement("div");
+    card.classList.add("challenge-card");
+    card.innerHTML = `
+      <p>${challenge.text}</p>
+      <button class="mark-done-btn" data-index="${index}">Mark as Done ✅</button>
+    `;
+    challengeCardsContainer.appendChild(card);
   });
+  goalsCompleted = 0;
+  goalsCompletedCount.textContent = `0/${challenges.length}`;
+  dailyGoalsProgressFill.style.width = "0%";
+  motivationalText.textContent = "Complete your daily goals! 💪";
+  rewardChest.classList.remove("active");
+  rewardMessage.textContent = "";
+}
+loadChallenges();
 
-  // Close Modal
-  closeDailyGoalsBtn.addEventListener("click", () => {
-    dailyGoalsModal.classList.remove("active");
-  });
+// Handle mark as done
+challengeCardsContainer.addEventListener("click", (e) => {
+  if (e.target.classList.contains("mark-done-btn")) {
+    const btn = e.target;
+    const card = btn.parentElement;
 
-  // Generate Challenge Cards
-  function renderChallenges() {
-    challengeCardsContainer.innerHTML = "";
-    challenges.forEach((challenge) => {
-      const card = document.createElement("div");
-      card.classList.add("challenge-card");
-      card.setAttribute("data-id", challenge.id);
+    if (!card.classList.contains("completed")) {
+      card.classList.add("completed", "animate-card");
+      btn.disabled = true;
+      goalsCompleted++;
 
-      card.innerHTML = `
-        <p>${challenge.text}</p>
-        <button class="mark-done-btn">Mark as Done ✅</button>
-      `;
+      // Update progress
+      const progressPercent = (goalsCompleted / challenges.length) * 100;
+      dailyGoalsProgressFill.style.width = `${progressPercent}%`;
+      goalsCompletedCount.textContent = `${goalsCompleted}/${challenges.length}`;
 
-      const button = card.querySelector(".mark-done-btn");
-      button.addEventListener("click", () => completeChallenge(card, button));
+      // Show motivational text
+      motivationalText.textContent =
+        motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
 
-      challengeCardsContainer.appendChild(card);
-    });
-  }
+      // If all goals complete
+      if (goalsCompleted === challenges.length) {
+        triggerConfetti();
 
-  // Complete Challenge
-  function completeChallenge(card, button) {
-    if (card.classList.contains("completed")) return; // prevent double clicks
+        // ✅ Update streak
+        dailyStreak++;
+        dailyStreakCounter.textContent = dailyStreak;
 
-    card.classList.add("completed");
-    button.disabled = true;
-
-    // Update counter
-    completedGoals++;
-    goalsCompletedCount.textContent = `${completedGoals}/3`;
-
-    // Update progress bar
-    const progressPercent = (completedGoals / challenges.length) * 100;
-    progressFill.style.width = `${progressPercent}%`;
-
-    // Show motivational text
-    const randomQuote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
-    motivationalText.textContent = randomQuote;
-
-    // Animate card
-    card.classList.add("animate-card");
-
-    // If all done -> celebrate 🎉
-    if (completedGoals === challenges.length) {
-      launchConfetti();
-      rewardChest.classList.add("active");
-      rewardMessage.textContent = "🎉 You earned Boost Points!";
+        // ✅ Activate reward chest
+        rewardChest.classList.add("active");
+        rewardMessage.textContent = "🎉 You earned Boost Points!";
+      }
     }
   }
+});
 
-  // Confetti Animation
-  function launchConfetti() {
-    const duration = 2000;
-    const end = Date.now() + duration;
+// Reset goals function
+function resetGoals() {
+  loadChallenges();
+}
 
-    (function frame() {
-      const confetti = document.createElement("div");
-      confetti.className = "confetti";
-      confetti.style.left = Math.random() * 100 + "vw";
-      confetti.style.animationDuration = 2 + Math.random() * 3 + "s";
-      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-      document.body.appendChild(confetti);
+// Add reset button dynamically
+const resetBtn = document.createElement("button");
+resetBtn.textContent = "🔄 Reset Goals";
+resetBtn.classList.add("mark-done-btn");
+resetBtn.style.marginTop = "15px";
+resetBtn.addEventListener("click", resetGoals);
+dailyGoalsModal.querySelector(".daily-goals-content").appendChild(resetBtn);
 
-      setTimeout(() => confetti.remove(), 4000);
+// Confetti generator
+function triggerConfetti() {
+  for (let i = 0; i < 40; i++) {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+    confetti.style.backgroundColor =
+      `hsl(${Math.random() * 360}, 100%, 50%)`;
+    confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
+    document.body.appendChild(confetti);
 
-      if (Date.now() < end) {
-        requestAnimationFrame(frame);
-      }
-    })();
+    setTimeout(() => confetti.remove(), 5000);
   }
+}
 
-  // Initialize
-  renderChallenges();
+// Open / close modal
+openDailyGoalsBtn.addEventListener("click", () => {
+  dailyGoalsModal.style.display = "flex";
+});
+closeDailyGoalsBtn.addEventListener("click", () => {
+  dailyGoalsModal.style.display = "none";
 });
