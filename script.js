@@ -1101,3 +1101,38 @@ if (openDailyGoalsTracker && dailyGoalsModal && closeDailyGoals) {
 document.addEventListener('DOMContentLoaded', () => {
   loadGoalsState();
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const openDailyGoals = document.getElementById("openDailyGoals");
+  const dailyGoalsModal = document.getElementById("dailyGoalsModal");
+  const closeDailyGoals = document.getElementById("closeDailyGoals");
+  const doctorModal = document.getElementById("doctorModal");
+
+  if (openDailyGoals && dailyGoalsModal) {
+    openDailyGoals.addEventListener("click", () => {
+      // close doctor modal if open (optional)
+      if (doctorModal) {
+        doctorModal.style.display = "none";
+        doctorModal.classList.remove("active");
+      }
+      dailyGoalsModal.style.display = "flex";
+      dailyGoalsModal.classList.add("active");
+    });
+  }
+
+  if (closeDailyGoals && dailyGoalsModal) {
+    closeDailyGoals.addEventListener("click", () => {
+      dailyGoalsModal.style.display = "none";
+      dailyGoalsModal.classList.remove("active");
+    });
+  }
+
+  // Close by clicking outside modal container
+  if (dailyGoalsModal) {
+    dailyGoalsModal.addEventListener("click", (e) => {
+      if (e.target === dailyGoalsModal) {
+        dailyGoalsModal.style.display = "none";
+        dailyGoalsModal.classList.remove("active");
+      }
+    });
+  }
+});
