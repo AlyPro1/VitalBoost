@@ -833,3 +833,271 @@ function updateCaloriesProgress(progress) {
     progressFill.style.backgroundColor = "orangered";
   }
 }
+
+// =============================
+// DAILY FITNESS GOALS FEATURE
+// =============================
+
+// Daily Goals Modal Elements
+const openDailyGoalsTracker = document.getElementById('openDailyGoalsTracker');
+const dailyGoalsModal = document.getElementById('dailyGoalsModal');
+const closeDailyGoals = document.getElementById('closeDailyGoals');
+const challengeCardsContainer = document.getElementById('challengeCardsContainer');
+const goalsCompletedCount = document.getElementById('goalsCompletedCount');
+const dailyGoalsProgressFill = document.getElementById('dailyGoalsProgressFill');
+const motivationalText = document.getElementById('motivationalText');
+const dailyStreakCounter = document.getElementById('dailyStreakCounter');
+const rewardChest = document.getElementById('rewardChest');
+const dailyGoalsRewardMessage = document.getElementById('dailyGoalsRewardMessage');
+
+// Daily Goals State
+let dailyGoals = [
+  { id: 'water', text: 'Drink 8 glasses of water', emoji: '🚰', completed: false },
+  { id: 'stretch', text: 'Stretch for 10 minutes', emoji: '🧘', completed: false },
+  { id: 'fruits', text: 'Eat 2 fruits', emoji: '🍎', completed: false }
+];
+
+let completedGoalsCount = 0;
+let dailyStreak = 0;
+let lastCompletionDate = null;
+
+const motivationalTexts = [
+  "Keep pushing 💪",
+  "Discipline = Freedom",
+  "You're unstoppable! 🚀",
+  "Excellence is a habit ⭐",
+  "Progress over perfection 📈",
+  "Your future self will thank you 🙏",
+  "Small steps, big results 👣",
+  "Consistency is key 🔑"
+];
+
+// Load goals state from localStorage
+function loadGoalsState() {
+  const savedGoals = localStorage.getItem('dailyGoals');
+  const savedStreak = localStorage.getItem('dailyStreak');
+  const savedDate = localStorage.getItem('lastCompletionDate');
+  
+  if (savedGoals) {
+    dailyGoals = JSON.parse(savedGoals);
+  }
+  if (savedStreak) {
+    dailyStreak = parseInt(savedStreak);
+  }
+  if (savedDate) {
+    lastCompletionDate = savedDate;
+  }
+  
+  checkAndResetGoals();
+}
+
+// Save goals state to localStorage
+function saveGoalsState() {
+  localStorage.setItem('dailyGoals', JSON.stringify(dailyGoals));
+  localStorage.setItem('dailyStreak', dailyStreak.toString());
+  if (lastCompletionDate) {
+    localStorage.setItem('lastCompletionDate', lastCompletionDate);
+  }
+}
+
+// Check if it's a new day and reset goals if needed
+function checkAndResetGoals() {
+  const today = new Date().toDateString();
+  const lastDate = lastCompletionDate ? new Date(lastCompletionDate).toDateString() : null;
+  
+  if (lastDate && lastDate !== today) {
+    // Check if all goals were completed yesterday
+    const allCompleted = dailyGoals.every(goal => goal.completed);
+    
+    if (!allCompleted) {
+      // Reset streak if goals weren't completed
+      dailyStreak = 0;
+    }
+    
+    // Reset goals for new day
+    dailyGoals.forEach(goal => goal.completed = false);
+    completedGoalsCount = 0;
+  }
+  
+  // Update completed count
+  completedGoalsCount = dailyGoals.filter(goal => goal.completed).length;
+}
+
+// Render challenge cards
+function renderChallengeCards() {
+  if (!challengeCardsContainer) return;
+  
+  challengeCardsContainer.innerHTML = '';
+  
+  dailyGoals.forEach((goal, index) => {
+    const cardDiv = document.createElement('div');
+    cardDiv.className = `challenge-card ${goal.completed ? 'completed' : ''}`;
+    cardDiv.innerHTML = `
+      <div class="challenge-text">
+        <span class="challenge-emoji">${goal.emoji}</span>
+        <span>${goal.text}</span>
+      </div>
+      <button class="mark-done-btn ${goal.completed ? 'completed' : ''}" data-goal-id="${goal.id}">
+        ${goal.completed ? 'Completed ✅' : 'Mark as Done ✅'}
+      </button>
+    `;
+    
+    challengeCardsContainer.appendChild(cardDiv);
+    
+    // Add event listener to mark done button
+    const markDoneBtn = cardDiv.querySelector('.mark-done-btn');
+    if (!goal.completed) {
+      markDoneBtn.addEventListener('click', () => markGoalCompleted(goal.id));
+    }
+  });
+}
+
+// Mark goal as completed
+function markGoalCompleted(goalId) {
+  const goal = dailyGoals.find(g => g.id === goalId);
+  if (!goal || goal.completed) return;
+  
+  goal.completed = true;
+  completedGoalsCount++;
+  
+  // Re-render cards to show updated state
+  renderChallengeCards();
+  
+  // Update progress
+  updateDailyGoalsProgress();
+  
+  // Show motivational text
+  displayMotivationalText();
+  
+  // Check if all goals completed
+  if (completedGoalsCount === dailyGoals.length) {
+    triggerDailyGoalsReward();
+  }
+  
+  // Save state
+  saveGoalsState();
+}
+
+// Update progress bar and counter
+function updateDailyGoalsProgress() {
+  if (!goalsCompletedCount || !dailyGoalsProgressFill) return;
+  
+  const percentage = (completedGoalsCount / dailyGoals.length) * 100;
+  
+  goalsCompletedCount.textContent = `${completedGoalsCount}/${dailyGoals.length}`;
+  dailyGoalsProgressFill.style.width = `${percentage}%`;
+  
+  // Change progress bar color based on completion
+  if (percentage === 100) {
+    dailyGoalsProgressFill.style.background = 'linear-gradient(90deg, #f59e0b, #d97706)'; // Gold
+  } else if (percentage >= 66) {
+    dailyGoalsProgressFill.style.background = 'linear-gradient(90deg, #ef4444, #dc2626)'; // Red
+  } else if (percentage >= 33) {
+    dailyGoalsProgressFill.style.background = 'linear-gradient(90deg, #f97316, #ea580c)'; // Orange
+  } else {
+    dailyGoalsProgressFill.style.background = 'linear-gradient(90deg, #10b981, #059669)'; // Green
+  }
+}
+
+// Display random motivational text
+function displayMotivationalText() {
+  if (!motivationalText) return;
+  
+  const randomText = motivationalTexts[Math.floor(Math.random() * motivationalTexts.length)];
+  motivationalText.textContent = randomText;
+  
+  // Trigger fade-in animation
+  motivationalText.style.animation = 'none';
+  setTimeout(() => {
+    motivationalText.style.animation = 'motivational-fade-in 0.5s ease-out';
+  }, 10);
+}
+
+// Update streak counter display
+function updateStreakCounter() {
+  if (!dailyStreakCounter) return;
+  dailyStreakCounter.textContent = dailyStreak;
+}
+
+// Trigger reward when all goals completed
+function triggerDailyGoalsReward() {
+  // Update streak
+  dailyStreak++;
+  lastCompletionDate = new Date().toISOString();
+  updateStreakCounter();
+  
+  // Animate reward chest
+  if (rewardChest) {
+    rewardChest.classList.add('animate');
+    setTimeout(() => {
+      rewardChest.classList.remove('animate');
+    }, 1000);
+  }
+  
+  // Show reward message
+  if (dailyGoalsRewardMessage) {
+    dailyGoalsRewardMessage.textContent = "You earned Boost Points! 🎉";
+    dailyGoalsRewardMessage.classList.add('show');
+  }
+  
+  // Trigger confetti
+  generateConfetti();
+  
+  // Update motivational text
+  motivationalText.textContent = "All goals completed! You're a champion! 🏆";
+  
+  // Save state
+  saveGoalsState();
+}
+
+// Daily Goals Modal Event Listeners
+if (openDailyGoalsTracker && dailyGoalsModal && closeDailyGoals) {
+  
+  // Open Daily Goals modal
+  openDailyGoalsTracker.addEventListener('click', () => {
+    // Close runner modal first
+    if (runnerModal) {
+      runnerModal.style.display = 'none';
+      runnerModal.classList.remove('active');
+    }
+    
+    // Load state and render
+    loadGoalsState();
+    renderChallengeCards();
+    updateDailyGoalsProgress();
+    updateStreakCounter();
+    
+    // Show modal
+    dailyGoalsModal.style.display = 'flex';
+    dailyGoalsModal.classList.add('active');
+  });
+  
+  // Close Daily Goals modal
+  closeDailyGoals.addEventListener('click', () => {
+    dailyGoalsModal.style.display = 'none';
+    dailyGoalsModal.classList.remove('active');
+    
+    // Hide reward message
+    if (dailyGoalsRewardMessage) {
+      dailyGoalsRewardMessage.classList.remove('show');
+    }
+  });
+  
+  // Close modal when clicking outside
+  window.addEventListener('click', (event) => {
+    if (event.target === dailyGoalsModal) {
+      dailyGoalsModal.style.display = 'none';
+      dailyGoalsModal.classList.remove('active');
+      
+      // Hide reward message
+      if (dailyGoalsRewardMessage) {
+        dailyGoalsRewardMessage.classList.remove('show');
+      }
+    }
+  });
+}
+
+// Initialize goals state on page load
+document.addEventListener('DOMContentLoaded', () => {
+  loadGoalsState();
+});
