@@ -2731,3 +2731,32 @@ body {
     justify-content: center;
   }
 }
+/* Reward chest base */
+.reward-chest {
+  font-size: 4rem;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  display: inline-block;
+}
+
+/* Chest open: bounce once + start glowing pulse */
+.reward-chest.open {
+  animation: chestPopup 1s ease forwards, chestPulse 2s ease-in-out infinite 1s;
+  filter: drop-shadow(0 0 15px gold);
+}
+
+/* Bounce animation */
+@keyframes chestPopup {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.5) rotate(-12deg); }
+  60%  { transform: scale(1.3) rotate(12deg); }
+  80%  { transform: scale(1.4) rotate(-6deg); }
+  100% { transform: scale(1.2) rotate(0deg); }
+}
+
+/* Glowing pulsing loop */
+@keyframes chestPulse {
+  0%   { filter: drop-shadow(0 0 10px gold); transform: scale(1.2); }
+  50%  { filter: drop-shadow(0 0 25px gold); transform: scale(1.25); }
+  100% { filter: drop-shadow(0 0 10px gold); transform: scale(1.2); }
+}
