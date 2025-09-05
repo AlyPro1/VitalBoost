@@ -2975,37 +2975,56 @@ body {
   .welcome-social-btn { min-width: 100%; font-size:0.95rem; padding:0.8rem; }
   .welcome-modal-container { padding:1.4rem; }
 }
-/* Stunning Get Started button */
-.hero-button {
-  background: linear-gradient(135deg, #ff6b6b, #f8e473, #4ecdc4);
-  background-size: 300% 300%;
-  color: white;
-  font-size: 1.3rem;
-  font-weight: 700;
+/* 🌟 Get Started Button Styling */
+.cta-button {
+  position: relative;
   padding: 14px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #ff6a00, #ff0077);
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
-  transition: all 0.3s ease;
-  animation: gradientShift 5s ease infinite, buttonPulse 2.5s infinite;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 0, 119, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.hero-button:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 35px rgba(255, 107, 107, 0.9),
-              0 0 55px rgba(78, 205, 196, 0.7);
+.cta-button:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 30px rgba(255, 0, 119, 0.7);
 }
 
-/* Gradient animation */
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Glow Effect */
+.cta-button .button-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 20%, transparent 70%);
+  animation: pulseGlow 3s infinite;
 }
 
-/* Subtle pulse effect */
-@keyframes buttonPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.04); }
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 0.2; }
+}
+
+/* Shine Effect */
+.cta-button .button-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.7), transparent);
+  animation: shineMove 4s infinite;
+}
+
+@keyframes shineMove {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
 }
