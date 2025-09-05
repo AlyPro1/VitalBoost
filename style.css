@@ -2848,3 +2848,66 @@ body {
     font-size: 0.85rem;
   }
 }
+/* === Avatar Glow & Hover Effects === */
+.avatar-item {
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Soft glowing aura behind avatars */
+.avatar-item::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 130%;
+  height: 130%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: -1;
+}
+
+/* Hover pulse effect */
+.avatar-item:hover::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+.avatar-item:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* === Avatar Text Styling === */
+.avatar-text {
+  margin-top: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Animated pulse on hover */
+.avatar-item:hover .avatar-text {
+  color: #ffdd57;
+  transform: scale(1.1);
+  animation: textPulse 1s infinite;
+}
+
+/* Pulse animation keyframes */
+@keyframes textPulse {
+  0%, 100% {
+    text-shadow: 0 0 6px rgba(255, 221, 87, 0.9),
+                 0 0 12px rgba(255, 221, 87, 0.7);
+  }
+  50% {
+    text-shadow: 0 0 12px rgba(255, 221, 87, 1),
+                 0 0 20px rgba(255, 221, 87, 0.9);
+  }
+}
