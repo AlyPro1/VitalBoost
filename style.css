@@ -3049,3 +3049,31 @@ body {
     transform: scale(1);
   }
 }
+.counter-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
+
+.counter-number {
+  color: #ffd700; /* Gold for highlight */
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 6px;
+  transition: transform 0.3s ease;
+}
+
+.counter-pulse {
+  animation: pulseGlow 1.2s ease;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(1); text-shadow: 0 0 5px #ffd700; }
+  50% { transform: scale(1.2); text-shadow: 0 0 20px #ffae00; }
+  100% { transform: scale(1); text-shadow: 0 0 5px #ffd700; }
+}
