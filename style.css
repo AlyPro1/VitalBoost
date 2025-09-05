@@ -3202,3 +3202,41 @@ body {
   animation: glowing-blink 3s ease-in-out infinite;
   will-change: background-position, text-shadow, opacity;
 }
+@keyframes glowing-blink {
+  0% {
+    opacity: 0.7;
+    background-position: 0% 50%;
+    text-shadow: 0 0 20px red, 0 0 40px red, 0 0 60px red, 0 0 80px red;
+  }
+  25% {
+    opacity: 1;
+    background-position: 50% 50%;
+    text-shadow: 0 0 20px teal, 0 0 40px teal, 0 0 60px teal, 0 0 80px teal;
+  }
+  50% {
+    opacity: 0.8;
+    background-position: 100% 50%;
+    text-shadow: 0 0 20px blue, 0 0 40px blue, 0 0 60px blue, 0 0 80px blue;
+  }
+  75% {
+    opacity: 1;
+    background-position: 150% 50%;
+    text-shadow: 0 0 20px green, 0 0 40px green, 0 0 60px green, 0 0 80px green;
+  }
+  100% {
+    opacity: 0.7;
+    background-position: 200% 50%;
+    text-shadow: 0 0 20px yellow, 0 0 40px yellow, 0 0 60px yellow, 0 0 80px yellow;
+  }
+}
+
+.headline-line.highlight {
+  display: inline-block;
+  color: transparent;
+  background: linear-gradient(45deg, red, teal, blue, green, yellow, pink, skyblue);
+  background-size: 400% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: glowing-blink 3s ease-in-out infinite;
+  will-change: background-position, text-shadow, opacity;
+}
