@@ -1332,3 +1332,65 @@ document.addEventListener("DOMContentLoaded", () => {
   renderChallenges();
   updateProgress();
 })();
+/* ---------------------------
+   Welcome / Get Started JS
+   (Append to bottom of script.js)
+   --------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const openWelcomeBtn = document.getElementById('ctaButton'); // your Get Started button
+  const welcomeModalEl = document.getElementById('welcomeModal');
+  const closeWelcomeBtn = document.getElementById('closeWelcome');
+  const btnGoogle = document.getElementById('btnGoogle');
+  const btnFacebook = document.getElementById('btnFacebook');
+  const btnEmail = document.getElementById('btnEmail');
+  const welcomeStatusEl = document.getElementById('welcomeStatus');
+
+  if (!openWelcomeBtn || !welcomeModalEl || !closeWelcomeBtn) {
+    // required elements missing — abort silently
+    return;
+  }
+
+  function openWelcomeModal() {
+    welcomeModalEl.style.display = 'flex';
+    welcomeModalEl.classList.add('active');
+    if (welcomeStatusEl) welcomeStatusEl.innerHTML = '';
+    // optional: focus first action
+    setTimeout(() => { btnGoogle && btnGoogle.focus(); }, 120);
+  }
+
+  function closeWelcomeModal() {
+    welcomeModalEl.style.display = 'none';
+    welcomeModalEl.classList.remove('active');
+    if (welcomeStatusEl) welcomeStatusEl.innerHTML = '';
+  }
+
+  openWelcomeBtn.addEventListener('click', openWelcomeModal);
+  closeWelcomeBtn.addEventListener('click', closeWelcomeModal);
+
+  // close when clicking backdrop
+  window.addEventListener('click', (ev) => {
+    if (ev.target === welcomeModalEl) closeWelcomeModal();
+  });
+
+  // close via Escape key
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' && welcomeModalEl.classList.contains('active')) {
+      closeWelcomeModal();
+    }
+  });
+
+  // tiny fake sign-in simulation (replace with real integration later)
+  function simulateSignIn(providerLabel) {
+    if (!welcomeStatusEl) return;
+    welcomeStatusEl.innerHTML = `<span class="spinner"></span>Redirecting with ${providerLabel}...`;
+    // simulate short redirect -> success -> close
+    setTimeout(() => {
+      welcomeStatusEl.innerHTML = `✅ Signed in with ${providerLabel}`;
+      setTimeout(closeWelcomeModal, 800);
+    }, 900);
+  }
+
+  btnGoogle && btnGoogle.addEventListener('click', () => simulateSignIn('Google'));
+  btnFacebook && btnFacebook.addEventListener('click', () => simulateSignIn('Facebook'));
+  btnEmail && btnEmail.addEventListener('click', () => simulateSignIn('Email'));
+});
