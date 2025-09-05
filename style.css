@@ -3267,3 +3267,14 @@ body {
     text-shadow: 0 0 10px yellow, 0 0 20px yellow;
   }
 }
+.headline-line.highlight {
+  display: inline-block;
+  color: transparent;
+  background: linear-gradient(45deg, red, teal, blue, green, yellow, pink, skyblue);
+  background-size: 400% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: glowing-blink 3s ease-in-out infinite;
+  will-change: background-position, text-shadow, opacity;
+  -webkit-text-stroke: 0.5px white; /* optional for readability */
+}
