@@ -1394,3 +1394,36 @@ document.addEventListener('DOMContentLoaded', () => {
   btnFacebook && btnFacebook.addEventListener('click', () => simulateSignIn('Facebook'));
   btnEmail && btnEmail.addEventListener('click', () => simulateSignIn('Email'));
 });
+// Visitor Counter Logic
+document.addEventListener("DOMContentLoaded", () => {
+  const counterElement = document.getElementById("counterNumber");
+  let count = localStorage.getItem("visitorCount");
+
+  if (!count) {
+    count = 1; // first visit
+  } else {
+    count = parseInt(count) + 1; // increment
+  }
+
+  localStorage.setItem("visitorCount", count);
+
+  // Animate counting
+  let current = 0;
+  const duration = 1200; // total time
+  const step = Math.ceil(count / (duration / 16));
+
+  const animate = () => {
+    current += step;
+    if (current >= count) {
+      counterElement.textContent = count.toLocaleString();
+    } else {
+      counterElement.textContent = current.toLocaleString();
+      requestAnimationFrame(animate);
+    }
+  };
+  animate();
+
+  // Pulse glow effect
+  counterElement.classList.add("counter-pulse");
+  setTimeout(() => counterElement.classList.remove("counter-pulse"), 1200);
+});
