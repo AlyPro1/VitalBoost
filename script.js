@@ -1,3 +1,22 @@
+// Import analytics at the top of the file
+import { 
+  trackFitnessActivity, 
+  trackSteps, 
+  trackCaloriesBurned, 
+  trackDailyGoal, 
+  trackGoalCompletion,
+  trackHealthTipView,
+  trackModalOpen,
+  trackModalClose,
+  trackButtonClick,
+  initializeAnalytics
+} from './src/utils/supabaseAnalytics.js';
+
+// Initialize analytics when page loads
+document.addEventListener('DOMContentLoaded', () => {
+  initializeAnalytics();
+});
+
 // Floating images animation
 document.addEventListener("DOMContentLoaded", () => {
   const floatingElements = document.querySelectorAll(".floating-image");
@@ -82,6 +101,8 @@ if (doctorAvatar) {
     if (doctorModal) {
       doctorModal.style.display = "flex";
       doctorModal.classList.add("active");
+      trackModalOpen('doctor');
+      trackButtonClick('doctor_avatar', 'hero');
     }
   });
 }
@@ -92,6 +113,8 @@ if (runnerAvatar) {
     if (runnerModal) {
       runnerModal.style.display = "flex";
       runnerModal.classList.add("active");
+      trackModalOpen('runner');
+      trackButtonClick('runner_avatar', 'hero');
     }
   });
 }
@@ -102,6 +125,7 @@ if (closeDoctor) {
     if (doctorModal) {
       doctorModal.style.display = "none";
       doctorModal.classList.remove("active");
+      trackModalClose('doctor');
     }
   });
 }
@@ -112,6 +136,7 @@ if (closeRunner) {
     if (runnerModal) {
       runnerModal.style.display = "none";
       runnerModal.classList.remove("active");
+      trackModalClose('runner');
     }
   });
 }
@@ -138,6 +163,8 @@ if (chatWithAIDoctorBtn) {
     if (aiDoctorChatModal) {
       aiDoctorChatModal.style.display = "flex";
       aiDoctorChatModal.classList.add("active");
+      trackModalOpen('ai_doctor_chat');
+      trackButtonClick('chat_with_ai_doctor', 'doctor_modal');
     }
   });
 }
@@ -160,6 +187,9 @@ window.addEventListener("click", (event) => {
 // =============================
 // AI CHAT INTERACTIVITY LOGIC
 // =============================
+
+// Import analytics functions
+import { trackHealthQuery, trackModalOpen, trackModalClose, trackButtonClick, trackUserAction, initializeAnalytics } from './src/utils/supabaseAnalytics.js';
 
 // Select the chat elements from your HTML
 const chatMessages = document.getElementById('chatMessages');
@@ -197,6 +227,10 @@ if (chatMessages && healthQueryInput && sendQueryBtn) {
 
         // 3. Get the AI's response (using the simulated function for now)
         getAIResponse(userText);
+        
+        // 4. Track the health query
+        trackHealthQuery(userText);
+        trackButtonClick('send_health_query', 'ai_doctor_chat');
     }
 
     // This function creates and adds a new message bubble to the chat
@@ -232,6 +266,9 @@ if (chatMessages && healthQueryInput && sendQueryBtn) {
             
             // Display the final simulated response
             displayMessage(simulatedResponse, 'ai');
+
+            // Track the AI response
+            trackHealthQuery(userMessage, simulatedResponse);
 
         }, 1500); // 1.5-second delay
     }
@@ -361,10 +398,19 @@ function startTracking() {
   addSteps.style.display = 'none';
   resetSteps.style.display = 'none';
   
+  // Track step tracking start
+  trackButtonClick('start_step_tracking', 'steps_modal');
+  trackUserAction('step_tracking_started');
+  
   // Start counting steps (faster for demo - every 100ms)
   stepInterval = setInterval(() => {
     currentSteps += Math.floor(Math.random() * 3) + 1; // Random 1-3 steps
     updateStepDisplay();
+    
+    // Track steps every 100 steps
+    if (currentSteps % 100 === 0) {
+      trackSteps(currentSteps);
+    }
   }, 100);
 }
 
@@ -388,6 +434,11 @@ function stopTracking() {
   stopTrackingBtn.style.display = 'none';
   addSteps.style.display = 'inline-block';
   resetSteps.style.display = 'inline-block';
+  
+  // Track final step count
+  trackSteps(currentSteps);
+  trackButtonClick('stop_step_tracking', 'steps_modal');
+  trackUserAction('step_tracking_stopped');
 }
 
 // Trigger reward popup
@@ -646,6 +697,15 @@ function showTip(index) {
   if (allDots[currentTipIndex]) {
     allDots[currentTipIndex].classList.add('active');
   }
+  
+  // Track health tip view
+  if (healthTipsData[index]) {
+    trackHealthTipView(
+      `tip_${index}`, 
+      healthTipsData[index].title,
+      4500 // duration of auto-cycling
+    );
+  }
 }
 
 // Start auto-cycling through tips
@@ -789,6 +849,10 @@ if (healthTipsBtn && healthTipsModal && closeHealthTips && tipsCarousel && carou
     const kcal = Math.round(activeMET * 3.5 * weightKg / 200 * minutes);
 
     caloriesDisplay.textContent = `Total: ${kcal} kcal`;
+
+    // Track calories burned
+    trackCaloriesBurned(active, kcal, minutes);
+    trackButtonClick('calculate_calories', 'calories_modal');
 
     // Progress bar
     const pct = Math.min((kcal / dailyGoalKcal) * 100, 100);
@@ -969,9 +1033,14 @@ function markGoalCompleted(goalId) {
   // Show motivational text
   displayMotivationalText();
   
+  // Track goal completion
+  trackGoalCompletion(goal.id, goal.text);
+  trackButtonClick('mark_goal_completed', 'daily_goals_modal');
+  
   // Check if all goals completed
   if (completedGoalsCount === dailyGoals.length) {
     triggerDailyGoalsReward();
+    trackUserAction('all_daily_goals_completed');
   }
   
   // Save state
