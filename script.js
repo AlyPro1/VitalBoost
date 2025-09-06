@@ -1427,3 +1427,33 @@ document.addEventListener("DOMContentLoaded", () => {
   counterElement.classList.add("counter-pulse");
   setTimeout(() => counterElement.classList.remove("counter-pulse"), 1200);
 });
+async function testOpenAI() {
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+
+  try {
+    const res = await fetch(`${supabaseUrl}/functions/v1/openai-chat`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": import.meta.env.VITE_SUPABASE_ANON_KEY,
+      },
+    });
+
+    if (!res.ok) {
+      const err = await res.text();
+      console.error("❌ Function error:", err);
+      alert("❌ Supabase → OpenAI connection failed");
+      return;
+    }
+
+    const data = await res.json();
+    console.log("✅ OpenAI reply:", data);
+    alert("✅ " + data.reply);
+  } catch (e) {
+    console.error("❌ Network error:", e);
+    alert("❌ Failed to reach Supabase function");
+  }
+}
+
+// Run the test once when the page loads
+testOpenAI();
