@@ -9,6 +9,8 @@ import {
   trackModalOpen,
   trackModalClose,
   trackButtonClick,
+  trackHealthQuery,
+  trackUserAction,
   initializeAnalytics
 } from './src/utils/supabaseAnalytics.js';
 
@@ -187,9 +189,6 @@ window.addEventListener("click", (event) => {
 // =============================
 // AI CHAT INTERACTIVITY LOGIC
 // =============================
-
-// Import analytics functions
-import { trackHealthQuery, trackModalOpen, trackModalClose, trackButtonClick, trackUserAction, initializeAnalytics } from './src/utils/supabaseAnalytics.js';
 
 // Select the chat elements from your HTML
 const chatMessages = document.getElementById('chatMessages');
