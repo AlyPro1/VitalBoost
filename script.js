@@ -1,24 +1,3 @@
-// Import analytics at the top of the file
-import { 
-  trackFitnessActivity, 
-  trackSteps, 
-  trackCaloriesBurned, 
-  trackDailyGoal, 
-  trackGoalCompletion,
-  trackHealthTipView,
-  trackModalOpen,
-  trackModalClose,
-  trackButtonClick,
-  trackHealthQuery,
-  trackUserAction,
-  initializeAnalytics
-} from './src/utils/supabaseAnalytics.js';
-
-// Initialize analytics when page loads
-document.addEventListener('DOMContentLoaded', () => {
-  initializeAnalytics();
-});
-
 // Floating images animation
 document.addEventListener("DOMContentLoaded", () => {
   const floatingElements = document.querySelectorAll(".floating-image");
