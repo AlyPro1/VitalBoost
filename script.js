@@ -1,3 +1,17 @@
+// --- Temporary stub analytics functions to prevent errors ---
+function trackFitnessActivity() {}
+function trackSteps() {}
+function trackCaloriesBurned() {}
+function trackDailyGoal() {}
+function trackGoalCompletion() {}
+function trackHealthTipView() {}
+function trackModalOpen() {}
+function trackModalClose() {}
+function trackButtonClick() {}
+function trackHealthQuery() {}
+function trackUserAction() {}
+function initializeAnalytics() {}
+
 // Floating images animation
 document.addEventListener("DOMContentLoaded", () => {
   const floatingElements = document.querySelectorAll(".floating-image");
