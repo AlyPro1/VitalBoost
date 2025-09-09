@@ -3372,3 +3372,53 @@ body {
   display: block;
   margin: 10px auto;
 }
+/* Quit Smoking button styled like a cigarette */
+.quit-smoking-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;          /* shorter length */
+  height: 32px;          /* slim cigarette */
+  background: linear-gradient(to right, #fff 85%, #d9a066 100%); /* white + small brown filter */
+  border-radius: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  border: 2px solid #ccc;
+  margin-bottom: 20px;   /* space above Get Started button */
+  overflow: hidden;
+}
+
+/* 🔥 Burning red tip */
+.quit-smoking-btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 12px;
+  height: 100%;
+  background: radial-gradient(circle at center, red 30%, orange 60%, transparent 100%);
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  box-shadow: 0 0 8px red, 0 0 15px orange;
+}
+
+/* 💨 Smoke animation */
+.quit-smoking-btn::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 5px;
+  width: 8px;
+  height: 30px;
+  background: rgba(200, 200, 200, 0.4);
+  border-radius: 50%;
+  animation: smoke 3s infinite ease-in-out;
+}
+
+@keyframes smoke {
+  0% { transform: translateY(0) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-15px) scale(1.3); opacity: 0.3; }
+  100% { transform: translateY(-30px) scale(1.6); opacity: 0; }
+}
