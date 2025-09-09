@@ -3359,3 +3359,16 @@ body {
     box-shadow: inset -10px 0 30px rgba(255, 80, 80, 1);
   }
 }
+/* Force buttons to stack vertically */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Ensure buttons don’t sit side by side */
+.cta-button,
+.quit-smoking-btn {
+  display: block;
+  margin: 10px auto;
+}
