@@ -3278,3 +3278,84 @@ body {
   will-change: background-position, text-shadow, opacity;
   -webkit-text-stroke: 0.5px white; /* optional for readability */
 }
+/* Quit Smoking Button - Cigarette Style */
+.quit-smoking-btn {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 12px 50px;
+  background: linear-gradient(to right, #ffffff 70%, #dba24a 30%);
+  border-radius: 25px;
+  border: 2px solid #ccc;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #000;
+  cursor: pointer;
+  position: relative;
+  box-shadow: inset -10px 0 20px rgba(255, 50, 50, 0.8);
+  animation: pulse-glow 2s infinite;
+  max-width: 280px;
+}
+
+/* Cigarette Burning Effect (Left Side) */
+.quit-smoking-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -15px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, red 30%, orange 60%, transparent 80%);
+  border-radius: 50%;
+  filter: blur(2px);
+  box-shadow: 0 0 10px red, 0 0 20px orange;
+}
+
+/* Smoke Animation */
+.smoke {
+  position: absolute;
+  left: -5px;
+  top: -25px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  animation: smoke-rise 4s infinite ease-in-out;
+  filter: blur(8px);
+}
+
+.smoke:nth-child(2) {
+  animation-delay: 1s;
+  left: 5px;
+}
+
+.smoke:nth-child(3) {
+  animation-delay: 2s;
+  left: 15px;
+}
+
+/* Keyframes for animations */
+@keyframes smoke-rise {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-40px) scale(1);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-80px) scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: inset -10px 0 20px rgba(255, 50, 50, 0.8);
+  }
+  50% {
+    box-shadow: inset -10px 0 30px rgba(255, 80, 80, 1);
+  }
+}
