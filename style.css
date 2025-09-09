@@ -3452,3 +3452,13 @@ button.cigarette-button span {
   50% { transform: translateY(-15px) scale(1.2); opacity: 0.2; }
   100% { transform: translateY(-30px) scale(1.4); opacity: 0; }
 }
+/* Ensure buttons stack vertically with spacing */
+.hero-content .cigarette-button,
+.hero-content .cta-button {
+  display: block;          /* stack on top of each other */
+  margin: 0 auto;          /* keep centered */
+}
+
+.hero-content .cigarette-button {
+  margin-bottom: 30px;     /* space between the two buttons */
+}
