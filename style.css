@@ -3372,19 +3372,3 @@ body {
   display: block;
   margin: 10px auto;
 }
-/* Keep buttons stacked neatly */
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Quit Smoking button (cigarette) */
-.quit-smoking-btn {
-  margin-bottom: 18px; /* space between Quit Smoking and Get Started */
-}
-
-/* Get Started button */
-.cta-button {
-  margin-top: 0; /* remove extra spacing */
-}
