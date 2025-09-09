@@ -3583,3 +3583,63 @@ button.cigarette-button span {
   50%  { transform: translateY(-20px) scale(1.2); opacity: 0.2; }
   100% { transform: translateY(-38px) scale(1.4); opacity: 0; }
 }
+/* Cigarette Button Styling - Fixed */
+.cigarette-button {
+  position: relative;
+  display: inline-block;
+  width: 280px;             /* adjusted width */
+  height: 40px;             /* taller for text */
+  margin: 0 auto 30px auto;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(to right, #ffffff 82%, #b5651d 100%); /* white body + brown filter */
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #222;
+  text-align: center;
+  line-height: 40px;        /* centers text vertically */
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  text-transform: uppercase;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Burning tip (doesn't push text anymore) */
+.cigarette-button .burning-tip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px;
+  height: 100%;
+  background: radial-gradient(circle, red 0%, orange 50%, transparent 70%);
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  animation: glow 1s infinite alternate;
+  z-index: 2;
+}
+
+/* Smoke */
+.cigarette-button .smoke {
+  position: absolute;
+  top: -28px;
+  left: 12px;
+  width: 14px;
+  height: 28px;
+  background: rgba(200,200,200,0.4);
+  border-radius: 50%;
+  animation: smoke 3s infinite ease-in-out;
+  z-index: 0;
+}
+
+@keyframes glow {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+@keyframes smoke {
+  0%   { transform: translateY(0) scale(1); opacity: 0.4; }
+  50%  { transform: translateY(-20px) scale(1.2); opacity: 0.2; }
+  100% { transform: translateY(-38px) scale(1.4); opacity: 0; }
+}
