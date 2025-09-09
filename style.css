@@ -3521,3 +3521,65 @@ button.cigarette-button span {
   50% { transform: translateY(-18px) scale(1.2); opacity: 0.2; }
   100% { transform: translateY(-35px) scale(1.4); opacity: 0; }
 }
+/* Cigarette Button Styling - Improved */
+.cigarette-button {
+  position: relative;
+  display: block;
+  width: 310px;            /* extra width for text comfort */
+  height: 38px;            /* slightly taller for balance */
+  margin: 0 auto 30px auto;
+  border: none;
+  border-radius: 19px;     /* rounded like cigarette edges */
+  background: linear-gradient(to right, #fdfdfd 85%, #b5651d 100%); /* white body + brown filter */
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  letter-spacing: 0.5px;   /* spacing like branding */
+  text-align: center;
+  line-height: 38px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  text-transform: uppercase;
+  text-shadow: 0 0 1px rgba(0,0,0,0.3); /* printed effect */
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Burning tip (left side) */
+.cigarette-button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px;
+  height: 100%;
+  background: radial-gradient(circle, red 0%, orange 40%, transparent 70%);
+  border-top-left-radius: 19px;
+  border-bottom-left-radius: 19px;
+  animation: glow 1s infinite alternate;
+}
+
+/* Smoke animation */
+.cigarette-button::after {
+  content: "";
+  position: absolute;
+  top: -28px;
+  left: 10px;
+  width: 12px;
+  height: 28px;
+  background: rgba(200,200,200,0.4);
+  border-radius: 50%;
+  animation: smoke 3s infinite ease-in-out;
+}
+
+@keyframes glow {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+@keyframes smoke {
+  0%   { transform: translateY(0) scale(1); opacity: 0.4; }
+  50%  { transform: translateY(-20px) scale(1.2); opacity: 0.2; }
+  100% { transform: translateY(-38px) scale(1.4); opacity: 0; }
+}
