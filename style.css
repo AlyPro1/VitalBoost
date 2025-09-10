@@ -3424,3 +3424,45 @@ body {
     opacity: 0;
   }
 }
+/* === Final: Multi Smoke Puffs (keep this, remove all other .smoke blocks) === */
+.cigarette-btn .smoke {
+  position: absolute;
+  left: -14px;        /* adjust this if your burning-tip is more/less left */
+  top: -30px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 18%, rgba(230,230,230,0.6) 45%, rgba(200,200,200,0.35) 70%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;      /* ensure smoke sits above everything */
+  filter: blur(3px);
+  animation: puff 5s infinite ease-in-out;
+}
+
+/* staggered puffs so they look like continuous flow */
+.cigarette-btn .smoke1 { animation-delay: 0s; }
+.cigarette-btn .smoke2 { animation-delay: 1.2s; }
+.cigarette-btn .smoke3 { animation-delay: 2.4s; }
+
+@keyframes puff {
+  0% {
+    transform: translateY(0) scale(0.5) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  45% {
+    transform: translateY(-40px) scale(1.05) translateX(-6px);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translateY(-80px) scale(1.45) translateX(-10px);
+    opacity: 0.25;
+  }
+  100% {
+    transform: translateY(-120px) scale(2.0) translateX(-14px);
+    opacity: 0;
+  }
+}
