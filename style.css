@@ -3436,3 +3436,43 @@ body {
   #quitSmokingBtn .qs-smoke { left:-14px; width:36px; height:36px; filter: blur(2px); }
   #quitSmokingBtn .qs-label { font-size: 12px; }
 }
+/* Smoke effect */
+.cigarette-btn .smoke {
+  position: absolute;
+  left: -18px; /* aligned near burning tip */
+  top: -25px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.9) 20%, rgba(200,200,200,0.6) 60%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  animation: puff 6s infinite;
+}
+
+.cigarette-btn .smoke1 { animation-delay: 0s; }
+.cigarette-btn .smoke2 { animation-delay: 2s; }
+.cigarette-btn .smoke3 { animation-delay: 4s; }
+
+@keyframes puff {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(-50px) scale(1.4);
+    opacity: 0.6;
+  }
+  80% {
+    transform: translateY(-100px) scale(2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-140px) scale(2.4);
+    opacity: 0;
+  }
+}
