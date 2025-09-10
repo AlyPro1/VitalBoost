@@ -3642,3 +3642,40 @@ body {
   animation-duration: 3s; /* faster smoke puffing */
   opacity: 1;
 }
+/* Smooth hover transition */
+.cigarette-btn {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+/* Hover effect on the cigarette */
+.cigarette-btn:hover {
+  transform: scale(1.07) rotate(-2deg); /* zoom & tilt */
+  box-shadow: 0 12px 24px rgba(0,0,0,0.35);
+}
+
+/* Ember glow intensifies on hover */
+.cigarette-btn:hover .burning-tip {
+  animation: ember-burst 0.8s infinite alternate;
+}
+
+@keyframes ember-burst {
+  0% {
+    box-shadow: 0 0 8px rgba(255,99,71,0.6),
+                0 0 14px rgba(255,69,0,0.7),
+                inset 0 0 5px rgba(255,140,0,0.6);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(255,140,0,1),
+                0 0 28px rgba(255,69,0,1),
+                inset 0 0 12px rgba(255,215,0,0.9);
+  }
+}
+
+/* Smoke speeds up on hover */
+.cigarette-btn:hover .smoke1,
+.cigarette-btn:hover .smoke2,
+.cigarette-btn:hover .smoke3 {
+  animation-duration: 3s; /* faster puff */
+  opacity: 1; /* make smoke more visible */
+}
