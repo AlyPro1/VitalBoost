@@ -3278,191 +3278,161 @@ body {
   will-change: background-position, text-shadow, opacity;
   -webkit-text-stroke: 0.5px white; /* optional for readability */
 }
-/* === Cigarette Button Final === */
-.cigarette-btn {
+/* ================= FINAL: Cigarette button (isolated, single block) ================= */
+#quitSmokingBtn.qs-cigarette {
+  --qb-width: 300px;
+  --qb-height: 42px;
+  --filter-color-a: #c08a3e;   /* filter color (right side) */
+  --filter-color-b: #b26e2f;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 280px;
-  height: 42px;
-  margin: 0 auto 25px auto;
-  border: 2px solid #ddd;
-  border-radius: 20px;
-  background: linear-gradient(to right, #fff 85%, #b5651d 100%); /* body + filter */
-  box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
+  display: block;
+  width: var(--qb-width);
+  height: var(--qb-height);
+  margin: 18px auto 28px auto;
+  padding: 0;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 22px;
+  background: linear-gradient(to right, #ffffff 0% 78%, var(--filter-color-a) 78% 100%);
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.06), 0 8px 22px rgba(0,0,0,0.06);
   cursor: pointer;
-  overflow: hidden;
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Text */
-.cigarette-btn .label {
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  font-weight: bold;
+/* label (center) */
+#quitSmokingBtn .qs-label{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 13px;
   color: #222;
+  letter-spacing: .4px;
   text-transform: uppercase;
-  z-index: 2;
-  margin-left: 22px; /* space from tip */
+  z-index: 6;
+  pointer-events: none;
+  user-select: none;
   white-space: nowrap;
 }
 
-/* Burning tip */
-.cigarette-btn .burning-tip {
+/* Burning-tip on LEFT (red/orange ember area) */
+#quitSmokingBtn .qs-burning-tip{
   position: absolute;
-  left: 0;
+  left: -10px;
   top: 0;
-  width: 18px;
+  width: 20px;
   height: 100%;
-  background: linear-gradient(to right, red 20%, orange 60%, #b5651d 100%);
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-  animation: glow 1s infinite alternate;
+  border-top-left-radius: 22px;
+  border-bottom-left-radius: 22px;
+  background: radial-gradient(circle at 35% 50%, #ff7a40 5%, #ff3c00 18%, #b5651d 65%, transparent 100%);
+  box-shadow: 0 0 14px 4px rgba(255,100,40,0.25);
+  z-index: 8;
+  transform-origin: center;
+  animation: qs-tip-glow 1.4s infinite ease-in-out;
 }
 
-@keyframes glow {
-  from { filter: brightness(0.9); }
-  to   { filter: brightness(1.4); }
-}
-
-/* Ash (shrinks away) */
-.cigarette-btn .ash {
+/* ember (small glowing dot on the paper next to tip) */
+#quitSmokingBtn .qs-ember{
   position: absolute;
-  left: 18px;
-  top: 6px;
-  width: 6px;
-  height: 30px;
-  background: #555;
-  border-radius: 3px;
-  animation: ashBurn 10s linear forwards;
-}
-
-@keyframes ashBurn {
-  0%   { height: 30px; top: 6px; }
-  100% { height: 0px; top: 36px; opacity: 0; }
-}
-
-/* Ember glow */
-.cigarette-btn .ember {
-  position: absolute;
-  left: 16px;
-  top: 12px;
+  left: 18px;                 /* sits just right of the tip */
+  top: 50%;
+  transform: translateY(-50%);
   width: 10px;
   height: 10px;
-  background: radial-gradient(circle, rgba(255,0,0,0.9) 20%, rgba(255,120,0,0.6) 60%, transparent 100%);
   border-radius: 50%;
-  animation: emberPulse 1.5s infinite ease-in-out;
-}
-
-@keyframes emberPulse {
-  0%   { transform: scale(0.8); opacity: 0.6; }
-  50%  { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(0.8); opacity: 0.6; }
-}
-
-/* --- Cigarette Button Fixes --- */
-
-/* make the filter (right side) more visible */
-.cigarette-button {
-  background: linear-gradient(to right, #ffffff 0% 80%, #c08a3e 80% 100%) !important;
-}
-
-/* Smoke puff effect */
-.cigarette-button .smoke {
-  position: absolute;
-  left: -8px;    /* align with burning tip */
-  top: -25px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(230,230,230,0.9) 20%, rgba(200,200,200,0.4) 60%, transparent 80%);
-  opacity: 0;
-  animation: puff 3s infinite;
+  background: radial-gradient(circle, #ff3b00 0%, #ff9a40 50%, rgba(255,140,60,0) 100%);
+  box-shadow: 0 0 10px 3px rgba(255,80,30,0.55);
+  z-index: 9;
+  animation: qs-ember-pulse 1.5s infinite ease-in-out;
   pointer-events: none;
 }
 
-/* smoke animation */
-@keyframes puff {
-  0%   { transform: translateY(0) scale(0.5); opacity: 0.4; }
-  40%  { transform: translateY(-20px) scale(1); opacity: 0.25; }
-  80%  { transform: translateY(-40px) scale(1.4); opacity: 0.1; }
-  100% { transform: translateY(-60px) scale(1.6); opacity: 0; }
-}
-/* Smoke effect */
-.cigarette-btn .smoke {
+/* ash piece right next to ember — subtle */
+#quitSmokingBtn .qs-ash{
   position: absolute;
-  left: -15px; /* near burning tip */
-  top: -20px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.9) 20%, rgba(200,200,200,0.4) 60%, transparent 100%);
-  opacity: 0;
+  left: 28px;
+  top: 8px;
+  width: 6px;
+  height: 26px;
+  border-radius: 3px;
+  background: linear-gradient(#666, #222);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  z-index: 7;
+  opacity: 0.95;
+  animation: qs-ash-burn 10s linear infinite;
   pointer-events: none;
-  z-index: 20;
-  animation: puff 5s infinite;
 }
 
-.cigarette-btn .smoke1 { animation-delay: 0s; }
-.cigarette-btn .smoke2 { animation-delay: 1.5s; }
-.cigarette-btn .smoke3 { animation-delay: 3s; }
-
-@keyframes puff {
-  0% {
-    transform: translateY(0) scale(0.5);
-    opacity: 0;
-  }
-  20% {
-    opacity: 0.8;
-  }
-  60% {
-    transform: translateY(-40px) scale(1.3);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translateY(-80px) scale(1.8);
-    opacity: 0;
-  }
-}
-/* === Final: Multi Smoke Puffs (keep this, remove all other .smoke blocks) === */
-.cigarette-btn .smoke {
+/* ========== SMOKE PUFFS ========== */
+/* base smoke puff style — three elements staggered */
+#quitSmokingBtn .qs-smoke{
   position: absolute;
-  left: -14px;        /* adjust this if your burning-tip is more/less left */
-  top: -30px;
+  left: -18px;            /* align with left burning tip (tweak if needed) */
+  top: -28px;
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.95) 18%, rgba(230,230,230,0.6) 45%, rgba(200,200,200,0.35) 70%, transparent 100%);
-  opacity: 0;
-  pointer-events: none;
-  z-index: 9999;      /* ensure smoke sits above everything */
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 18%, rgba(240,240,240,0.75) 36%, rgba(210,210,210,0.45) 62%, transparent 100%);
   filter: blur(3px);
-  animation: puff 5s infinite ease-in-out;
+  opacity: 0;
+  z-index: 9999;          /* force above everything */
+  pointer-events: none;
+  animation: qs-puff 5.2s infinite ease-in-out;
 }
 
-/* staggered puffs so they look like continuous flow */
-.cigarette-btn .smoke1 { animation-delay: 0s; }
-.cigarette-btn .smoke2 { animation-delay: 1.2s; }
-.cigarette-btn .smoke3 { animation-delay: 2.4s; }
+/* staggered puffs */
+#quitSmokingBtn .qs-smoke1{ animation-delay: 0s; }
+#quitSmokingBtn .qs-smoke2{ animation-delay: 1.6s; }
+#quitSmokingBtn .qs-smoke3{ animation-delay: 3.2s; }
 
-@keyframes puff {
+/* ========== KEYFRAMES ========== */
+@keyframes qs-tip-glow {
+  0%   { filter: brightness(0.9); transform: translateY(0) rotate(0.0deg); opacity:0.95; }
+  50%  { filter: brightness(1.35); transform: translateY(-1px) rotate(-0.2deg); opacity:1; }
+  100% { filter: brightness(0.95); transform: translateY(0) rotate(0.0deg); opacity:0.96; }
+}
+
+@keyframes qs-ember-pulse {
+  0%   { transform: translateY(-50%) scale(0.85); opacity: 0.7; filter: brightness(0.9); }
+  50%  { transform: translateY(-52%) scale(1.15); opacity: 1; filter: brightness(1.3); }
+  100% { transform: translateY(-50%) scale(0.9); opacity: 0.75; filter: brightness(0.95); }
+}
+
+@keyframes qs-ash-burn {
+  0%   { height: 26px; top: 8px; opacity: 1; transform: scaleY(1); }
+  50%  { height: 14px; top: 14px; opacity: 0.7; transform: scaleY(0.55); }
+  100% { height: 26px; top: 8px; opacity: 1; transform: scaleY(1); }
+}
+
+/* puff animation — grows, drifts slightly left, fades out */
+@keyframes qs-puff {
   0% {
-    transform: translateY(0) scale(0.5) translateX(0);
+    transform: translateY(0) translateX(0) scale(0.5);
     opacity: 0;
   }
-  10% {
+  12% {
     opacity: 0.85;
   }
-  45% {
-    transform: translateY(-40px) scale(1.05) translateX(-6px);
-    opacity: 0.6;
+  46% {
+    transform: translateY(-40px) translateX(-6px) scale(1.05);
+    opacity: 0.55;
   }
-  75% {
-    transform: translateY(-80px) scale(1.45) translateX(-10px);
-    opacity: 0.25;
+  78% {
+    transform: translateY(-90px) translateX(-10px) scale(1.6);
+    opacity: 0.18;
   }
   100% {
-    transform: translateY(-120px) scale(2.0) translateX(-14px);
+    transform: translateY(-140px) translateX(-14px) scale(2.1);
     opacity: 0;
   }
+}
+
+/* responsive: shrink on small screens */
+@media (max-width: 480px) {
+  #quitSmokingBtn.qs-cigarette { --qb-width: 230px; --qb-height: 36px; width: var(--qb-width); height: var(--qb-height); border-radius: 18px; }
+  #quitSmokingBtn .qs-burning-tip { left:-8px; width:16px; }
+  #quitSmokingBtn .qs-smoke { left:-14px; width:36px; height:36px; filter: blur(2px); }
+  #quitSmokingBtn .qs-label { font-size: 12px; }
 }
