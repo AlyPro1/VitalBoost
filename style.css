@@ -3476,3 +3476,119 @@ body {
     opacity: 0;
   }
 }
+/* Cigarette Button Base */
+.cigarette-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 260px;
+  height: 55px;
+  background: linear-gradient(to right, #dcdcdc 0%, #ffffff 80%, #f5f5f5 100%);
+  border-radius: 30px;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  overflow: hidden;
+  margin: 20px auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Burning tip */
+.cigarette-btn .burning-tip {
+  position: absolute;
+  left: -18px;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(to right, #ff4500, #b22222);
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  box-shadow: 0 0 8px rgba(255,69,0,0.8), 0 0 15px rgba(178,34,34,0.6);
+}
+
+/* Ash shrinking effect */
+.cigarette-btn .ash {
+  position: absolute;
+  left: -8px;
+  width: 8px;
+  height: 100%;
+  background: #555;
+  border-radius: 4px;
+  animation: ash-burn 6s infinite linear;
+}
+@keyframes ash-burn {
+  0% { height: 100%; opacity: 1; }
+  100% { height: 10%; opacity: 0.2; }
+}
+
+/* Filter (right side, more visible now) */
+.cigarette-btn::after {
+  content: '';
+  position: absolute;
+  right: -25px;
+  width: 25px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    #f8d27a,
+    #f8d27a 6px,
+    #e6b85c 6px,
+    #e6b85c 12px
+  );
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-left: 2px solid #cfa94d;
+}
+
+/* Label */
+.cigarette-btn .label {
+  position: relative;
+  z-index: 5;
+}
+
+/* Smoke layers */
+.cigarette-btn .smoke1,
+.cigarette-btn .smoke2,
+.cigarette-btn .smoke3 {
+  position: absolute;
+  left: -30px; /* near burning tip */
+  bottom: 50%;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 20%, rgba(200,200,200,0.5) 60%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  animation: smoke-drift 6s infinite;
+}
+
+/* Individual timing + size variations */
+.cigarette-btn .smoke1 { animation-delay: 0s; transform: scale(0.8); }
+.cigarette-btn .smoke2 { animation-delay: 2s; transform: scale(1); }
+.cigarette-btn .smoke3 { animation-delay: 4s; transform: scale(1.2); }
+
+@keyframes smoke-drift {
+  0% {
+    transform: translate(0, 0) scale(0.7);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-10px, -40px) scale(1.1);
+    opacity: 0.5;
+  }
+  80% {
+    transform: translate(15px, -70px) scale(1.4);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(-20px, -100px) scale(1.8);
+    opacity: 0;
+  }
+}
