@@ -3663,3 +3663,105 @@ body {
   animation-duration: 2s !important;
   opacity: 1 !important;
 }
+/* ================================
+   Quit Smoking Cigarette Button
+   ================================ */
+.qs-cigarette {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 60px;
+  margin: 20px 0;
+  background: linear-gradient(to right, #ffffff 80%, #d4a373 20%);
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  animation: floaty 3s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.qs-cigarette:hover {
+  transform: scale(1.05) rotate(-2deg);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Burning red tip */
+.qs-burning-tip {
+  position: absolute;
+  left: 0;
+  width: 15px;
+  height: 100%;
+  background: linear-gradient(to right, #ff0000, #ff8800);
+  border-radius: 10px 0 0 10px;
+  box-shadow: 0 0 6px rgba(255, 0, 0, 0.8);
+  animation: emberGlow 1.5s infinite alternate;
+}
+
+/* Ash shrinking */
+.qs-ash {
+  position: absolute;
+  right: 0;
+  width: 8px;
+  height: 100%;
+  background: #d4a373;
+  border-radius: 0 10px 10px 0;
+}
+
+/* Ember glow */
+.qs-ember {
+  position: absolute;
+  left: 0;
+  width: 15px;
+  height: 100%;
+  border-radius: 10px 0 0 10px;
+  box-shadow: 0 0 8px rgba(255, 50, 50, 0.8);
+  opacity: 0.8;
+}
+
+/* Label text */
+.qs-label {
+  position: relative;
+  z-index: 2;
+  color: #333;
+  white-space: nowrap;
+}
+
+/* Smoke puffs */
+.qs-smoke {
+  position: absolute;
+  top: -30px;
+  left: -10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 30%, rgba(200, 200, 200, 0.4) 70%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.qs-smoke1 { animation: puff 4s infinite; }
+.qs-smoke2 { animation: puff 4s infinite 1.3s; }
+.qs-smoke3 { animation: puff 4s infinite 2.6s; }
+
+/* Animations */
+@keyframes puff {
+  0%   { transform: translateY(0) scale(0.5); opacity: 0; }
+  20%  { opacity: 0.7; }
+  60%  { transform: translateY(-40px) scale(1.2); opacity: 0.5; }
+  100% { transform: translateY(-80px) scale(1.6); opacity: 0; }
+}
+
+@keyframes emberGlow {
+  from { box-shadow: 0 0 4px rgba(255, 50, 50, 0.6); }
+  to   { box-shadow: 0 0 12px rgba(255, 0, 0, 1); }
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
