@@ -3441,3 +3441,28 @@ body {
     opacity: 0;
   }
 }
+/* Multi Smoke Puffs */
+.cigarette-btn .smoke {
+  position: absolute;
+  left: -10px;  /* place at burning tip */
+  top: -25px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.9) 25%, rgba(200,200,200,0.5) 60%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 50; /* force above button */
+  animation: puff 5s infinite;
+}
+
+.cigarette-btn .smoke1 { animation-delay: 0s; }
+.cigarette-btn .smoke2 { animation-delay: 1.5s; }
+.cigarette-btn .smoke3 { animation-delay: 3s; }
+
+@keyframes puff {
+  0%   { transform: translateY(0) scale(0.5); opacity: 0; }
+  10%  { opacity: 0.8; }
+  50%  { transform: translateY(-40px) scale(1.2); opacity: 0.5; }
+  100% { transform: translateY(-90px) scale(1.8); opacity: 0; }
+}
