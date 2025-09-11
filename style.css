@@ -3663,3 +3663,32 @@ body {
   animation-duration: 2s !important;
   opacity: 1 !important;
 }
+/* CSS for the "How To Quit Smoking" button glow and animation */
+#quitSmokingBtn {
+  /* Ensure smooth transitions for all animated properties */
+  transition: all 0.4s ease-in-out;
+  /* Initial subtle glow for the pulsing effect */
+  box-shadow: 0 0 8px rgba(255, 102, 0, 0.6), 0 0 15px rgba(255, 193, 7, 0.3);
+  /* Apply the continuous pulsing animation */
+  animation: pulse-glow 2s infinite alternate;
+}
+
+/* Keyframes for the continuous subtle pulsing glow */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 8px rgba(255, 102, 0, 0.6), 0 0 15px rgba(255, 193, 7, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 102, 0, 1), 0 0 25px rgba(255, 193, 7, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(255, 102, 0, 0.6), 0 0 15px rgba(255, 193, 7, 0.3);
+  }
+}
+
+/* Hover effects for the button */
+#quitSmokingBtn:hover {
+  transform: scale(1.03); /* Gentle scale-up */
+  /* More intense glow on hover */
+  box-shadow: 0 0 25px rgba(255, 102, 0, 1), 0 0 40px rgba(255, 193, 7, 0.8), 0 0 60px rgba(255, 193, 7, 0.5);
+}
