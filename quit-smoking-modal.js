@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Elements
   const quitSmokingBtn = document.getElementById('quitSmokingBtn');
   const quitSmokingModal = document.getElementById('quitSmokingModal');
   const closeQuitSmokingModal = document.getElementById('closeQuitSmokingModal');
 
-  // Calculator elements (may be inside modal)
+  // Calculator elements
   const cigarettesPerDayInput = document.getElementById('cigarettesPerDay');
   const costPerPackInput = document.getElementById('costPerPack');
   const cigarettesPerPackInput = document.getElementById('cigarettesPerPack');
@@ -12,206 +11,135 @@ document.addEventListener('DOMContentLoaded', () => {
   const weeklySavingsDisplay = document.getElementById('weeklySavings');
   const yearlySavingsDisplay = document.getElementById('yearlySavings');
 
-  // Progress circle elements (may be inside modal)
-  const circleElement = document.querySelector('.money-saved-meter .circle');
-  const circleText = document.querySelector('.money-saved-meter .circle-text');
-
-  // Butterfly container
-  const butterflyContainer = document.querySelector('.butterfly-effect');
-
-  // Dynamic <style> for runtime keyframes
-  let dynamicStyleEl = document.getElementById('qs-dynamic-styles');
-  if (!dynamicStyleEl) {
-    dynamicStyleEl = document.createElement('style');
-    dynamicStyleEl.id = 'qs-dynamic-styles';
-    document.head.appendChild(dynamicStyleEl);
-  }
-  const dynamicSheet = dynamicStyleEl.sheet;
-
-  // Safe helpers
-  function safeText(el, value) { if (el) el.textContent = value; }
-
-  // Calculator logic
+  // Function to calculate savings
   function calculateSavings() {
-    if (!dailySavingsDisplay || !weeklySavingsDisplay || !yearlySavingsDisplay) return;
-
-    const cigarettesPerDay = parseFloat(cigarettesPerDayInput?.value) || 0;
-    const costPerPack = parseFloat(costPerPackInput?.value) || 0;
-    const cigarettesPerPack = parseFloat(cigarettesPerPackInput?.value) || 1;
+    const cigarettesPerDay = parseFloat(cigarettesPerDayInput.value) || 0;
+    const costPerPack = parseFloat(costPerPackInput.value) || 0;
+    const cigarettesPerPack = parseFloat(cigarettesPerPackInput.value) || 1; // Avoid division by zero
 
     if (cigarettesPerDay <= 0 || costPerPack <= 0 || cigarettesPerPack <= 0) {
-      safeText(dailySavingsDisplay, '$0.00');
-      safeText(weeklySavingsDisplay, '$0.00');
-      safeText(yearlySavingsDisplay, '$0.00');
+      dailySavingsDisplay.textContent = '$0.00';
+      weeklySavingsDisplay.textContent = '$0.00';
+      yearlySavingsDisplay.textContent = '$0.00';
       return;
     }
 
-    const costPerCig = costPerPack / cigarettesPerPack;
-    const daily = cigarettesPerDay * costPerCig;
-    const weekly = daily * 7;
-    const yearly = daily * 365;
+    const costPerCigarette = costPerPack / cigarettesPerPack;
+    const dailySavings = cigarettesPerDay * costPerCigarette;
+    const weeklySavings = dailySavings * 7;
+    const yearlySavings = dailySavings * 365;
 
-    safeText(dailySavingsDisplay, `$${daily.toFixed(2)}`);
-    safeText(weeklySavingsDisplay, `$${weekly.toFixed(2)}`);
-    safeText(yearlySavingsDisplay, `$${yearly.toFixed(2)}`);
+    dailySavingsDisplay.textContent = `$${dailySavings.toFixed(2)}`;
+    weeklySavingsDisplay.textContent = `$${weeklySavings.toFixed(2)}`;
+    yearlySavingsDisplay.textContent = `$${yearlySavings.toFixed(2)}`;
   }
 
-  // Wire calculator inputs (guarded)
-  try {
-    if (cigarettesPerDayInput) cigarettesPerDayInput.addEventListener('input', calculateSavings);
-    if (costPerPackInput) costPerPackInput.addEventListener('input', calculateSavings);
-    if (cigarettesPerPackInput) cigarettesPerPackInput.addEventListener('input', calculateSavings);
-  } catch (err) {
-    console.warn('Calculator binding error', err);
-  }
+  // Add event listeners for calculator inputs
+  cigarettesPerDayInput.addEventListener('input', calculateSavings);
+  costPerPackInput.addEventListener('input', calculateSavings);
+  cigarettesPerPackInput.addEventListener('input', calculateSavings);
 
-  // Initial calculation attempt
+  // Initial calculation when modal opens or page loads
   calculateSavings();
 
-  // Modal open/close logic (guarded & idempotent)
+  // Modal open/close logic
   if (quitSmokingBtn && quitSmokingModal && closeQuitSmokingModal) {
     quitSmokingBtn.addEventListener('click', () => {
-      try {
-        // open modal
-        quitSmokingModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        // refresh visuals
-        calculateSavings();
-        updateSmokeFreeProgress(15); // example, replace with real value later
-        // start butterflies (safe)
-        generateButterfliesSafely();
-      } catch (err) {
-        console.error('Error opening Quit Smoking modal:', err);
-      }
+      quitSmokingModal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      generateButterflies(); // Start cinematic effects
     });
 
-    closeQuitSmokingModal.addEventListener('click', closeModalSafely);
+    closeQuitSmokingModal.addEventListener('click', () => {
+      quitSmokingModal.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+      clearButterflies(); // Stop cinematic effects
+    });
 
     // Close when clicking outside the modal content
     quitSmokingModal.addEventListener('click', (event) => {
-      if (event.target === quitSmokingModal) closeModalSafely();
+      if (event.target === quitSmokingModal) {
+        quitSmokingModal.classList.remove('active');
+        document.body.style.overflow = '';
+        clearButterflies();
+      }
     });
 
     // Close with Escape key
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && quitSmokingModal.classList.contains('active')) {
-        closeModalSafely();
+        quitSmokingModal.classList.remove('active');
+        document.body.style.overflow = '';
+        clearButterflies();
       }
     });
-  } else {
-    console.warn('Quit smoking elements not found (quitSmokingBtn or quitSmokingModal).');
   }
 
-  function closeModalSafely() {
-    try {
-      quitSmokingModal.classList.remove('active');
-      document.body.style.overflow = '';
-      clearButterflies();
-    } catch (err) {
-      console.error('Error closing Quit Smoking modal:', err);
-    }
-  }
-
-  // Progress circle updater (safe)
-  function updateSmokeFreeProgress(days) {
-    if (!circleElement || !circleText) return;
-    const radius = 15.9155; // SVG radius used
-    const circumference = 2 * Math.PI * radius;
-    const maxDays = 30;
-    const progress = Math.max(0, Math.min(1, days / maxDays));
-    const dash = (progress * circumference).toFixed(2);
-    circleElement.style.strokeDasharray = `${dash} ${circumference}`;
-    circleText.textContent = Math.round(days);
-  }
-
-  // ------------------------------
-  // Butterflies: robust generation
-  // ------------------------------
-  let butterflyCounter = 0;
-  let activeButterflies = [];
+  // Cinematic Butterflies (JS for dynamic generation and movement)
+  const butterflyContainer = document.querySelector('.butterfly-effect');
+  let butterflyIntervals = [];
 
   function createButterfly() {
-    if (!butterflyContainer) return null;
-
-    const idSuffix = `qsfly_${Date.now().toString(36)}_${Math.floor(Math.random()*10000)}`;
-    const keyframeName = `qsFly_${idSuffix}`;
-
-    // define unique keyframes to avoid collisions and avoid writing into cross-origin sheets
-    const p1x = Math.round((Math.random() * 120 - 60)); // px
-    const p1y = Math.round((Math.random() * 120 - 60));
-    const p2x = Math.round((Math.random() * 120 - 60));
-    const p2y = Math.round((Math.random() * 120 - 60));
-    const duration = (Math.random() * 8 + 6).toFixed(2) + 's';
-    const rotate1 = Math.round(Math.random() * 360);
-    const rotate2 = Math.round(Math.random() * 360);
-
-    const frames = `
-      @keyframes ${keyframeName} {
-        0% { transform: translate(0px, 0px) rotate(0deg); }
-        25% { transform: translate(${p1x}px, ${p1y}px) rotate(${rotate1}deg); }
-        50% { transform: translate(${p2x}px, ${p2y}px) rotate(${rotate2}deg); }
-        75% { transform: translate(${p1x/2}px, ${p1y/2}px) rotate(${rotate1/2}deg); }
-        100% { transform: translate(0px, 0px) rotate(0deg); }
-      }
-    `;
-    try {
-      // append keyframes to our dedicated dynamic style element
-      dynamicSheet.insertRule(frames, dynamicSheet.cssRules.length);
-    } catch (err) {
-      // If insertRule fails (very rare), log and continue (but animation won't be unique)
-      console.warn('Could not insert keyframes for butterfly', err);
-    }
-
-    // create DOM node
     const butterfly = document.createElement('div');
-    butterfly.className = 'qs-butterfly';
-    butterfly.style.width = `${Math.random() * 22 + 12}px`;
+    butterfly.className = 'butterfly';
+    butterfly.style.width = `${Math.random() * 20 + 10}px`; // Random size
     butterfly.style.height = butterfly.style.width;
+    butterfly.style.background = `hsl(${Math.random() * 360}, 70%, 70%)`; // Random color
+    butterfly.style.borderRadius = '50%';
     butterfly.style.position = 'absolute';
-    // Use percentages relative to container instead of vw/vh
-    butterfly.style.left = `${Math.random() * 90}%`;
-    butterfly.style.top = `${Math.random() * 80}%`;
-    butterfly.style.opacity = (Math.random() * 0.6 + 0.3).toString();
-    butterfly.style.zIndex = 0;
-    butterfly.style.pointerEvents = 'none';
-    butterfly.style.transformOrigin = 'center center';
-    butterfly.style.animation = `${keyframeName} ${duration} infinite ease-in-out`;
-    // simple visual (svg-like) — you can replace with an actual SVG background later
-    butterfly.innerHTML = `<svg viewBox="0 0 24 24" width="100%" height="100%" aria-hidden="true"><path d="M2 12c6-4 11 1 11 1s5-5 11-1c-3 4-8 4-11 4S5 16 2 12z" fill="rgba(255,255,255,0.8)"/></svg>`;
+    butterfly.style.left = `${Math.random() * 100}vw`;
+    butterfly.style.top = `${Math.random() * 100}vh`;
+    butterfly.style.opacity = Math.random() * 0.5 + 0.3;
+    butterfly.style.filter = 'blur(1px)';
+    butterfly.style.animation = `fly ${Math.random() * 10 + 5}s infinite alternate ease-in-out`;
     butterflyContainer.appendChild(butterfly);
 
-    activeButterflies.push(butterfly);
-    butterflyCounter++;
+    // Define keyframes dynamically for each butterfly
+    const styleSheet = document.styleSheets[0];
+    const flyKeyframes = `@keyframes fly {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) rotate(${Math.random() * 360}deg); }
+      50% { transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) rotate(${Math.random() * 360}deg); }
+      75% { transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) rotate(${Math.random() * 360}deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }`;
+    styleSheet.insertRule(flyKeyframes, styleSheet.cssRules.length);
+
     return butterfly;
   }
 
-  function generateButterfliesSafely() {
-    try {
-      clearButterflies();
-      // create up to 10 butterflies but be conservative on small screens
-      const count = window.innerWidth < 640 ? 4 : 8;
-      for (let i = 0; i < count; i++) createButterfly();
-    } catch (err) {
-      console.error('generateButterfliesSafely failed', err);
+  function generateButterflies() {
+    clearButterflies(); // Clear any existing butterflies first
+    for (let i = 0; i < 10; i++) { // Generate 10 butterflies
+      const butterfly = createButterfly();
+      // Store interval to remove later if needed, though CSS animation handles movement
+      // For more complex JS-driven movement, an interval per butterfly would be needed.
     }
   }
 
   function clearButterflies() {
-    // remove nodes
-    activeButterflies.forEach(b => {
-      if (b && b.parentNode) b.parentNode.removeChild(b);
-    });
-    activeButterflies = [];
+    butterflyIntervals.forEach(interval => clearInterval(interval));
+    butterflyIntervals = [];
+    while (butterflyContainer.firstChild) {
+      butterflyContainer.removeChild(butterflyContainer.firstChild);
+    }
   }
 
-  // Expose for debugging from console
-  window.__qs = {
-    generateButterflies: generateButterfliesSafely,
-    clearButterflies,
-    calculateSavings,
-    updateSmokeFreeProgress
-  };
+  // Example of how to update progress circle (for "Smoke Free Days")
+  // You would integrate this with your actual data
+  function updateSmokeFreeProgress(days) {
+    const circle = document.querySelector('.money-saved-meter .circle');
+    const circleText = document.querySelector('.money-saved-meter .circle-text');
+    const radius = circle.r.baseVal.value;
+    const circumference = 2 * Math.PI * radius;
 
-  // Final safety: ensure progress circle uses initial values
-  updateSmokeFreeProgress(15);
+    const maxDays = 30; // Example max days for 100% progress
+    const progress = (days / maxDays) * 100;
+
+    circle.style.strokeDasharray = `${(progress / 100) * circumference} ${circumference}`;
+    circleText.textContent = days;
+  }
+
+  // Call this function with actual smoke-free days
+  updateSmokeFreeProgress(15); // Example: 15 smoke-free days
 });
