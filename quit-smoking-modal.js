@@ -130,7 +130,13 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateSmokeFreeProgress(days) {
     const circle = document.querySelector('.money-saved-meter .circle');
     const circleText = document.querySelector('.money-saved-meter .circle-text');
-    const radius = circle.r.baseVal.value;
+    
+    // Add null checks to prevent errors if elements are not found
+    if (!circle || !circleText) {
+      return;
+    }
+    
+    const radius = 15.9155; // Use the radius value from the SVG path's d attribute
     const circumference = 2 * Math.PI * radius;
 
     const maxDays = 30; // Example max days for 100% progress
