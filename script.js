@@ -1487,4 +1487,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // Pulse glow effect
   counterElement.classList.add("counter-pulse");
   setTimeout(() => counterElement.classList.remove("counter-pulse"), 1200);
-});
+}); 
