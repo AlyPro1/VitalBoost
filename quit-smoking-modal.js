@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateSmokeFreeProgress(days) {
     const circle = document.querySelector('.money-saved-meter .circle');
     const circleText = document.querySelector('.money-saved-meter .circle-text');
-    const radius = circle.r.baseVal.value;
+    const radius = 15.9155;
     const circumference = 2 * Math.PI * radius;
 
     const maxDays = 30; // Example max days for 100% progress
