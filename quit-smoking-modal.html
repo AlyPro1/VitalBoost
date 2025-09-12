@@ -1,227 +1,332 @@
-<div id="quitSmokingModal" class="quit-smoking-modal-overlay">
-  <div class="quit-smoking-modal-container">
-    <!-- Cinematic Background Elements -->
-    <div class="cinematic-bg">
-      <div class="smoke-effect"></div>
-      <div class="particle-effect"></div>
-      <div class="butterfly-effect"></div>
-      <div class="forest-silhouette"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quit Smoking Modal</title>
+    <link rel="stylesheet" href="quit-smoking-modal.css">
+</head>
+<body>
+    <!-- Quit Smoking Modal -->
+    <div id="quitSmokingModal" class="quit-modal-overlay">
+        <div class="quit-modal-container">
+            <!-- Close Button -->
+            <button class="quit-modal-close" id="closeQuitModal">&times;</button>
+            
+            <!-- Header Section -->
+            <div class="quit-modal-header">
+                <div class="header-logo">
+                    <div class="logo-icon">🏥</div>
+                    <span class="logo-text">Health & Fitness</span>
+                </div>
+                <div class="header-nav">
+                    <span class="nav-item">Advising</span>
+                    <span class="nav-item">Products</span>
+                    <button class="nav-btn">JOIN NCT</button>
+                </div>
+            </div>
+
+            <!-- Hero Section with Cinematic Background -->
+            <div class="quit-hero-section">
+                <!-- Animated Background Elements -->
+                <div class="cinematic-bg">
+                    <div class="smoke-particles"></div>
+                    <div class="floating-butterflies">
+                        <div class="butterfly butterfly-1">🦋</div>
+                        <div class="butterfly butterfly-2">🦋</div>
+                        <div class="butterfly butterfly-3">🦋</div>
+                    </div>
+                    <div class="forest-silhouette"></div>
+                    <div class="glowing-particles">
+                        <div class="particle particle-1"></div>
+                        <div class="particle particle-2"></div>
+                        <div class="particle particle-3"></div>
+                        <div class="particle particle-4"></div>
+                        <div class="particle particle-5"></div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="quit-hero-content">
+                    <div class="hero-left">
+                        <h1 class="hero-title">
+                            BREATHE FREE.<br>
+                            <span class="hero-subtitle">QUIT SMOKING STARTS TODAY.</span>
+                        </h1>
+                        <p class="hero-description">
+                            <span class="highlight-text">Tobacco and lung disease</span> WOW effects. 
+                            <span class="highlight-text">Harmful lung WOW</span> effects.
+                        </p>
+
+                        <!-- Input Forms -->
+                        <div class="input-section">
+                            <div class="input-group">
+                                <label>How long you smoked?</label>
+                                <select class="custom-select">
+                                    <option>Choose period</option>
+                                    <option>Less than 1 year</option>
+                                    <option>1-5 years</option>
+                                    <option>5-10 years</option>
+                                    <option>10+ years</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>How long you smoked</label>
+                                <select class="custom-select">
+                                    <option>More 1 Timeless</option>
+                                    <option>1-5 cigarettes/day</option>
+                                    <option>5-10 cigarettes/day</option>
+                                    <option>10-20 cigarettes/day</option>
+                                    <option>20+ cigarettes/day</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Buy long financial Milestone</label>
+                                <div class="milestone-input">
+                                    <span>Month 1 Milestone Achieved</span>
+                                    <div class="progress-dots">
+                                        <div class="dot active"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculator Widget -->
+                    <div class="calculator-widget">
+                        <div class="widget-header">
+                            <span class="widget-title">Mini Calculator Widget</span>
+                        </div>
+                        
+                        <div class="calculator-item">
+                            <span class="calc-label">Cigarettes per day</span>
+                            <div class="calc-display">
+                                <span class="calc-number">10</span>
+                                <div class="calc-controls">
+                                    <button class="calc-btn">-</button>
+                                    <button class="calc-btn">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="calculator-item">
+                            <span class="calc-label">$ YOU'LL SAVE 56,800 PER YEAR</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%"></div>
+                            </div>
+                            <div class="calc-controls">
+                                <button class="calc-btn">-</button>
+                                <button class="calc-btn">+</button>
+                            </div>
+                        </div>
+
+                        <div class="calculator-item">
+                            <span class="calc-label">$ YOU'LL SAVE 56,800 PER YEAR</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                            <div class="calc-controls">
+                                <button class="calc-btn">-</button>
+                                <button class="calc-btn">+</button>
+                            </div>
+                        </div>
+
+                        <div class="health-message">
+                            <div class="heart-icon">❤️</div>
+                            <span>YOUR LUNG CAPACITY IMPROVES IN 6 MONTHS<br>YOU'LL ADD 5 YEARS TO LIFE</span>
+                        </div>
+
+                        <button class="start-journey-btn">START YOUR JOURNEY</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personalized Quit Plan Section -->
+            <div class="quit-plan-section">
+                <h2 class="section-title">
+                    Personalized Quit Plan 
+                    <span class="ai-badge">AI Powered</span>
+                </h2>
+
+                <div class="plan-metrics">
+                    <div class="metric-card">
+                        <div class="metric-icon">🔥</div>
+                        <div class="metric-circle">
+                            <div class="circle-progress" data-progress="85">
+                                <span class="circle-text">Smoke Free<br><strong>85</strong><br>Days</span>
+                            </div>
+                        </div>
+                        <p class="metric-label">Streak: 7 Days</p>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-circle money-saved">
+                            <div class="circle-progress" data-progress="65">
+                                <div class="money-icons">
+                                    <span class="money-icon">💵</span>
+                                    <span class="money-icon">💵</span>
+                                    <span class="money-icon">💵</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="metric-label">Money Saved Meter</p>
+                        <p class="metric-value">$328 Saved</p>
+                    </div>
+
+                    <div class="metric-card">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-circle money-saved">
+                            <div class="circle-progress" data-progress="80">
+                                <div class="money-icons">
+                                    <span class="money-icon">💵</span>
+                                    <span class="money-icon">💵</span>
+                                    <span class="money-icon">💵</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="metric-value">$730 Saved</p>
+                    </div>
+
+                    <div class="coping-section">
+                        <h3 class="coping-title">Coping stracker</h3>
+                        <div class="coping-items">
+                            <div class="coping-item">
+                                <span class="coping-icon">🧠</span>
+                                <span class="coping-text">Coping strategies<br><small>Outsmart stress</small></span>
+                            </div>
+                            <div class="coping-item">
+                                <span class="coping-icon">🧘</span>
+                                <span class="coping-text">Meditation</span>
+                            </div>
+                            <div class="coping-item">
+                                <span class="coping-icon">⏰</span>
+                                <span class="coping-text">Priority Streaks<br><small>milestones</small></span>
+                            </div>
+                        </div>
+                        <div class="lung-health">
+                            <div class="lung-icon">🫁</div>
+                            <span class="lung-text">Health: 9 Days</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gamified Tracker Section -->
+            <div class="gamified-section">
+                <h2 class="section-title">Gamified Tracker</h2>
+                
+                <div class="tracker-content">
+                    <div class="challenge-card">
+                        <div class="challenge-icon">🏆</div>
+                        <div class="challenge-info">
+                            <h3>Quit Together</h3>
+                            <p>Challenge - 30 Days</p>
+                        </div>
+                    </div>
+
+                    <div class="coach-section">
+                        <div class="coach-avatar">
+                            <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Coach" class="coach-img">
+                        </div>
+                        <div class="coach-info">
+                            <h4>Coach Vital Boost</h4>
+                            <p>Take 60 second breath each day. Remember to breathe. A mindful breath helps you stay focused.</p>
+                        </div>
+                        <div class="coach-controls">
+                            <button class="coach-btn">🎤</button>
+                            <button class="coach-btn">⏸️</button>
+                        </div>
+                    </div>
+
+                    <div class="stats-display">
+                        <div class="big-stat">
+                            <span class="stat-number">1,200</span>
+                            <span class="stat-label">people are<br>co quitting with you today</span>
+                        </div>
+                        <div class="user-avatar">
+                            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100" alt="User" class="user-img">
+                        </div>
+                    </div>
+
+                    <div class="leaderboard">
+                        <h3>Leaderboard</h3>
+                        <div class="leaderboard-item">
+                            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=50" alt="User" class="leader-avatar">
+                            <div class="leader-info">
+                                <span class="leader-name">Linda - 30 Days</span>
+                                <span class="leader-streak">Smoke Free</span>
+                            </div>
+                            <div class="leader-score">
+                                <span class="score">3000$ Days</span>
+                                <span class="badge">🏅</span>
+                            </div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=50" alt="User" class="leader-avatar">
+                            <div class="leader-info">
+                                <span class="leader-name">Linda - 7 Days</span>
+                                <span class="leader-streak">Enjoy Fridge</span>
+                            </div>
+                            <div class="leader-score">
+                                <span class="score">7.1 Days</span>
+                                <span class="badge">🏆</span>
+                                <span class="achievement">1 Week Free 🎉</span>
+                            </div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <img src="https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=50" alt="User" class="leader-avatar">
+                            <div class="leader-info">
+                                <span class="leader-name">Linda - 30 Days</span>
+                                <span class="leader-streak">Fridge Investment</span>
+                            </div>
+                            <div class="leader-score">
+                                <span class="score">300$ Days</span>
+                                <span class="badge">🏅</span>
+                                <span class="achievement">Heart Legend 🎉</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cinematic Health Journey -->
+            <div class="cinematic-journey">
+                <h2 class="section-title">Cinematic Health Journey</h2>
+                <div class="journey-stages">
+                    <div class="journey-stage stage-1">
+                        <div class="stage-image smoky-lungs">
+                            <div class="lung-visual damaged">🫁</div>
+                            <div class="smoke-effect"></div>
+                        </div>
+                        <p class="stage-label">Day 1 Smoky Lungs</p>
+                    </div>
+                    <div class="journey-stage stage-2">
+                        <div class="stage-image healing-lungs">
+                            <div class="lung-visual healing">🫁</div>
+                            <div class="healing-glow"></div>
+                        </div>
+                        <p class="stage-label">Day 30 Healing Lungs</p>
+                    </div>
+                    <div class="journey-stage stage-3">
+                        <div class="stage-image clear-lungs">
+                            <div class="lung-visual healthy">🫁</div>
+                            <div class="nature-bg">
+                                <div class="tree">🌳</div>
+                                <div class="butterfly-fly">🦋</div>
+                                <div class="fresh-air"></div>
+                            </div>
+                        </div>
+                        <p class="stage-label">Day 1-365 Clear Lungs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="modal-content-wrapper">
-      <!-- Header -->
-      <header class="modal-header">
-        <div class="header-left">
-          <span class="header-icon">🧠</span>
-          <span class="header-title">Health & Fitness</span>
-        </div>
-        <nav class="header-nav">
-          <a href="#" class="nav-item">Adjusting</a>
-          <a href="#" class="nav-item">Products</a>
-          <a href="#" class="nav-item">LON MCT</a>
-        </nav>
-        <button class="modal-close-btn" id="closeQuitSmokingModal">&times;</button>
-      </header>
-
-      <!-- Hero Section -->
-      <section class="hero-section">
-        <div class="hero-text">
-          <h1>BREATHE FREE.</h1>
-          <h2>QUIT SMOKING STARTS TODAY.</h2>
-          <p>Torem ipsum dolor sit amet, consectetur adipiscing elit. Identi, too WOW efficitur.</p>
-        </div>
-
-        <div class="quit-calculator-widget">
-          <h3>Mini Calculator Widget</h3>
-          <div class="input-group">
-            <label for="cigarettesPerDay">Cigarettes per day</label>
-            <input type="number" id="cigarettesPerDay" value="10" min="0">
-          </div>
-          <div class="input-group">
-            <label for="costPerPack">Cost per pack ($)</label>
-            <input type="number" id="costPerPack" value="7" min="0" step="0.01">
-          </div>
-          <div class="input-group">
-            <label for="cigarettesPerPack">Cigarettes per pack</label>
-            <input type="number" id="cigarettesPerPack" value="20" min="1">
-          </div>
-
-          <div class="calculator-results">
-            <div class="result-item">
-              <span class="result-label">🚬 YOU'LL SAVE</span>
-              <span class="result-value" id="dailySavings">$0.00</span>
-              <span class="result-unit">PER DAY</span>
-            </div>
-            <div class="result-item">
-              <span class="result-label">🚬 YOU'LL SAVE</span>
-              <span class="result-value" id="weeklySavings">$0.00</span>
-              <span class="result-unit">PER WEEK</span>
-            </div>
-            <div class="result-item">
-              <span class="result-label">🚬 YOU'LL SAVE</span>
-              <span class="result-value" id="yearlySavings">$0.00</span>
-              <span class="result-unit">PER YEAR</span>
-            </div>
-          </div>
-          <p class="health-impact">
-            <span class="health-icon">❤️</span> YOUR LUNG DAMAGE CAN START HEALING IN DAYS.
-            <span class="health-icon">🧠</span> BRAIN FOG STARTS TO LIFT.
-          </p>
-          <button class="start-journey-btn">START YOUR JOURNEY</button>
-        </div>
-
-        <div class="quit-form-section">
-          <div class="form-group">
-            <label for="howLongSmoked">How long you smoked?</label>
-            <input type="text" id="howLongSmoked" placeholder="Ex: 5 years">
-          </div>
-          <div class="form-group">
-            <label for="howManySmoked">How many cigarettes you smoked?</label>
-            <input type="text" id="howManySmoked" placeholder="Ex: 10 cigarettes">
-          </div>
-          <div class="form-group">
-            <label for="motivation">Why do you want to quit?</label>
-            <input type="text" id="motivation" placeholder="Ex: For my health">
-          </div>
-        </div>
-      </section>
-
-      <!-- Personalized Quit Plan Section -->
-      <section class="dashboard-section">
-        <h3>Personalized Quit Plan <span class="ai-powered">AI Powered</span></h3>
-        <div class="dashboard-grid">
-          <div class="card money-saved-meter">
-            <h4>Money Saved Meter</h4>
-            <div class="meter-content">
-              <div class="progress-circle">
-                <svg viewBox="0 0 36 36" class="circular-chart">
-                  <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                  <path class="circle" stroke-dasharray="60, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                  <text x="18" y="20.35" class="circle-text">15</text>
-                </svg>
-                <p>Smoke Free Days</p>
-                <p class="streak">Streak: 7 Days</p>
-              </div>
-              <div class="savings-display">
-                <div class="savings-item">
-                  <span class="savings-icon">💰</span>
-                  <span class="savings-amount">$329</span>
-                  <span class="savings-label">Saved</span>
-                </div>
-                <div class="savings-item">
-                  <span class="savings-icon">💰</span>
-                  <span class="savings-amount">$230</span>
-                  <span class="savings-label">Saved</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card coping-tracker">
-            <h4>Coping tracker</h4>
-            <p class="coping-description">Coping strategies</p>
-            <div class="coping-items">
-              <div class="coping-item">
-                <span class="coping-icon">🧘</span>
-                <span class="coping-text">Meditation</span>
-              </div>
-              <div class="coping-item">
-                <span class="coping-icon">🚶</span>
-                <span class="coping-text">Physical Exercise</span>
-              </div>
-              <div class="coping-item">
-                <span class="coping-icon">🍏</span>
-                <span class="coping-text">Healthy Eating</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Gamified Tracker Section -->
-      <section class="dashboard-section">
-        <h3>Gamified Tracker</h3>
-        <div class="dashboard-grid">
-          <div class="card quit-challenge">
-            <h4>Quit Together Challenge – 30 Days</h4>
-            <div class="challenge-content">
-              <div class="people-count">
-                <span class="count-number">1,200</span>
-                <span class="count-text">people are quitting with you today</span>
-              </div>
-              <div class="coach-section">
-                <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Coach Vital Boost" class="coach-avatar">
-                <div class="coach-bubble">
-                  <p>Coach Vital Boost</p>
-                  <p>Take 30 second breath each time you crave a cigarette. It will soothe your throat and mind! ✨</p>
-                </div>
-                <button class="coach-action-btn">Text me tips and advice</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="card leaderboard">
-            <h4>Leaderboard</h4>
-            <div class="leaderboard-list">
-              <div class="leaderboard-item">
-                <img src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="User Avatar" class="user-avatar">
-                <div class="user-info">
-                  <p class="user-name">User A</p>
-                  <p class="user-streak">Streak: 30 Days</p>
-                </div>
-                <span class="trophy-icon">🏆</span>
-                <span class="score">500XP</span>
-              </div>
-              <div class="leaderboard-item">
-                <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="User Avatar" class="user-avatar">
-                <div class="user-info">
-                  <p class="user-name">User B</p>
-                  <p class="user-streak">Streak: 7 Days</p>
-                </div>
-                <span class="trophy-icon">🏆</span>
-                <span class="score">75XP</span>
-              </div>
-              <div class="leaderboard-item">
-                <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="User Avatar" class="user-avatar">
-                <div class="user-info">
-                  <p class="user-name">User C</p>
-                  <p class="user-streak">Streak: 3 Days</p>
-                </div>
-                <span class="trophy-icon">🏆</span>
-                <span class="score">30XP</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Cinematic Health Journey Section -->
-      <section class="dashboard-section cinematic-health-journey">
-        <h3>Cinematic Health Journey</h3>
-        <div class="journey-stages">
-          <div class="journey-card">
-            <div class="lung-animation-container">
-              <img src="https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Smoky Lungs" class="lung-image smoky-lungs">
-              <div class="smoke-overlay"></div>
-            </div>
-            <p>Day 1 Smoky Lungs</p>
-          </div>
-          <div class="journey-card">
-            <div class="lung-animation-container">
-              <img src="https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Healing Lungs" class="lung-image healing-lungs">
-              <div class="glow-overlay"></div>
-            </div>
-            <p>Day 20 Healing Lungs</p>
-          </div>
-          <div class="journey-card">
-            <div class="lung-animation-container">
-              <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Clear Lungs" class="lung-image clear-lungs">
-              <div class="clear-overlay"></div>
-            </div>
-            <p>Day 365 Clear Lungs</p>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
-</div>
+    <script src="quit-smoking-modal.js"></script>
+</body>
+</html>
