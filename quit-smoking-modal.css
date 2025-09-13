@@ -1068,3 +1068,123 @@
         grid-template-columns: 1fr;
     }
 }
+/* ===============================
+   Cinematic: big smoke puffs + better butterflies + glowing particles
+   Append this at the END of quit-smoking-modal.css
+   =============================== */
+
+/* Make smoke container visible and allow overflow for high puffs */
+.smoke-particles {
+  position: absolute;
+  bottom: 8%;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+}
+
+/* Individual puff */
+.smoke-particles .puff {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  filter: blur(6px);
+  opacity: 0;
+  transform-origin: center;
+  mix-blend-mode: screen;
+  background: radial-gradient(circle at 30% 30%,
+              rgba(255,255,255,0.96) 0%,
+              rgba(220,220,220,0.65) 18%,
+              rgba(180,180,180,0.35) 40%,
+              rgba(150,150,150,0.15) 65%,
+              transparent 100%);
+  animation: puffUp var(--puffDur,6s) linear infinite;
+  will-change: transform, opacity, filter;
+}
+
+/* different sizes/positions (you can create up to 10 puffs) */
+.smoke-particles .puff:nth-child(1){ left: 10%; width: 48px; height:48px; --puffDur:6.2s; animation-delay: -1.2s;}
+.smoke-particles .puff:nth-child(2){ left: 22%; width: 62px; height:62px; --puffDur:7s; animation-delay: -2.1s;}
+.smoke-particles .puff:nth-child(3){ left: 34%; width: 44px; height:44px; --puffDur:5.6s; animation-delay: -0.7s;}
+.smoke-particles .puff:nth-child(4){ left: 46%; width: 70px; height:70px; --puffDur:8s; animation-delay: -3.4s;}
+.smoke-particles .puff:nth-child(5){ left: 58%; width: 56px; height:56px; --puffDur:6.6s; animation-delay: -2.8s;}
+.smoke-particles .puff:nth-child(6){ left: 70%; width: 42px; height:42px; --puffDur:5.8s; animation-delay: -1.6s;}
+.smoke-particles .puff:nth-child(7){ left: 82%; width: 50px; height:50px; --puffDur:7.2s; animation-delay: -2.9s;}
+.smoke-particles .puff:nth-child(8){ left: 28%; width: 90px; height:90px; --puffDur:9s; animation-delay: -4.2s; opacity:0.85; filter: blur(8px);}
+
+/* Puff animation - rising, spreading and fading */
+@keyframes puffUp {
+  0% {
+    transform: translateY(0) scale(0.6) rotate(0deg);
+    opacity: 0;
+    filter: blur(6px) brightness(1);
+  }
+  8% {
+    opacity: 0.85;
+  }
+  55% {
+    transform: translateY(-120px) scale(1.25) rotate(6deg);
+    opacity: 0.45;
+    filter: blur(8px) brightness(0.95);
+  }
+  100% {
+    transform: translateY(-260px) scale(1.9) rotate(12deg);
+    opacity: 0;
+    filter: blur(12px) brightness(0.9);
+  }
+}
+
+/* butterfly enhancements - drop shadow + wing micro-flap + multi animation */
+.floating-butterflies .butterfly {
+  will-change: transform, filter;
+  filter: drop-shadow(0 10px 14px rgba(0,0,0,0.45));
+  animation: butterflyFly var(--flyDur,12s) infinite ease-in-out,
+             wingFlap 0.55s infinite ease-in-out;
+  transform-origin: center;
+  display: inline-block;
+}
+
+/* separate micro-flap for “wing” effect (subtle scaleY) */
+@keyframes wingFlap {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(0.86); }
+  100% { transform: scaleY(1); }
+}
+
+/* make butterflies pop a bit when they first appear */
+.floating-butterflies .butterfly { opacity: 0; transform: translateY(6px) scale(0.98); }
+.floating-butterflies .butterfly.show { opacity: 1; transform: translateY(0) scale(1); transition: transform .6s cubic-bezier(.2,.9,.2,1), opacity .6s; }
+
+/* glowing particles tweak for more glow */
+.glowing-particles .particle {
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, rgba(0,255,136,0.95), rgba(0,255,136,0.25), transparent 70%);
+  filter: blur(4px);
+  mix-blend-mode: screen;
+  opacity: 0.85;
+}
+
+/* lung inhale-exhale */
+.lung-visual {
+  animation: lungBreathe 3.4s infinite ease-in-out;
+  transform-origin: center;
+  will-change: transform, filter;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.4));
+}
+
+/* slightly stronger inhale for the final clear-lungs stage */
+.stage-3 .lung-visual {
+  animation-duration: 3s;
+  animation-timing-function: cubic-bezier(.25,.9,.4,1);
+}
+
+/* minor polish for cinematic-journey smoke overlay (so it blends) */
+.cinematic-journey .smoke-effect { mix-blend-mode: screen; filter: blur(6px) contrast(.95); opacity: .9; }
+
+/* small performance hint */
+.smoke-particles .puff,
+.floating-butterflies .butterfly,
+.glowing-particles .particle { will-change: transform, opacity; }
