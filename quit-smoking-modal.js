@@ -45,10 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize modal animations and interactions
     function initializeModalAnimations() {
-   startSmokePuffs();
-  randomizeButterflies();
-  enableModalFocusTrap(quitModal);
-}
+  startSmokePuffs(); randomizeButterflies(); enableModalFocusTrap(quitModal);
         // Initialize calculator functionality
         initializeCalculator();
         
