@@ -428,9 +428,3 @@ function enableModalFocusTrap(modal) {
   });
   observer.observe(modal, { attributes: true });
 }
-
-/* Call these from initializeModalAnimations() */
-// inside initializeModalAnimations(), after startCinematicAnimations() or at the end:
-startSmokePuffs();
-randomizeButterflies();
-enableModalFocusTrap(quitModal);
