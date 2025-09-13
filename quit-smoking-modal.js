@@ -430,3 +430,7 @@ function enableModalFocusTrap(modal) {
 }
 
 /* Call these from initializeModalAnimations() */
+// inside initializeModalAnimations(), after startCinematicAnimations() or at the end:
+startSmokePuffs();
+randomizeButterflies();
+enableModalFocusTrap(quitModal);
