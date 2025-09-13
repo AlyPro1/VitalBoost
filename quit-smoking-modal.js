@@ -342,3 +342,91 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(particleStyle);
 });
+/* ===============================
+   Cinematic runtime helpers:
+   spawn smoke puffs + randomize butterflies + focus trap
+   Append into quit-smoking-modal.js (below existing code)
+   =============================== */
+
+function startSmokePuffs() {
+  const container = document.querySelector('.smoke-particles');
+  if (!container) return;
+  // avoid recreating on repeated opens
+  if (container.dataset.puffsCreated) return;
+  container.dataset.puffsCreated = '1';
+
+  const puffCount = 8;
+  for (let i = 0; i < puffCount; i++) {
+    const p = document.createElement('div');
+    p.className = 'puff';
+    // Randomize horizontal position more naturally (use percentages)
+    const left = 8 + Math.random() * 84; // between 8% and 92%
+    p.style.left = left + '%';
+    // Randomize size a bit
+    const size = 30 + Math.random() * 80; // px
+    p.style.width = size + 'px';
+    p.style.height = size + 'px';
+    // Duration random
+    const dur = 5 + Math.random() * 4; // 5-9s
+    p.style.setProperty('--puffDur', dur + 's');
+    // negative delay to stagger immediately
+    p.style.animationDelay = '-' + (Math.random() * dur).toFixed(2) + 's';
+    container.appendChild(p);
+  }
+}
+
+function randomizeButterflies() {
+  const butterflies = document.querySelectorAll('.floating-butterflies .butterfly');
+  butterflies.forEach((b) => {
+    const dur = 8 + Math.random() * 8; // 8-16s
+    b.style.setProperty('--flyDur', dur + 's');
+    // reposition a little (within the cinematic bg bounds)
+    const left = 60 + Math.random() * 30; // keep them mostly on the right area like your layout
+    const top = 10 + Math.random() * 70;
+    b.style.left = left + '%';
+    b.style.top = top + '%';
+    // show class for transition in
+    b.classList.add('show');
+    // randomize delay
+    b.style.animationDelay = '-' + (Math.random() * 4).toFixed(2) + 's';
+  });
+}
+
+/* Basic focus trap for the modal */
+function enableModalFocusTrap(modal) {
+  if (!modal) return;
+  modal.setAttribute('role','dialog');
+  modal.setAttribute('aria-modal','true');
+
+  let focusables = modal.querySelectorAll('a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  focusables = Array.prototype.slice.call(focusables);
+  if (focusables.length === 0) return;
+  const first = focusables[0], last = focusables[focusables.length - 1];
+
+  function trap(e) {
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'Tab') {
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
+  document.addEventListener('keydown', trap);
+
+  // cleanup hook: remove listener when modal closes
+  const observer = new MutationObserver(muts => {
+    muts.forEach(m => {
+      if (m.attributeName === 'class' && !modal.classList.contains('active')) {
+        document.removeEventListener('keydown', trap);
+        observer.disconnect();
+      }
+    });
+  });
+  observer.observe(modal, { attributes: true });
+}
+
+/* Call these from initializeModalAnimations() */
