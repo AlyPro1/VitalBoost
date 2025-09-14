@@ -1188,3 +1188,179 @@
 .smoke-particles .puff,
 .floating-butterflies .butterfly,
 .glowing-particles .particle { will-change: transform, opacity; }
+/* 🎨 Cinematic Jewel Styling for Mini Calculator Widget */
+.calculator-widget {
+  background: linear-gradient(145deg, #0d0d0f, #1a1a1d);
+  border-radius: 18px;
+  padding: 24px;
+  margin: 20px 0;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55), inset 0 0 25px rgba(0, 255, 136, 0.15);
+  position: relative;
+  overflow: hidden;
+  color: #eafdf6;
+}
+
+.calculator-widget::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 255, 136, 0.12), transparent 60%);
+  animation: pulseGlow 6s infinite alternate;
+  z-index: 0;
+}
+
+@keyframes pulseGlow {
+  from { transform: scale(1); opacity: 0.6; }
+  to { transform: scale(1.2); opacity: 0.3; }
+}
+
+.widget-header {
+  text-align: center;
+  margin-bottom: 18px;
+  position: relative;
+  z-index: 1;
+}
+
+.widget-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #00ff88, #00ccff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(0, 255, 136, 0.7);
+  animation: shimmerTitle 3s infinite linear;
+}
+
+@keyframes shimmerTitle {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+.calculator-item {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 12px;
+  padding: 14px;
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.calculator-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.25);
+}
+
+.calc-label {
+  font-size: 14px;
+  color: #b8f5da;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.calc-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calc-number {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+  transition: transform 0.2s ease;
+}
+
+.calc-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.calc-btn {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.4);
+  border-radius: 8px;
+  color: #00ff88;
+  font-size: 18px;
+  font-weight: 700;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.calc-btn:hover {
+  background: rgba(0, 255, 136, 0.25);
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.5);
+}
+
+.progress-bar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff88, #00ccff);
+  transition: width 0.4s ease;
+}
+
+.health-message {
+  margin-top: 16px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 3px solid #00ff88;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #dfffee;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 1;
+}
+
+.heart-icon {
+  font-size: 18px;
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+.start-journey-btn {
+  margin-top: 18px;
+  padding: 14px;
+  background: linear-gradient(90deg, #00ff88, #00ccff);
+  border: none;
+  border-radius: 12px;
+  color: #0d0d0f;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow: 0 8px 20px rgba(0, 255, 136, 0.35);
+  z-index: 1;
+}
+
+.start-journey-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0, 255, 136, 0.55);
+}
