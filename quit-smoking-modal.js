@@ -432,3 +432,24 @@ function enableModalFocusTrap(modal) {
   });
   observer.observe(modal, { attributes: true });
 }
+function animateQuitPlanStats() {
+  const counters = document.querySelectorAll('.streak-counter, .money-counter');
+  counters.forEach(counter => {
+    let target = +counter.getAttribute('data-target');
+    let current = 0;
+    let step = target / 60; // ~1 sec smooth
+    let interval = setInterval(() => {
+      current += step;
+      if(current >= target) {
+        current = target;
+        clearInterval(interval);
+      }
+      counter.textContent = Math.floor(current);
+    }, 16);
+  });
+
+  // Animate progress bars
+  document.querySelectorAll('.progress-fill').forEach(fill => {
+    fill.style.width = fill.getAttribute('data-progress') + "%";
+  });
+}
