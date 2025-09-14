@@ -48,7 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
  startSmokePuffs();
   randomizeButterflies();
   enableModalFocusTrap(quitModal);
-      
+      animateQuitPlanStats();
+
         // Initialize calculator functionality
         initializeCalculator();
         
