@@ -454,3 +454,20 @@ function animateQuitPlanStats() {
     fill.style.width = fill.getAttribute('data-progress') + "%";
   });
 }
+// Animate counters
+function animateCounter(id, end, duration) {
+  let obj = document.getElementById(id);
+  let start = 0;
+  let range = end - start;
+  let stepTime = Math.abs(Math.floor(duration / range));
+  let current = start;
+  let timer = setInterval(() => {
+    current++;
+    obj.innerText = id === "streak-counter" ? current + " Days" : "$" + current;
+    if (current >= end) clearInterval(timer);
+  }, stepTime);
+}
+
+// Example: animate streak and money saved
+animateCounter("streak-counter", 30, 2000); // 30 days
+animateCounter("money-counter", 1500, 2500); // $1500
