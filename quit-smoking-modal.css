@@ -1364,3 +1364,13 @@
   transform: translateY(-3px);
   box-shadow: 0 12px 25px rgba(0, 255, 136, 0.55);
 }
+.start-journey-btn {
+    position: relative;
+    z-index: 10;          /* brings button above overlays */
+    pointer-events: auto; /* makes sure it's clickable */
+}
+
+.mini-calculator-widget::before,
+.mini-calculator-widget::after {
+    pointer-events: none; /* overlays don’t block clicks */
+}
