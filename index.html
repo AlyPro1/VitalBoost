@@ -389,51 +389,54 @@
         <!-- Main Content -->
         <div class="quit-hero-content">
           <div class="hero-left">
-            <h1 class="hero-title">
-              BREATHE FREE.<br>
-              <span class="hero-subtitle">QUIT SMOKING STARTS TODAY.</span>
-            </h1>
-            <p class="hero-description">
-              <span class="highlight-text">Tobacco and lung disease</span> WOW effects. 
-              <span class="highlight-text">Harmful lung WOW</span> effects.
-            </p>
+  <h1 class="hero-title">
+    BREATHE FREE.<br>
+    <span class="hero-subtitle">QUIT SMOKING STARTS TODAY.</span>
+  </h1>
 
-            <!-- Input Forms -->
-            <div class="input-section">
-              <div class="input-group">
-                <label>How long you smoked?</label>
-                <select class="custom-select">
-                  <option>Choose period</option>
-                  <option>Less than 1 year</option>
-                  <option>1-5 years</option>
-                  <option>5-10 years</option>
-                  <option>10+ years</option>
-                </select>
-              </div>
-              <div class="input-group">
-                <label>How long you smoked</label>
-                <select class="custom-select">
-                  <option>More 1 Timeless</option>
-                  <option>1-5 cigarettes/day</option>
-                  <option>5-10 cigarettes/day</option>
-                  <option>10-20 cigarettes/day</option>
-                  <option>20+ cigarettes/day</option>
-                </select>
-              </div>
-              <div class="input-group">
-                <label>Buy long financial Milestone</label>
-                <div class="milestone-input">
-                  <span>Month 1 Milestone Achieved</span>
-                  <div class="progress-dots">
-                    <div class="dot active"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  <p class="hero-description">
+    <span class="highlight-text">Tobacco</span> causes lung disease and many harmful effects.
+    Quitting can start your body's healing process in days.
+  </p>
+
+  <!-- Input Forms (accessible) -->
+  <div class="input-section">
+    <div class="input-group">
+      <label for="smokeDuration">How long have you smoked?</label>
+      <select id="smokeDuration" name="smokeDuration" class="custom-select" aria-label="How long have you smoked">
+        <option value="">Choose period</option>
+        <option value="lt1">Less than 1 year</option>
+        <option value="1-5">1–5 years</option>
+        <option value="5-10">5–10 years</option>
+        <option value="10plus">10+ years</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="cigsPerDay">How many cigarettes per day?</label>
+      <select id="cigsPerDay" name="cigsPerDay" class="custom-select" aria-label="How many cigarettes per day">
+        <option value="">Select amount</option>
+        <option value="1-5">1–5 cigarettes/day</option>
+        <option value="5-10">5–10 cigarettes/day</option>
+        <option value="10-20">10–20 cigarettes/day</option>
+        <option value="20plus">20+ cigarettes/day</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="savingsMilestone">Set a savings milestone</label>
+      <div class="milestone-input" id="savingsMilestone">
+        <span>Month 1 milestone achieved</span>
+        <div class="progress-dots" aria-hidden="true">
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
           <!-- Calculator Widget -->
           <div class="calculator-widget">
