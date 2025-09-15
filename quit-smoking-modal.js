@@ -475,24 +475,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ JS file is loaded");
-
-  const joinBtn = document.getElementById("joinChallengeBtn");
-  const message = document.getElementById("challengeMessage");
-
-  if (joinBtn && message) {
-    joinBtn.addEventListener("click", () => {
-      console.log("🚀 Button clicked");
-
-      message.textContent = "✅ Challenge Joined!";
-      message.style.opacity = "1";
-
-      setTimeout(() => {
-        message.style.opacity = "0";
-      }, 3000);
-    });
-  } else {
-    console.log("❌ Could not find joinChallengeBtn or challengeMessage");
-  }
-});
