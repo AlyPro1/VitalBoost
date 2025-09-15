@@ -472,9 +472,8 @@ function animateCounter(id, end, duration) {
 animateCounter("streak-counter", 30, 2000); // 30 days
 animateCounter("money-counter", 1500, 2500); // $1500
 
-<script>
-document.querySelectorAll(".progress-circle").forEach(circle => {
-  let progress = circle.getAttribute("data-progress");
-  circle.style.setProperty("--progress", progress / 100);
+// Animate circular progress meters
+document.querySelectorAll('.progress-circle').forEach(circle => {
+  const progress = circle.getAttribute('data-progress'); 
+  circle.style.setProperty('--progress', progress / 100);
 });
-</script> 
