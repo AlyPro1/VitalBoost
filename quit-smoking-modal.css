@@ -1729,10 +1729,3 @@
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
-.challenge-message {
-  margin-top: 8px;
-  font-weight: bold;
-  color: #4caf50;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
