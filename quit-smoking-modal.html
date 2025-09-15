@@ -145,24 +145,51 @@
   <div class="quit-plan-content">
     
     <!-- LEFT SIDE: Stats -->
-    <div class="quit-plan-stats">
-      <div class="stat-card">
-        <h3 class="stat-label">🚭 Smoke-Free Streak</h3>
-        <p class="stat-value" id="streak-counter">0 Days</p>
-      </div>
-
-      <div class="stat-card">
-        <h3 class="stat-label">💰 Money Saved</h3>
-        <p class="stat-value" id="money-counter">$0</p>
-      </div>
-
-      <div class="progress-container">
-        <span class="progress-label">Health Progress</span>
-        <div class="progress-bar">
-          <div class="progress-fill"></div>
+   <div class="quit-plan-left">
+  <div class="plan-metrics">
+    <!-- Smoke Free Streak -->
+    <div class="metric-card">
+      <div class="metric-icon">🔥</div>
+      <div class="metric-circle">
+        <div class="circle-progress" data-progress="85">
+          <span class="circle-text">Smoke Free<br><strong>85</strong><br>Days</span>
         </div>
       </div>
+      <p class="metric-label">Streak: 7 Days</p>
     </div>
+
+    <!-- Money Saved -->
+    <div class="metric-card">
+      <div class="metric-icon">💰</div>
+      <div class="metric-circle money-saved">
+        <div class="circle-progress" data-progress="65">
+          <div class="money-icons">
+            <span class="money-icon">💵</span>
+            <span class="money-icon">💵</span>
+            <span class="money-icon">💵</span>
+          </div>
+        </div>
+      </div>
+      <p class="metric-label">Money Saved</p>
+      <p class="metric-value">$328 Saved</p>
+    </div>
+
+    <!-- Another Money Goal Example -->
+    <div class="metric-card">
+      <div class="metric-icon">💰</div>
+      <div class="metric-circle money-saved">
+        <div class="circle-progress" data-progress="80">
+          <div class="money-icons">
+            <span class="money-icon">💵</span>
+            <span class="money-icon">💵</span>
+            <span class="money-icon">💵</span>
+          </div>
+        </div>
+      </div>
+      <p class="metric-value">$730 Saved</p>
+    </div>
+  </div>
+</div>
 
     <!-- RIGHT SIDE: Coping Strategies -->
     <div class="quit-plan-coping">
