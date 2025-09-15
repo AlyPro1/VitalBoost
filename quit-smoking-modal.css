@@ -1722,3 +1722,10 @@
   transform: scale(1.05);
   box-shadow: 0 0 12px rgba(0,200,255,0.7);
 }
+.challenge-message {
+  margin-top: 10px;
+  font-size: 16px;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
