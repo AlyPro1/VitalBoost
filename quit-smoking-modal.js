@@ -471,7 +471,6 @@ function animateCounter(id, end, duration) {
 // Example: animate streak and money saved
 animateCounter("streak-counter", 30, 2000); // 30 days
 animateCounter("money-counter", 1500, 2500); // $1500
-
 document.querySelectorAll('.circle-progress').forEach(circle => {
   const progress = circle.getAttribute('data-progress');
   circle.style.setProperty('--progress', progress / 100);
