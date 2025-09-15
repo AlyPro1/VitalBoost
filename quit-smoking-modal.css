@@ -1655,3 +1655,34 @@
                0 0 12px rgba(29, 185, 84, 0.6),
                0 0 20px rgba(29, 185, 84, 0.4);
 }
+/* Make all main feature sections clickable */
+.challenge-card,
+.coach-section,
+.stats-display {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+/* Hover Effects */
+.challenge-card:hover,
+.coach-section:hover,
+.stats-display:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 0 15px rgba(0, 200, 255, 0.6);
+}
+
+/* Glow Animation */
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 5px rgba(0,200,255,0.3); }
+  50% { box-shadow: 0 0 20px rgba(0,200,255,0.7); }
+  100% { box-shadow: 0 0 5px rgba(0,200,255,0.3); }
+}
+
+/* Apply glow animation */
+.challenge-card:hover,
+.coach-section:hover,
+.stats-display:hover {
+  animation: glowPulse 1.5s infinite;
+}
