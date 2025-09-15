@@ -1621,3 +1621,28 @@
 .money-icon {
   font-size: 18px;
 }
+.money-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  animation: floatMoney 3s infinite ease-in-out;
+}
+
+.money-icon {
+  font-size: 1.2rem;
+  margin: 2px 0;
+  animation: bounceMoney 2s infinite alternate;
+}
+
+@keyframes floatMoney {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes bounceMoney {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.2); }
+}
