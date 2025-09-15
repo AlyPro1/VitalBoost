@@ -458,6 +458,7 @@ document.querySelectorAll('.circle-progress').forEach(circle => {
   const progress = circle.getAttribute('data-progress');
   circle.style.setProperty('--progress', progress / 100);
 });
+
 document.addEventListener("DOMContentLoaded", () => {
   const joinBtn = document.getElementById("joinChallengeBtn");
   const message = document.getElementById("challengeMessage");
