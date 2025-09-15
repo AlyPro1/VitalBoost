@@ -458,19 +458,20 @@ document.querySelectorAll('.circle-progress').forEach(circle => {
   const progress = circle.getAttribute('data-progress');
   circle.style.setProperty('--progress', progress / 100);
 });
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const joinBtn = document.getElementById("joinChallengeBtn");
   const message = document.getElementById("challengeMessage");
 
-  joinBtn.addEventListener("click", function () {
-    message.textContent = "✅ Challenge Joined!";
-    message.style.color = "green";
-    message.style.fontWeight = "bold";
-    message.style.opacity = "1";
+  if (joinBtn && message) {
+    joinBtn.addEventListener("click", () => {
+      // Show confirmation
+      message.textContent = "✅ Challenge Joined!";
+      message.style.opacity = "1";
 
-    // Hide after 3 seconds with fade-out
-    setTimeout(() => {
-      message.style.opacity = "0";
-    }, 3000);
-  });
+      // Hide after 3 seconds
+      setTimeout(() => {
+        message.style.opacity = "0";
+      }, 3000);
+    });
+  }
 });
