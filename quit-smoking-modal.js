@@ -476,3 +476,160 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// Coach Vital Boost Breathing Exercise Modal
+document.addEventListener('DOMContentLoaded', function() {
+  const coachSection = document.querySelector('.coach-section');
+  const coachBreathingModal = document.getElementById('coachBreathingModal');
+  const stopBreathingBtn = document.getElementById('stopBreathingBtn');
+  const countdownTimer = document.getElementById('countdownTimer');
+  
+  let breathingInterval = null;
+  let timeRemaining = 60;
+  
+  // Open breathing exercise modal when coach section is clicked
+  if (coachSection && coachBreathingModal) {
+    coachSection.addEventListener('click', function() {
+      openBreathingModal();
+    });
+  }
+  
+  // Stop button functionality
+  if (stopBreathingBtn) {
+    stopBreathingBtn.addEventListener('click', function() {
+      closeBreathingModal();
+    });
+  }
+  
+  // Close modal when clicking outside
+  if (coachBreathingModal) {
+    coachBreathingModal.addEventListener('click', function(e) {
+      if (e.target === coachBreathingModal) {
+        closeBreathingModal();
+      }
+    });
+  }
+  
+  // Close with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && coachBreathingModal && coachBreathingModal.classList.contains('active')) {
+      closeBreathingModal();
+    }
+  });
+  
+  function openBreathingModal() {
+    if (!coachBreathingModal || !countdownTimer) return;
+    
+    // Reset timer
+    timeRemaining = 60;
+    countdownTimer.textContent = timeRemaining;
+    
+    // Show modal
+    coachBreathingModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Start countdown
+    startBreathingTimer();
+  }
+  
+  function closeBreathingModal() {
+    if (!coachBreathingModal) return;
+    
+    // Hide modal
+    coachBreathingModal.classList.remove('active');
+    document.body.style.overflow = '';
+    
+    // Stop timer
+    stopBreathingTimer();
+  }
+  
+  function startBreathingTimer() {
+    if (breathingInterval) clearInterval(breathingInterval);
+    
+    breathingInterval = setInterval(function() {
+      timeRemaining--;
+      
+      if (countdownTimer) {
+        countdownTimer.textContent = timeRemaining;
+      }
+      
+      // Change timer color as it gets closer to 0
+      if (countdownTimer) {
+        if (timeRemaining <= 10) {
+          countdownTimer.style.color = '#ff4757';
+        } else if (timeRemaining <= 30) {
+          countdownTimer.style.color = '#ffa502';
+        } else {
+          countdownTimer.style.color = '#00ffff';
+        }
+      }
+      
+      // Auto-close when timer reaches 0
+      if (timeRemaining <= 0) {
+        stopBreathingTimer();
+        setTimeout(function() {
+          closeBreathingModal();
+          // Show completion message
+          showBreathingCompletionMessage();
+        }, 1000);
+      }
+    }, 1000);
+  }
+  
+  function stopBreathingTimer() {
+    if (breathingInterval) {
+      clearInterval(breathingInterval);
+      breathingInterval = null;
+    }
+  }
+  
+  function showBreathingCompletionMessage() {
+    // Create a temporary notification
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(45deg, #00ff88, #00ccff);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 15px;
+      font-size: 1.2em;
+      font-weight: 600;
+      z-index: 10002;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      animation: notificationSlide 0.5s ease-out;
+    `;
+    notification.textContent = '🌟 Breathing exercise completed! Well done!';
+    
+    document.body.appendChild(notification);
+    
+    // Remove notification after 3 seconds
+    setTimeout(function() {
+      if (notification.parentNode) {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        setTimeout(function() {
+          notification.remove();
+        }, 300);
+      }
+    }, 3000);
+  }
+});
+
+// Add notification animation keyframes
+const breathingStyle = document.createElement('style');
+breathingStyle.textContent = `
+  @keyframes notificationSlide {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -50%) translateY(-20px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%) translateY(0) scale(1);
+    }
+  }
+`;
+document.head.appendChild(breathingStyle);
