@@ -2219,3 +2219,9 @@
 .first { border-left: 5px solid gold; }
 .second { border-left: 5px solid silver; }
 .third { border-left: 5px solid #cd7f32; }
+
+.container {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  align-items: center;    /* center horizontally */
+}
