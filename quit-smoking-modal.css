@@ -1970,3 +1970,18 @@
   -webkit-text-fill-color: transparent;
   margin: 0;
 }
+.fighters-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(90deg, #ff416c, #ff4b2b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  display: inline-block;
+}
+
+.shield-icon {
+  font-size: 1.8rem;
+  color: #ffcc00; /* golden shield for contrast */
+}
