@@ -1985,3 +1985,141 @@
   font-size: 1.8rem;
   color: #ffcc00; /* golden shield for contrast */
 }
+/* ========== Fighters Modal ========== */
+.fighters-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+}
+
+.fighters-modal-overlay.active {
+  display: flex;
+}
+
+.fighters-modal-container {
+  position: relative;
+  background: #111;
+  border-radius: 15px;
+  padding: 30px 20px 40px;
+  max-width: 650px;
+  width: 90%;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  animation: scaleIn 0.4s ease;
+}
+
+/* Scale in animation */
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Close Button */
+.fighters-close {
+  position: absolute;
+  top: 15px; right: 20px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ff4757;
+  transition: 0.3s;
+}
+.fighters-close:hover { transform: scale(1.2); }
+
+/* Blinking Animated Title */
+.fighters-modal-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  animation: blinkColors 2s infinite;
+}
+
+@keyframes blinkColors {
+  0% { color: #ff4757; }
+  25% { color: #00ffff; }
+  50% { color: #ffcc00; }
+  75% { color: #ff00ff; }
+  100% { color: #ff4757; }
+}
+
+/* Avatar Grid */
+.fighters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 15px;
+  justify-items: center;
+  margin-bottom: 25px;
+}
+
+.fighter-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00ffff;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeWave 1s forwards;
+}
+
+/* Staggered wave animation */
+.fighter-avatar:nth-child(1) { animation-delay: 0.1s; }
+.fighter-avatar:nth-child(2) { animation-delay: 0.2s; }
+.fighter-avatar:nth-child(3) { animation-delay: 0.3s; }
+.fighter-avatar:nth-child(4) { animation-delay: 0.4s; }
+.fighter-avatar:nth-child(5) { animation-delay: 0.5s; }
+.fighter-avatar:nth-child(6) { animation-delay: 0.6s; }
+.fighter-avatar:nth-child(7) { animation-delay: 0.7s; }
+.fighter-avatar:nth-child(8) { animation-delay: 0.8s; }
+.fighter-avatar:nth-child(9) { animation-delay: 0.9s; }
+.fighter-avatar:nth-child(10) { animation-delay: 1s; }
+
+@keyframes fadeWave {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fighter-avatar:hover {
+  transform: scale(1.15);
+  border-color: #ff4757;
+  transition: 0.3s;
+}
+
+/* CTA Button */
+.join-fighters-btn {
+  background: linear-gradient(90deg, #ff4757, #ffcc00, #00ffff);
+  background-size: 300% 300%;
+  color: #111;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  animation: gradientShift 4s infinite, pulseBtn 1.5s infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulseBtn {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.join-fighters-btn:hover {
+  color: #fff;
+  transform: scale(1.12);
+  transition: 0.3s;
+}
