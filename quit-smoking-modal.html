@@ -247,11 +247,10 @@
       </div>
     </div> <!-- ✅ closes .coach-section -->
 
-      <!-- Co-Quitting Stats -->
+     <!-- Co-Quitting Stats -->
 <div class="stats-display">
   <div class="big-stat">
-    <!-- Clickable Title -->
-    <h3 class="fighters-title" id="openFightersModal">
+    <h3 id="openFightersModal" class="fighters-title">
       Join <span class="fighters-number">1,200</span> Fighters 
       <span class="shield-icon">🛡️</span>
     </h3>
@@ -260,32 +259,22 @@
     <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100" 
          alt="User" class="user-img">
   </div>
-</div>
 
-<!-- Fighters Modal -->
-<div id="fightersModal" class="fighters-modal-overlay">
-  <div class="fighters-modal-container">
-    <span class="fighters-close" id="closeFightersModal">&times;</span>
-    
-    <!-- Blinking Animated Title -->
-    <h2 class="fighters-modal-title">✨ Welcome Fighters! ✨</h2>
-    
-    <!-- Avatar Grid -->
-    <div class="fighters-grid">
-      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Fighter" class="fighter-avatar">
-      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Fighter" class="fighter-avatar">
-      <img src="https://randomuser.me/api/portraits/men/56.jpg" alt="Fighter" class="fighter-avatar">
-      <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Fighter" class="fighter-avatar">
-      <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Fighter" class="fighter-avatar">
-      <img src="https://randomuser.me/api/portraits/women/23.jpg" alt="Fighter" class="fighter-avatar">
-      <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Fighter" class="fighter-avatar">
-      <img src="https://randomuser.me/api/portraits/women/35.jpg" alt="Fighter" class="fighter-avatar">
-      <img src="https://randomuser.me/api/portraits/men/84.jpg" alt="Fighter" class="fighter-avatar">
-      <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Fighter" class="fighter-avatar">
+  <!-- Fighters Modal (inside same section) -->
+  <div id="fightersModal" class="fighters-modal">
+    <div class="fighters-modal-content">
+      <span id="closeFightersModal" class="fighters-close">&times;</span>
+      <h2 class="fighters-modal-title">✨ Welcome Fighters! ✨</h2>
+      <div class="fighters-avatars">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="avatar">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="avatar">
+        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="avatar">
+        <img src="https://randomuser.me/api/portraits/women/23.jpg" alt="avatar">
+        <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="avatar">
+        <img src="https://randomuser.me/api/portraits/women/56.jpg" alt="avatar">
+      </div>
+      <button class="fighters-join-btn">🔥 Join the 1,200 Fighters 🔥</button>
     </div>
-
-    <!-- CTA Button -->
-    <button class="join-fighters-btn">🔥 Join the 1,200 Fighters 🔥</button>
   </div>
 </div>
 
