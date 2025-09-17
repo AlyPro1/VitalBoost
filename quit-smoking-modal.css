@@ -2006,20 +2006,3 @@
   color: #ffcc00; /* golden shield */
   filter: drop-shadow(0 0 4px #ffd700); /* glowing effect */
 }
-.shield-icon {
-  font-size: 1.9rem;
-  color: #ffcc00; /* golden shield */
-  filter: drop-shadow(0 0 4px #ffd700); /* glowing effect */
-  animation: pulseShield 2s infinite ease-in-out;
-}
-
-@keyframes pulseShield {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 4px #ffd700);
-  }
-  50% {
-    transform: scale(1.2);
-    filter: drop-shadow(0 0 8px #ffea00);
-  }
-}
