@@ -1985,24 +1985,3 @@
   font-size: 1.8rem;
   color: #ffcc00; /* golden shield for contrast */
 }
-.fighters-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-align: center;
-  margin: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px; /* space between text and shield */
-}
-
-.fighters-text {
-  background: linear-gradient(90deg, #ff416c, #ff4b2b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.shield-icon {
-  font-size: 1.9rem;
-  color: #ffcc00; /* golden shield */
-  filter: drop-shadow(0 0 4px #ffd700); /* glowing effect */
-}
