@@ -1954,3 +1954,10 @@
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
+.fighters-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  color: #222; /* match your theme */
+  margin: 0;
+}
