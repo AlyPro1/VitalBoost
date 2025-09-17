@@ -652,14 +652,3 @@ window.addEventListener("click", (e) => {
     fightersModal.classList.remove("active");
   }
 });
-const openFighters = document.getElementById("openFightersModal");
-const closeFighters = document.getElementById("closeFightersModal");
-const fightersModal = document.getElementById("fightersModal");
-
-openFighters.addEventListener("click", () => {
-  fightersModal.style.display = "block";
-});
-
-closeFighters.addEventListener("click", () => {
-  fightersModal.style.display = "none";
-});
