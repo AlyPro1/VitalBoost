@@ -2218,3 +2218,17 @@
 .first { border-left: 5px solid gold; }
 .second { border-left: 5px solid silver; }
 .third { border-left: 5px solid #cd7f32; }
+/* Force each main section to stack full-width */
+section {
+  width: 100%;
+  display: block;
+  clear: both;
+}
+
+/* Leaderboard wrapper fix */
+.leaderboard {
+  display: block;
+  width: 100%;
+  margin: 0 auto 40px auto;
+  clear: both;
+}
