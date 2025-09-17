@@ -633,3 +633,22 @@ breathingStyle.textContent = `
   }
 `;
 document.head.appendChild(breathingStyle);
+// Fighters Modal Logic
+const openFightersModal = document.getElementById("openFightersModal");
+const fightersModal = document.getElementById("fightersModal");
+const closeFightersModal = document.getElementById("closeFightersModal");
+
+openFightersModal.addEventListener("click", () => {
+  fightersModal.classList.add("active");
+});
+
+closeFightersModal.addEventListener("click", () => {
+  fightersModal.classList.remove("active");
+});
+
+// Close modal on outside click
+window.addEventListener("click", (e) => {
+  if (e.target === fightersModal) {
+    fightersModal.classList.remove("active");
+  }
+});
