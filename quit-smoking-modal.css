@@ -2220,38 +2220,63 @@
 .second { border-left: 5px solid silver; }
 .third { border-left: 5px solid #cd7f32; }
 
-/* Ensure leaderboard is contained properly */
+/* Leaderboard container */
 .leaderboard {
-  display: block;
+  display: flex;
+  flex-direction: column;  /* Stack vertically */
+  align-items: center;
+  justify-content: flex-start;
   width: 100%;
-  max-width: 700px;   /* Optional: center narrower */
-  margin: 0 auto 50px auto;  /* space below leaderboard */
-  clear: both;  
-  float: none;
-  position: relative;  /* keep it in flow */
-  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  clear: both;
 }
 
-/* Leaderboard title animation (so it’s visible & hooked) */
-.leaderboard-title {
-  text-align: center;
-  font-size: 1.8rem;
+/* Each leaderboard item */
+.leaderboard-item {
+  display: flex;
+  flex-direction: row;   /* Horizontal inside item */
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  margin: 10px 0;
+  padding: 12px 16px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Avatar */
+.leader-avatar {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+/* Info area */
+.leader-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Score area */
+.leader-score {
+  text-align: right;
   font-weight: bold;
-  color: #FFD700; /* gold */
-  animation: glow 2s infinite alternate;
+  color: #FFD700;
 }
 
-@keyframes glow {
-  0% { color: #FFD700; text-shadow: 0 0 5px #FFD700; }
-  100% { color: #FF4500; text-shadow: 0 0 15px #FF6347; }
-}
-
-/* Reset next section (Cinematic Health Journey) */
+/* Fix next section (cinematic health journey) */
 .cinematic-health {
   display: block;
   width: 100%;
   margin: 40px auto 0 auto;
-  clear: both;  
-  float: none;  
-  position: relative;
+  clear: both;
 }
