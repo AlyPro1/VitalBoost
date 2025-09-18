@@ -2143,3 +2143,41 @@
   padding: 15px 20px;
   margin-bottom: 15px;
 }
+
+/* --- Leaderboard Patch --- */
+.leaderboard {
+  width: 100%;               /* take full row */
+  max-width: 900px;          /* optional: keeps it neat */
+  margin: 0 auto 40px auto;  /* center + spacing below */
+  display: block;            /* ensures it's a block section */
+  clear: both;               /* clears floats from above */
+}
+
+.leaderboard-item {
+  display: flex;              /* side by side layout */
+  align-items: center;        /* vertically align content */
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  box-sizing: border-box;     /* avoid stretching */
+  width: 100%;                /* keep full width inside container */
+}
+
+.leader-info {
+  flex: 1;                    /* stretch in middle */
+  margin-left: 12px;
+}
+
+.leader-score {
+  text-align: right;
+  min-width: 120px;           /* stop jumping to next line */
+}
+
+.leader-avatar {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+}
