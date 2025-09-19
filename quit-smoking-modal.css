@@ -2444,3 +2444,16 @@
     width: 96%;
   }
 }
+/* ✅ Force modal containers to size properly */
+#coachBreathingModal .coach-breathing-modal-container,
+#fightersModal .fighters-modal-container {
+  width: 80% !important;
+  max-width: 900px !important;
+  margin: 5% auto !important;
+
+  height: auto !important;
+  max-height: 85vh !important; /* never full tall */
+  overflow-y: auto !important;
+  background: inherit; /* keep your current design background */
+  border-radius: 12px; /* optional: smooth edges */
+}
