@@ -2444,3 +2444,12 @@
     width: 96%;
   }
 }
+/* 🔹 Fix modal width issue without affecting height */
+.coach-breathing-modal-container,
+.fighters-modal-container {
+  width: 80%;          /* stretches horizontally */
+  max-width: 900px;    /* prevents it from getting too wide on big screens */
+  margin: 5% auto;     /* centers modal */
+  height: auto;        /* let content decide height */
+  border-radius: 16px; /* optional: smoother rounded edges */
+}
