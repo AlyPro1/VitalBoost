@@ -2456,4 +2456,4 @@
   height: auto !important;
   max-height: 90vh;  /* never taller than screen */
   overflow-y: auto;  /* scroll inside if content overflows */
-}
+} 
