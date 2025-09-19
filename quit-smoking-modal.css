@@ -2444,6 +2444,7 @@
     width: 96%;
   }
 }
+
 /* ✅ Force modal containers to size properly */
 #coachBreathingModal .coach-breathing-modal-container,
 #fightersModal .fighters-modal-container {
