@@ -2444,3 +2444,29 @@
     width: 96%;
   }
 }
+
+/* Coach Modal container */
+.coach-breathing-modal-container {
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 12px;
+  padding: 20px;
+  width: 80%;              /* stretch horizontally */
+  max-width: 900px;        /* don’t get too wide */
+  height: auto;            /* natural height */
+  max-height: 85vh;        /* cap vertical size */
+  overflow-y: auto;        /* scroll if needed */
+  box-sizing: border-box;
+}
+
+/* Fighters Modal container */
+.fighters-modal-container {
+  background: #111;
+  border-radius: 12px;
+  padding: 20px;
+  width: 80%;              /* stretch horizontally */
+  max-width: 900px;
+  height: auto;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
