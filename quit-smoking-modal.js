@@ -947,18 +947,3 @@ window.addEventListener("click", (e) => {
   });
 
 })();
-
-// Force correct sizing when modal opens
-function adjustModalSize(modalId) {
-  const modal = document.querySelector(modalId + " .modal-container, " + modalId + " .coach-breathing-modal-container, " + modalId + " .fighters-modal-container");
-  if (modal) {
-    modal.style.height = "auto";
-    modal.style.maxHeight = "85vh";
-    modal.style.width = "80%";
-    modal.style.maxWidth = "900px";
-  }
-}
-
-// Example: adjust when modal opens
-document.getElementById("coachBreathingModal").addEventListener("transitionend", () => adjustModalSize("#coachBreathingModal"));
-document.getElementById("fightersModal").addEventListener("transitionend", () => adjustModalSize("#fightersModal"));
