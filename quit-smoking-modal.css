@@ -2421,3 +2421,26 @@
   justify-content: center;
   align-items: center;
 }
+
+/* === Adjust modal widths only === */
+
+/* Coach Vital Boost modal */
+.coach-breathing-modal-container {
+  max-width: 700px;   /* wider than before */
+  width: 90%;         /* scales nicely on smaller screens */
+}
+
+/* Fighters modal */
+.fighters-modal-container {
+  max-width: 880px;   /* give this one more width since grid inside */
+  width: 92%;
+}
+
+/* Mobile: still shrink a bit */
+@media (max-width: 720px) {
+  .coach-breathing-modal-container,
+  .fighters-modal-container {
+    max-width: 96%;   /* nearly full width */
+    width: 96%;
+  }
+}
