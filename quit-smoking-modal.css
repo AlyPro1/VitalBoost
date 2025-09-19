@@ -2393,3 +2393,17 @@
                  0 0 60px rgba(0, 198, 255, 0.8);
   }
 }
+
+/* override for anchored modal (used by JS) */
+.anchored-modal {
+  display: none; /* JS toggles display + inline styles */
+  background: rgba(0,0,0,0.85); /* overlay limited to section */
+  backdrop-filter: blur(6px);
+}
+
+/* when JS sets active class */
+.anchored-modal.active {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
