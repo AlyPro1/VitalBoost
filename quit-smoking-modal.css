@@ -2444,16 +2444,3 @@
     width: 96%;
   }
 }
-
-/* 🔹 Fix tall modal issue */
-.coach-breathing-modal-container,
-.fighters-modal-container {
-  width: 80%;
-  max-width: 900px;
-  margin: 5% auto;
-  
-  /* ✅ Force content-based height */
-  height: auto !important;
-  max-height: 90vh;  /* never taller than screen */
-  overflow-y: auto;  /* scroll inside if content overflows */
-} 
