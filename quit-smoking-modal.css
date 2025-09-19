@@ -2336,3 +2336,35 @@
   from { text-shadow: 0 0 5px #00f7ff; }
   to { text-shadow: 0 0 15px #00f7ff, 0 0 25px #ff00ff; }
 }
+
+.cinematic-journey {
+  text-align: center;
+  padding: 50px 20px;
+  background: #000; /* cinematic black background */
+  color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  margin-top: 40px;
+}
+
+.cinematic-journey .section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+.journey-video {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+
+.journey-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 15px;
+}
