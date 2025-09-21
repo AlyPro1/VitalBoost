@@ -1022,3 +1022,241 @@ window.addEventListener("click", (e) => {
     console.log('Modal width enforcer attached.');
   });
 })();
+
+/* modal-anchoring-rescue.js
+   Smart modal anchor: if nearest container is too narrow, open modal as fixed overlay on body
+   - prevents clipping/skinny tall modal
+   - restores original DOM location on close
+*/
+(function(){
+  'use strict';
+
+  const MIN_ANCHOR_WIDTH = 600; // if anchor width < this, fall back to body
+
+  // helper queries
+  const $ = (sel, ctx=document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+
+  // remembers where modal originally lived so we can restore it later
+  function rememberOriginalLocation(modal) {
+    modal._origParent = modal.parentElement || null;
+    modal._origNextSibling = modal.nextSibling || null;
+  }
+  function restoreOriginalLocation(modal) {
+    try {
+      if (modal._origParent) {
+        if (modal._origNextSibling && modal._origNextSibling.parentElement === modal._origParent) {
+          modal._origParent.insertBefore(modal, modal._origNextSibling);
+        } else {
+          modal._origParent.appendChild(modal);
+        }
+      }
+    } catch (e) { /* ignore */ }
+  }
+
+  // anchor modal to a parent element (absolute) so it covers that parent
+  function anchorAbsoluteToParent(modal, parentEl) {
+    // ensure parent has positioning
+    const parentPos = window.getComputedStyle(parentEl).position;
+    if (parentPos === 'static') parentEl.style.position = 'relative';
+
+    // style modal to cover parent
+    modal.style.position = 'absolute';
+    modal.style.inset = '0';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.display = 'flex';
+    modal.style.justifyContent = 'center';
+    modal.style.alignItems = 'center';
+    modal.style.zIndex = '9999';
+    modal.classList.add('anchored-modal');
+  }
+
+  // anchor modal as fixed viewport overlay (full-screen)
+  function anchorFixedToBody(modal) {
+    // append to body
+    if (modal.parentElement !== document.body) {
+      document.body.appendChild(modal);
+    }
+    // style modal to cover viewport
+    modal.style.position = 'fixed';
+    modal.style.inset = '0';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100vw';
+    modal.style.height = '100vh';
+    modal.style.display = 'flex';
+    modal.style.justifyContent = 'center';
+    modal.style.alignItems = 'center';
+    modal.style.zIndex = '99999';
+    modal.classList.add('anchored-modal', 'anchored-fixed');
+  }
+
+  // revert inline styles set by anchoring
+  function unanchorModal(modal) {
+    // remove saved class; restore basic inline styles to nothing
+    modal.classList.remove('anchored-modal', 'anchored-fixed');
+    modal.style.position = '';
+    modal.style.inset = '';
+    modal.style.top = '';
+    modal.style.left = '';
+    modal.style.width = '';
+    modal.style.height = '';
+    modal.style.display = '';
+    modal.style.justifyContent = '';
+    modal.style.alignItems = '';
+    modal.style.zIndex = '';
+  }
+
+  // Pause any page-level cinematic video when modal opens, resume on close
+  function pausePageVideo() {
+    const vid = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video');
+    if (vid && !vid.paused) {
+      try { vid.pause(); } catch(e){}
+      vid._wasPlaying = true;
+    }
+  }
+  function resumePageVideo() {
+    const vid = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video');
+    if (vid && vid._wasPlaying) {
+      try { vid.play().catch(()=>{}); } catch(e){}
+      vid._wasPlaying = false;
+    }
+  }
+
+  // Find a good anchor: prefer given selectors, otherwise nearest section/container.
+  // If chosen anchor is too narrow (< MIN_ANCHOR_WIDTH) return document.body
+  function findGoodAnchor(triggerEl, preferredSelectors=[]) {
+    if (!triggerEl) return document.body;
+
+    // try preferred selectors first (closest ancestor)
+    for (const sel of preferredSelectors) {
+      const found = triggerEl.closest(sel);
+      if (found) {
+        const w = found.clientWidth || found.getBoundingClientRect().width;
+        if (w >= MIN_ANCHOR_WIDTH) return found;
+        // if too narrow, continue searching
+      }
+    }
+
+    // walk up ancestors to find a reasonably wide container
+    let el = triggerEl;
+    while (el && el !== document.body) {
+      const w = el.clientWidth || el.getBoundingClientRect().width;
+      if (w >= MIN_ANCHOR_WIDTH) return el;
+      el = el.parentElement;
+    }
+
+    // fallback to body (fixed overlay)
+    return document.body;
+  }
+
+  // generic modal attach
+  function attachModalSmart(options) {
+    const { modalSelector, triggerSelectors=[], closeSelectors=[], anchorPreference=[] } = options;
+    const modal = typeof modalSelector === 'string' ? document.querySelector(modalSelector) : modalSelector;
+    if (!modal) return;
+
+    rememberOriginalLocation(modal);
+
+    // find triggers (allow many)
+    let triggers = [];
+    triggerSelectors.forEach(sel => {
+      const found = Array.from(document.querySelectorAll(sel));
+      if (found.length) triggers = triggers.concat(found);
+    });
+    // fallback triggers if none found
+    if (triggers.length === 0) {
+      if (modal.id === 'coachBreathingModal') triggers = Array.from(document.querySelectorAll('#openCoachModal, .coach-section .coach-btn, .coach-controls button, .coach-section'));
+      if (modal.id === 'fightersModal') triggers = Array.from(document.querySelectorAll('#openFightersModal, .fighters-title, .big-stat, .join-fighters-btn, .stats-display'));
+    }
+
+    // dedupe
+    triggers = Array.from(new Set(triggers));
+
+    function openForTrigger(triggerEl, ev) {
+      if (ev) { try { ev.preventDefault(); ev.stopPropagation(); } catch(e){} }
+      // find anchor candidate
+      const anchor = findGoodAnchor(triggerEl, anchorPreference);
+      // move modal to anchor or body
+      rememberOriginalLocation(modal);
+
+      if (anchor === document.body) {
+        anchorFixedToBody(modal);
+      } else {
+        // append to that anchor and absolute-cover it
+        anchor.appendChild(modal);
+        anchorAbsoluteToParent(modal, anchor);
+      }
+
+      // show the modal
+      modal.classList.add('active');
+
+      // pause page video
+      pausePageVideo();
+
+      // try to play any video inside modal if present
+      const insideVid = modal.querySelector('video');
+      if (insideVid) {
+        try { insideVid.play().catch(()=>{}); } catch(e){}
+      }
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      // pause internal videos
+      const insideVid = modal.querySelector('video');
+      if (insideVid) {
+        try { insideVid.pause(); } catch(e){}
+      }
+      // unanchor + restore DOM location
+      unanchorModal(modal);
+      restoreOriginalLocation(modal);
+      // resume page-level video if needed
+      resumePageVideo();
+    }
+
+    // bind triggers
+    triggers.forEach(t => {
+      try { t.addEventListener('click', function(e){ openForTrigger(t, e); }); } catch(e){}
+    });
+
+    // close inside elements
+    const closeEls = closeSelectors.length ? closeSelectors.reduce((acc, sel) => acc.concat(Array.from(modal.querySelectorAll(sel))), []) : Array.from(modal.querySelectorAll('.close, .fighters-close, .close-modal, .stop-breathing-btn, #stopBreathingBtn'));
+    closeEls.forEach(btn => {
+      try { btn.addEventListener('click', function(ev){ ev.stopPropagation(); closeModal(); }); } catch(e){}
+    });
+
+    // click overlay to close (only when clicking exact overlay)
+    modal.addEventListener('click', (ev) => {
+      if (ev.target === modal) closeModal();
+    });
+
+    // escape key closes
+    document.addEventListener('keydown', function(ev){
+      if ((ev.key === 'Escape' || ev.key === 'Esc') && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+  }
+
+  // initialize on DOM ready
+  document.addEventListener('DOMContentLoaded', function(){
+    attachModalSmart({
+      modalSelector: '#coachBreathingModal',
+      triggerSelectors: ['#openCoachModal', '.coach-section .coach-btn', '.coach-controls button'],
+      closeSelectors: ['.stop-breathing-btn', '#stopBreathingBtn', '.fighters-close'],
+      anchorPreference: ['.coach-section', '.tracker-content', '.gamified-section', '.content', '.content-wrapper']
+    });
+
+    attachModalSmart({
+      modalSelector: '#fightersModal',
+      triggerSelectors: ['#openFightersModal', '.fighters-title', '.big-stat', '.join-fighters-btn', '.stats-display'],
+      closeSelectors: ['.fighters-close', '#closeFightersModal'],
+      anchorPreference: ['.stats-display', '.big-stat', '.gamified-section', '.content', '.content-wrapper']
+    });
+  });
+
+})();
