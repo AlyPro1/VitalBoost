@@ -2444,3 +2444,27 @@
     width: 96%;
   }
 }
+
+/* Coach Vital Boost Modal */
+#coachBreathingModal .coach-breathing-modal-container {
+  width: 800px !important;   /* Stretch width */
+  max-width: 90%;            /* Responsive */
+  height: auto !important;   /* Prevent tall stretch */
+  margin: auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0b0b0b;       /* Keep dark theme */
+  padding: 20px;
+}
+
+/* Fighters Modal */
+#fightersModal .fighters-modal-container {
+  width: 600px !important;   /* Stretch width */
+  max-width: 90%;
+  height: auto !important;
+  margin: auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0b0b0b;
+  padding: 20px;
+}
