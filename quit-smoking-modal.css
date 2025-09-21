@@ -2444,3 +2444,25 @@
     width: 96%;
   }
 }
+
+/* Coach Breathing Modal */
+.coach-breathing-modal-container {
+  width: 800px !important;        /* adjust to your liking */
+  max-width: 90% !important;      /* responsive on small screens */
+  height: auto !important;        /* no forced tall stretch */
+  margin: auto !important;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #111; /* keep if you want a background */
+}
+
+/* Fighters Modal */
+.fighters-modal-container {
+  width: 600px !important;        /* adjust to your liking */
+  max-width: 90% !important;
+  height: auto !important;
+  margin: auto !important;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #111; /* keep if you want */
+}
