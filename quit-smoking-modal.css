@@ -2490,3 +2490,29 @@
   overflow-y: auto !important;
   border-radius: 16px;
 }
+/* ensure modal overlays work as full-viewport when anchored to body */
+#coachBreathingModal,
+#fightersModal {
+  position: fixed !important;
+  inset: 0 !important;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.72);
+  z-index: 99999;
+  padding: 20px;
+  box-sizing: border-box;
+}
+#coachBreathingModal.active,
+#fightersModal.active {
+  display: flex !important;
+}
+
+/* ensure internal container sizes are respected (you already set these) */
+#coachBreathingModal .coach-breathing-modal-container,
+#fightersModal .fighters-modal-container {
+  height: auto !important;
+  max-height: 85vh !important;
+  overflow-y: auto !important;
+}
+
