@@ -947,3 +947,78 @@ window.addEventListener("click", (e) => {
   });
 
 })();
+
+// === Modal width enforcer (paste at end of quit-smoking-modal.js) ===
+(function(){
+  'use strict';
+
+  function enforceModalSizing(modalId, containerSelector, desiredWidthPx, imageSelector) {
+    const modal = document.getElementById(modalId);
+    if (!modal) {
+      console.warn('Modal not found:', modalId);
+      return;
+    }
+    const container = modal.querySelector(containerSelector);
+    if (!container) {
+      console.warn('Modal container not found for', modalId, containerSelector);
+      return;
+    }
+
+    // function that applies inline sizing styles
+    function applySizing() {
+      // horizontal width
+      container.style.width = (desiredWidthPx ? desiredWidthPx + 'px' : '80%');
+      container.style.maxWidth = '96%';
+      container.style.boxSizing = 'border-box';
+      container.style.margin = '0 auto';
+
+      // vertical sizing
+      container.style.height = 'auto';
+      container.style.maxHeight = '85vh';
+      container.style.overflowY = 'auto';
+
+      // ensure children don't force weird min-height
+      container.style.minHeight = 'initial';
+
+      // image inside (if any) - keep it from expanding vertically
+      if (imageSelector) {
+        const img = container.querySelector(imageSelector);
+        if (img) {
+          img.style.display = 'block';
+          img.style.width = '100%';
+          img.style.maxWidth = '460px';
+          img.style.height = 'auto';
+          img.style.objectFit = 'cover';
+          img.style.margin = '0 auto';
+        }
+      }
+    }
+
+    // apply immediately (in case modal is already open)
+    applySizing();
+
+    // Observe class changes on modal (active toggles) and reapply when active
+    const mo = new MutationObserver(function(muts) {
+      muts.forEach(m => {
+        if (m.type === 'attributes' && m.attributeName === 'class') {
+          // always reapply sizing when class list changes
+          applySizing();
+        }
+      });
+    });
+    mo.observe(modal, { attributes: true, attributeFilter: ['class'] });
+
+    // reapply on resize (keeps responsive)
+    window.addEventListener('resize', applySizing);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Coach: pick width (px) that feels good; change numbers if needed
+    enforceModalSizing('coachBreathingModal', '.coach-breathing-modal-container', 840, '.breathing-image');
+
+    // Fighters: slightly narrower or same as coach; adjust as you like
+    enforceModalSizing('fightersModal', '.fighters-modal-container', 780, null);
+
+    console.log('Modal width enforcer attached.');
+  });
+})();
