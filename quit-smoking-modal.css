@@ -2490,3 +2490,12 @@
   overflow-y: auto !important;
   border-radius: 16px;
 }
+
+/* Coach Modal Fix */
+.coach-breathing-modal-container {
+  width: 70vw !important;   /* wider */
+  max-width: 1000px;        /* cap at desktop size */
+  height: auto !important;  /* remove forced tall height */
+  max-height: 90vh;         /* safe on small screens */
+  overflow-y: auto;         /* allow scroll if content exceeds */
+}
