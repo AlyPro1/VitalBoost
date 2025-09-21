@@ -2490,6 +2490,7 @@
   overflow-y: auto !important;
   border-radius: 16px;
 }
+
 /* ensure modal overlays work as full-viewport when anchored to body */
 #coachBreathingModal,
 #fightersModal {
