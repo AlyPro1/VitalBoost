@@ -2448,7 +2448,7 @@
 /* Fix for Coach Vital Boost and Fighters modal width */
 .coach-breathing-modal-container,
 .fighters-modal-container {
-  width: 800px;              /* adjust as needed */
+  width: 900px;              /* adjust as needed */
   max-width: 90%;            /* keeps it responsive */
   margin: auto;              /* centers the modal */
   border-radius: 16px;       /* optional: smoother look */
