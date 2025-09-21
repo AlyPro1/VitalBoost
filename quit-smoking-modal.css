@@ -2468,3 +2468,25 @@
   background: #0b0b0b;
   padding: 20px;
 }
+
+/* ✅ Coach Vital Boost Modal (wider) */
+#coachBreathingModal .coach-breathing-modal-container {
+  width: 840px !important;
+  max-width: 90% !important;
+  height: auto !important;
+  max-height: 85vh !important;
+  margin: 0 auto !important;
+  overflow-y: auto !important;
+  border-radius: 16px;
+}
+
+/* ✅ Fighters Modal (slightly smaller) */
+#fightersModal .fighters-modal-container {
+  width: 640px !important;
+  max-width: 85% !important;
+  height: auto !important;
+  max-height: 80vh !important;
+  margin: 0 auto !important;
+  overflow-y: auto !important;
+  border-radius: 16px;
+}
