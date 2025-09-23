@@ -573,105 +573,147 @@
       <p id="challengeMessage" class="challenge-message"></p>
     </div> <!-- ✅ closes .challenge-card -->
       
-          <div class="coach-section">
-            <div class="coach-avatar">
-              <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Coach" class="coach-img">
-            </div>
-            <div class="coach-info">
-              <h4>Coach Vital Boost</h4>
-              <p>Take 60 second breath each day. Remember to breathe. A mindful breath helps you stay focused.</p>
-            </div>
-            <div class="coach-controls">
-              <button class="coach-btn">🎤</button>
-              <button class="coach-btn">⏸️</button>
-            </div>
-          </div>
+          <!-- Coach Vital Boost Card -->
+     <div class="coach-section">
+      <div class="coach-avatar">
+ <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Coach" class="coach-img">
+    </div>
+   <div class="coach-info">
+    <h4>Coach Vital Boost</h4>
+ <p>Take 60 second breath each day. Remember to breathe. A mindful breath helps you stay focused.</p>
+  </div>
+ <div class="coach-controls">
+       <!-- Trigger button for modal -->   
+       <button id="openCoachModal" class="coach-btn">Start Breathing 🌬️</button>
+      </div>
+    </div> <!-- ✅ closes .coach-section -->
 
-          <div class="stats-display">
-            <div class="big-stat">
-              <span class="stat-number">1,200</span>
-              <span class="stat-label">people are<br>co quitting with you today</span>
-            </div>
-            <div class="user-avatar">
-              <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100" alt="User" class="user-img">
-            </div>
-          </div>
+   <!-- Fighters-Quitting Stats -->
+<div class="stats-display">
+  <div class="big-stat">
+    <!-- Clickable Title -->
+    <h3 class="fighters-title" id="openFightersModal">
+      Join <span class="fighters-number">1,200</span> Fighters 
+      <span class="shield-icon">🛡️</span>
+    </h3>
+  </div>
+  <div class="user-avatar">
+    <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100" 
+         alt="User" class="user-img">
+  </div>
+</div>
 
-          <div class="leaderboard">
-            <h3>Leaderboard</h3>
-            <div class="leaderboard-item">
-              <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=50" alt="User" class="leader-avatar">
+       <!-- Live Leaderboard -->
+<div class="leaderboard">
+<h3 class="leaderboard-title">🏆 Live Leaderboard</h3>
+        <div class="leaderboard-item">
+  <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=50" alt="User" class="leader-avatar">
+          <div class="leader-info">
+          <span class="leader-name">Linda - 30 Days</span>
+          <span class="leader-streak">Quit Smoking 🚭</span>
+        </div>
+          <div class="leader-score">
+          <span class="score">3000$ Days</span>
+          <span class="badge">🏅</span>
+        </div>
+      </div>
+          <div class="leaderboard-item">
+  <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=50" alt="User" class="leader-avatar">
               <div class="leader-info">
-                <span class="leader-name">Linda - 30 Days</span>
-                <span class="leader-streak">Smoke Free</span>
+              <span class="leader-name">Peter - 7 Days</span>
+              <span class="leader-streak">1 Week Without Junk Food 🍔❌</span>
               </div>
               <div class="leader-score">
-                <span class="score">3000$ Days</span>
-                <span class="badge">🏅</span>
+              <span class="score">7.1 Days</span>
+              <span class="badge">🏆</span>
+              <span class="achievement">1 Week Free 🎉</span>
               </div>
             </div>
-            <div class="leaderboard-item">
-              <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=50" alt="User" class="leader-avatar">
-              <div class="leader-info">
-                <span class="leader-name">Linda - 7 Days</span>
-                <span class="leader-streak">Enjoy Fridge</span>
-              </div>
-              <div class="leader-score">
-                <span class="score">7.1 Days</span>
-                <span class="badge">🏆</span>
-                <span class="achievement">1 Week Free 🎉</span>
-              </div>
+          <div class="leaderboard-item">
+  <img src="https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=50" alt="User" class="leader-avatar">
+            <div class="leader-info">
+            <span class="leader-name">Nancy - 30 Days</span>
+            <span class="leader-streak">Daily Workout Streak 💪</span>
             </div>
-            <div class="leaderboard-item">
-              <img src="https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=50" alt="User" class="leader-avatar">
-              <div class="leader-info">
-                <span class="leader-name">Linda - 30 Days</span>
-                <span class="leader-streak">Fridge Investment</span>
-              </div>
-              <div class="leader-score">
-                <span class="score">300$ Days</span>
-                <span class="badge">🏅</span>
-                <span class="achievement">Heart Legend 🎉</span>
-              </div>
+            <div class="leader-score">
+            <span class="score">300$ Days</span>
+            <span class="badge">🏅</span>
+            <span class="achievement">Heart Legend 🎉</span>
+             </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Cinematic Health Journey -->
-      <div class="cinematic-journey">
-        <h2 class="section-title">Cinematic Health Journey</h2>
-        <div class="journey-stages">
-          <div class="journey-stage stage-1">
-            <div class="stage-image smoky-lungs">
-              <div class="lung-visual damaged">🫁</div>
-              <div class="smoke-effect"></div>
-            </div>
-            <p class="stage-label">Day 1 Smoky Lungs</p>
-          </div>
-          <div class="journey-stage stage-2">
-            <div class="stage-image healing-lungs">
-              <div class="lung-visual healing">🫁</div>
-              <div class="healing-glow"></div>
-            </div>
-            <p class="stage-label">Day 30 Healing Lungs</p>
-          </div>
-          <div class="journey-stage stage-3">
-            <div class="stage-image clear-lungs">
-              <div class="lung-visual healthy">🫁</div>
-              <div class="nature-bg">
-                <div class="tree">🌳</div>
-                <div class="butterfly-fly">🦋</div>
-                <div class="fresh-air"></div>
-              </div>
-            </div>
-            <p class="stage-label">Day 1-365 Clear Lungs</p>
-          </div>
-        </div>
+        <!-- Cinematic Health Journey -->
+    <div class="cinematic-journey">
+  <h2 class="cinematic-title">8 Seconds to Breathe Again ✨</h2>
+
+  <div class="journey-video">
+    <video autoplay muted loop playsinline>
+      <source src="cinematic-journey.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+       </video>
+      </div>
+    </div>
+   </div>
+  </div>
+  
+        <!-- Coach Vital Boost Breathing Exercise Modal -->
+     <div id="coachBreathingModal" class="coach-breathing-modal-overlay">
+     <div class="coach-breathing-modal-container">
+    <div class="breathing-background">
+      <div class="breathing-particles"></div>
+    </div>
+    
+    <div class="breathing-content">
+      <div class="breathing-image-container">
+        <img src="Coach Vital Boost feature design.jpg"
+             alt="Breathing Exercise" 
+             class="breathing-image">
+        <div class="breathing-overlay"></div>
+      </div>
+      
+      <div class="breathing-controls">
+        <div class="countdown-timer" id="countdownTimer">60</div>
+        <button class="stop-breathing-btn" id="stopBreathingBtn">Stop</button>
+      </div>
+      
+      <div class="breathing-instructions">
+        <h3>Coach Vital Boost</h3>
+        <p>Take 60 second breath each day. Remember to breathe. A mindful breath helps you stay focused.</p>
       </div>
     </div>
   </div>
+</div>
 
+          <!-- Fighters Modal -->
+         <div id="fightersModal" class="fighters-modal-overlay">
+         <div class="fighters-modal-container">
+        <span class="fighters-close" id="closeFightersModal">&times;</span>
+    
+           <!-- Blinking Animated Title -->
+         <h2 class="fighters-modal-title">✨ Welcome Fighters! ✨</h2>
+    
+          <!-- Avatar Grid -->
+         <div class="fighters-grid">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/men/56.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/women/23.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/women/35.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/men/84.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Fighter" class="fighter-avatar">
+    </div>
+
+            <!-- CTA Button -->
+      <button class="join-fighters-btn">🔥 Join the 1,200 Fighters 🔥</button>
+  </div>
+</div>
+      
   <script src="script.js"></script>
   <link rel="stylesheet" href="quit-smoking-modal.css">
   <script src="quit-smoking-modal.js"></script>
