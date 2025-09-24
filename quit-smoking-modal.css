@@ -2576,16 +2576,3 @@
 .stop-breathing-btn:hover {
   background: #ff3333;
 }
-
-/* Fix Coach Vital Boost Modal sizing without breaking layout */
-#coachBreathingModal .coach-breathing-modal-container {
-  width: 70vw;          /* make it wider on screen */
-  max-width: 900px;     /* don’t let it stretch too much */
-  height: auto;         /* let content decide the height */
-  max-height: 90vh;     /* ensure it doesn’t exceed screen */
-  overflow-y: auto;     /* scroll only if content is taller */
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
