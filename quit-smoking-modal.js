@@ -1260,3 +1260,175 @@ window.addEventListener("click", (e) => {
   });
 
 })();
+
+// === Coach Modal Forced-Overlay Fix ===
+// Paste at end of quit-smoking-modal.js (or quit-smoking-modal-fix.js)
+(function(){
+  'use strict';
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const MODAL_ID = 'coachBreathingModal';
+    const CONTAINER_SEL = '.coach-breathing-modal-container';
+    const coachModal = document.getElementById(MODAL_ID);
+    if (!coachModal) return;
+
+    // Save original location & styles once
+    function rememberOriginal(modal) {
+      if (!modal._origSaved) {
+        modal._origParent = modal.parentElement;
+        modal._origNextSibling = modal.nextSibling;
+        modal._origStyle = modal.getAttribute('style') || '';
+        const cont = modal.querySelector(CONTAINER_SEL);
+        if (cont) cont._origStyle = cont.getAttribute('style') || '';
+        modal._origSaved = true;
+      }
+    }
+
+    // Restore original DOM location & inline styles
+    function restoreOriginal(modal) {
+      try {
+        // restore container inline styles
+        const cont = modal.querySelector(CONTAINER_SEL);
+        if (cont) {
+          if (cont._origStyle !== undefined) {
+            if (cont._origStyle) cont.setAttribute('style', cont._origStyle);
+            else cont.removeAttribute('style');
+          } else {
+            cont.removeAttribute('style');
+          }
+        }
+
+        // restore modal inline styles
+        if (modal._origStyle !== undefined) {
+          if (modal._origStyle) modal.setAttribute('style', modal._origStyle);
+          else modal.removeAttribute('style');
+        } else {
+          modal.removeAttribute('style');
+        }
+
+        // restore DOM position
+        if (modal._origParent) {
+          if (modal._origNextSibling && modal._origNextSibling.parentElement === modal._origParent) {
+            modal._origParent.insertBefore(modal, modal._origNextSibling);
+          } else {
+            modal._origParent.appendChild(modal);
+          }
+        }
+      } catch (err) {
+        // fail-safe: do nothing
+        console.warn('restoreOriginal error', err);
+      }
+    }
+
+    // Apply forced fixed overlay style and strong sizing to inner container
+    function forceFixedOverlay(modal) {
+      rememberOriginal(modal);
+
+      // ensure modal is appended to body
+      if (modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+      }
+
+      // overlay styles (inline, override anything)
+      modal.style.position = 'fixed';
+      modal.style.left = '0';
+      modal.style.top = '0';
+      modal.style.width = '100vw';
+      modal.style.height = '100vh';
+      modal.style.display = 'flex';
+      modal.style.justifyContent = 'center';
+      modal.style.alignItems = 'center';
+      modal.style.inset = '0';
+      modal.style.padding = '20px';
+      modal.style.background = 'rgba(0,0,0,0.72)';
+      modal.style.zIndex = '120000';
+
+      // inner container sizing
+      const cont = modal.querySelector(CONTAINER_SEL);
+      if (cont) {
+        cont.style.width = '840px';            // desired width (adjust if needed)
+        cont.style.maxWidth = '95%';
+        cont.style.height = 'auto';
+        cont.style.maxHeight = '85vh';
+        cont.style.overflowY = 'auto';
+        cont.style.margin = '0 auto';
+        cont.style.boxSizing = 'border-box';
+        // ensure image doesn't blow up height
+        const img = cont.querySelector('.breathing-image');
+        if (img) {
+          img.style.maxWidth = '420px';
+          img.style.width = '100%';
+          img.style.height = 'auto';
+          img.style.display = 'block';
+          img.style.margin = '0 auto';
+        }
+        // ensure content stacks nicely
+        cont.style.display = 'flex';
+        cont.style.flexDirection = 'column';
+        cont.style.alignItems = 'center';
+        cont.style.justifyContent = 'flex-start';
+      }
+
+      // Pause any page-level background video (if present)
+      try {
+        const pageVid = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video');
+        if (pageVid && !pageVid.paused) { pageVid.pause(); pageVid._wasPlaying = true; }
+      } catch(e){}
+    }
+
+    // When modal closes, restore original
+    function handleCloseRestore(modal) {
+      // restore page video if needed
+      try {
+        const pageVid = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video');
+        if (pageVid && pageVid._wasPlaying) {
+          pageVid.play().catch(()=>{});
+          pageVid._wasPlaying = false;
+        }
+      } catch(e){}
+      restoreOriginal(modal);
+    }
+
+    // Observe class changes on the modal and apply force when .active is toggled
+    const mo = new MutationObserver(function(mutations) {
+      mutations.forEach(m => {
+        if (m.type === 'attributes' && m.attributeName === 'class') {
+          const isActive = coachModal.classList.contains('active');
+          if (isActive) {
+            // apply forced overlay after a tiny tick (let other handlers finish)
+            setTimeout(()=> forceFixedOverlay(coachModal), 16);
+          } else {
+            // closed -> restore
+            setTimeout(()=> handleCloseRestore(coachModal), 20);
+          }
+        }
+      });
+    });
+    mo.observe(coachModal, { attributes: true });
+
+    // Also ensure clicking the open button applies the same fallback if open logic doesn't add .active first
+    const openBtn = document.getElementById('openCoachModal') || document.querySelector('.coach-section .coach-btn');
+    if (openBtn) {
+      openBtn.addEventListener('click', function () {
+        // small delay so any existing listeners can set .active; then enforce
+        setTimeout(()=> {
+          if (coachModal.classList.contains('active')) {
+            forceFixedOverlay(coachModal);
+          } else {
+            // if not active yet, still ensure modal becomes fixed when it is activated
+            // MutationObserver will pick it up
+          }
+        }, 60);
+      });
+    }
+
+    // Safety: also intercept Escape/global close to restore modal
+    document.addEventListener('keydown', function(e){
+      if ((e.key === 'Escape' || e.key === 'Esc') && coachModal.classList.contains('active')) {
+        // small delay to allow other close handlers to run
+        setTimeout(() => handleCloseRestore(coachModal), 80);
+      }
+    });
+
+  }); // DOMContentLoaded
+})();
