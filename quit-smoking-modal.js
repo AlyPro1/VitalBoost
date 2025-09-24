@@ -201,19 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, index * 200);
         });
 
-        // Animate journey stages
-        const journeyStages = document.querySelectorAll('.journey-stage');
-        journeyStages.forEach((stage, index) => {
-            stage.style.opacity = '0';
-            stage.style.transform = 'scale(0.8)';
-            
-            setTimeout(() => {
-                stage.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                stage.style.opacity = '1';
-                stage.style.transform = 'scale(1)';
-            }, 1000 + (index * 300));
-        });
-
         // Animate leaderboard items
         const leaderboardItems = document.querySelectorAll('.leaderboard-item');
         leaderboardItems.forEach((item, index) => {
