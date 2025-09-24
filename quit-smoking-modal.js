@@ -1333,6 +1333,7 @@ window.addEventListener("click", (e) => {
     
     // When modal closes, restore original
     function handleCloseRestore(modal) {
+    // restore page video if needed 
         
     // Observe class changes on the modal and apply force when .active is toggled
     const mo = new MutationObserver(function(mutations) {
