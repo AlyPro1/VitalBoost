@@ -2520,3 +2520,105 @@
   color: #ff4d4d;
   text-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
+
+/* Layout */
+.tracker-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem; /* space between items */
+  margin-top: 2rem;
+}
+
+/* VS Center */
+.vs-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vs-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff4d6d;
+  background: #fff;
+  border-radius: 50%;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+/* Card styling */
+.card {
+  background: linear-gradient(135deg, #f0f9ff, #e0f7fa);
+  padding: 1.5rem;
+  border-radius: 15px;
+  text-align: center;
+  width: 260px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Avatar */
+.card-avatar {
+  margin-bottom: 1rem;
+}
+
+.card-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+}
+
+/* Title */
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Description */
+.card-description {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* Button */
+.action-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.action-btn:hover {
+  background: #0056b3;
+}
+
+/* Specific card touches */
+.coach-card .action-btn {
+  background: #28a745; /* green */
+}
+
+.coach-card .action-btn:hover {
+  background: #1e7e34;
+}
+
+.fighters-card .action-btn {
+  background: #e83e8c; /* pink */
+}
+
+.fighters-card .action-btn:hover {
+  background: #bd216d;
+}
