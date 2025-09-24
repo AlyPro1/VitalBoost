@@ -2392,7 +2392,3 @@
 .gamified-section .fighters-card {
   margin-top: 25px;   /* adjust number until spacing looks good */
 }
-
-.gamified-section .tracker-content > div:nth-child(2) {
-  margin-top: 25px;
-}
