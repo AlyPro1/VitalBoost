@@ -1327,7 +1327,10 @@ window.addEventListener("click", (e) => {
         cont.style.alignItems = 'center';
         cont.style.justifyContent = 'flex-start';
       }
-      
+
+      // Pause any page-level background video (if present)
+      try { const pageVid = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video'); if (pageVid && !pageVid.paused) { pageVid.pause(); pageVid._wasPlaying = true; } } catch(e){} }
+    
     // When modal closes, restore original
     function handleCloseRestore(modal) {
         
