@@ -2383,8 +2383,15 @@
   background: #ff3333;
 }
 
-.tracker-content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Creates space between cards */
+/* Target each card inside Gamified Tracker */
+.gamified-section .tracker-content > div {
+  margin-bottom: 25px;   /* adds proper space between features */
+  border-radius: 10px;   /* keep rounded look */
+  overflow: hidden;      /* ensure clean edges */
 }
+
+/* Optional: remove extra space after the last card */
+.gamified-section .tracker-content > div:last-child {
+  margin-bottom: 0;
+}
+
