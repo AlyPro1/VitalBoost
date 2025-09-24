@@ -2383,15 +2383,12 @@
   background: #ff3333;
 }
 
-/* Target each card inside Gamified Tracker */
-.gamified-section .tracker-content > div {
-  margin-bottom: 25px;   /* adds proper space between features */
-  border-radius: 10px;   /* keep rounded look */
-  overflow: hidden;      /* ensure clean edges */
+/* Add padding inside the tracker section */
+.gamified-section .tracker-content {
+  padding: 10px 0;
 }
 
-/* Optional: remove extra space after the last card */
-.gamified-section .tracker-content > div:last-child {
-  margin-bottom: 0;
+/* Specifically push the Fighters card down */
+.gamified-section .fighters-card {
+  margin-top: 25px;   /* adjust number until spacing looks good */
 }
-
