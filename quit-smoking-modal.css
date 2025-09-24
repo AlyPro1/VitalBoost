@@ -2382,3 +2382,9 @@
 .stop-breathing-btn:hover {
   background: #ff3333;
 }
+
+.tracker-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Creates space between cards */
+}
