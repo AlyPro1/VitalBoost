@@ -2490,3 +2490,19 @@
   overflow-y: auto !important;
   border-radius: 16px;
 }
+
+/* Coach Vital Boost Modal Fix */
+.coach-breathing-modal-container {
+  width: 70vw;              /* wider modal */
+  max-width: 1000px;        /* cap width for large screens */
+  height: auto;             /* remove forced tall height */
+  max-height: 90vh;         /* limit height to viewport */
+  overflow-y: auto;         /* scroll only if content exceeds height */
+  margin: 0 auto;           /* center horizontally */
+  border-radius: 12px;      /* keep clean look */
+  background: #fff;         /* keep background clean */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
