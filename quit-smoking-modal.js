@@ -843,13 +843,7 @@ window.addEventListener("click", (e) => {
       // mark active
       modal.classList.add('active');
 
-      // pause any background cinematic video in the page (not modal)
-      const pageVideo = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video');
-      if (pageVideo) {
-        try { pageVideo.pause(); } catch(e){}
-      }
-
-      // ensure any video inside modal plays (if desired)
+           // ensure any video inside modal plays (if desired)
       const modalVideo = modal.querySelector('video');
       if (modalVideo) {
         try { modalVideo.play().catch(()=>{}); } catch(e){}
@@ -871,13 +865,7 @@ window.addEventListener("click", (e) => {
       // pause any modal internal video
       pauseVideosInside(modal);
 
-      // restore video on page
-      const pageVideo = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video');
-      if (pageVideo) {
-        try { pageVideo.play().catch(()=>{}); } catch(e){}
-      }
-
-      // unanchor and restore original location
+            // unanchor and restore original location
       unanchorModal(modal);
       restoreOriginalLocation(modal);
     }
@@ -1339,13 +1327,6 @@ window.addEventListener("click", (e) => {
         cont.style.alignItems = 'center';
         cont.style.justifyContent = 'flex-start';
       }
-
-      // Pause any page-level background video (if present)
-      try {
-        const pageVid = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video');
-        if (pageVid && !pageVid.paused) { pageVid.pause(); pageVid._wasPlaying = true; }
-      } catch(e){}
-    }
 
     // When modal closes, restore original
     function handleCloseRestore(modal) {
