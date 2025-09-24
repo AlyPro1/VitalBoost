@@ -2383,12 +2383,50 @@
   background: #ff3333;
 }
 
-/* Add padding inside the tracker section */
-.gamified-section .tracker-content {
-  padding: 10px 0;
+/* ---------- Gamified Tracker: force spacing between Coach & Fighters ---------- */
+/* 1) General spacing for the two card types (safe & global) */
+.gamified-section .coach-section,
+.gamified-section .stats-display,
+.coach-section,
+.stats-display,
+.fighters-card,
+.coach-card {
+  display: block !important;       /* ensure they behave like block elements */
+  width: 100% !important;
+  margin: 0 0 28px 0 !important;   /* primary spacing between cards */
+  box-sizing: border-box !important;
 }
 
-/* Specifically push the Fighters card down */
-.gamified-section .fighters-card {
-  margin-top: 25px;   /* adjust number until spacing looks good */
+/* 2) If Fighters follows Coach as a direct sibling, ensure extra top gap */
+.gamified-section .coach-section + .stats-display,
+.coach-section + .stats-display,
+.coach-section + .fighters-card {
+  margin-top: 32px !important;
+}
+
+/* 3) If one or both were accidentally absolutely-positioned (common source of overlap), reset positioning */
+.gamified-section .coach-section[style*="position: absolute"],
+.gamified-section .stats-display[style*="position: absolute"],
+.coach-section[style*="position: absolute"],
+.stats-display[style*="position: absolute"] {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+  margin-bottom: 28px !important;
+  z-index: 1 !important;
+}
+
+/* 4) Last-child safety to avoid extra bottom gap in the section */
+.gamified-section .tracker-content > :last-child,
+.gamified-section > :last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 5) Small-screen adjustments */
+@media (max-width: 768px) {
+  .gamified-section .coach-section,
+  .gamified-section .stats-display {
+    margin-bottom: 22px !important;
+  }
 }
