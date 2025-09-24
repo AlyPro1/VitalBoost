@@ -1096,23 +1096,7 @@ window.addEventListener("click", (e) => {
     modal.style.alignItems = '';
     modal.style.zIndex = '';
   }
-
-  // Pause any page-level cinematic video when modal opens, resume on close
-  function pausePageVideo() {
-    const vid = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video');
-    if (vid && !vid.paused) {
-      try { vid.pause(); } catch(e){}
-      vid._wasPlaying = true;
-    }
-  }
-  function resumePageVideo() {
-    const vid = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video');
-    if (vid && vid._wasPlaying) {
-      try { vid.play().catch(()=>{}); } catch(e){}
-      vid._wasPlaying = false;
-    }
-  }
-
+  
   // Find a good anchor: prefer given selectors, otherwise nearest section/container.
   // If chosen anchor is too narrow (< MIN_ANCHOR_WIDTH) return document.body
   function findGoodAnchor(triggerEl, preferredSelectors=[]) {
