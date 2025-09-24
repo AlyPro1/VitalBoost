@@ -1334,6 +1334,7 @@ window.addEventListener("click", (e) => {
     // When modal closes, restore original
     function handleCloseRestore(modal) {
     // restore page video if needed 
+      try { const pageVid = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video'); if (pageVid && pageVid._wasPlaying) { pageVid.play().catch(()=>{}); pageVid._wasPlaying = false; } } catch(e){} restoreOriginal(modal); }
         
     // Observe class changes on the modal and apply force when .active is toggled
     const mo = new MutationObserver(function(mutations) {
