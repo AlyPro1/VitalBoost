@@ -1345,7 +1345,8 @@ if (vid && !vid.paused) {
       }
 
       // Pause any page-level background video (if present)
-      try { const pageVid = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video'); if (pageVid && !pageVid.paused) { pageVid.pause(); pageVid._wasPlaying = true; } } catch(e){} }
+      try { const pageVid = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video'); 
+if (pageVid && !pageVid.paused) { pageVid.pause(); pageVid._wasPlaying = true; } } catch(e){} }
     
     // When modal closes, restore original
     function handleCloseRestore(modal) {
