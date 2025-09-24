@@ -1330,9 +1330,7 @@ window.addEventListener("click", (e) => {
       
     // When modal closes, restore original
     function handleCloseRestore(modal) {
-      
-try { const pageVid = document.querySelector('.journey-video-container video, video.cinematic-video, .journey-video video'); if (pageVid && !pageVid.paused) { pageVid.pause(); pageVid._wasPlaying = true; } } catch(e){} }
-      
+        
     // Observe class changes on the modal and apply force when .active is toggled
     const mo = new MutationObserver(function(mutations) {
       mutations.forEach(m => {
