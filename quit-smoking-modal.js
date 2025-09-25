@@ -1397,3 +1397,42 @@ if (pageVid && !pageVid.paused) { pageVid.pause(); pageVid._wasPlaying = true; }
 
   }); // DOMContentLoaded
 })();
+
+// gamified-patch.js  <- paste this code (no <script> tags) at the end of your external JS file
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    console.log('gamified-patch: running');
+
+    const s = document.querySelector('.gamified-section');
+    if (!s) {
+      console.warn('gamified-patch: .gamified-section not found');
+      return;
+    }
+
+    // Inline style fallback: apply only if needed
+    Object.assign(s.style, {
+      background: 'linear-gradient(135deg, #0f2740 0%, #0b2540 100%)',
+      color: '#ffffff',
+      maxWidth: '1100px',
+      margin: '40px auto',
+      padding: '28px',
+      borderRadius: '16px',
+      boxShadow: '0 12px 30px rgba(2,12,27,0.45)',
+      overflow: 'visible',
+      position: 'relative',
+      zIndex: '1'
+    });
+
+    // ensure next section has breathing room
+    const next = document.querySelector('.leaderboard') ||
+                 document.querySelector('.cinematic-journey') ||
+                 document.querySelector('#leaderboard');
+    if (next) {
+      next.style.marginTop = '48px';
+    }
+
+    console.log('gamified-patch: applied styles to .gamified-section');
+  } catch (err) {
+    console.error('gamified-patch error:', err);
+  }
+});
