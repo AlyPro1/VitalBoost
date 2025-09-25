@@ -1397,28 +1397,3 @@ if (pageVid && !pageVid.paused) { pageVid.pause(); pageVid._wasPlaying = true; }
 
   }); // DOMContentLoaded
 })();
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const s = document.querySelector('.gamified-section');
-  if (!s) return;
-
-  // Inline style fallback (forces styles if CSS is overridden elsewhere)
-  s.style.background = 'linear-gradient(135deg, #0f2740 0%, #0b2540 100%)';
-  s.style.color = '#ffffff';
-  s.style.maxWidth = '1100px';
-  s.style.margin = '40px auto';
-  s.style.padding = '28px';
-  s.style.borderRadius = '16px';
-  s.style.boxShadow = '0 12px 30px rgba(2,12,27,0.45)';
-  s.style.overflow = 'visible';
-  s.style.position = 'relative';
-  s.style.zIndex = '1';
-
-  // ensure next section has spacing
-  const next = document.querySelector('.leaderboard') ||
-               document.querySelector('.cinematic-journey') ||
-               document.querySelector('#leaderboard');
-  if (next) next.style.marginTop = '48px';
-});
-</script>
