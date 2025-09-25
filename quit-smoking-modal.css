@@ -2754,3 +2754,10 @@
 .gamified-section .card .card-title {
   color: #0f2740; /* keep card titles dark */
 }
+
+.gamified-section .card p,
+.gamified-section .card li {
+  color: #333333; /* readable dark gray inside white cards */
+  font-size: 15px;
+  line-height: 1.5;
+}
