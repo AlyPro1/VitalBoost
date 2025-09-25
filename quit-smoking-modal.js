@@ -1436,3 +1436,49 @@ document.addEventListener('DOMContentLoaded', function () {
     console.error('gamified-patch error:', err);
   }
 });
+
+// Start the 60 second breathing countdown
+function startBreathingCountdown() {
+  let timeLeft = 60;
+  const timerDisplay = document.getElementById("countdownTimer");
+
+  if (!timerDisplay) return;
+
+  timerDisplay.textContent = timeLeft;
+
+  // Clear any old interval if already running
+  if (window.breathingInterval) {
+    clearInterval(window.breathingInterval);
+  }
+
+  window.breathingInterval = setInterval(() => {
+    timeLeft--;
+    timerDisplay.textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(window.breathingInterval);
+      timerDisplay.textContent = "Done ✅";
+    }
+  }, 1000);
+}
+
+// Open modal & start countdown
+document.getElementById("openCoachModal").addEventListener("click", () => {
+  const modal = document.getElementById("coachBreathingModal");
+  if (modal) {
+    modal.style.display = "flex"; // or "block" depending on your CSS
+    startBreathingCountdown();
+  }
+});
+
+// Stop button closes modal & resets timer
+document.getElementById("stopBreathingBtn").addEventListener("click", () => {
+  const modal = document.getElementById("coachBreathingModal");
+  if (modal) {
+    modal.style.display = "none";
+  }
+  if (window.breathingInterval) {
+    clearInterval(window.breathingInterval);
+  }
+  document.getElementById("countdownTimer").textContent = 60; // reset
+});
