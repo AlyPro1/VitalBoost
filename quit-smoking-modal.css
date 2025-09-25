@@ -2761,3 +2761,31 @@
   font-size: 15px;
   line-height: 1.5;
 }
+
+/* Coach Vital Boost title */
+.gamified-section .coach-card h3,
+.gamified-section .coach-card h4 {
+  color: #00ff66; /* bright green */
+  font-weight: 700;
+  animation: blinkPulse 2s infinite;
+}
+
+/* Fighters title */
+.gamified-section .fighters-card h3,
+.gamified-section .fighters-card h4 {
+  color: #ff8800; /* orange */
+  font-weight: 700;
+  animation: blinkPulse 2s infinite;
+}
+
+/* Blinking + pulsing effect */
+@keyframes blinkPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
