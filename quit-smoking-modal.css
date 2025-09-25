@@ -2622,3 +2622,41 @@
 .fighters-card .action-btn:hover {
   background: #bd216d;
 }
+
+/* Gamified Section Container */
+.gamified-section {
+  background: linear-gradient(135deg, #f9fafb, #f1f5f9); /* soft light gray */
+  padding: 2rem;
+  border-radius: 20px;
+  margin: 2rem auto;
+  max-width: 1000px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+}
+
+/* Title styling */
+.gamified-section .section-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Tracker layout stays same */
+.tracker-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Card styling (cleaner background) */
+.card {
+  background: #ffffff; /* solid white card on soft section bg */
+  padding: 1.5rem;
+  border-radius: 15px;
+  text-align: center;
+  width: 260px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+}
