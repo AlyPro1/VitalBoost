@@ -2828,3 +2828,15 @@
     transform: scale(1.05);
   }
 }
+
+/* Coach Vital Boost Title → Green */
+.coach-section h4 {
+  color: #00cc44 !important; /* strong green */
+  font-weight: bold;
+}
+
+/* Fighters Title → Orange */
+.fighters-title {
+  color: #ff6600 !important; /* bright orange */
+  font-weight: bold;
+}
