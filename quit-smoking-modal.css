@@ -2829,14 +2829,34 @@
   }
 }
 
-/* Coach Vital Boost Title → Green */
-.coach-section h4 {
-  color: #00cc44 !important; /* strong green */
+/* Coach Vital Boost Title */
+.coach-card .card-title {
+  color: green !important;
   font-weight: bold;
+  animation: pulseGreen 2s infinite;
 }
 
-/* Fighters Title → Orange */
-.fighters-title {
-  color: #ff6600 !important; /* bright orange */
+/* Fighters Title */
+.fighters-card .card-title {
+  color: orange !important;
   font-weight: bold;
+  animation: pulseOrange 2s infinite;
+}
+
+/* Pulse Animations */
+@keyframes pulseGreen {
+  0% { text-shadow: 0 0 5px green; }
+  50% { text-shadow: 0 0 15px lime; }
+  100% { text-shadow: 0 0 5px green; }
+}
+
+@keyframes pulseOrange {
+  0% { text-shadow: 0 0 5px orange; }
+  50% { text-shadow: 0 0 15px gold; }
+  100% { text-shadow: 0 0 5px orange; }
+}
+
+/* Inside text (descriptions) */
+.card-description {
+  color: white !important;
 }
