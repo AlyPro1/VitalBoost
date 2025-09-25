@@ -2728,3 +2728,17 @@
     margin: 24px 16px !important;
   }
 }
+
+.gamified-section .card {
+  background: #ffffff; /* clean white cards */
+  color: #0f2740; /* dark navy text for readability */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25); /* subtle lift */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gamified-section .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+}
