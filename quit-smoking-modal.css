@@ -2795,3 +2795,11 @@
 .gamified-section .card span {
   color: #ffffff; /* white text inside cards */
 }
+
+.gamified-section .card {
+  background: #1c1c1c; /* dark card to contrast with white text */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  text-align: center;
+}
