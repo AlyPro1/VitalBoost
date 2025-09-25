@@ -2795,3 +2795,36 @@
 .gamified-section .card span {
   color: #ffffff; /* white text inside cards */
 }
+
+/* Coach Vital Boost Title (Green + Pulse) */
+.coach-section h4 {
+  color: #00ff66; /* bright green */
+  font-weight: 700;
+  animation: blinkPulse 2s infinite;
+}
+
+/* Fighters Title (Orange + Pulse) */
+.fighters-title {
+  color: #ff8800; /* orange */
+  font-weight: 700;
+  animation: blinkPulse 2s infinite;
+}
+
+/* Inner text inside cards → White */
+.coach-section p,
+.stats-display p,
+.stats-display span {
+  color: #ffffff;
+}
+
+/* Pulse + Blink Animation */
+@keyframes blinkPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
