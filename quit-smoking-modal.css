@@ -2660,3 +2660,71 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   transition: transform 0.2s ease-in-out;
 }
+
+/* ===== Strong override for Gamified Tracker container ===== */
+.gamified-section {
+  /* section background (choose light or dark per your app theme) */
+  background: linear-gradient(135deg, #0f2740 0%, #0b2540 100%) !important;
+  color: #ffffff !important;
+
+  /* layout constraints so it doesn't stretch the whole page */
+  max-width: 1100px !important;
+  margin: 40px auto !important;
+  padding: 28px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 12px 30px rgba(2,12,27,0.45) !important;
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Title color inside the section */
+.gamified-section .section-title {
+  color: #f6fbff !important;
+  margin-bottom: 20px !important;
+}
+
+/* Cards placed on top of the section */
+.gamified-section .card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)) !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  padding: 18px !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35) !important;
+  width: 260px !important;
+}
+
+/* VS center styling */
+.gamified-section .vs-layout .vs-text {
+  background: radial-gradient(circle at 40% 30%, #ffffff22, #0000) !important;
+  color: #ff6b90 !important;
+  padding: 12px 18px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 6px 18px rgba(255,107,144,0.12) !important;
+}
+
+/* Ensure separation from the next section (Live Leaderboard) */
+.gamified-section {
+  margin-bottom: 40px !important;
+}
+
+/* Extra safety: bump leaderboard down if it's too close */
+.leaderboard,
+.cinematic-journey,
+#leaderboard {
+  margin-top: 48px !important;
+}
+
+/* Responsive: collapse horizontally on small screens */
+@media (max-width: 820px) {
+  .tracker-content, .vs-layout, .gamified-section .tracker-content {
+    flex-direction: column !important;
+    gap: 18px !important;
+    align-items: center !important;
+  }
+
+  .gamified-section {
+    padding: 20px !important;
+    margin: 24px 16px !important;
+  }
+}
