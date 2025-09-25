@@ -2742,3 +2742,15 @@
   transform: translateY(-4px);
   box-shadow: 0 10px 28px rgba(0,0,0,0.35);
 }
+
+.gamified-section h2,
+.gamified-section h3,
+.gamified-section .card-title {
+  color: #ffffff; /* make headings white */
+  font-weight: 700;
+}
+
+.gamified-section .card h3,
+.gamified-section .card .card-title {
+  color: #0f2740; /* keep card titles dark */
+}
