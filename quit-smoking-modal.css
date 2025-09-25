@@ -2789,3 +2789,9 @@
     transform: scale(1.05);
   }
 }
+
+.gamified-section .card p,
+.gamified-section .card li,
+.gamified-section .card span {
+  color: #ffffff; /* white text inside cards */
+}
