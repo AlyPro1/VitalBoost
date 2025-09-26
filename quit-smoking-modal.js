@@ -1482,3 +1482,32 @@ document.getElementById("stopBreathingBtn").addEventListener("click", () => {
   }
   document.getElementById("countdownTimer").textContent = 60; // reset
 });
+
+function startBreathingExercise() {
+  let timeLeft = 60;
+  const timerElement = document.getElementById("breathing-timer");
+
+  // Reset initial state
+  timerElement.textContent = timeLeft;
+  timerElement.style.color = "#000"; // default black
+
+  const countdown = setInterval(() => {
+    timeLeft--;
+    timerElement.textContent = timeLeft;
+
+    // Color change logic
+    if (timeLeft === 30) {
+      timerElement.style.color = "orange";
+    } else if (timeLeft === 20) {
+      timerElement.style.color = "red";
+    } else if (timeLeft === 10) {
+      timerElement.style.color = "green";
+    }
+
+    if (timeLeft <= 0) {
+      clearInterval(countdown);
+      timerElement.textContent = "Done!";
+      timerElement.style.color = "blue"; // optional final color
+    }
+  }, 1000);
+}
