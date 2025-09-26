@@ -2860,3 +2860,57 @@
 .card-description {
   color: white !important;
 }
+
+/* Smooth fade for timer colors */
+#countdownTimer {
+  font-size: 3rem;
+  font-weight: bold;
+  transition: color 0.5s ease;
+}
+
+/* Popup overlay */
+.success-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* hidden by default */
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+}
+
+/* Popup content */
+.success-popup-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  animation: popup-bounce 0.8s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Rocket emoji animation */
+.success-popup-content .rocket {
+  font-size: 3rem;
+  display: block;
+  animation: rocket-fly 1.2s ease-in-out infinite alternate;
+}
+
+/* Bounce-in effect */
+@keyframes popup-bounce {
+  0%   { transform: scale(0.5); opacity: 0; }
+  60%  { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Rocket floating effect */
+@keyframes rocket-fly {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-10px); }
+}
