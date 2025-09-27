@@ -1488,3 +1488,8 @@ document.addEventListener("DOMContentLoaded", () => {
   counterElement.classList.add("counter-pulse");
   setTimeout(() => counterElement.classList.remove("counter-pulse"), 1200);
 });
+
+// Make Join Free button open same modal/flow as Get Started
+document.getElementById("joinFreeBtn").addEventListener("click", function() {
+  document.getElementById("ctaButton").click();
+});
