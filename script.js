@@ -1493,3 +1493,27 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("joinFreeBtn").addEventListener("click", function() {
   document.getElementById("ctaButton").click();
 });
+
+import { supabase } from './supabaseClient.js';
+
+// Google login
+document.getElementById('btnGoogle').addEventListener('click', async () => {
+  try {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: 'https://vitalboostapp.netlify.app/' // after login redirect
+      }
+    });
+
+    if (error) {
+      console.error('Google login error:', error.message);
+      document.getElementById('welcomeStatus').innerText = "❌ Login failed. Try again.";
+    } else {
+      document.getElementById('welcomeStatus').innerText = "✅ Redirecting to Google...";
+    }
+  } catch (err) {
+    console.error(err);
+    document.getElementById('welcomeStatus').innerText = "⚠️ Something went wrong.";
+  }
+});
