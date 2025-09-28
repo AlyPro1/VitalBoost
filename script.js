@@ -1493,23 +1493,3 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("joinFreeBtn").addEventListener("click", function() {
   document.getElementById("ctaButton").click();
 });
-
-import { supabase } from './supabaseClient.js';
-
-document.getElementById("btnGoogle").addEventListener("click", async () => {
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-  });
-
-  if (error) {
-    document.getElementById("welcomeStatus").innerText = "❌ Login failed. Try again.";
-    console.error(error.message);
-  } else {
-    document.getElementById("welcomeStatus").innerText = "✅ Logged in to Vital Boost!";
-    
-    // Close modal after 2 seconds
-    setTimeout(() => {
-      document.getElementById("welcomeModal").style.display = "none";
-    }, 2000);
-  }
-});
