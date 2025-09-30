@@ -1493,3 +1493,47 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("joinFreeBtn").addEventListener("click", function() {
   document.getElementById("ctaButton").click();
 });
+
+// =============================
+// PRIVACY POLICY MODAL
+// =============================
+
+const privacyPolicyBtn = document.getElementById('privacyPolicyBtn');
+const privacyPolicyModal = document.getElementById('privacyPolicyModal');
+const closePrivacyModal = document.getElementById('closePrivacyModal');
+
+if (privacyPolicyBtn && privacyPolicyModal && closePrivacyModal) {
+
+  privacyPolicyBtn.addEventListener('click', () => {
+    privacyPolicyModal.style.display = 'flex';
+    privacyPolicyModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    trackButtonClick('privacy_policy_button', 'hero_page');
+    trackModalOpen('privacy_policy');
+  });
+
+  closePrivacyModal.addEventListener('click', () => {
+    privacyPolicyModal.style.display = 'none';
+    privacyPolicyModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    trackModalClose('privacy_policy');
+  });
+
+  window.addEventListener('click', (event) => {
+    if (event.target === privacyPolicyModal) {
+      privacyPolicyModal.style.display = 'none';
+      privacyPolicyModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      trackModalClose('privacy_policy');
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && privacyPolicyModal.classList.contains('active')) {
+      privacyPolicyModal.style.display = 'none';
+      privacyPolicyModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      trackModalClose('privacy_policy');
+    }
+  });
+}

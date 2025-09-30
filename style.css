@@ -3730,3 +3730,324 @@ body {
 .join-free-btn {
   animation: pulseGlow 2s infinite;
 }
+
+/* ===== Privacy Policy Button (Bottom Left Corner) ===== */
+.privacy-policy-btn {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  border: none;
+  border-radius: 50px;
+  padding: 0.8rem 1.5rem;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+  animation: privacySlideIn 1s ease-out 1.5s both, privacyPulse 3s ease-in-out 2.5s infinite;
+}
+
+.privacy-policy-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(16, 185, 129, 0.5);
+  background: linear-gradient(135deg, #059669, #2563eb);
+}
+
+.privacy-policy-btn:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.privacy-icon {
+  font-size: 1.2rem;
+  animation: privacyIconRotate 2s ease-in-out infinite;
+}
+
+.privacy-text {
+  font-weight: 600;
+}
+
+@keyframes privacySlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes privacyPulse {
+  0%, 100% {
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 10px 40px rgba(16, 185, 129, 0.6), 0 0 0 8px rgba(16, 185, 129, 0.2);
+  }
+}
+
+@keyframes privacyIconRotate {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+/* ===== Privacy Policy Modal ===== */
+.privacy-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.privacy-modal-overlay.active {
+  display: flex;
+  opacity: 1;
+  animation: privacyFadeIn 0.4s ease-out;
+}
+
+.privacy-modal-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  max-width: 700px;
+  width: 90%;
+  max-height: 85vh;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  animation: privacySlideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.privacy-modal-header {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(59, 130, 246, 0.2));
+  padding: 2rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.privacy-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.privacy-modal-header h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+}
+
+.effective-date {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.privacy-modal-content {
+  padding: 2rem;
+  overflow-y: auto;
+  max-height: calc(85vh - 200px);
+  color: #e2e8f0;
+}
+
+.privacy-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.privacy-modal-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.privacy-modal-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  border-radius: 4px;
+}
+
+.privacy-intro {
+  padding: 1.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  border-left: 4px solid #10b981;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.privacy-intro p {
+  margin: 0;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.privacy-section {
+  margin-bottom: 2rem;
+}
+
+.privacy-section h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.privacy-section h4::before {
+  content: '';
+  width: 4px;
+  height: 1.3rem;
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  border-radius: 2px;
+}
+
+.privacy-section p {
+  margin-bottom: 1rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.privacy-section ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.privacy-section li {
+  margin-bottom: 0.5rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.privacy-contact {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.privacy-email {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.privacy-email:hover {
+  color: #10b981;
+}
+
+.privacy-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.full-policy-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #10b981;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.full-policy-link:hover {
+  color: #3b82f6;
+  transform: translateY(-2px);
+}
+
+@keyframes privacyFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes privacySlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsive Design for Privacy Button and Modal */
+@media (max-width: 768px) {
+  .privacy-policy-btn {
+    bottom: 20px;
+    left: 20px;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .privacy-icon {
+    font-size: 1rem;
+  }
+
+  .privacy-text {
+    display: none;
+  }
+
+  .privacy-policy-btn {
+    border-radius: 50%;
+    padding: 0.8rem;
+  }
+
+  .privacy-modal-container {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .privacy-modal-header {
+    padding: 1.5rem;
+  }
+
+  .privacy-modal-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .privacy-modal-content {
+    padding: 1.5rem;
+    max-height: calc(90vh - 150px);
+  }
+
+  .privacy-section h4 {
+    font-size: 1.1rem;
+  }
+}

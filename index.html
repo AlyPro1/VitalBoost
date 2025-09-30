@@ -105,6 +105,12 @@
     </div>
   </div> <!-- ✅ End Hero -->
 
+  <!-- Privacy Policy Button (Fixed Bottom Left) -->
+  <button class="privacy-policy-btn" id="privacyPolicyBtn" aria-label="View Privacy Policy">
+    <span class="privacy-icon">🔒</span>
+    <span class="privacy-text">Privacy Policy</span>
+  </button>
+
   <!-- Doctor Modal -->
   <div class="modal-overlay" id="doctorModal">
     <div class="modal-container">
@@ -688,7 +694,62 @@
       <button class="join-fighters-btn">🔥 Join the 1,200 Fighters 🔥</button>
   </div>
 </div>
-      
+
+  <!-- Privacy Policy Modal -->
+  <div id="privacyPolicyModal" class="modal-overlay privacy-modal-overlay">
+    <div class="modal-container privacy-modal-container">
+      <button class="modal-close" id="closePrivacyModal">&times;</button>
+      <div class="privacy-modal-header">
+        <div class="privacy-logo">
+          <span class="logo-icon">💪</span>
+          <span class="brand-name">VitalBoost</span>
+        </div>
+        <h3>Privacy Policy</h3>
+        <p class="effective-date">Effective Date: September 30, 2025</p>
+      </div>
+
+      <div class="privacy-modal-content">
+        <div class="privacy-intro">
+          <p>Vital Boost ("we," "our," or "us") respects your privacy. This Privacy Policy explains how we collect, use, and protect your information when you use our Health & Fitness web app.</p>
+        </div>
+
+        <section class="privacy-section">
+          <h4>1. Information We Collect</h4>
+          <ul>
+            <li>Basic account details (name, email) when you sign in with Google.</li>
+            <li>Non-personal usage data (how you interact with the app).</li>
+          </ul>
+        </section>
+
+        <section class="privacy-section">
+          <h4>2. How We Use Your Information</h4>
+          <ul>
+            <li>To provide access to personalized fitness tools and features.</li>
+            <li>To improve the app's performance and user experience.</li>
+            <li>We do not sell or share your personal data with third parties.</li>
+          </ul>
+        </section>
+
+        <section class="privacy-section">
+          <h4>3. Data Security</h4>
+          <p>We use secure authentication (Supabase + Google) to protect your account.</p>
+        </section>
+
+        <section class="privacy-section">
+          <h4>4. Your Rights</h4>
+          <p>You may request to delete your account and data anytime by contacting us at:</p>
+          <div class="privacy-contact">
+            <a href="mailto:vitalboost.team@gmail.com" class="privacy-email">vitalboost.team@gmail.com</a>
+          </div>
+        </section>
+
+        <div class="privacy-footer">
+          <a href="privacy.html" class="full-policy-link" target="_blank">View Full Privacy Policy Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
   <link rel="stylesheet" href="quit-smoking-modal.css">
   <script src="quit-smoking-modal.js"></script>
