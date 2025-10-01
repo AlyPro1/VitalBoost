@@ -4051,19 +4051,3 @@ body {
     font-size: 1.1rem;
   }
 }
-
-/* ensure overlay shows when .active is toggled */
-.modal-overlay,
-.privacy-modal-overlay {
-  display: none;             /* default hidden */
-  position: fixed;
-  inset: 0;
-  justify-content: center;
-  align-items: center;
-  z-index: 12000;
-}
-
-.modal-overlay.active,
-.privacy-modal-overlay.active {
-  display: flex !important;
-}
