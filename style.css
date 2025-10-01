@@ -4051,9 +4051,3 @@ body {
     font-size: 1.1rem;
   }
 }
-
-/* Fix for Privacy Policy modal visibility */
-.modal-overlay.active,
-.privacy-modal-overlay.active {
-  display: flex !important;
-}
