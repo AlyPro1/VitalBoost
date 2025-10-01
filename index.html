@@ -695,62 +695,7 @@
   </div>
 </div>
 
-  <script src="script.js"></script>
-  <link rel="stylesheet" href="quit-smoking-modal.css">
-  <script src="quit-smoking-modal.js"></script>
-
-    <!-- Supabase CDN + Google Auth -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    // Initialize Supabase client
-    const supabaseUrl = "https://nltnmjlxmphamxziycuf.supabase.co"; 
-    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sdG5tamx4bXBoYW14eml5Y3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcxMzg0MjAsImV4cCI6MjA3MjcxNDQyMH0.upEhU4waIW1iCeO5n7as517dtdbC4x6xYDLLzrRdEhQ"; 
-    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-    // Grab modal + status elements
-    const welcomeModal = document.getElementById("welcomeModal");
-    const welcomeStatus = document.getElementById("welcomeStatus");
-
-    // Google Login
-    document.getElementById("btnGoogle").addEventListener("click", async () => {
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-      });
-
-      if (error) {
-        console.error("Google login error:", error.message);
-        welcomeStatus.textContent = "❌ Login failed. Please try again.";
-      } else {
-        welcomeStatus.textContent = "✅ Redirecting to Google login...";
-      }
-    });
-
-    // Function to close modal
-    function closeModal() {
-      if (welcomeModal) {
-        welcomeModal.style.display = "none";
-      }
-    }
-
-    // Check session on page load
-    (async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        welcomeStatus.textContent = "🎉 You are logged in to Vital Boost!";
-        closeModal();
-      }
-    })();
-
-    // Listen for auth state changes (login success, logout, etc.)
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_IN") {
-        welcomeStatus.textContent = "🎉 You are logged in to Vital Boost!";
-        closeModal();
-      }
-    });
-  </script> 
-
-    <!-- Privacy Policy Modal -->
+  <!-- Privacy Policy Modal -->
   <div id="privacyPolicyModal" class="modal-overlay privacy-modal-overlay">
     <div class="modal-container privacy-modal-container">
       <button class="modal-close" id="closePrivacyModal">&times;</button>
@@ -804,6 +749,60 @@
       </div>
     </div>
   </div>
-    
+
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="quit-smoking-modal.css">
+  <script src="quit-smoking-modal.js"></script>
+
+    <!-- Supabase CDN + Google Auth -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Initialize Supabase client
+    const supabaseUrl = "https://nltnmjlxmphamxziycuf.supabase.co";
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sdG5tamx4bXBoYW14eml5Y3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcxMzg0MjAsImV4cCI6MjA3MjcxNDQyMH0.upEhU4waIW1iCeO5n7as517dtdbC4x6xYDLLzrRdEhQ";
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    // Grab modal + status elements
+    const welcomeModal = document.getElementById("welcomeModal");
+    const welcomeStatus = document.getElementById("welcomeStatus");
+
+    // Google Login
+    document.getElementById("btnGoogle").addEventListener("click", async () => {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+      });
+
+      if (error) {
+        console.error("Google login error:", error.message);
+        welcomeStatus.textContent = "❌ Login failed. Please try again.";
+      } else {
+        welcomeStatus.textContent = "✅ Redirecting to Google login...";
+      }
+    });
+
+    // Function to close modal
+    function closeModal() {
+      if (welcomeModal) {
+        welcomeModal.style.display = "none";
+      }
+    }
+
+    // Check session on page load
+    (async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        welcomeStatus.textContent = "🎉 You are logged in to Vital Boost!";
+        closeModal();
+      }
+    })();
+
+    // Listen for auth state changes (login success, logout, etc.)
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_IN") {
+        welcomeStatus.textContent = "🎉 You are logged in to Vital Boost!";
+        closeModal();
+      }
+    });
+  </script>
 </body>
 </html>
