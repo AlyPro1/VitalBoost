@@ -178,6 +178,14 @@ window.addEventListener("click", (event) => {
     aiDoctorChatModal.style.display = "none";
     aiDoctorChatModal.classList.remove("active");
   }
+
+  // Privacy Policy Modal close on outside click
+  const privacyModal = document.getElementById('privacyPolicyModal');
+  if (event.target === privacyModal && privacyModal) {
+    privacyModal.style.display = "none";
+    privacyModal.classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
 });
 // =============================
 // AI CHAT INTERACTIVITY LOGIC
@@ -1498,42 +1506,54 @@ document.getElementById("joinFreeBtn").addEventListener("click", function() {
 // PRIVACY POLICY MODAL
 // =============================
 
-const privacyPolicyBtn = document.getElementById('privacyPolicyBtn');
-const privacyPolicyModal = document.getElementById('privacyPolicyModal');
-const closePrivacyModal = document.getElementById('closePrivacyModal');
+document.addEventListener('DOMContentLoaded', () => {
+  const privacyPolicyBtn = document.getElementById('privacyPolicyBtn');
+  const privacyPolicyModal = document.getElementById('privacyPolicyModal');
+  const closePrivacyModal = document.getElementById('closePrivacyModal');
 
-if (privacyPolicyBtn && privacyPolicyModal && closePrivacyModal) {
-
-  privacyPolicyBtn.addEventListener('click', () => {
-    privacyPolicyModal.style.display = 'flex';
-    privacyPolicyModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    trackButtonClick('privacy_policy_button', 'hero_page');
-    trackModalOpen('privacy_policy');
+  console.log('Privacy Policy Elements:', {
+    button: privacyPolicyBtn,
+    modal: privacyPolicyModal,
+    closeBtn: closePrivacyModal
   });
 
-  closePrivacyModal.addEventListener('click', () => {
-    privacyPolicyModal.style.display = 'none';
-    privacyPolicyModal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-    trackModalClose('privacy_policy');
-  });
+  if (privacyPolicyBtn && privacyPolicyModal && closePrivacyModal) {
+    console.log('Privacy Policy modal initialized successfully');
 
-  window.addEventListener('click', (event) => {
-    if (event.target === privacyPolicyModal) {
-      privacyPolicyModal.style.display = 'none';
+    privacyPolicyBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      console.log('Privacy Policy button clicked');
+      privacyPolicyModal.style.display = 'flex';
+      setTimeout(() => {
+        privacyPolicyModal.classList.add('active');
+      }, 10);
+      document.body.style.overflow = 'hidden';
+      trackButtonClick('privacy_policy_button', 'hero_page');
+      trackModalOpen('privacy_policy');
+    });
+
+    closePrivacyModal.addEventListener('click', () => {
+      console.log('Privacy Policy close button clicked');
       privacyPolicyModal.classList.remove('active');
+      setTimeout(() => {
+        privacyPolicyModal.style.display = 'none';
+      }, 300);
       document.body.style.overflow = 'auto';
       trackModalClose('privacy_policy');
-    }
-  });
+    });
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && privacyPolicyModal.classList.contains('active')) {
-      privacyPolicyModal.style.display = 'none';
-      privacyPolicyModal.classList.remove('active');
-      document.body.style.overflow = 'auto';
-      trackModalClose('privacy_policy');
-    }
-  });
-}
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && privacyPolicyModal.classList.contains('active')) {
+        console.log('Privacy Policy closed with Escape key');
+        privacyPolicyModal.classList.remove('active');
+        setTimeout(() => {
+          privacyPolicyModal.style.display = 'none';
+        }, 300);
+        document.body.style.overflow = 'auto';
+        trackModalClose('privacy_policy');
+      }
+    });
+  } else {
+    console.error('Privacy Policy modal elements not found');
+  }
+});
