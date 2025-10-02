@@ -421,21 +421,4 @@ function stopTracking() {
   isTracking = false;
   
   // Clear interval
-  if (stepInterval) {
-    clearInterval(stepInterval);
-    stepInterval = null;
-  }
-  
-  // Update UI
-  if (stepsCircle) stepsCircle.classList.remove('tracking');
-  if (shoeIcon) shoeIcon.classList.remove('shoe-jump');
-  
-  // Show/hide buttons
-  if (stopTrackingBtn) stopTrackingBtn.style.display = 'none';
-  if (addSteps) addSteps.style.display = 'inline-block';
-  if (resetSteps) resetSteps.style.display = 'inline-block';
-  
-  // Track step tracking stop
-  trackButtonClick('stop_step_tracking', 'steps_modal');
-  trackUserAction('step_tracking_stopped');
-}
+  if (stepInterval)
