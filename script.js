@@ -422,3 +422,4 @@ function stopTracking() {
   
   // Clear interval
   if (stepInterval)
+}
