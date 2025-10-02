@@ -159,6 +159,238 @@ body {
   box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
 }
 
+/* Terms of Service Button */
+.terms-of-service-btn {
+  background: rgba(59, 130, 246, 0.9);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+.terms-of-service-btn:hover {
+  background: rgba(59, 130, 246, 1);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+}
+
+.terms-icon {
+  font-size: 16px;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+.terms-text {
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5);
+  }
+}
+
+/* Terms of Service Modal */
+.terms-modal-overlay {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+}
+
+.terms-of-service-modal-container {
+  max-width: 800px;
+  max-height: 90vh;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+  animation: modalSlideIn 0.4s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.terms-modal-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+}
+
+.terms-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.terms-modal-header h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.terms-modal-header .effective-date {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.terms-modal-content {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.5) transparent;
+}
+
+.terms-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terms-modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terms-modal-content::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.5);
+  border-radius: 3px;
+}
+
+.terms-modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.7);
+}
+
+.terms-intro {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 4px solid #3b82f6;
+  border-radius: 8px;
+  color: #e2e8f0;
+}
+
+.terms-section {
+  margin-bottom: 2rem;
+}
+
+.terms-section h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.terms-section h4::before {
+  content: '';
+  width: 4px;
+  height: 1.3rem;
+  background: linear-gradient(135deg, #3b82f6, #10b981);
+  border-radius: 2px;
+}
+
+.terms-section p {
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.terms-section ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.terms-section li {
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.terms-contact {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.terms-contact p {
+  color: #e2e8f0;
+  margin: 0;
+}
+
+.terms-email {
+  color: #10b981;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.terms-email:hover {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+/* Responsive Design for Bottom Left Buttons */
+@media (max-width: 768px) {
+  .bottom-left-fixed-buttons {
+    bottom: 15px;
+    left: 15px;
+    gap: 8px;
+  }
+  
+  .privacy-policy-btn,
+  .terms-of-service-btn {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+  
+  .privacy-text,
+  .terms-text {
+    font-size: 11px;
+  }
+  
+  .terms-of-service-modal-container {
+    max-width: 95vw;
+    margin: 20px;
+  }
+  
+  .terms-modal-content {
+    max-height: 50vh;
+  }
+
 .checkup-button:active {
   transform: translateY(-1px) scale(1.02);
 }
@@ -3731,12 +3963,19 @@ body {
   animation: pulseGlow 2s infinite;
 }
 
-/* ===== Privacy Policy Button (Bottom Left Corner) ===== */
-.privacy-policy-btn {
+/* Bottom Left Fixed Buttons Container */
+.bottom-left-fixed-buttons {
   position: fixed;
   bottom: 30px;
   left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   z-index: 1000;
+}
+
+/* Privacy Policy Button */
+.privacy-policy-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;

@@ -105,11 +105,20 @@
     </div>
   </div> <!-- ✅ End Hero -->
 
-  <!-- Privacy Policy Button (Fixed Bottom Left) -->
-  <button class="privacy-policy-btn" id="privacyPolicyBtn" aria-label="View Privacy Policy">
-    <span class="privacy-icon">🔒</span>
-    <span class="privacy-text">Privacy Policy</span>
-  </button>
+  <!-- Bottom Left Fixed Buttons Container -->
+  <div class="bottom-left-fixed-buttons">
+    <!-- Privacy Policy Button -->
+    <button class="privacy-policy-btn" id="privacyPolicyBtn" aria-label="View Privacy Policy">
+      <span class="privacy-icon">🔒</span>
+      <span class="privacy-text">Privacy Policy</span>
+    </button>
+    
+    <!-- Terms of Service Button -->
+    <button class="terms-of-service-btn" id="termsOfServiceBtn" aria-label="View Terms of Service">
+      <span class="terms-icon">📜</span>
+      <span class="terms-text">Terms of Service</span>
+    </button>
+  </div>
 
   <!-- Doctor Modal -->
   <div class="modal-overlay" id="doctorModal">
@@ -745,6 +754,62 @@
 
         <div class="privacy-footer">
           <a href="privacy.html" class="full-policy-link" target="_blank">View Full Privacy Policy Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms of Service Modal -->
+  <div id="termsOfServiceModal" class="modal-overlay terms-modal-overlay">
+    <div class="modal-container terms-of-service-modal-container">
+      <button class="modal-close" id="closeTermsModal">&times;</button>
+      <div class="terms-modal-header">
+        <div class="terms-logo">
+          <span class="logo-icon">💪</span>
+          <span class="brand-name">VitalBoost</span>
+        </div>
+        <h3>📜 Terms of Service</h3>
+        <p class="effective-date">Effective Date: September 30, 2025</p>
+      </div>
+
+      <div class="terms-modal-content">
+        <div class="terms-intro">
+          <p>By using Vital Boost, you agree to the following terms:</p>
+        </div>
+
+        <section class="terms-section">
+          <h4>1. Use of Service</h4>
+          <ul>
+            <li>Vital Boost is a Health & Fitness web app designed to support healthy living.</li>
+            <li>You must use the app responsibly and not misuse it for unlawful purposes.</li>
+          </ul>
+        </section>
+
+        <section class="terms-section">
+          <h4>2. No Medical Advice</h4>
+          <p>Vital Boost provides general fitness and wellness guidance only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider before making health decisions.</p>
+        </section>
+
+        <section class="terms-section">
+          <h4>3. User Accounts</h4>
+          <ul>
+            <li>You are responsible for keeping your login credentials secure.</li>
+            <li>We may suspend accounts that violate these terms.</li>
+          </ul>
+        </section>
+
+        <section class="terms-section">
+          <h4>4. Limitation of Liability</h4>
+          <p>We are not responsible for any health outcomes, damages, or losses resulting from the use of this app.</p>
+        </section>
+
+        <section class="terms-section">
+          <h4>5. Updates</h4>
+          <p>We may update these terms from time to time. Continued use of the app means you accept the updated terms.</p>
+        </section>
+
+        <div class="terms-contact">
+          <p>Contact us: <a href="mailto:vitalboost.team@gmail.com" class="terms-email">vitalboost.team@gmail.com</a></p>
         </div>
       </div>
     </div>
