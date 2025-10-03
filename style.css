@@ -2983,67 +2983,363 @@ body {
 }
 /* ---------------------------
    Welcome / Get Started Modal
-   (append to bottom of style.css)
    --------------------------- */
 .welcome-modal-container {
-  max-width: 560px;
+  position: relative;
+  max-width: 500px;
   width: 94%;
-  padding: 2rem;
-  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  border-radius: 32px;
   text-align: center;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 20px 50px rgba(2,6,23,0.6);
+  background: linear-gradient(135deg,
+    rgba(20, 20, 40, 0.95) 0%,
+    rgba(30, 30, 60, 0.92) 50%,
+    rgba(25, 25, 50, 0.95) 100%);
+  backdrop-filter: blur(40px);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 5px 20px rgba(59, 130, 246, 0.15);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
+  animation: welcomeSlideUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  overflow: hidden;
+}
+
+@keyframes welcomeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.welcome-bg-gradient {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(59, 130, 246, 0.15) 0%,
+    rgba(16, 185, 129, 0.1) 25%,
+    transparent 50%
+  );
+  animation: rotateGradient 10s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes rotateGradient {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.welcome-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.welcome-particles .particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: floatParticles 8s ease-in-out infinite;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.welcome-particles .particle:nth-child(1) {
+  top: 20%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.welcome-particles .particle:nth-child(2) {
+  top: 60%;
+  left: 80%;
+  animation-delay: 1.5s;
+}
+
+.welcome-particles .particle:nth-child(3) {
+  top: 40%;
+  left: 30%;
+  animation-delay: 3s;
+}
+
+.welcome-particles .particle:nth-child(4) {
+  top: 75%;
+  left: 50%;
+  animation-delay: 4.5s;
+}
+
+.welcome-particles .particle:nth-child(5) {
+  top: 30%;
+  left: 70%;
+  animation-delay: 2s;
+}
+
+@keyframes floatParticles {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-40px) translateX(-10px);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(-20px) translateX(5px);
+    opacity: 0.8;
+  }
+}
+
+.welcome-logo-section {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 1rem;
+}
+
+.welcome-logo-icon {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.rocket-icon {
+  font-size: 3rem;
+  position: relative;
+  z-index: 2;
+  animation: rocketFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6));
+}
+
+@keyframes rocketFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-5deg);
+  }
+}
+
+.logo-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.4), transparent 70%);
+  border-radius: 50%;
+  animation: pulseLogo 2s ease-in-out infinite;
+}
+
+@keyframes pulseLogo {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.welcome-title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(135deg, #fff, #e0e7ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .welcome-subtext {
-  color: rgba(255,255,255,0.9);
   margin: 0;
-  font-size: 1rem;
-  opacity: 0.95;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 90%;
 }
 
 .welcome-actions {
+  position: relative;
+  z-index: 2;
   display: flex;
-  gap: 0.75rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 6px;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .welcome-social-btn {
-  padding: 0.85rem 1.1rem;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: .2px;
-  transition: transform .18s ease, box-shadow .18s ease;
-  box-shadow: 0 8px 22px rgba(2,6,23,0.45);
+  position: relative;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 1rem 1.5rem;
   color: #fff;
-  min-width: 160px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
-.welcome-social-btn:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(2,6,23,0.5); }
+.welcome-social-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
 
-.welcome-social-btn.google { background: linear-gradient(90deg,#4285F4,#2A6DF4); }
-.welcome-social-btn.facebook { background: linear-gradient(90deg,#1877F2,#145DB8); }
-.welcome-social-btn.email { background: linear-gradient(90deg,#10b981,#06b6a4); }
+.welcome-social-btn:hover::before {
+  left: 100%;
+}
 
-/* tiny status area and spinner */
-.welcome-status { margin-top: 0.25rem; min-height: 28px; color: #e6fffa; font-weight:600; font-size:0.95rem; }
-.spinner { width:18px; height:18px; border-radius:50%; border:3px solid rgba(255,255,255,0.18); border-top-color: #fff; display:inline-block; vertical-align:middle; margin-right:8px; animation: wb-spin .8s linear infinite; }
-@keyframes wb-spin { to { transform: rotate(360deg); } }
+.welcome-social-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
 
-/* small responsive tweak */
-@media (max-width:480px){
-  .welcome-social-btn { min-width: 100%; font-size:0.95rem; padding:0.8rem; }
-  .welcome-modal-container { padding:1.4rem; }
+.welcome-social-btn:active {
+  transform: translateY(0);
+}
+
+.welcome-social-btn.google {
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.15), rgba(52, 168, 83, 0.1));
+  border-color: rgba(66, 133, 244, 0.3);
+}
+
+.welcome-social-btn.google:hover {
+  background: linear-gradient(135deg, rgba(66, 133, 244, 0.25), rgba(52, 168, 83, 0.15));
+  border-color: rgba(66, 133, 244, 0.5);
+  box-shadow: 0 10px 40px rgba(66, 133, 244, 0.3);
+}
+
+.welcome-social-btn.facebook {
+  background: linear-gradient(135deg, rgba(24, 119, 242, 0.15), rgba(6, 95, 212, 0.1));
+  border-color: rgba(24, 119, 242, 0.3);
+}
+
+.welcome-social-btn.facebook:hover {
+  background: linear-gradient(135deg, rgba(24, 119, 242, 0.25), rgba(6, 95, 212, 0.15));
+  border-color: rgba(24, 119, 242, 0.5);
+  box-shadow: 0 10px 40px rgba(24, 119, 242, 0.3);
+}
+
+.welcome-social-btn.email {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 182, 164, 0.1));
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.welcome-social-btn.email:hover {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 164, 0.15));
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
+}
+
+.btn-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.btn-icon {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+}
+
+.btn-text {
+  flex: 1;
+  text-align: center;
+}
+
+.welcome-status {
+  position: relative;
+  z-index: 2;
+  margin-top: -0.5rem;
+  min-height: 28px;
+  color: #e0e7ff;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.18);
+  border-top-color: #fff;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  animation: wb-spin 0.8s linear infinite;
+}
+
+@keyframes wb-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-modal-container {
+    padding: 2rem 1.5rem;
+    border-radius: 24px;
+  }
+
+  .welcome-title {
+    font-size: 1.6rem;
+  }
+
+  .welcome-subtext {
+    font-size: 0.95rem;
+  }
+
+  .welcome-social-btn {
+    font-size: 0.95rem;
+    padding: 0.9rem 1.2rem;
+  }
 }
 /* 🌟 Get Started Button Styling */
 .cta-button {
