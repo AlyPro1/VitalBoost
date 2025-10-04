@@ -4351,3 +4351,41 @@ body {
 /* =============================
    SOCIAL MEDIA ICONS - VITAL BOOST STYLE
 ============================= */
+.social-icons {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.4rem;
+  z-index: 10; /* below modals but above Hero */
+}
+
+.social-icons .social-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icons .social-link i {
+  color: #fff;
+  font-size: 18px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons .social-link:hover {
+  background: #fff;
+}
+
+.social-icons .social-link:hover i {
+  color: #000;
+  transform: scale(1.2);
+}
