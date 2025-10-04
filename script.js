@@ -239,30 +239,64 @@ if (chatMessages && healthQueryInput && sendQueryBtn) {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // This function simulates getting a response from the AI
-    function getAIResponse(userMessage) {
+    // This function gets a response from the AI using OpenAI via Supabase Edge Function
+    async function getAIResponse(userMessage) {
         // Display a "thinking..." message immediately for better user experience
         displayMessage("Thinking...", 'ai');
 
-        // Simulate a network delay (like the AI is actually thinking)
-        setTimeout(() => {
-            // First, find and remove the "Thinking..." message
+        try {
+            // Get Supabase URL and Anon Key from environment or script
+            const supabaseUrl = typeof window.supabase !== 'undefined' && window.supabase._supabaseUrl
+                ? window.supabase._supabaseUrl
+                : "https://nltnmjlxmphamxziycuf.supabase.co";
+            const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sdG5tamx4bXBoYW14eml5Y3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcxMzg0MjAsImV4cCI6MjA3MjcxNDQyMH0.upEhU4waIW1iCeO5n7as517dtdbC4x6xYDLLzrRdEhQ";
+
+            // Call the Supabase Edge Function
+            const response = await fetch(`${supabaseUrl}/functions/v1/chat-openai`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${supabaseAnonKey}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userMessage })
+            });
+
+            // Remove the "Thinking..." message
             const thinkingBubble = Array.from(chatMessages.children).find(child => child.innerText === "Thinking...");
             if (thinkingBubble) {
                 chatMessages.removeChild(thinkingBubble);
             }
 
-            // --- IMPORTANT ---
-            // ** TODO: Replace this simulated response with your actual API call to Bolt AI. **
-            const simulatedResponse = `Regarding your query about "${userMessage}", please remember I am an AI assistant. For any real medical advice, consult a qualified doctor. General guidance often suggests a balanced diet and regular exercise.`;
-            
-            // Display the final simulated response
-            displayMessage(simulatedResponse, 'ai');
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to get response from AI');
+            }
+
+            const data = await response.json();
+            const aiResponse = data.response;
+
+            // Display the AI response
+            displayMessage(aiResponse, 'ai');
 
             // Track the AI response
-            trackHealthQuery(userMessage, simulatedResponse);
+            trackHealthQuery(userMessage, aiResponse);
 
-        }, 1500); // 1.5-second delay
+        } catch (error) {
+            console.error('Error getting AI response:', error);
+
+            // Remove the "Thinking..." message if still present
+            const thinkingBubble = Array.from(chatMessages.children).find(child => child.innerText === "Thinking...");
+            if (thinkingBubble) {
+                chatMessages.removeChild(thinkingBubble);
+            }
+
+            // Display an error message to the user
+            const errorMessage = error.message.includes('OPENAI_API_KEY')
+                ? "Sorry, the AI service is not configured yet. Please contact support."
+                : "I'm having trouble connecting right now. Please try again in a moment.";
+
+            displayMessage(errorMessage, 'ai');
+        }
     }
 }
 // =============================
