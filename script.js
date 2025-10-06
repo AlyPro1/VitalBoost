@@ -1571,3 +1571,24 @@ if (privacyPolicyBtn && privacyPolicyModal && closePrivacyModal) {
     }
   });
 }
+
+const supabaseUrl = "https://nltnmjlxmphamxziycuf.supabase.co";
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sdG5tamx4bXBoYW14eml5Y3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcxMzg0MjAsImV4cCI6MjA3MjcxNDQyMH0.upEhU4waIW1iCeO5n7as517dtdbC4x6xYDLLzrRdEhQ";
+
+async function sendMessageToAI(userMessage) {
+  try {
+    const response = await fetch(`${supabaseUrl}/functions/v1/chat-openai`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${supabaseAnonKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: userMessage }),
+    });
+
+    const data = await response.json();
+    console.log("✅ AI Reply:", data);
+  } catch (error) {
+    console.error("❌ Error:", error);
+  }
+}
