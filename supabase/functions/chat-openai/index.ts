@@ -5,9 +5,13 @@ export default component$(() => {
   const aiResponse = useSignal("");
   const isLoading = useSignal(false);
 
-  // ✅ Your Supabase Edge Function URL (do not add anon key here)
+  // ✅ Supabase Edge Function URL
   const SUPABASE_FUNCTION_URL =
     "https://nltnmjlxmphamxziycuf.functions.supabase.co/chat-openai";
+
+  // ✅ Your Supabase anon key (only safe for Edge Functions)
+  const SUPABASE_ANON_KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sdG5tamx4bXBoYW14eml5Y3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcxMzg0MjAsImV4cCI6MjA3MjcxNDQyMH0.upEhU4waIW1iCeO5n7as517dtdbC4x6xYDLLzrRdEhQ";
 
   const sendMessage = async () => {
     if (!userMessage.value.trim()) {
@@ -19,28 +23,23 @@ export default component$(() => {
     isLoading.value = true;
 
     try {
-      console.log("📤 Sending to Supabase Edge Function...");
-      const SUPABASE_FUNCTION_URL =
-  "https://nltnmjlxmphamxziycuf.functions.supabase.co/chat-openai";
+      console.log("📤 Sending message to Supabase Edge Function...");
 
-const SUPABASE_ANON_KEY =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sdG5tamx4bXBoYW14eml5Y3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcxMzg0MjAsImV4cCI6MjA3MjcxNDQyMH0.upEhU4waIW1iCeO5n7as517dtdbC4x6xYDLLzrRdEhQ";
-      
-const res = await fetch(SUPABASE_FUNCTION_URL, {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sdG5tamx4bXBoYW14eml5Y3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcxMzg0MjAsImV4cCI6MjA3MjcxNDQyMH0.upEhU4waIW1iCeO5n7as517dtdbC4x6xYDLLzrRdEhQ}`,
-  },
-  body: JSON.stringify({
-    message: userMessage.value,
-  }),
-});
+      const res = await fetch(SUPABASE_FUNCTION_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({
+          message: userMessage.value,
+        }),
+      });
 
       if (!res.ok) {
         const errText = await res.text();
         console.error("❌ Server Error:", errText);
-        aiResponse.value = "Server error. Please try again.";
-        isLoading.value = false;
+        aiResponse.value = `Server error: ${errText}`;
         return;
       }
 
