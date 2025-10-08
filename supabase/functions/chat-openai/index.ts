@@ -1,16 +1,14 @@
 import { component$, useSignal } from "@builder.io/qwik";
 
 export default component$(() => {
-  // User input & AI response signals
   const userMessage = useSignal("");
   const aiResponse = useSignal("");
   const isLoading = useSignal(false);
 
-  // ⚡ Your Supabase Edge Function endpoint
+  // ✅ Your Supabase Edge Function URL (do not add anon key here)
   const SUPABASE_FUNCTION_URL =
     "https://nltnmjlxmphamxziycuf.functions.supabase.co/chat-openai";
 
-  // ✅ Handle send message
   const sendMessage = async () => {
     if (!userMessage.value.trim()) {
       aiResponse.value = "⚠️ Please enter a message first.";
@@ -21,7 +19,7 @@ export default component$(() => {
     isLoading.value = true;
 
     try {
-      console.log("📤 Sending message to Supabase Edge Function...");
+      console.log("📤 Sending to Supabase Edge Function...");
       const res = await fetch(SUPABASE_FUNCTION_URL, {
         method: "POST",
         headers: {
@@ -33,28 +31,26 @@ export default component$(() => {
       });
 
       if (!res.ok) {
-        const errorText = await res.text();
-        console.error("❌ Error from server:", errorText);
-        aiResponse.value = "Server error. Please try again later.";
+        const errText = await res.text();
+        console.error("❌ Server Error:", errText);
+        aiResponse.value = "Server error. Please try again.";
         isLoading.value = false;
         return;
       }
 
       const data = await res.json();
-      console.log("✅ AI Reply Received:", data);
+      console.log("✅ AI Reply:", data);
 
-      aiResponse.value = data.reply || "No response from AI.";
-
+      aiResponse.value = data.reply || "⚠️ No response from AI.";
     } catch (err) {
-      console.error("⚠️ Network error:", err);
-      aiResponse.value = "Connection failed. Check your network or API.";
+      console.error("⚠️ Network Error:", err);
+      aiResponse.value = "Connection failed. Check your network or API key.";
     } finally {
       isLoading.value = false;
       userMessage.value = "";
     }
   };
 
-  // ✅ UI
   return (
     <div class="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-6">
       <h1 class="text-3xl font-bold mb-4 text-gray-800">
@@ -82,9 +78,7 @@ export default component$(() => {
         </button>
 
         <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200 text-gray-800 whitespace-pre-wrap">
-          {aiResponse.value
-            ? aiResponse.value
-            : "💬 Your AI reply will appear here..."}
+          {aiResponse.value || "💬 Your AI reply will appear here..."}
         </div>
       </div>
     </div>
