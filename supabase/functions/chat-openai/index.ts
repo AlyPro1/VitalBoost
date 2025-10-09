@@ -1,91 +1,135 @@
-import { component$, useSignal } from "@builder.io/qwik";
+import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
-export default component$(() => {
-  const userMessage = useSignal("");
-  const aiResponse = useSignal("");
-  const isLoading = useSignal(false);
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Client-Info, Apikey",
+};
 
-  // ✅ Supabase Edge Function URL
-  const SUPABASE_FUNCTION_URL =
-    "https://nltnmjlxmphamxziycuf.functions.supabase.co/chat-openai";
+interface ChatRequest {
+  message: string;
+}
 
-  // ✅ Your Supabase anon key (only safe for Edge Functions)
-  const SUPABASE_ANON_KEY =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sdG5tamx4bXBoYW14eml5Y3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcxMzg0MjAsImV4cCI6MjA3MjcxNDQyMH0.upEhU4waIW1iCeO5n7as517dtdbC4x6xYDLLzrRdEhQ";
+Deno.serve(async (req: Request) => {
+  // Handle CORS preflight requests
+  if (req.method === "OPTIONS") {
+    return new Response(null, {
+      status: 200,
+      headers: corsHeaders,
+    });
+  }
 
-  const sendMessage = async () => {
-    if (!userMessage.value.trim()) {
-      aiResponse.value = "⚠️ Please enter a message first.";
-      return;
-    }
+  try {
+    // Get the OpenAI API key from environment
+    const openaiApiKey = Deno.env.get("OPENAI_API_KEY");
 
-    aiResponse.value = "";
-    isLoading.value = true;
-
-    try {
-      console.log("📤 Sending message to Supabase Edge Function...");
-
-      const res = await fetch(SUPABASE_FUNCTION_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-        },
-        body: JSON.stringify({
-          message: userMessage.value,
+    if (!openaiApiKey) {
+      console.error("OPENAI_API_KEY is not set in environment variables");
+      return new Response(
+        JSON.stringify({
+          error: "OPENAI_API_KEY not configured. Please contact support."
         }),
-      });
-
-      if (!res.ok) {
-        const errText = await res.text();
-        console.error("❌ Server Error:", errText);
-        aiResponse.value = `Server error: ${errText}`;
-        return;
-      }
-
-      const data = await res.json();
-      console.log("✅ AI Reply:", data);
-
-      aiResponse.value = data.reply || "⚠️ No response from AI.";
-    } catch (err) {
-      console.error("⚠️ Network Error:", err);
-      aiResponse.value = "Connection failed. Check your network or API key.";
-    } finally {
-      isLoading.value = false;
-      userMessage.value = "";
+        {
+          status: 500,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
-  };
 
-  return (
-    <div class="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-6">
-      <h1 class="text-3xl font-bold mb-4 text-gray-800">
-        🧠 Vital Boost – AI Health Assistant
-      </h1>
+    // Parse the request body
+    const { message }: ChatRequest = await req.json();
 
-      <div class="w-full max-w-md bg-white shadow-lg rounded-2xl p-6">
-        <textarea
-          class="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          rows={4}
-          placeholder="Ask me anything about your health..."
-          bind:value={userMessage}
-        ></textarea>
+    if (!message || message.trim() === "") {
+      return new Response(
+        JSON.stringify({ error: "Message is required" }),
+        {
+          status: 400,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
 
-        <button
-          onClick$={sendMessage}
-          disabled={isLoading.value}
-          class={`mt-4 w-full py-3 rounded-lg font-semibold transition ${
-            isLoading.value
-              ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700 text-white"
-          }`}
-        >
-          {isLoading.value ? "Thinking..." : "Ask AI"}
-        </button>
+    console.log("Received message:", message);
 
-        <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200 text-gray-800 whitespace-pre-wrap">
-          {aiResponse.value || "💬 Your AI reply will appear here..."}
-        </div>
-      </div>
-    </div>
-  );
+    // Call OpenAI API
+    const openaiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${openaiApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content: "You are a helpful and empathetic health advisor named Dr. VitalBoost. Provide informative and supportive health advice based on user questions. Always remind users that your advice is informational and they should consult with a real healthcare professional for medical concerns, diagnoses, or treatment plans. Keep responses concise, clear, and friendly."
+          },
+          {
+            role: "user",
+            content: message
+          }
+        ],
+        temperature: 0.7,
+        max_tokens: 500,
+      }),
+    });
+
+    if (!openaiResponse.ok) {
+      const errorData = await openaiResponse.text();
+      console.error("OpenAI API error:", errorData);
+
+      return new Response(
+        JSON.stringify({
+          error: "Failed to get response from AI service. Please try again later."
+        }),
+        {
+          status: openaiResponse.status,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
+
+    const data = await openaiResponse.json();
+    const aiResponse = data.choices[0]?.message?.content || "I'm sorry, I couldn't generate a response. Please try again.";
+
+    console.log("AI Response generated successfully");
+
+    // Return the response
+    return new Response(
+      JSON.stringify({ response: aiResponse }),
+      {
+        status: 200,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+  } catch (error) {
+    console.error("Error in chat-openai function:", error);
+
+    return new Response(
+      JSON.stringify({
+        error: "An unexpected error occurred. Please try again."
+      }),
+      {
+        status: 500,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
 });

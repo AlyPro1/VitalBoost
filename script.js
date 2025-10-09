@@ -251,6 +251,8 @@ if (chatMessages && healthQueryInput && sendQueryBtn) {
                 : "https://nltnmjlxmphamxziycuf.supabase.co";
             const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sdG5tamx4bXBoYW14eml5Y3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcxMzg0MjAsImV4cCI6MjA3MjcxNDQyMH0.upEhU4waIW1iCeO5n7as517dtdbC4x6xYDLLzrRdEhQ";
 
+            console.log('Sending request to AI Doctor...');
+
             // Call the Supabase Edge Function
             const response = await fetch(`${supabaseUrl}/functions/v1/chat-openai`, {
                 method: 'POST',
@@ -267,13 +269,27 @@ if (chatMessages && healthQueryInput && sendQueryBtn) {
                 chatMessages.removeChild(thinkingBubble);
             }
 
+            console.log('Response status:', response.status);
+
             if (!response.ok) {
-                const errorData = await response.json();
+                let errorData;
+                try {
+                    errorData = await response.json();
+                } catch (e) {
+                    errorData = { error: await response.text() };
+                }
+                console.error('API Error:', errorData);
                 throw new Error(errorData.error || 'Failed to get response from AI');
             }
 
             const data = await response.json();
-            const aiResponse = data.response;
+            console.log('API Response:', data);
+
+            const aiResponse = data.response || data.reply || "I'm sorry, I couldn't generate a response. Please try again.";
+
+            if (!aiResponse || aiResponse.trim() === '') {
+                throw new Error('Empty response from AI');
+            }
 
             // Display the AI response
             displayMessage(aiResponse, 'ai');
@@ -291,9 +307,15 @@ if (chatMessages && healthQueryInput && sendQueryBtn) {
             }
 
             // Display an error message to the user
-            const errorMessage = error.message.includes('OPENAI_API_KEY')
-                ? "Sorry, the AI service is not configured yet. Please contact support."
-                : "I'm having trouble connecting right now. Please try again in a moment.";
+            let errorMessage = "I'm having trouble connecting right now. Please try again in a moment.";
+
+            if (error.message.includes('OPENAI_API_KEY') || error.message.includes('not configured')) {
+                errorMessage = "Sorry, the AI service is not configured yet. Please contact support.";
+            } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                errorMessage = "Network error. Please check your internet connection and try again.";
+            } else if (error.message.includes('Empty response')) {
+                errorMessage = "I received an empty response. Please try asking your question again.";
+            }
 
             displayMessage(errorMessage, 'ai');
         }
