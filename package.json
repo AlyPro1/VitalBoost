@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.58.0",
-    "@whop/api": "^0.0.51"
+    "@whop/api": "^0.0.51",
+    "@whop/sdk": "^0.0.2"
   }
 }
