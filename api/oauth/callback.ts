@@ -1,4 +1,3 @@
-// /api/oauth/callback.ts
 import { WhopServerSdk } from "@whop/api";
 
 const whopApi = WhopServerSdk({
@@ -15,41 +14,34 @@ export async function GET(request: Request) {
     return new Response("Missing code or state", { status: 400 });
   }
 
-  const cookieHeader = request.headers.get("Cookie") ?? "";
+  const cookieHeader = request.headers.get("Cookie") || "";
   const stateCookie = cookieHeader
     .split(";")
-    .find((c) => c.trim().startsWith(`oauth-state.${state}=`));
+    .find((cookie) => cookie.trim().startsWith(`oauth-state.${state}=`));
 
   if (!stateCookie) {
-    return new Response("Invalid state cookie", { status: 400 });
+    return new Response("Invalid state", { status: 400 });
   }
 
-  // Exchange code for tokens:
   const authResponse = await whopApi.oauth.exchangeCode({
     code,
-    // IMPORTANT: ensure this matches the redirectUri used in /api/oauth/init.ts
-    redirectUri: "https://vitalboostapp.netlify.app/api/oauth/callback",
+    redirectUri: "http://localhost:5173/api/oauth/callback", // change to your production URL later
   });
 
   if (!authResponse.ok) {
-    console.error("Whop code exchange failed:", authResponse);
     return new Response("Code exchange failed", { status: 400 });
   }
 
   const { access_token } = authResponse.tokens;
+  const next = decodeURIComponent(stateCookie.split("=")[1]);
+  const nextUrl = new URL(next, "http://localhost:5173");
 
-  // restore `next` from state cookie:
-  const next = decodeURIComponent(stateCookie.split("=")[1] || "/");
-  const redirectUrl = new URL(next, "https://vitalboostapp.netlify.app");
-
-  // Set whop_access_token cookie for app to read (HttpOnly)
+  // Store Whop token in cookie (short lifespan)
   return new Response(null, {
     status: 302,
     headers: {
-      Location: redirectUrl.toString(),
+      Location: nextUrl.toString(),
       "Set-Cookie": `whop_access_token=${access_token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=3600`,
-      // optionally clear the oauth-state cookie:
-      // "Set-Cookie": `oauth-state.${state}=; Path=/; HttpOnly; Secure; Max-Age=0`,
     },
   });
 }
