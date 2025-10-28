@@ -35,7 +35,10 @@ export function ExperienceView() {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Vital Boost</Text>
-      <Text style={styles.subtitle}>Whop Authentication Connected ✅</Text>
+      <Text style={styles.subtitle}>Experience View</Text>
+
+      {/* ✅ Added Whop Auth Confirmation Line */}
+      <Text style={styles.authStatus}>Whop Auth Active ✅</Text>
 
       {user ? (
         <View style={styles.infoBox}>
