@@ -1,30 +1,56 @@
 // src/views/experience-view.tsx
 
-import React from "react";
-import type { ExperienceViewProps } from "@whop/react-native";
-import { ScrollView, Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ScrollView, Text, View, StyleSheet, ActivityIndicator, TouchableOpacity } from "react-native";
+import { getCurrentUser } from "@whop/sdk";
 
-export function ExperienceView(props: ExperienceViewProps) {
-  const { companyId, experienceId, currentUserId, path } = props;
+export function ExperienceView() {
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchWhopUser() {
+      try {
+        const currentUser = await getCurrentUser();
+        console.log("Whop currentUser:", currentUser);
+        setUser(currentUser);
+      } catch (err) {
+        console.error("Error fetching Whop user:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchWhopUser();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color="#4CAF50" />
+        <Text style={{ marginTop: 10 }}>Loading Whop session...</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Vital Boost</Text>
-      <Text style={styles.subtitle}>Experience View</Text>
+      <Text style={styles.subtitle}>Whop Authentication Connected ✅</Text>
 
-      <View style={styles.infoBox}>
-        <Text style={styles.label}>Company ID:</Text>
-        <Text style={styles.value}>{companyId}</Text>
+      {user ? (
+        <View style={styles.infoBox}>
+          <Text style={styles.label}>User Name:</Text>
+          <Text style={styles.value}>{user.username || "Anonymous"}</Text>
 
-        <Text style={styles.label}>Experience ID:</Text>
-        <Text style={styles.value}>{experienceId}</Text>
+          <Text style={styles.label}>User ID:</Text>
+          <Text style={styles.value}>{user.id}</Text>
 
-        <Text style={styles.label}>Current User ID:</Text>
-        <Text style={styles.value}>{currentUserId}</Text>
-
-        <Text style={styles.label}>Path:</Text>
-        <Text style={styles.value}>/{path.join("/")}</Text>
-      </View>
+          <Text style={styles.label}>Email:</Text>
+          <Text style={styles.value}>{user.email || "N/A"}</Text>
+        </View>
+      ) : (
+        <Text style={styles.noUserText}>No Whop session found. Please open this app via Whop.</Text>
+      )}
 
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Go to Vital Boost</Text>
@@ -40,6 +66,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     backgroundColor: "#f7f8fa",
     alignItems: "center",
+  },
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: 26,
@@ -73,6 +105,11 @@ const styles = StyleSheet.create({
   value: {
     fontSize: 14,
     color: "#555",
+  },
+  noUserText: {
+    fontSize: 16,
+    color: "#555",
+    marginBottom: 30,
   },
   button: {
     backgroundColor: "#4CAF50",
