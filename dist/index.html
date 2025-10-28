@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VitalBoost</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" crossorigin href="/assets/index-RLXePlb7.css">
+</head>
+<body> 
+
+  <!-- Hero Section -->
+  <div class="hero-container">
+    <!-- Top Navigation / Join Free Button -->
+<div class="top-nav">
+  <button class="join-free-btn" id="joinFreeBtn">Join Free</button>
+</div>
+    
+    <!-- Background Carousel -->
+    <div class="image-carousel">
+      <div class="image-slide active" style="background-image: url('https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+      <div class="image-slide" style="background-image: url('https://images.pexels.com/photos/1431282/pexels-photo-1431282.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+    </div>
+
+    <!-- Gradient Overlay -->
+    <div class="gradient-overlay"></div>
+
+    <!-- Avatars -->
+    <div class="avatars-popup"> 
+      <!-- Doctor Avatar -->
+      <div class="avatar-item doctor-avatar" id="doctorAvatar">
+        <img
+          src="https://raw.githubusercontent.com/AlyPro1/VitalBoost/bc8a938f40e41dff57088dc24f991fd49a368d65/doctor_avatar_bounce.gif"
+          alt="Doctor Avatar"
+          class="avatar-image"
+        />
+        <p class="avatar-text">Talk to Doctor</p>
+      </div>
+
+      <!-- Runner Avatar -->
+      <div class="avatar-item runner-avatar" id="runnerAvatar">
+        <img
+          src="https://raw.githubusercontent.com/AlyPro1/VitalBoost/bc8a938f40e41dff57088dc24f991fd49a368d65/runner_avatar_flip.gif"
+          alt="Runner Avatar"
+          class="avatar-image"
+        />
+        <p class="avatar-text">Track Fitness</p>
+      </div>
+    </div> <!-- ✅ Closing avatars-popup -->
+
+    <!-- Floating Parallax Elements -->
+    <div class="parallax-element parallax-1"></div>
+    <div class="parallax-element parallax-2"></div>
+    <div class="parallax-element parallax-3"></div>
+
+    <!-- Main Content -->
+    <div class="hero-content">
+      <div class="content-wrapper">
+        <div class="brand">
+          <span class="logo-icon">💪</span>
+          <span class="brand-name">VitalBoost</span>
+        </div>
+        <h1 class="main-headline">
+          <span class="headline-line">Boost Your</span>
+          <span class="headline-line highlight">Health & Fitness</span>
+        </h1>
+        
+<!-- Cigarette Button -->
+<button id="quitSmokingBtn" class="qs-cigarette" aria-label="How To Quit Smoking">
+  <span class="qs-burning-tip"></span>
+  <span class="qs-ash"></span>
+  <span class="qs-ember"></span>
+  <span class="qs-label">How To Quit Smoking</span>
+
+  <!-- 3 smoke puffs (continuous flow) -->
+  <span class="qs-smoke qs-smoke1"></span>
+  <span class="qs-smoke qs-smoke2"></span>
+  <span class="qs-smoke qs-smoke3"></span>
+</button>
+
+        <button class="cta-button" id="ctaButton">
+          <span class="button-glow"></span>
+          <span class="button-shine"></span>
+          Get Started
+        </button>
+        
+        <!-- Social Proof -->
+        <div class="social-proof">
+          <div class="counter-wrapper">
+            <span class="pulse-dot"></span>
+            <span class="counter-text">Join over <span class="counter-number" id="counterNumber">0</span> happy users!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+      <div class="floating-element element-1">💊</div>
+      <div class="floating-element element-2">🏃♂️</div>
+      <div class="floating-element element-3">🥗</div>
+      <div class="floating-element element-4">💪</div>
+      <div class="floating-element element-5">🧘♀️</div>
+    </div>
+
+    <!-- =============================
+     SOCIAL MEDIA ICONS SECTION
+     ============================= -->
+  <div class="social-icons">
+  <a href="#" class="social-icon facebook" aria-label="Facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="#" class="social-icon x" aria-label="X (Twitter)">
+    <i class="fa-brands fa-x-twitter"></i>
+  </a>
+  <a href="#" class="social-icon instagram" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="#" class="social-icon youtube" aria-label="YouTube">
+    <i class="fab fa-youtube"></i>
+  </a>
+  <a href="#" class="social-icon tiktok" aria-label="TikTok">
+    <i class="fab fa-tiktok"></i>
+  </a>
+</div>
+   <!-- ✅ Font Awesome CDN (Full Library with Brands) -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+  </div> <!-- ✅ End Hero -->
+
+  <!-- Privacy Policy Button (Fixed Bottom Left) -->
+  <button class="privacy-policy-btn" id="privacyPolicyBtn" aria-label="View Privacy Policy">
+    <span class="privacy-icon">🔒</span>
+    <span class="privacy-text">Privacy Policy</span>
+  </button>
+
+  <!-- Doctor Modal -->
+  <div class="modal-overlay" id="doctorModal">
+    <div class="modal-container">
+      <button class="modal-close" id="closeDoctor">&times;</button>
+      <div class="modal-header">
+        <h3>Your Health CheckUp</h3>
+      </div>
+      
+      <!-- Doctor Modal Features -->
+      <div class="modal-button-group">
+        <button class="modal-action-button doctor-chat blue-glow" id="chatWithAIDoctorBtn">
+          <span class="button-icon">🩺</span>
+          Chat with AI Doctor
+        </button>
+
+        <button class="modal-action-button upload-symptoms red-glow" id="uploadTrigger">
+          <span class="button-icon">📤</span>
+          Upload Symptoms
+        </button>
+        <input type="file" id="symptomUpload" multiple style="display:none;">
+        <div id="uploadedFiles"></div>
+
+       <button class="modal-action-button health-tips green-glow" id="healthTipsBtn">
+         <span class="button-icon">💡</span>
+         Health Tips
+       </button>
+      </div>
+    </div>
+  </div> <!-- ✅ Close doctorModal -->
+
+  <!-- Runner Modal -->
+  <div class="modal-overlay" id="runnerModal">
+    <div class="modal-container">
+      <button class="modal-close" id="closeRunner">&times;</button>
+      <div class="modal-header">
+        <h3>Your Fitness Tracker</h3>
+      </div>
+      <div class="modal-button-group">
+    <button class="modal-action-button track-steps sky-blue-glow" id="openStepsTracker"> 
+          <span class="button-icon">👟</span>
+          Track Steps
+        </button>  
+
+   <button id="openCaloriesBurned" class="modal-action-button calories-burned orange-glow">
+  <span class="button-icon">🔥</span>
+  Calories Burned
+</button>
+
+ <button class="modal-action-button fitness-goals vanilla-glow" id="openDailyGoals">
+  <span class="button-icon">🎯</span>
+  Daily Fitness Goals
+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Doctor Chat Modal -->
+  <div class="modal-overlay" id="aiDoctorChatModal">
+    <div class="modal-container ai-chat-container">
+      <button class="modal-close" id="closeAIDoctor">&times;</button>
+      <div class="ai-doctor-header">
+        <div class="ai-doctor-avatar">
+          <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=300" alt="AI Doctor" class="doctor-avatar-img">
+        </div>
+        <h3 class="ai-doctor-greeting">How can I Help you with your Health?</h3>
+      </div>
+
+      <!-- Chat messages container -->
+      <div class="chat-messages" id="chatMessages"></div>
+
+      <div class="ai-chat-input-section">
+        <input type="text" id="healthQuery" class="health-input" placeholder="Describe your symptoms or health concerns...">
+        <button class="send-query-btn" id="sendQueryBtn">
+          <span class="button-icon">💬</span>
+          Ask Doctor
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confetti Container -->
+  <div class="confetti-container" id="confettiContainer"></div>
+
+  <!-- Health Tips Modal -->
+  <div id="healthTipsModal" class="modal-overlay">
+    <div class="modal-container health-tips-modal-container">
+      <button class="modal-close" id="closeHealthTips">&times;</button>
+      <div class="modal-header">
+        <h3>💡 Daily Health Tips</h3>
+      </div>
+      <div class="tips-carousel-container">
+        <div class="tips-carousel" id="tipsCarousel">
+          <!-- Cards will be dynamically inserted here -->
+        </div>
+        <div class="carousel-indicators" id="carouselIndicators">
+          <!-- Indicator dots will be dynamically inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Steps Tracker Modal -->
+<div id="stepsModal" class="modal-overlay">
+  <div class="modal-container steps-modal-container">
+    <button class="modal-close" id="closeSteps">&times;</button>
+    <div class="modal-header">
+      <h3>👟 Step Counter</h3>
+    </div>
+
+   <div class="steps-circle" id="stepsCircle">
+        <span class="shoe-icon" id="shoeIcon">👟</span>
+      </div>
+
+    <p class="step-count-text" id="stepCountText">Start Walking</p>
+    <p class="step-number" id="stepCount">0</p>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <div class="steps-controls">
+      <button id="stopTrackingBtn" style="display: none;">Stop Tracking</button>
+      <button id="addSteps">+100 Steps</button>
+      <button id="resetSteps">Reset</button>
+    </div>
+  </div>
+</div>
+
+  <!-- Reward Modal -->
+  <div id="rewardModal" class="modal-overlay">
+    <div class="modal-container reward-modal-container">
+      <button class="modal-close" id="closeReward">&times;</button>
+      <div class="reward-content">
+        <div class="reward-icon">🎉</div>
+        <h3 class="reward-title">Congratulations!</h3>
+        <p class="reward-message">You've hit your step goal!</p>
+        <p class="crypto-reward">You've won a crypto reward! 🪙</p>
+        <button class="claim-reward-btn" id="claimRewardBtn">
+          <span class="button-icon">🎁</span>
+          Claim Reward
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- ✅ Script must be last (moved AFTER the Health Tips modal) -->
+
+  <!-- Calories Burned Modal -->
+  <div class="modal-overlay" id="caloriesBurnedModal">
+    <div class="modal-container calories-burned-modal-container">
+      <button class="modal-close" id="closeCaloriesBurned">&times;</button>
+      <div class="modal-header">
+        <h3>🔥 Calories Burned</h3>
+      </div>
+      <div class="calories-content">
+        <div class="flame-icon" id="flameIcon">🔥</div>
+        <p class="calories-status-text" id="caloriesStatusText">Start Burning Calories!</p>
+
+        <div class="activity-options">
+          <button class="activity-button" id="cyclingBtn">🚴 Cycling</button>
+          <button class="activity-button" id="gymBtn">🏋️ Gym</button>
+          <button class="activity-button" id="yogaBtn">🧘 Yoga</button>
+        </div>
+
+        <div class="calories-input-section">
+          <input type="number" id="minutesInput" class="minutes-input" placeholder="Minutes" min="1">
+          <button class="calculate-button" id="calculateCaloriesBtn">Calculate</button>
+        </div>
+
+        <p class="calories-display" id="caloriesDisplay">Total: 0 kcal</p>
+
+        <div class="progress-bar calories-progress-bar">
+          <div class="progress-fill" id="caloriesProgressFill"></div>
+        </div>
+
+        <p class="milestone-message" id="milestoneMessage"></p>
+        <p class="calories-reward-message" id="caloriesRewardMessage"></p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Daily Fitness Goals Modal -->
+  <div class="modal-overlay" id="dailyGoalsModal">
+    <div class="modal-container daily-goals-modal-container">
+      <button class="modal-close" id="closeDailyGoals">&times;</button>
+      <div class="modal-header">
+        <h3>🎯 Daily Fitness Goals</h3>
+      </div>
+      
+      <div class="daily-goals-content">
+        <!-- Daily Streak Counter -->
+        <div class="streak-section">
+          <div class="streak-icon">🔥</div>
+          <div class="streak-text">
+            <span class="streak-label">Daily Streak</span>
+            <span class="streak-count" id="dailyStreakCounter">0</span>
+          </div>
+        </div>
+
+        <!-- Challenge Cards Container -->
+        <div class="challenge-cards-container" id="challengeCardsContainer">
+          <!-- Cards will be dynamically generated -->
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+          <div class="progress-label">
+            <span>Goals Completed: </span>
+            <span id="goalsCompletedCount">0/3</span>
+          </div>
+          <div class="daily-goals-progress-bar">
+            <div class="daily-goals-progress-fill" id="dailyGoalsProgressFill"></div>
+          </div>
+        </div>
+
+        <!-- Motivational Text -->
+        <p class="motivational-text" id="motivationalText">Complete your daily goals! 💪</p>
+
+        <!-- Reward Section -->
+        <div class="reward-section">
+          <div class="reward-chest" id="rewardChest">🎁</div>
+          <p class="daily-goals-reward-message" id="dailyGoalsRewardMessage"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Welcome Modal -->
+  <div id="welcomeModal" class="modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+  <div class="modal-container welcome-modal-container">
+    <button class="modal-close" id="closeWelcome" aria-label="Close">&times;</button>
+
+    <!-- Animated Background Gradient -->
+    <div class="welcome-bg-gradient"></div>
+
+    <!-- Floating Particles -->
+    <div class="welcome-particles">
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+    </div>
+
+    <!-- Logo & Title Section -->
+    <div class="welcome-logo-section">
+      <div class="welcome-logo-icon">
+        <span class="rocket-icon">🚀</span>
+        <div class="logo-pulse"></div>
+      </div>
+      <h3 id="welcomeTitle" class="welcome-title">Welcome to VitalBoost</h3>
+      <p class="welcome-subtext">Your daily health & fitness companion starts here.</p>
+    </div>
+
+    <!-- Social Auth Buttons -->
+    <div class="welcome-actions">
+      <button class="welcome-social-btn google" id="btnGoogle">
+        <span class="btn-icon-wrapper">
+          <svg class="btn-icon" viewBox="0 0 24 24" width="20" height="20">
+            <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+        </span>
+        <span class="btn-text">Continue with Google</span>
+      </button>
+
+      <button class="welcome-social-btn facebook" id="btnFacebook">
+        <span class="btn-icon-wrapper">
+          <svg class="btn-icon" viewBox="0 0 24 24" width="20" height="20">
+            <path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </span>
+        <span class="btn-text">Continue with Facebook</span>
+      </button>
+
+      <button class="welcome-social-btn email" id="btnEmail">
+        <span class="btn-icon-wrapper">
+          <svg class="btn-icon" viewBox="0 0 24 24" width="20" height="20">
+            <path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </span>
+        <span class="btn-text">Sign up with Email</span>
+      </button>
+    </div>
+
+    <div class="welcome-status" id="welcomeStatus" aria-live="polite"></div>
+  </div>
+</div>
+
+  <!-- Quit Smoking Modal -->
+  <div id="quitSmokingModal" class="quit-modal-overlay">
+    <div class="quit-modal-container">
+      <!-- Close Button -->
+      <button class="quit-modal-close" id="closeQuitModal">&times;</button>
+      
+      <!-- Header Section -->
+      <div class="quit-modal-header">
+        <div class="header-logo">
+          <div class="logo-icon">🏥</div>
+          <span class="logo-text">Health & Fitness</span>
+        </div>
+        <div class="header-nav">
+          <span class="nav-item">Advising</span>
+          <span class="nav-item">Products</span>
+          <button class="nav-btn">JOIN NOW</button>
+        </div>
+      </div>
+
+      <!-- Hero Section with Cinematic Background -->
+      <div class="quit-hero-section">
+        <!-- Animated Background Elements -->
+        <div class="cinematic-bg">
+          <div class="smoke-particles"></div>
+          <div class="floating-butterflies">
+            <div class="butterfly butterfly-1">🦋</div>
+            <div class="butterfly butterfly-2">🦋</div>
+            <div class="butterfly butterfly-3">🦋</div>
+          </div>
+          <div class="forest-silhouette"></div>
+          <div class="glowing-particles">
+            <div class="particle particle-1"></div>
+            <div class="particle particle-2"></div>
+            <div class="particle particle-3"></div>
+            <div class="particle particle-4"></div>
+            <div class="particle particle-5"></div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="quit-hero-content">
+          <div class="hero-left">
+  <h1 class="hero-title">
+    BREATHE FREE.<br>
+    <span class="hero-subtitle">QUIT SMOKING STARTS TODAY.</span>
+  </h1>
+
+  <p class="hero-description">
+    <span class="highlight-text">Tobacco</span> causes lung disease and many harmful effects.
+    Quitting can start your body's healing process in days.
+  </p>
+
+  <!-- Input Forms (accessible) -->
+  <div class="input-section">
+    <div class="input-group">
+      <label for="smokeDuration">How long have you smoked?</label>
+      <select id="smokeDuration" name="smokeDuration" class="custom-select" aria-label="How long have you smoked">
+        <option value="">Choose period</option>
+        <option value="lt1">Less than 1 year</option>
+        <option value="1-5">1–5 years</option>
+        <option value="5-10">5–10 years</option>
+        <option value="10plus">10+ years</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="cigsPerDay">How many cigarettes per day?</label>
+      <select id="cigsPerDay" name="cigsPerDay" class="custom-select" aria-label="How many cigarettes per day">
+        <option value="">Select amount</option>
+        <option value="1-5">1–5 cigarettes/day</option>
+        <option value="5-10">5–10 cigarettes/day</option>
+        <option value="10-20">10–20 cigarettes/day</option>
+        <option value="20plus">20+ cigarettes/day</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="savingsMilestone">Set a savings milestone</label>
+      <div class="milestone-input" id="savingsMilestone">
+        <span>Month 1 milestone achieved</span>
+        <div class="progress-dots" aria-hidden="true">
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+          <!-- Calculator Widget -->
+          <div class="calculator-widget">
+            <div class="widget-header">
+              <span class="widget-title">Mini Calculator Widget</span>
+            </div>
+            
+            <div class="calculator-item">
+              <span class="calc-label">Cigarettes per day</span>
+              <div class="calc-display">
+                <span class="calc-number">10</span>
+                <div class="calc-controls">
+                  <button class="calc-btn">-</button>
+                  <button class="calc-btn">+</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="calculator-item">
+              <span class="calc-label">$ YOU'LL SAVE 56,800 PER YEAR</span>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 70%"></div>
+              </div>
+              <div class="calc-controls">
+                <button class="calc-btn">-</button>
+                <button class="calc-btn">+</button>
+              </div>
+            </div>
+
+            <div class="health-message">
+              <div class="heart-icon">❤️</div>
+              <span>YOUR LUNG CAPACITY IMPROVES IN 6 MONTHS<br>YOU'LL ADD 5 YEARS TO LIFE</span>
+            </div>
+
+            <button class="start-journey-btn">START YOUR JOURNEY</button>
+          </div>
+        </div>
+      </div>
+
+<!-- Personalized Quit Plan Section -->
+<div class="quit-plan-section">
+  <h2 class="quit-plan-title">
+    ✨ Personalized Quit Plan – AI Powered ✨
+  </h2>
+
+  <div class="quit-plan-content">
+    
+    <!-- LEFT SIDE: Stats -->
+    <div class="quit-plan-left">
+  <div class="plan-metrics">
+    <!-- Smoke Free Streak -->
+    <div class="metric-card">
+      <div class="metric-icon">🔥</div>
+      <div class="metric-circle">
+        <div class="circle-progress" data-progress="85">
+          <span class="circle-text">Smoke Free<br><strong>85</strong><br>Days</span>
+        </div>
+      </div>
+      <p class="metric-label">Streak: 7 Days</p>
+    </div>
+
+    <!-- Money Saved -->
+    <div class="metric-card">
+      <div class="metric-icon">💰</div>
+      <div class="metric-circle money-saved">
+        <div class="circle-progress" data-progress="65">
+          <div class="money-icons">
+            <span class="money-icon">💵</span>
+            <span class="money-icon">💵</span>
+            <span class="money-icon">💵</span>
+          </div>
+        </div>
+      </div>
+      <p class="metric-label">Money Saved</p>
+      <p class="metric-value">$328 Saved</p>
+    </div>
+
+    <!-- Another Money Goal Example -->
+    <div class="metric-card">
+      <div class="metric-icon">💰</div>
+      <div class="metric-circle money-saved">
+        <div class="circle-progress" data-progress="80">
+          <div class="money-icons">
+            <span class="money-icon">💵</span>
+            <span class="money-icon">💵</span>
+            <span class="money-icon">💵</span>
+          </div>
+        </div>
+      </div>
+      <p class="metric-value">$730 Saved</p>
+    </div>
+  </div>
+</div>
+    <!-- RIGHT SIDE: Coping Strategies -->
+    <div class="quit-plan-coping">
+      <h3 class="coping-title">🧘 Coping Strategies</h3>
+      <div class="coping-card">
+        <h4>Meditation</h4>
+        <p>Calm your mind with 5-min deep breathing</p>
+      </div>
+      <div class="coping-card">
+        <h4>Priority Streaks</h4>
+        <p>Focus on today. Small wins add up.</p>
+      </div>
+      <div class="coping-card">
+        <h4>Health Boost</h4>
+        <p>Lungs regenerate in weeks. Energy improves fast.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+    <!-- Gamified Tracker Section -->
+<div class="gamified-section">
+  <h2 class="section-title">Gamified Tracker</h2>
+
+     <div class="tracker-content">
+  <!-- Coach Vital Boost Card -->
+  <div class="card coach-card">
+    <div class="card-avatar">
+      <img src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=150" 
+           alt="Coach Vital Boost" class="card-img">
+    </div>
+    <h3 class="card-title">Coach Vital Boost</h3>
+    <p class="card-description">
+      Take 60 second breath each day. A mindful breath helps you stay focused.
+    </p>
+    <button id="openCoachModal" class="action-btn">Start Breathing 🌬️</button>
+  </div>
+
+  <!-- VS Center -->
+  <div class="vs-layout">
+    <span class="vs-text">VS</span>
+  </div>
+
+  <!-- Fighters Card -->
+  <div class="card fighters-card">
+    <div class="card-avatar">
+      <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=150" 
+           alt="Join Fighters" class="card-img">
+    </div>
+    <h3 class="card-title">Join <span class="fighters-number">1,200</span> Fighters 🛡️</h3>
+    <p class="card-description">
+      Be part of the community that fights cravings together!
+    </p>
+    <button id="openFightersModal" class="action-btn">View Stats 📊</button>
+  </div>
+</div>
+
+       <!-- Live Leaderboard -->
+       <div class="leaderboard">
+       <h3 class="leaderboard-title">🏆 Live Leaderboard</h3>
+        <div class="leaderboard-item">
+  <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=50" alt="User" class="leader-avatar">
+          <div class="leader-info">
+          <span class="leader-name">Linda - 30 Days</span>
+          <span class="leader-streak">Quit Smoking 🚭</span>
+        </div>
+          <div class="leader-score">
+          <span class="score">3000$ Days</span>
+          <span class="badge">🏅</span>
+        </div>
+      </div>
+          <div class="leaderboard-item">
+  <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=50" alt="User" class="leader-avatar">
+      <div class="leader-info">
+      <span class="leader-name">Peter - 7 Days</span>
+      <span class="leader-streak">1 Week Without Junk Food 🍔❌</span>
+      </div>
+      <div class="leader-score">
+      <span class="score">7.1 Days</span>
+      <span class="badge">🏆</span>
+      <span class="achievement">1 Week Free 🎉</span>
+      </div>
+      </div>
+      <div class="leaderboard-item">
+  <img src="https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=50" alt="User" class="leader-avatar">
+            <div class="leader-info">
+            <span class="leader-name">Nancy - 30 Days</span>
+            <span class="leader-streak">Daily Workout Streak 💪</span>
+            </div>
+            <div class="leader-score">
+            <span class="score">300$ Days</span>
+            <span class="badge">🏅</span>
+            <span class="achievement">Heart Legend 🎉</span>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- Coach Vital Boost Breathing Exercise Modal -->
+     <div id="coachBreathingModal" class="coach-breathing-modal-overlay">
+     <div class="coach-breathing-modal-container">
+    <div class="breathing-background">
+      <div class="breathing-particles"></div>
+    </div>
+    
+    <div class="breathing-content">
+      <div class="breathing-image-container">
+        <img src="/assets/Coach%20Vital%20Boost%20feature%20design--B0PkjT-.jpg"
+             alt="Breathing Exercise" 
+             class="breathing-image">
+        <div class="breathing-overlay"></div>
+      </div>
+      
+      <div class="breathing-controls">
+        <div class="countdown-timer" id="countdownTimer">60</div>
+        <button class="stop-breathing-btn" id="stopBreathingBtn">Stop</button>
+      </div>
+      
+      <div class="breathing-instructions">
+        <h3>Coach Vital Boost</h3>
+  <p>Take 60 second breath each day. Remember to breathe. A mindful breath helps you stay focused.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+          <!-- Fighters Modal -->
+         <div id="fightersModal" class="fighters-modal-overlay">
+         <div class="fighters-modal-container">
+        <span class="fighters-close" id="closeFightersModal">&times;</span>
+    
+           <!-- Blinking Animated Title -->
+         <h2 class="fighters-modal-title">✨ Welcome Fighters! ✨</h2>
+    
+          <!-- Avatar Grid -->
+         <div class="fighters-grid">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/men/56.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/women/23.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/women/35.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/men/84.jpg" alt="Fighter" class="fighter-avatar">
+      <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Fighter" class="fighter-avatar">
+    </div>
+
+            <!-- CTA Button -->
+      <button class="join-fighters-btn">🔥 Join the 1,200 Fighters 🔥</button>
+  </div>
+</div>
+
+  <!-- Privacy Policy Modal -->
+  <div id="privacyPolicyModal" class="modal-overlay privacy-modal-overlay">
+    <div class="modal-container privacy-modal-container">
+      <button class="modal-close" id="closePrivacyModal">&times;</button>
+      <div class="privacy-modal-header">
+        <div class="privacy-logo">
+          <span class="logo-icon">💪</span>
+          <span class="brand-name">VitalBoost</span>
+        </div>
+        <h3>Privacy Policy</h3>
+        <p class="effective-date">Effective Date: September 30, 2025</p>
+      </div>
+
+      <div class="privacy-modal-content">
+        <div class="privacy-intro">
+          <p>Vital Boost ("we," "our," or "us") respects your privacy. This Privacy Policy explains how we collect, use, and protect your information when you use our Health & Fitness web app.</p>
+        </div>
+
+        <section class="privacy-section">
+          <h4>1. Information We Collect</h4>
+          <ul>
+            <li>Basic account details (name, email) when you sign in with Google.</li>
+            <li>Non-personal usage data (how you interact with the app).</li>
+          </ul>
+        </section>
+
+        <section class="privacy-section">
+          <h4>2. How We Use Your Information</h4>
+          <ul>
+            <li>To provide access to personalized fitness tools and features.</li>
+            <li>To improve the app's performance and user experience.</li>
+            <li>We do not sell or share your personal data with third parties.</li>
+          </ul>
+        </section>
+
+        <section class="privacy-section">
+          <h4>3. Data Security</h4>
+          <p>We use secure authentication (Supabase + Google) to protect your account.</p>
+        </section>
+
+        <section class="privacy-section">
+          <h4>4. Your Rights</h4>
+          <p>You may request to delete your account and data anytime by contacting us at:</p>
+          <div class="privacy-contact">
+            <a href="mailto:vitalboost.team@gmail.com" class="privacy-email">vitalboost.team@gmail.com</a>
+          </div>
+        </section>
+
+        <div class="privacy-footer">
+          <a href="privacy.html" class="full-policy-link" target="_blank">View Full Privacy Policy Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="quit-smoking-modal.js"></script>
+
+    <!-- Supabase CDN + Google Auth -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Initialize Supabase client
+    const supabaseUrl = "https://nltnmjlxmphamxziycuf.supabase.co"; 
+    const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sdG5tamx4bXBoYW14eml5Y3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcxMzg0MjAsImV4cCI6MjA3MjcxNDQyMH0.upEhU4waIW1iCeO5n7as517dtdbC4x6xYDLLzrRdEhQ"; 
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+    // Grab modal + status elements
+    const welcomeModal = document.getElementById("welcomeModal");
+    const welcomeStatus = document.getElementById("welcomeStatus");
+
+    // Google Login
+    document.getElementById("btnGoogle").addEventListener("click", async () => {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+      });
+
+      if (error) {
+        console.error("Google login error:", error.message);
+        welcomeStatus.textContent = "❌ Login failed. Please try again.";
+      } else {
+        welcomeStatus.textContent = "✅ Redirecting to Google login...";
+      }
+    });
+
+    // Function to close modal
+    function closeModal() {
+      if (welcomeModal) {
+        welcomeModal.style.display = "none";
+      }
+    }
+
+    // Check session on page load
+    (async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        welcomeStatus.textContent = "🎉 You are logged in to Vital Boost!";
+        closeModal();
+      }
+    })();
+
+    // Listen for auth state changes (login success, logout, etc.)
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_IN") {
+        welcomeStatus.textContent = "🎉 You are logged in to Vital Boost!";
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
