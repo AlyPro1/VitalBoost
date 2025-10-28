@@ -1,37 +1,40 @@
 import type { DashboardViewProps } from "@whop/react-native";
-import { ScrollView, Text, TouchableOpacity, Linking } from "react-native";
+import { ScrollView, Text, View, Button } from "react-native";
+import { useEffect, useState } from "react";
+import { getWhopUser } from "../lib/whop";
 
 export function DashboardView(props: DashboardViewProps) {
-  const handleWhopLogin = () => {
-    // When running in production, this should open your deployed site’s /api/oauth/init route
-    // Example for production:
-    Linking.openURL("https://vitalboostapp.netlify.app/api/oauth/init?next=/");
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-    // If you ever test locally instead, you can temporarily use:
-    // Linking.openURL("http://localhost:5174/api/oauth/init?next=/");
-  };
+  useEffect(() => {
+    async function fetchUser() {
+      const whopUser = await getWhopUser();
+      setUser(whopUser);
+      setLoading(false);
+    }
+    fetchUser();
+  }, []);
+
+  if (loading) {
+    return <Text>Loading user session...</Text>;
+  }
+
+  if (!user) {
+    return (
+      <ScrollView>
+        <Text>No active Whop session found.</Text>
+        <Text>Please login with Whop below:</Text>
+        <a href="/api/oauth/init?next=/dashboard">Login with Whop</a>
+      </ScrollView>
+    );
+  }
 
   return (
-    <ScrollView style={{ padding: 20 }}>
-      {/* --- Whop Login Button --- */}
-      <TouchableOpacity
-        onPress={handleWhopLogin}
-        style={{
-          backgroundColor: "#111",
-          padding: 12,
-          borderRadius: 8,
-          marginBottom: 20,
-        }}
-      >
-        <Text style={{ color: "#fff", textAlign: "center" }}>
-          Login with Whop
-        </Text>
-      </TouchableOpacity>
-
-      {/* --- Existing Dashboard Info --- */}
-      <Text>Hello World! (DashboardView)</Text>
+    <ScrollView>
+      <Text>Hello {user.email || "Whop User"} 👋</Text>
       <Text>companyId: {props.companyId}</Text>
-      <Text>currentUserId: {props.currentUserId}</Text>
+      <Text>currentUserId: {user.id}</Text>
       <Text>path: /{props.path.join("/")}</Text>
     </ScrollView>
   );
