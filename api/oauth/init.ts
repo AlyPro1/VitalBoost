@@ -1,4 +1,3 @@
-// /api/oauth/init.ts
 import { WhopServerSdk } from "@whop/api";
 
 const whopApi = WhopServerSdk({
@@ -8,15 +7,14 @@ const whopApi = WhopServerSdk({
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const next = url.searchParams.get("next") ?? "/";
+  const next = url.searchParams.get("next") ?? "/dashboard";
 
   const { url: authUrl, state } = whopApi.oauth.getAuthorizationUrl({
-    // IMPORTANT: Update redirectUri to EXACT value in your Whop App's OAuth settings.
-    redirectUri: "https://vitalboostapp.netlify.app/api/oauth/callback",
+    redirectUri: "http://localhost:5173/api/oauth/callback", // change to your live domain when deployed
     scope: ["read_user"],
   });
 
-  // Set a temporary state cookie so we can restore `next` after callback.
+  // Store state temporarily in cookie for later verification
   return new Response(null, {
     status: 302,
     headers: {
