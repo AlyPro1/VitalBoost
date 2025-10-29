@@ -1,42 +1,27 @@
-import { useEffect, useState } from "react";
+// src/views/dashboard-view.tsx
+import type { DashboardViewProps } from "@whop/react-native";
 import { ScrollView, Text } from "react-native";
-import whop from "../whopClient";
+import React, { useEffect } from "react";
 
-export function DashboardView() {
-  const [user, setUser] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
-
+export function DashboardView(props: DashboardViewProps) {
+  // ✅ Log all props when this screen loads
   useEffect(() => {
-    async function fetchUser() {
-      try {
-        const response = await whop.retrieveCurrentUser();
-        setUser(response);
-      } catch (err: any) {
-        console.error("Whop auth error:", err);
-        setError("User not authenticated");
-      }
-    }
-
-    fetchUser();
-  }, []);
+    console.log("🧩 DashboardView props:", props);
+  }, [props]);
 
   return (
-    <ScrollView>
-      <Text style={{ fontSize: 22, fontWeight: "bold", marginBottom: 10 }}>
-        Vital Boost Dashboard
+    <ScrollView style={{ padding: 24 }}>
+      <Text style={{ fontSize: 22, fontWeight: "bold", marginBottom: 12 }}>
+        Vital Boost — Dashboard
       </Text>
 
-      {error && <Text style={{ color: "red" }}>{error}</Text>}
+      <Text>companyId: {props.companyId}</Text>
+      <Text>currentUserId: {props.currentUserId}</Text>
+      <Text>path: /{props.path.join("/")}</Text>
 
-      {user ? (
-        <>
-          <Text>✅ Whop Auth Active</Text>
-          <Text>User ID: {user.id}</Text>
-          <Text>Email: {user.email}</Text>
-        </>
-      ) : (
-        <Text>Loading user info...</Text>
-      )}
+      <Text style={{ marginTop: 20, color: "#4CAF50" }}>
+        ✅ Whop App Loaded
+      </Text>
     </ScrollView>
   );
 }
